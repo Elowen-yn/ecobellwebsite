@@ -135,7 +135,7 @@
       transform: translateY(-6px);
       pointer-events: none;
       transition: opacity 0.25s ease, transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-      z-index: 100;
+      z-index: 102;
     }
     .lnb.open {
       opacity: 1;
@@ -206,6 +206,136 @@
       flex-shrink: 0;
     }
 
+    /* ─── SEARCH OVERLAY ─── */
+    header.search-open {
+      background: #f2f6f7;
+      border-bottom-color: transparent;
+      box-shadow: none;
+    }
+
+    .search-overlay {
+      position: absolute;
+      top: 79px;
+      left: -1px; right: -1px;
+      height: 230px; /* 309px - 79px header */
+      background: #f2f6f7;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.28s cubic-bezier(0.4,0,0.2,1);
+      transform: translateY(-8px);
+      z-index: 100;
+    }
+    .search-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .search-content {
+      position: relative;
+      width: 1440px;
+      margin: 0 auto;
+      height: 100%;
+    }
+
+    /* 입력 필드 (viewport y=154 → overlay top y=75) */
+    .search-input-row {
+      position: absolute;
+      top: 75px;
+      left: 315px;
+      width: 811px;
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+    .search-input {
+      flex: 1;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 400;
+      font-size: 20px;
+      color: #000;
+      letter-spacing: 0.2px;
+      line-height: 1.5;
+      background: transparent;
+      border: none;
+      outline: none;
+      height: 36px;
+      padding: 0;
+    }
+    .search-input::placeholder {
+      color: rgba(0,0,0,0.3);
+    }
+    .search-submit {
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 17px; height: 17px;
+      padding: 0;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+    .search-submit:hover { opacity: 1; }
+    .search-submit img { width: 17px; height: 17px; object-fit: contain; }
+
+    /* 구분선 (viewport y=200 → overlay top y=121) */
+    .search-divider {
+      position: absolute;
+      top: 121px;
+      left: 315px;
+      width: 811px;
+      height: 0.3px;
+      background: rgba(0,0,0,0.2);
+    }
+
+    /* 해시태그 추천 (viewport y=215 → overlay top y=136) */
+    .search-tags {
+      position: absolute;
+      top: 136px;
+      left: 315px;
+      display: flex;
+      gap: 9px;
+    }
+    .search-tag {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      color: rgba(0,0,0,0.55);
+      letter-spacing: 0.11px;
+      border: 0.3px solid rgba(0,0,0,0.15);
+      border-radius: 100px;
+      padding: 0 10px;
+      height: 22px;
+      background: transparent;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .search-tag:hover {
+      border-color: rgba(0,0,0,0.4);
+      color: rgba(0,0,0,0.85);
+    }
+
+    /* 닫기(X) 버튼 - 검색 아이콘 자리 */
+    .close-btn {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 20px; height: 20px;
+      padding: 0;
+      align-items: center; justify-content: center;
+      font-size: 18px;
+      color: #000;
+      opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+    .close-btn:hover { opacity: 1; }
+    .close-btn img { width: 18px; height: 18px; object-fit: contain; }
+
+    header.search-open .search-btn { display: none; }
+    header.search-open .close-btn { display: flex; }
+
     /* ─── HEADER RIGHT ─── */
     .header-right {
       position: absolute;
@@ -226,7 +356,7 @@
       transition: transform 0.2s ease, opacity 0.2s;
     }
     .search-btn:hover { transform: scale(1.15); opacity: 0.7; }
-    .search-btn img { width: 20px; height: 21px; object-fit: contain; }
+    .search-btn svg { display: block; }
 
     .demo-btn {
       display: flex;
@@ -293,16 +423,19 @@
       margin-bottom: 22px;
       white-space: pre;
     }
-    .hero-title .underlined {
-      position: relative;
+    .hero-bar {
       display: inline-block;
+      width: 26px;
+      height: 10px;
+      margin: 0 10px;
+      vertical-align: middle;
+      margin-bottom: 6px;
+      background: linear-gradient(90deg, #50BC5D, #52B0AC, #0091BB, #234B63);
+      border-radius: 1px;
     }
-    .hero-title .underlined::after {
-      content: '';
-      position: absolute;
-      left: 0; bottom: 2px;
-      width: 100%; height: 2.5px;
-      background: #000;
+
+    .hero-title .underlined {
+      display: inline;
     }
     .hero-desc {
       font-family: 'Noto Sans KR', sans-serif;
@@ -381,118 +514,61 @@
       height: 100%;
     }
 
-    /* Footer nav cols */
-    .footer-col { position: absolute; top: 44px; }
-    .footer-col:nth-child(1) { left: 53px; }
-    .footer-col:nth-child(2) { left: 180px; }
-    .footer-col:nth-child(3) { left: 317px; }
-    .footer-col:nth-child(4) { left: 465px; }
-
-    .footer-col-title {
+    /* ── 컬럼 타이틀 ── */
+    .ft-col-title {
+      position: absolute;
       font-family: 'Chillax', sans-serif;
       font-weight: 600;
       font-size: 15px;
       color: #fff;
       letter-spacing: 0.45px;
       line-height: 1.6;
-      margin-bottom: 18px;
+      white-space: nowrap;
+      margin: 0;
     }
-    .footer-col ul { list-style: none; }
-    .footer-col ul li {
+
+    /* ── 링크 (top = 센터 Y, translateY(-50%)) ── */
+    .ft-link {
+      position: absolute;
+      transform: translateY(-50%);
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700;
       font-size: 13px;
       color: rgba(255,255,255,0.8);
       letter-spacing: 0.13px;
       line-height: 1.5;
-      margin-bottom: 12px;
-      cursor: pointer;
       white-space: nowrap;
-      transition: color 0.2s, transform 0.2s;
-      display: inline-block;
-    }
-    .footer-col ul li:hover { color: #fff; transform: translateX(3px); }
-    .footer-col ul li.eng { font-family: 'Chillax', sans-serif; font-weight: 500; }
-    .footer-col ul li.kor { font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 700; }
-    .footer-col ul li.divider-line {
-      height: 1px; background: rgba(255,255,255,0.3);
-      margin: 6px 0; cursor: default;
-      display: block; transform: none !important;
-    }
-    .footer-col ul li.insight-link { display: flex; align-items: center; gap: 6px; }
-    .footer-col ul li.insight-link img { width: 12px; height: 12px; object-fit: contain; }
-
-    /* TOP 버튼 */
-    .top-btn {
-      position: absolute;
-      right: 54px; top: 44px;
-      display: flex; flex-direction: column;
-      align-items: center; gap: 6px;
-      cursor: pointer;
       text-decoration: none;
-      transition: transform 0.25s ease;
-    }
-    .top-btn:hover { transform: translateY(-4px); }
-    .top-btn-circle {
-      width: 40px; height: 40px;
-      border: 1.5px solid rgba(255,255,255,0.6);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      transition: border-color 0.2s, background 0.2s;
-    }
-    .top-btn:hover .top-btn-circle { border-color: #fff; background: rgba(255,255,255,0.15); }
-    .top-btn-arrow {
-      width: 0; height: 0;
-      border-left: 6px solid transparent;
-      border-right: 6px solid transparent;
-      border-bottom: 8px solid rgba(255,255,255,0.8);
-      transition: border-bottom-color 0.2s;
-    }
-    .top-btn:hover .top-btn-arrow { border-bottom-color: #fff; }
-    .top-btn-label {
-      font-family: 'Chillax', sans-serif;
-      font-weight: 500;
-      font-size: 11px;
-      color: rgba(255,255,255,0.8);
-      letter-spacing: 0.5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
       transition: color 0.2s;
     }
-    .top-btn:hover .top-btn-label { color: #fff; }
+    .ft-link:hover { color: #fff; }
+    .ft-link.ft-en {
+      font-family: 'Chillax', sans-serif;
+      font-weight: 500;
+    }
 
-    /* Footer dividers */
-    .footer-divider-1 {
+    /* ── 구분선 (솔루션 ecoNODE 아래) ── */
+    .ft-sep {
       position: absolute;
-      left: 52px; right: 52px; top: 267px;
+      height: 1px;
+      background: rgba(255,255,255,0.3);
+    }
+
+    /* ── 가로 디바이더 ── */
+    .ft-divider {
+      position: absolute;
+      left: 50px; right: 50px;
       height: 0.4px;
       background: rgba(255,255,255,0.35);
     }
-    .footer-divider-2 {
-      position: absolute;
-      left: 52px; right: 52px; top: 309px;
-      height: 0.4px;
-      background: rgba(255,255,255,0.35);
-    }
 
-    /* Social icons */
-    .footer-social {
+    /* ── 하단 링크 (top = 센터 Y) ── */
+    .ft-bottom-link {
       position: absolute;
-      right: 52px; top: 279px;
-      display: flex; align-items: center; gap: 17px;
-    }
-    .footer-social img {
-      width: 18px; height: 18px;
-      object-fit: contain;
-      cursor: pointer;
-      opacity: 0.75;
-      transition: opacity 0.2s, transform 0.2s ease;
-    }
-    .footer-social img:hover { opacity: 1; transform: scale(1.2); }
-
-    /* Footer bottom links */
-    .footer-bottom-links {
-      position: absolute;
-      left: 52px; top: 287px;
-      display: flex; align-items: center; gap: 22px;
-    }
-    .footer-bottom-links a {
+      transform: translateY(-50%);
       font-family: 'Noto Sans KR', sans-serif;
       font-weight: 400;
       font-size: 13px;
@@ -501,29 +577,32 @@
       letter-spacing: -0.26px;
       line-height: 20px;
       white-space: nowrap;
-      position: relative;
+      transition: opacity 0.2s;
     }
-    .footer-bottom-links a:first-child { font-weight: 600; }
-    .footer-bottom-links a::after {
-      content: '';
-      position: absolute;
-      left: 0; bottom: -2px;
-      width: 100%; height: 1px;
-      background: #fff;
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.22s ease;
-    }
-    .footer-bottom-links a:hover::after { transform: scaleX(1); }
+    .ft-bottom-link:hover { opacity: 0.7; }
+    .ft-bottom-link.fw-bold { font-weight: 600; }
 
-    .footer-logo {
+    /* ── 소셜 아이콘 ── */
+    .ft-social {
+      position: absolute;
+      opacity: 0.75;
+      line-height: 0;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .ft-social:hover { opacity: 1; transform: scale(1.15); }
+
+    /* ── 흰색 로고 ── */
+    .ft-logo {
       position: absolute;
       left: 52px; top: 328px;
-      height: 31px; object-fit: contain;
+      width: 131px; height: 31px;
+      object-fit: contain;
     }
-    .footer-copyright {
+
+    /* ── 저작권 ── */
+    .ft-copyright {
       position: absolute;
-      right: 52px; top: 339px;
+      left: 1188px; top: 339px;
       font-family: 'Noto Sans KR', sans-serif;
       font-weight: 300;
       font-size: 12px;
@@ -531,6 +610,112 @@
       letter-spacing: -0.6px;
       line-height: 20px;
       white-space: nowrap;
+      margin: 0;
+    }
+
+    /* ── TOP 버튼 ── */
+    .top-btn {
+      position: absolute;
+      left: 1312px; top: 44px;
+      width: 74px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.25s ease;
+    }
+    .top-btn:hover { transform: translateY(-4px); }
+    .top-btn-circle {
+      width: 74px; height: 70px;
+      border: 0.5px solid rgba(255,255,255,0.4);
+      border-radius: 50%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 6px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .top-btn:hover .top-btn-circle { border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.1); }
+    .top-btn-arrow {
+      display: block;
+    }
+    .top-btn-label {
+      font-family: 'Chillax', sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      color: #fff;
+      letter-spacing: 0.13px;
+      line-height: 1;
+    }
+    /* ─── IFRAME 모달 ─── */
+    .iframe-modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+    }
+    .iframe-modal-backdrop.open {
+      display: flex;
+    }
+    .iframe-modal {
+      position: relative;
+      width: 1000px;
+      max-width: calc(100vw - 48px);
+      height: 670px;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    .iframe-modal-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      height: 48px;
+      background: #f2f6f7;
+      border-bottom: 1px solid #e0e8ea;
+      flex-shrink: 0;
+    }
+    .iframe-modal-title {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #234b63;
+    }
+    .iframe-modal-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .iframe-modal-newwin {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 12px;
+      color: #1e8dcd;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: opacity 0.2s;
+    }
+    .iframe-modal-newwin:hover { opacity: 0.7; }
+    .iframe-modal-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+    .iframe-modal-close:hover { opacity: 1; }
+    .iframe-modal iframe {
+      flex: 1;
+      width: 100%;
+      border: none;
     }
   </style>
 </head>
@@ -587,9 +772,9 @@
         </div>
         <!-- Insight -->
         <div class="lnb-col" data-col="insight">
-          <a href="#" class="en ext">NetZero News</a>
-          <a href="#" class="ext">친환경 기업정보</a>
-          <a href="#" class="ext">그린카 계산기</a>
+          <a href="https://www.netzeronews.kr/" class="en ext" target="_blank" rel="noopener noreferrer">NetZero News</a>
+          <a href="insight.html?page=eco" class="ext">친환경 기업정보</a>
+          <a href="insight.html?page=green" class="ext">그린카 계산기</a>
         </div>
         <!-- Contact Us -->
         <div class="lnb-col" data-col="contact">
@@ -599,14 +784,52 @@
         </div>
       </div>
 
+      <!-- Search Overlay -->
+      <div class="search-overlay" id="search-overlay">
+        <div class="search-content">
+          <div class="search-input-row">
+            <input
+              class="search-input"
+              type="text"
+              placeholder="검색어를 입력해주세요."
+              id="search-input"
+              autocomplete="off"
+            >
+            <button class="search-submit" aria-label="검색">
+              <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="7" cy="7" r="5" stroke="#000" stroke-width="1.5"/>
+                <line x1="11" y1="11" x2="16" y2="16" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+          <div class="search-divider"></div>
+          <div class="search-tags">
+            <button class="search-tag" data-keyword="에코벨">#에코벨</button>
+            <button class="search-tag" data-keyword="에코에셋">#에코에셋</button>
+            <button class="search-tag" data-keyword="에너지에셋">#에너지에셋</button>
+          </div>
+        </div>
+      </div>
+
       <!-- Header Right -->
       <div class="header-right">
-        <button class="search-btn" aria-label="검색">
-          <img src="https://www.figma.com/api/mcp/asset/f65bd98b-3a5f-4104-9896-8097b245236e" alt="search">
+        <button class="search-btn" aria-label="검색" id="search-open-btn">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="8.5" cy="8.5" r="5.5" stroke="#000" stroke-width="1.5"/>
+            <line x1="13" y1="13" x2="18" y2="18" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <button class="close-btn" aria-label="닫기" id="search-close-btn">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="1" y1="1" x2="17" y2="17" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="17" y1="1" x2="1" y2="17" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
         </button>
         <a class="demo-btn" href="#">
           <span class="demo-text">DEMO</span>
-          <img class="demo-arrow" src="https://www.figma.com/api/mcp/asset/5cd51a0b-cfbc-4e09-8f92-f149667e2572" alt="">
+          <svg class="demo-arrow" width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 7L7 1M7 1H3M7 1V5" stroke="#000" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
         </a>
       </div>
 
@@ -618,7 +841,7 @@
     <!-- HERO -->
     <section class="hero">
       <p class="hero-eyebrow">Where Energy Becomes Value</p>
-      <h1 class="hero-title">에너지를 가치로 잇&nbsp;&nbsp;&nbsp;<span class="underlined">다</span></h1>
+      <h1 class="hero-title">에너지를 가치로 잇<span class="hero-bar"></span><span class="underlined">다</span></h1>
       <p class="hero-desc">지속가능한 세상이 일상이 되도록, 에너지 자산화의 전 과정을 에코벨이 함께합니다.</p>
     </section>
 
@@ -646,77 +869,103 @@
     <div class="footer-overlay"></div>
     <div class="footer-inner">
 
-      <div class="footer-col">
-        <p class="footer-col-title">기업소개</p>
-        <ul>
-          <li class="kor">CEO 인사말</li>
-          <li class="kor">기업소개</li>
-          <li class="kor">보도자료</li>
-          <li class="kor">아카이브</li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <p class="footer-col-title">솔루션</p>
-        <ul>
-          <li class="kor">전체 솔루션 맵</li>
-          <li class="eng">ecoNODE</li>
-          <li class="divider-line"></li>
-          <li class="kor">태양광 솔루션</li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <p class="footer-col-title">플랫폼</p>
-        <ul>
-          <li class="eng">eco Asset</li>
-          <li class="eng">Energy Asset</li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <p class="footer-col-title">인사이트</p>
-        <ul>
-          <li class="insight-link eng">
-            NetZero News
-            <img src="https://www.figma.com/api/mcp/asset/87a68c2a-925f-49a9-99df-cd6985d7e506" alt="↗">
-          </li>
-          <li class="insight-link kor">
-            친환경 기업정보
-            <img src="https://www.figma.com/api/mcp/asset/eb51756d-86de-4fc2-a40f-c7ac24254c14" alt="↗">
-          </li>
-          <li class="insight-link kor">
-            그린카 계산기
-            <img src="https://www.figma.com/api/mcp/asset/e62ea5da-7eb0-47c1-9e7c-3a4aefa1c0b7" alt="↗">
-          </li>
-        </ul>
-      </div>
+      <!-- 컬럼 타이틀 (top=44) -->
+      <p class="ft-col-title" style="left:53px;top:44px;">기업소개</p>
+      <p class="ft-col-title" style="left:180px;top:44px;">솔루션</p>
+      <p class="ft-col-title" style="left:317px;top:44px;">플랫폼</p>
+      <p class="ft-col-title" style="left:465px;top:44px;">인사이트</p>
 
+      <!-- 기업소개 링크 (top = center Y) -->
+      <a class="ft-link" href="#" style="left:53px;top:87px;"><span style="font-family:'Chillax',sans-serif;font-weight:500;">CEO </span>인사말</a>
+      <a class="ft-link" href="#" style="left:53px;top:117px;">기업소개</a>
+      <a class="ft-link" href="#" style="left:53px;top:147px;">보도자료</a>
+      <a class="ft-link" href="#" style="left:53px;top:176px;">아카이브</a>
+
+      <!-- 솔루션 링크 -->
+      <a class="ft-link" href="#" style="left:180px;top:87px;">전체 솔루션 맵</a>
+      <a class="ft-link ft-en" href="#" style="left:180px;top:117px;">ecoNODE</a>
+      <div class="ft-sep" style="left:180px;top:147px;width:66px;"></div>
+      <a class="ft-link" href="#" style="left:180px;top:177px;">태양광 솔루션</a>
+
+      <!-- 플랫폼 링크 -->
+      <a class="ft-link ft-en" href="#" style="left:317px;top:87px;">eco Asset</a>
+      <a class="ft-link ft-en" href="#" style="left:317px;top:117px;">Energy Asset</a>
+
+      <!-- 인사이트 링크 (↗ 아이콘) -->
+      <a class="ft-link ft-en" href="https://www.netzeronews.kr/" target="_blank" rel="noopener noreferrer" style="left:465px;top:90px;">NetZero News <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 7L7 1M7 1H3M7 1V5" stroke="rgba(255,255,255,0.8)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="ft-link" href="insight.html?page=eco" style="left:465px;top:120px;">친환경 기업정보 <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 7L7 1M7 1H3M7 1V5" stroke="rgba(255,255,255,0.8)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="ft-link" href="insight.html?page=green" style="left:465px;top:150px;">그린카 계산기 <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 7L7 1M7 1H3M7 1V5" stroke="rgba(255,255,255,0.8)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+
+      <!-- TOP 버튼 -->
       <a class="top-btn" href="#" aria-label="맨 위로">
         <div class="top-btn-circle">
-          <div class="top-btn-arrow"></div>
+          <svg class="top-btn-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 16V4M10 4L4 10M10 4L16 10" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="top-btn-label">TOP</span>
         </div>
-        <span class="top-btn-label">TOP</span>
       </a>
 
-      <div class="footer-divider-1"></div>
-      <div class="footer-social">
-        <img src="https://www.figma.com/api/mcp/asset/4e52afdb-ff57-4fb7-b19b-8f1a47f1028a" alt="YouTube">
-        <img src="https://www.figma.com/api/mcp/asset/e6a5e64e-d215-4a0b-9c0b-99c3fc9e70e0" alt="Instagram">
-        <img src="https://www.figma.com/api/mcp/asset/75d85da5-e9a3-43b6-9d48-68ad53d2b3ab" alt="Facebook">
-      </div>
+      <!-- 디바이더 1 (top=267) -->
+      <div class="ft-divider" style="top:267px;"></div>
 
-      <div class="footer-bottom-links">
-        <a href="#">개인정보처리방침</a>
-        <a href="#">사이트맵</a>
-        <a href="#">찾아오시는 길</a>
-        <a href="#">문의하기</a>
-        <a href="#">공지사항</a>
-      </div>
-      <div class="footer-divider-2"></div>
+      <!-- 소셜 아이콘 (top = 아이콘 상단, 18px 높이) -->
+      <a class="ft-social" href="#" aria-label="YouTube" style="left:1297px;top:279px;">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="1.5" y="4" width="15" height="10" rx="2.5" stroke="rgba(255,255,255,0.8)" stroke-width="1.2"/>
+          <polygon points="7,7 12.5,9 7,11" fill="rgba(255,255,255,0.8)"/>
+        </svg>
+      </a>
+      <a class="ft-social" href="#" aria-label="Instagram" style="left:1332px;top:279px;">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="14" height="14" rx="4" stroke="rgba(255,255,255,0.8)" stroke-width="1.2"/>
+          <circle cx="9" cy="9" r="3.2" stroke="rgba(255,255,255,0.8)" stroke-width="1.2"/>
+          <circle cx="13" cy="5" r="0.9" fill="rgba(255,255,255,0.8)"/>
+        </svg>
+      </a>
+      <a class="ft-social" href="#" aria-label="Facebook" style="left:1367px;top:279px;">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10.5 9.5H12.3L12.8 7H10.5V5.8C10.5 5.1 10.8 4.5 11.8 4.5H13V2.3C13 2.3 11.9 2.1 10.9 2.1C8.7 2.1 7.5 3.4 7.5 5.5V7H5.3V9.5H7.5V16H10.5V9.5Z" fill="rgba(255,255,255,0.8)"/>
+        </svg>
+      </a>
 
-      <img class="footer-logo" src="https://www.figma.com/api/mcp/asset/8188306c-2083-4828-882c-d75f935522a4" alt="ecobell">
-      <p class="footer-copyright">ⓒ2026&nbsp;&nbsp;ecobell Co., Ltd. All rights reserved</p>
+      <!-- 하단 링크 (top = center Y = 287) -->
+      <a class="ft-bottom-link fw-bold" href="#" style="left:50px;top:287px;">개인정보처리방침</a>
+      <a class="ft-bottom-link" href="#" style="left:167px;top:287px;">사이트맵</a>
+      <a class="ft-bottom-link" href="#" style="left:238px;top:287px;">찾아오시는 길</a>
+      <a class="ft-bottom-link" href="#" style="left:335px;top:287px;">문의하기</a>
+      <a class="ft-bottom-link" href="#" style="left:406px;top:287px;">공지사항</a>
+
+      <!-- 디바이더 2 (top=309) -->
+      <div class="ft-divider" style="top:309px;"></div>
+
+      <!-- 흰색 로고 -->
+      <img class="ft-logo" src="https://www.figma.com/api/mcp/asset/7c192d98-853d-4be3-bc7a-661e371cb0b9" alt="ecobell">
+
+      <!-- 저작권 -->
+      <p class="ft-copyright">ⓒ2026&nbsp;&nbsp;ecobell Co., Ltd. All rights reserved</p>
 
     </div>
   </footer>
+
+  <!-- ─── IFRAME 모달 ─── -->
+  <div class="iframe-modal-backdrop" id="iframe-modal-backdrop">
+    <div class="iframe-modal">
+      <div class="iframe-modal-bar">
+        <span class="iframe-modal-title" id="iframe-modal-title"></span>
+        <div class="iframe-modal-actions">
+          <a class="iframe-modal-newwin" id="iframe-modal-newwin" href="#" target="_blank" rel="noopener noreferrer">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H6M10 2V6" stroke="#1e8dcd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            새 창으로 열기
+          </a>
+          <button class="iframe-modal-close" id="iframe-modal-close" aria-label="닫기">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><line x1="1" y1="1" x2="15" y2="15" stroke="#333" stroke-width="1.5" stroke-linecap="round"/><line x1="15" y1="1" x2="1" y2="15" stroke="#333" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+      </div>
+      <iframe id="iframe-modal-frame" src="" title=""></iframe>
+    </div>
+  </div>
 
   <script>
     // ─── 헤더 스크롤 그림자 ───
@@ -782,10 +1031,84 @@
       });
     });
 
+    // ─── 검색창 토글 ───
+    const searchOverlay  = document.getElementById('search-overlay');
+    const searchInput    = document.getElementById('search-input');
+    const searchOpenBtn  = document.getElementById('search-open-btn');
+    const searchCloseBtn = document.getElementById('search-close-btn');
+
+    function openSearch() {
+      header.classList.add('search-open');
+      searchOverlay.classList.add('open');
+      // LNB 닫기
+      nav.classList.remove('lnb-open');
+      lnb.classList.remove('open');
+      navItems.forEach(i => i.classList.remove('lnb-active'));
+      lnbCols.forEach(c => c.classList.remove('active'));
+      setTimeout(() => searchInput.focus(), 50);
+    }
+
+    function closeSearch() {
+      header.classList.remove('search-open');
+      searchOverlay.classList.remove('open');
+    }
+
+    searchOpenBtn.addEventListener('click', openSearch);
+    searchCloseBtn.addEventListener('click', closeSearch);
+
+    // 해시태그 클릭 → 입력창에 채우기
+    document.querySelectorAll('.search-tag').forEach(tag => {
+      tag.addEventListener('click', () => {
+        searchInput.value = tag.dataset.keyword;
+        searchInput.focus();
+      });
+    });
+
+    // ESC로 닫기
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeSearch();
+    });
+
     // TOP 버튼
     document.querySelector('.top-btn').addEventListener('click', e => {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ─── IFRAME 모달 ───
+    const iframeBackdrop = document.getElementById('iframe-modal-backdrop');
+    const iframeFrame    = document.getElementById('iframe-modal-frame');
+    const iframeTitle    = document.getElementById('iframe-modal-title');
+    const iframeNewwin   = document.getElementById('iframe-modal-newwin');
+    const iframeClose    = document.getElementById('iframe-modal-close');
+
+    function openIframeModal(url, title) {
+      iframeTitle.textContent = title;
+      iframeNewwin.href = url;
+      iframeFrame.src = url;
+      iframeBackdrop.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeIframeModal() {
+      iframeBackdrop.classList.remove('open');
+      iframeFrame.src = '';
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('[data-iframe-url]').forEach(el => {
+      el.addEventListener('click', e => {
+        e.preventDefault();
+        openIframeModal(el.dataset.iframeUrl, el.dataset.iframeTitle);
+      });
+    });
+
+    iframeClose.addEventListener('click', closeIframeModal);
+    iframeBackdrop.addEventListener('click', e => {
+      if (e.target === iframeBackdrop) closeIframeModal();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeIframeModal();
     });
   </script>
 </body>
