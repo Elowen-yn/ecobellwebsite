@@ -209,7 +209,8 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      margin-bottom: 48px;
+      margin-left: -31px;
+      margin-bottom: 31px;
     }
     .breadcrumb-item {
       font-family: 'Chillax', sans-serif;
@@ -231,9 +232,9 @@
       background: #fff;
     }
     .contact-page-inner {
-      width: 1290px;
+      width: 1440px;
       margin: 0 auto;
-      padding: 70px 0 0;
+      padding: 85px 75px 0;
     }
 
     /* 페이지 타이틀 */
@@ -242,8 +243,9 @@
       font-weight: 800;
       font-size: 45px;
       color: #000;
-      line-height: 1.3;
-      margin-bottom: 100px;
+      line-height: 58.5px;
+      letter-spacing: 0.45px;
+      margin-bottom: 80px;
     }
 
     /* 검색 바 + 총 건수 */
@@ -258,17 +260,20 @@
       font-weight: 800;
       font-size: 18px;
       color: #000;
+      letter-spacing: 0.18px;
+      line-height: 23.4px;
     }
+    .notice-count-num { color: #0091bb; }
     .notice-search {
       display: flex;
       align-items: center;
-      gap: 0;
+      gap: 14px;
     }
     .notice-select {
       width: 134px;
       height: 39px;
       border: 0.5px solid rgba(0,0,0,0.25);
-      border-right: none;
+      border-radius: 5px;
       background: #fff;
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-size: 15px;
@@ -290,6 +295,7 @@
       width: 100%;
       height: 100%;
       border: 0.5px solid rgba(0,0,0,0.25);
+      border-radius: 5px;
       background: #fff;
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-size: 15px;
@@ -297,7 +303,7 @@
       padding: 0 40px 0 14px;
       outline: none;
     }
-    .notice-search-input::placeholder { color: rgba(45,45,45,0.4); }
+    .notice-search-input::placeholder { color: rgba(45,45,45,0.4); font-weight: 400; letter-spacing: 0.45px; }
     .notice-search-btn {
       position: absolute;
       right: 12px;
@@ -332,6 +338,11 @@
       text-align: center;
       height: 53px;
       padding: 0;
+      letter-spacing: 0.15px;
+      line-height: 19.5px;
+    }
+    .notice-table th.ko {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
     }
     .notice-table td {
       height: 70px;
@@ -339,7 +350,6 @@
       border-bottom: 0.5px solid rgba(0,0,0,0.12);
       vertical-align: middle;
     }
-    .notice-table th:nth-child(2),
     .notice-table td:nth-child(2) { text-align: left; padding-left: 20px; }
 
     /* 컬럼 너비 (총 1290px) */
@@ -352,35 +362,38 @@
 
     .td-no {
       font-family: 'Chillax', sans-serif;
-      font-weight: 500;
-      font-size: 17px;
+      font-weight: 400;
+      font-size: 16px;
       color: #000;
+      letter-spacing: 0.16px;
     }
     .td-no.pinned { color: transparent; }
     .td-title {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 700;
-      font-size: 18px;
+      font-weight: 400;
+      font-size: 17px;
       color: #000;
+      letter-spacing: 0.17px;
+      line-height: 22.1px;
       cursor: pointer;
       transition: color 0.15s;
     }
     .td-title:hover { color: #1e8dcd; }
     .td-author {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 700;
+      font-weight: 400;
       font-size: 16px;
       color: #000;
     }
     .td-date {
       font-family: 'Chillax', sans-serif;
-      font-weight: 500;
+      font-weight: 400;
       font-size: 16px;
       color: #000;
     }
     .td-views {
       font-family: 'Chillax', sans-serif;
-      font-weight: 500;
+      font-weight: 400;
       font-size: 16px;
       color: #000;
     }
@@ -392,15 +405,21 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 30px;
       height: 70px;
       border-top: 0.5px solid rgba(0,0,0,0.12);
+    }
+    .page-arrow-group {
+      display: flex;
+      align-items: center;
+      gap: 9px;
     }
     .page-arrow {
       width: 23px; height: 22px;
       display: flex; align-items: center; justify-content: center;
       cursor: pointer;
-      border: 0.5px solid rgba(0,0,0,0.2);
+      border: 0.5px solid rgba(0,0,0,0.3);
+      border-radius: 3px;
       background: #fff;
       transition: background 0.2s;
     }
@@ -409,10 +428,11 @@
       font-family: 'Chillax', sans-serif;
       font-size: 17px;
       color: #000;
-      width: 28px;
       text-align: center;
       cursor: pointer;
       font-weight: 500;
+      letter-spacing: 0.17px;
+      line-height: 22.1px;
       transition: color 0.15s;
     }
     .page-num:hover { color: #1e8dcd; }
@@ -490,20 +510,19 @@
     /* ─── FOOTER ─── */
     footer { position: relative; height: 453px; background: rgb(247,252,253); }
     .footer-inner { position: relative; width: 1440px; margin: 0 auto; height: 100%; }
-    .ft-logo { position: absolute; left: 75px; top: 30px; width: 127px; height: 30px; object-fit: contain; }
-    .ft-company-info { position: absolute; left: 75px; top: 112px; font-family: 'Noto Sans KR', sans-serif; font-weight: 500; font-size: 14px; color: rgb(74,76,76); line-height: 1.85; white-space: pre-line; }
-    .ft-col-title { position: absolute; font-family: 'Chillax', sans-serif; font-weight: 600; font-size: 18px; color: #000; white-space: nowrap; margin: 0; top: 55px; }
-    .ft-link { position: absolute; font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 700; font-size: 15px; color: #000; white-space: nowrap; text-decoration: none; line-height: 17px; transition: opacity 0.2s; }
+    .ft-company-info { position: absolute; left: 75px; top: 112px; font-family: 'Noto Sans KR', sans-serif; font-weight: 500; font-size: 14px; color: rgb(74,76,76); line-height: 23px; letter-spacing: -0.28px; white-space: pre-line; }
+    .ft-col-title { position: absolute; font-family: 'Chillax', sans-serif; font-weight: 600; font-size: 18px; color: #000; white-space: nowrap; margin: 0; top: 55px; letter-spacing: 0.54px; line-height: 28.8px; }
+    .ft-link { position: absolute; font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 700; font-size: 15px; color: #000; white-space: nowrap; text-decoration: none; line-height: 22.5px; letter-spacing: 0.15px; transition: opacity 0.2s; }
     .ft-link:hover { opacity: 0.5; }
-    .ft-link.ft-en { font-family: 'Chillax', sans-serif; font-weight: 500; }
+    .ft-link.ft-en { font-family: 'Chillax', sans-serif; font-weight: 500; line-height: 16.5px; }
     .ft-sep { position: absolute; height: 0.5px; background: rgba(0,0,0,0.2); }
     .ft-divider { position: absolute; left: 75px; right: 75px; height: 0.5px; background: rgba(0,0,0,0.15); }
-    .ft-bottom-link { position: absolute; font-family: 'Noto Sans KR', sans-serif; font-weight: 400; font-size: 14px; color: #000; text-decoration: none; white-space: nowrap; top: 338px; line-height: 20px; transition: opacity 0.2s; }
+    .ft-bottom-link { position: absolute; font-family: 'Noto Sans KR', sans-serif; font-weight: 400; font-size: 14px; color: #000; text-decoration: none; white-space: nowrap; top: 338px; line-height: 20px; letter-spacing: -0.28px; transition: opacity 0.2s; }
     .ft-bottom-link:hover { opacity: 0.5; }
     .ft-bottom-link.fw-bold { font-weight: 500; }
     .ft-social { position: absolute; line-height: 0; opacity: 0.7; transition: opacity 0.2s, transform 0.2s; top: 339px; }
     .ft-social:hover { opacity: 1; transform: scale(1.1); }
-    .ft-copyright { position: absolute; left: 1164px; top: 387px; font-family: 'Noto Sans KR', sans-serif; font-weight: 300; font-size: 12px; color: #000; white-space: nowrap; margin: 0; }
+    .ft-copyright { position: absolute; left: 1164px; top: 387px; font-family: 'Noto Sans KR', sans-serif; font-weight: 300; font-size: 12px; color: #000; letter-spacing: -0.6px; line-height: 20px; white-space: nowrap; margin: 0; }
   </style>
 </head>
 <body>
@@ -614,7 +633,7 @@
 
       <!-- 툴바: 총 건수 + 검색 -->
       <div class="notice-toolbar">
-        <span class="notice-count">100건</span>
+        <span class="notice-count"><span class="notice-count-num">100</span>건</span>
         <div class="notice-search">
           <select class="notice-select">
             <option>제목 + 내용</option>
@@ -643,11 +662,11 @@
         <thead>
           <tr>
             <th>no</th>
-            <th>공지제목</th>
-            <th>작성자</th>
-            <th>작성일</th>
-            <th>조회수</th>
-            <th>첨부파일</th>
+            <th class="ko">공지제목</th>
+            <th class="ko">작성자</th>
+            <th class="ko">작성일</th>
+            <th class="ko">조회수</th>
+            <th class="ko">첨부파일</th>
           </tr>
         </thead>
         <tbody>
@@ -794,12 +813,14 @@
 
       <!-- 페이지네이션 -->
       <div class="notice-pagination">
-        <button class="page-arrow" aria-label="첫 페이지">
-          <svg width="7" height="7" viewBox="0 0 7 7" fill="none"><path d="M4 1L1 3.5L4 6" stroke="#000" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 1L4 3.5L7 6" stroke="#000" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <button class="page-arrow" aria-label="이전 페이지">
-          <svg width="5" height="7" viewBox="0 0 5 7" fill="none"><path d="M4 1L1 3.5L4 6" stroke="#000" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
+        <div class="page-arrow-group">
+          <button class="page-arrow" aria-label="첫 페이지">
+            <svg width="7" height="7" viewBox="0 0 7 7" fill="none"><path d="M4 1L1 3.5L4 6" stroke="rgba(0,0,0,0.6)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 1L4 3.5L7 6" stroke="rgba(0,0,0,0.6)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="page-arrow" aria-label="이전 페이지">
+            <svg width="5" height="7" viewBox="0 0 5 7" fill="none"><path d="M4 1L1 3.5L4 6" stroke="rgba(0,0,0,0.6)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
         <span class="page-num active">1</span>
         <span class="page-num">2</span>
         <span class="page-num">3</span>
@@ -810,12 +831,14 @@
         <span class="page-num">8</span>
         <span class="page-num">9</span>
         <span class="page-num">10</span>
-        <button class="page-arrow" aria-label="다음 페이지">
-          <svg width="5" height="7" viewBox="0 0 5 7" fill="none"><path d="M1 1L4 3.5L1 6" stroke="#000" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <button class="page-arrow" aria-label="마지막 페이지">
-          <svg width="7" height="7" viewBox="0 0 7 7" fill="none"><path d="M3 1L6 3.5L3 6" stroke="#000" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M0 1L3 3.5L0 6" stroke="#000" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
+        <div class="page-arrow-group">
+          <button class="page-arrow" aria-label="다음 페이지">
+            <svg width="5" height="7" viewBox="0 0 5 7" fill="none"><path d="M1 1L4 3.5L1 6" stroke="rgba(0,0,0,0.6)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="page-arrow" aria-label="마지막 페이지">
+            <svg width="7" height="7" viewBox="0 0 7 7" fill="none"><path d="M3 1L6 3.5L3 6" stroke="rgba(0,0,0,0.6)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M0 1L3 3.5L0 6" stroke="rgba(0,0,0,0.6)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
       </div>
 
     </div><!-- /.contact-page-inner -->
@@ -844,8 +867,6 @@
   <!-- ─── FOOTER ─── -->
   <footer>
     <div class="footer-inner">
-
-      <img class="ft-logo" src="https://www.figma.com/api/mcp/asset/7f89b782-9cc2-4cf5-92b8-d3f849373b47" alt="ecobell">
 
       <p class="ft-company-info">㈜에코벨
 
@@ -970,12 +991,6 @@
       tag.addEventListener('click', () => { searchInput.value = tag.dataset.keyword; searchInput.focus(); });
     });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSearch(); });
-
-    // ─── TOP 버튼 ───
-    document.querySelector('.top-btn').addEventListener('click', e => {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
 
     // ─── 페이지네이션 ───
     document.querySelectorAll('.page-num').forEach(btn => {

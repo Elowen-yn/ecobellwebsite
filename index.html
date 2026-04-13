@@ -506,14 +506,6 @@
       height: 100%;
     }
 
-    /* ── 로고 ── */
-    .ft-logo {
-      position: absolute;
-      left: 75px; top: 30px;
-      width: 127px; height: 30px;
-      object-fit: contain;
-    }
-
     /* ── 회사 정보 ── */
     .ft-company-info {
       position: absolute;
@@ -522,7 +514,8 @@
       font-weight: 500;
       font-size: 14px;
       color: rgb(74,76,76);
-      line-height: 1.85;
+      line-height: 23px;
+      letter-spacing: -0.28px;
       white-space: pre-line;
     }
 
@@ -536,6 +529,8 @@
       white-space: nowrap;
       margin: 0;
       top: 55px;
+      letter-spacing: 0.54px;
+      line-height: 28.8px;
     }
 
     /* ── 링크 ── */
@@ -547,13 +542,15 @@
       color: #000;
       white-space: nowrap;
       text-decoration: none;
-      line-height: 17px;
+      line-height: 22.5px;
+      letter-spacing: 0.15px;
       transition: opacity 0.2s;
     }
     .ft-link:hover { opacity: 0.5; }
     .ft-link.ft-en {
       font-family: 'Chillax', sans-serif;
       font-weight: 500;
+      line-height: 16.5px;
     }
 
     /* ── 솔루션 구분선 ── */
@@ -582,6 +579,7 @@
       white-space: nowrap;
       top: 338px;
       line-height: 20px;
+      letter-spacing: -0.28px;
       transition: opacity 0.2s;
     }
     .ft-bottom-link:hover { opacity: 0.5; }
@@ -923,9 +921,6 @@
   <!-- ─── FOOTER ─── -->
   <footer>
     <div class="footer-inner">
-
-      <!-- 로고 -->
-      <img class="ft-logo" src="https://www.figma.com/api/mcp/asset/7f89b782-9cc2-4cf5-92b8-d3f849373b47" alt="ecobell">
 
       <!-- 회사 정보 -->
       <p class="ft-company-info">㈜에코벨

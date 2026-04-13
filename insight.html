@@ -239,17 +239,19 @@
       background: #f2f6f7;
     }
     .insight-page-inner {
-      width: 1340px;
+      width: 100%;
+      max-width: 1440px;
       margin: 0 auto;
-      padding: 70px 0 80px;
+      padding: 70px 50px 80px;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
     }
     .insight-page-tabs {
       display: flex;
       gap: 0;
       margin-top: 80px;
+      align-self: flex-start;
     }
     .insight-page-tab {
       padding: 12px 32px;
@@ -270,31 +272,32 @@
       border-radius: 0 8px 8px 8px;
       overflow: hidden;
       box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      width: 100%;
+      height: 950px;
     }
     .insight-page-frame iframe {
       display: block;
       width: 100%;
-      height: 950px;
+      height: 100%;
       border: none;
     }
 
     /* ─── FOOTER ─── */
     footer { position: relative; height: 453px; background: rgb(247,252,253); }
     .footer-inner { position: relative; width: 1440px; margin: 0 auto; height: 100%; }
-    .ft-logo { position: absolute; left: 75px; top: 30px; width: 127px; height: 30px; object-fit: contain; }
-    .ft-company-info { position: absolute; left: 75px; top: 112px; font-family: 'Noto Sans KR', sans-serif; font-weight: 500; font-size: 14px; color: rgb(74,76,76); line-height: 1.85; white-space: pre-line; }
-    .ft-col-title { position: absolute; font-family: 'Chillax', sans-serif; font-weight: 600; font-size: 18px; color: #000; white-space: nowrap; margin: 0; top: 55px; }
-    .ft-link { position: absolute; font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 700; font-size: 15px; color: #000; white-space: nowrap; text-decoration: none; line-height: 17px; transition: opacity 0.2s; }
+    .ft-company-info { position: absolute; left: 75px; top: 112px; font-family: 'Noto Sans KR', sans-serif; font-weight: 500; font-size: 14px; color: rgb(74,76,76); line-height: 23px; letter-spacing: -0.28px; white-space: pre-line; }
+    .ft-col-title { position: absolute; font-family: 'Chillax', sans-serif; font-weight: 600; font-size: 18px; color: #000; white-space: nowrap; margin: 0; top: 55px; letter-spacing: 0.54px; line-height: 28.8px; }
+    .ft-link { position: absolute; font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 700; font-size: 15px; color: #000; white-space: nowrap; text-decoration: none; line-height: 22.5px; letter-spacing: 0.15px; transition: opacity 0.2s; }
     .ft-link:hover { opacity: 0.5; }
-    .ft-link.ft-en { font-family: 'Chillax', sans-serif; font-weight: 500; }
+    .ft-link.ft-en { font-family: 'Chillax', sans-serif; font-weight: 500; line-height: 16.5px; }
     .ft-sep { position: absolute; height: 0.5px; background: rgba(0,0,0,0.2); }
     .ft-divider { position: absolute; left: 75px; right: 75px; height: 0.5px; background: rgba(0,0,0,0.15); }
-    .ft-bottom-link { position: absolute; font-family: 'Noto Sans KR', sans-serif; font-weight: 400; font-size: 14px; color: #000; text-decoration: none; white-space: nowrap; top: 338px; line-height: 20px; transition: opacity 0.2s; }
+    .ft-bottom-link { position: absolute; font-family: 'Noto Sans KR', sans-serif; font-weight: 400; font-size: 14px; color: #000; text-decoration: none; white-space: nowrap; top: 338px; line-height: 20px; letter-spacing: -0.28px; transition: opacity 0.2s; }
     .ft-bottom-link:hover { opacity: 0.5; }
     .ft-bottom-link.fw-bold { font-weight: 500; }
     .ft-social { position: absolute; line-height: 0; opacity: 0.7; transition: opacity 0.2s, transform 0.2s; top: 339px; }
     .ft-social:hover { opacity: 1; transform: scale(1.1); }
-    .ft-copyright { position: absolute; left: 1164px; top: 387px; font-family: 'Noto Sans KR', sans-serif; font-weight: 300; font-size: 12px; color: #000; white-space: nowrap; margin: 0; }
+    .ft-copyright { position: absolute; left: 1164px; top: 387px; font-family: 'Noto Sans KR', sans-serif; font-weight: 300; font-size: 12px; color: #000; letter-spacing: -0.6px; line-height: 20px; white-space: nowrap; margin: 0; }
   </style>
 </head>
 <body>
@@ -412,8 +415,6 @@
   <!-- ─── FOOTER ─── -->
   <footer>
     <div class="footer-inner">
-
-      <img class="ft-logo" src="https://www.figma.com/api/mcp/asset/7f89b782-9cc2-4cf5-92b8-d3f849373b47" alt="ecobell">
 
       <p class="ft-company-info">㈜에코벨
 
@@ -539,11 +540,6 @@
     });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSearch(); });
 
-    // ─── TOP 버튼 ───
-    document.querySelector('.top-btn').addEventListener('click', e => {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
 
     // ─── 인사이트 탭 & URL 파라미터 ───
     const urls = {
