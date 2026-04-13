@@ -488,30 +488,34 @@
     /* ─── FOOTER ─── */
     footer {
       position: relative;
-      height: 409px;
-      overflow: hidden;
-    }
-    .footer-bg {
-      position: absolute; inset: 0;
-      background: linear-gradient(
-        90deg,
-        rgb(35,75,99) 0%,
-        rgb(0,145,187) 35%,
-        rgb(82,176,172) 70%,
-        rgb(80,188,93) 100%
-      );
-      opacity: 0.8;
-    }
-    .footer-overlay {
-      position: absolute; inset: 0;
-      background: rgba(0,0,0,0.2);
+      height: 453px;
+      background: rgb(247,252,253);
     }
     .footer-inner {
       position: relative;
-      z-index: 1;
       width: 1440px;
       margin: 0 auto;
       height: 100%;
+    }
+
+    /* ── 로고 ── */
+    .ft-logo {
+      position: absolute;
+      left: 75px; top: 30px;
+      width: 127px; height: 30px;
+      object-fit: contain;
+    }
+
+    /* ── 회사 정보 ── */
+    .ft-company-info {
+      position: absolute;
+      left: 75px; top: 112px;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      color: rgb(74,76,76);
+      line-height: 1.85;
+      white-space: pre-line;
     }
 
     /* ── 컬럼 타이틀 ── */
@@ -519,131 +523,160 @@
       position: absolute;
       font-family: 'Chillax', sans-serif;
       font-weight: 600;
-      font-size: 15px;
-      color: #fff;
-      letter-spacing: 0.45px;
-      line-height: 1.6;
+      font-size: 18px;
+      color: #000;
       white-space: nowrap;
       margin: 0;
+      top: 55px;
     }
 
-    /* ── 링크 (top = 센터 Y, translateY(-50%)) ── */
+    /* ── 링크 ── */
     .ft-link {
       position: absolute;
-      transform: translateY(-50%);
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-weight: 700;
-      font-size: 13px;
-      color: rgba(255,255,255,0.8);
-      letter-spacing: 0.13px;
-      line-height: 1.5;
+      font-size: 15px;
+      color: #000;
       white-space: nowrap;
       text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      transition: color 0.2s;
+      line-height: 17px;
+      transition: opacity 0.2s;
     }
-    .ft-link:hover { color: #fff; }
+    .ft-link:hover { opacity: 0.5; }
     .ft-link.ft-en {
       font-family: 'Chillax', sans-serif;
       font-weight: 500;
     }
 
-    /* ── 구분선 (솔루션 ecoNODE 아래) ── */
+    /* ── 솔루션 구분선 ── */
     .ft-sep {
       position: absolute;
-      height: 1px;
-      background: rgba(255,255,255,0.3);
+      height: 0.5px;
+      background: rgba(0,0,0,0.2);
     }
 
     /* ── 가로 디바이더 ── */
     .ft-divider {
       position: absolute;
-      left: 50px; right: 50px;
-      height: 0.4px;
-      background: rgba(255,255,255,0.35);
+      left: 75px; right: 75px;
+      height: 0.5px;
+      background: rgba(0,0,0,0.15);
     }
 
-    /* ── 하단 링크 (top = 센터 Y) ── */
+    /* ── 하단 링크 ── */
     .ft-bottom-link {
       position: absolute;
-      transform: translateY(-50%);
       font-family: 'Noto Sans KR', sans-serif;
       font-weight: 400;
-      font-size: 13px;
-      color: #fff;
+      font-size: 14px;
+      color: #000;
       text-decoration: none;
-      letter-spacing: -0.26px;
-      line-height: 20px;
       white-space: nowrap;
+      top: 338px;
+      line-height: 20px;
       transition: opacity 0.2s;
     }
-    .ft-bottom-link:hover { opacity: 0.7; }
-    .ft-bottom-link.fw-bold { font-weight: 600; }
+    .ft-bottom-link:hover { opacity: 0.5; }
+    .ft-bottom-link.fw-bold { font-weight: 500; }
 
     /* ── 소셜 아이콘 ── */
     .ft-social {
       position: absolute;
-      opacity: 0.75;
       line-height: 0;
+      opacity: 0.7;
       transition: opacity 0.2s, transform 0.2s;
+      top: 339px;
     }
-    .ft-social:hover { opacity: 1; transform: scale(1.15); }
-
-    /* ── 흰색 로고 ── */
-    .ft-logo {
-      position: absolute;
-      left: 52px; top: 328px;
-      width: 131px; height: 31px;
-      object-fit: contain;
-    }
+    .ft-social:hover { opacity: 1; transform: scale(1.1); }
 
     /* ── 저작권 ── */
     .ft-copyright {
       position: absolute;
-      left: 1188px; top: 339px;
+      left: 1164px; top: 387px;
       font-family: 'Noto Sans KR', sans-serif;
       font-weight: 300;
       font-size: 12px;
-      color: #fff;
-      letter-spacing: -0.6px;
-      line-height: 20px;
+      color: #000;
       white-space: nowrap;
       margin: 0;
     }
+    /* ─── 알림 툴팁 ─── */
+    header { overflow: visible; }
 
-    /* ── TOP 버튼 ── */
-    .top-btn {
-      position: absolute;
-      left: 1312px; top: 44px;
-      width: 74px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: transform 0.25s ease;
+    .notif-tooltip {
+      position: fixed;
+      top: 65px;
+      width: 216px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      pointer-events: auto;
+      z-index: 1000; /* header(999)보다 앞 → 항상 최상단 */
+      transition: opacity 0.2s ease, transform 0.2s ease;
     }
-    .top-btn:hover { transform: translateY(-4px); }
-    .top-btn-circle {
-      width: 74px; height: 70px;
-      border: 0.5px solid rgba(255,255,255,0.4);
-      border-radius: 50%;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 6px;
-      transition: border-color 0.2s, background 0.2s;
+    .notif-tooltip.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-4px);
     }
-    .top-btn:hover .top-btn-circle { border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.1); }
-    .top-btn-arrow {
-      display: block;
+
+    /* 삼각형 — JS로 left 계산 후 margin-left는 항상 pill 중앙(108px) */
+    .notif-arrow {
+      width: 0; height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 12px solid #000;
+      /* margin-left는 JS에서 동적으로 설정 */
     }
-    .top-btn-label {
-      font-family: 'Chillax', sans-serif;
-      font-weight: 500;
-      font-size: 16px;
+
+    /* 검은 pill */
+    .notif-pill {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 216px;
+      height: 27px;
+      background: #000;
+      border-radius: 4px;
+      padding: 0 10px;
+      gap: 8px;
+    }
+    .notif-text {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 800;
+      font-size: 12px;
       color: #fff;
-      letter-spacing: 0.13px;
-      line-height: 1;
+      letter-spacing: 0.12px;
+      white-space: nowrap;
     }
+    .notif-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      opacity: 0.7;
+      transition: opacity 0.15s;
+    }
+    .notif-close:hover { opacity: 1; }
+
+    /* ─── 플로팅 eco Asset 버튼 ─── */
+    .floating-ecoasset {
+      position: fixed;
+      right: 44px;
+      bottom: 44px;
+      width: 65px;
+      height: 48px;
+      cursor: pointer;
+      z-index: 500;
+      transition: transform 0.2s ease, opacity 0.2s;
+      text-decoration: none;
+    }
+    .floating-ecoasset:hover { transform: scale(1.08); opacity: 0.9; }
+    .floating-ecoasset img { width: 100%; height: 100%; object-fit: contain; }
+
     /* ─── IFRAME 모달 ─── */
     .iframe-modal-backdrop {
       display: none;
@@ -742,10 +775,10 @@
           <a class="nav-link" href="#">Platform</a>
         </div>
         <div class="nav-item" data-menu="insight">
-          <a class="nav-link" href="#">Insight</a>
+          <a class="nav-link" href="insight.html">Insight</a>
         </div>
         <div class="nav-item" data-menu="contact">
-          <a class="nav-link" href="#">Contact Us</a>
+          <a class="nav-link" href="contact.html">Contact Us</a>
         </div>
       </nav>
 
@@ -778,7 +811,7 @@
         </div>
         <!-- Contact Us -->
         <div class="lnb-col" data-col="contact">
-          <a href="#">공지사항</a>
+          <a href="contact.html">공지사항</a>
           <a href="#">오시는 길</a>
           <a href="#">문의하기</a>
         </div>
@@ -808,6 +841,20 @@
             <button class="search-tag" data-keyword="에코에셋">#에코에셋</button>
             <button class="search-tag" data-keyword="에너지에셋">#에너지에셋</button>
           </div>
+        </div>
+      </div>
+
+      <!-- 알림 툴팁 -->
+      <div class="notif-tooltip" id="notif-tooltip">
+        <div class="notif-arrow"></div>
+        <div class="notif-pill">
+          <span class="notif-text">필요한 정보를 검색해 확인해보세요.</span>
+          <button class="notif-close" id="notif-close" aria-label="닫기">
+            <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="0.5" y1="0.5" x2="6.5" y2="6.5" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/>
+              <line x1="6.5" y1="0.5" x2="0.5" y2="6.5" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/>
+            </svg>
+          </button>
         </div>
       </div>
 
@@ -865,88 +912,79 @@
 
   <!-- ─── FOOTER ─── -->
   <footer>
-    <div class="footer-bg"></div>
-    <div class="footer-overlay"></div>
     <div class="footer-inner">
 
-      <!-- 컬럼 타이틀 (top=44) -->
-      <p class="ft-col-title" style="left:53px;top:44px;">기업소개</p>
-      <p class="ft-col-title" style="left:180px;top:44px;">솔루션</p>
-      <p class="ft-col-title" style="left:317px;top:44px;">플랫폼</p>
-      <p class="ft-col-title" style="left:465px;top:44px;">인사이트</p>
+      <!-- 로고 -->
+      <img class="ft-logo" src="https://www.figma.com/api/mcp/asset/7f89b782-9cc2-4cf5-92b8-d3f849373b47" alt="ecobell">
 
-      <!-- 기업소개 링크 (top = center Y) -->
-      <a class="ft-link" href="#" style="left:53px;top:87px;"><span style="font-family:'Chillax',sans-serif;font-weight:500;">CEO </span>인사말</a>
-      <a class="ft-link" href="#" style="left:53px;top:117px;">기업소개</a>
-      <a class="ft-link" href="#" style="left:53px;top:147px;">보도자료</a>
-      <a class="ft-link" href="#" style="left:53px;top:176px;">아카이브</a>
+      <!-- 회사 정보 -->
+      <p class="ft-company-info">사업자 등록번호 : 598-87-02578  |  대표 : 김소연
+호스팅 서비스 : 주식회사 에코벨  |  통신판매업신고번호 : 2023-서울금천-1822
+08635 서울특별시 금천구 시흥대로 193, 701호(시흥동, 아람아이씨티타워)
+문의 : 02-892-9180  |  팩스 : 02-892-9181  |  이메일 : ecobell@ecobell.co.kr</p>
+
+      <!-- 컬럼 타이틀 -->
+      <p class="ft-col-title" style="left:847px;">기업소개</p>
+      <p class="ft-col-title" style="left:975px;">솔루션</p>
+      <p class="ft-col-title" style="left:1116px;">플랫폼</p>
+      <p class="ft-col-title" style="left:1264px;">인사이트</p>
+
+      <!-- 기업소개 링크 -->
+      <a class="ft-link" href="#" style="left:847px;top:107px;">CEO 인사말</a>
+      <a class="ft-link" href="#" style="left:847px;top:147px;">기업소개</a>
+      <a class="ft-link" href="#" style="left:847px;top:187px;">보도자료</a>
+      <a class="ft-link" href="#" style="left:847px;top:227px;">아카이브</a>
 
       <!-- 솔루션 링크 -->
-      <a class="ft-link" href="#" style="left:180px;top:87px;">전체 솔루션 맵</a>
-      <a class="ft-link ft-en" href="#" style="left:180px;top:117px;">ecoNODE</a>
-      <div class="ft-sep" style="left:180px;top:147px;width:66px;"></div>
-      <a class="ft-link" href="#" style="left:180px;top:177px;">태양광 솔루션</a>
+      <a class="ft-link" href="#" style="left:975px;top:107px;">전체 솔루션 맵</a>
+      <a class="ft-link ft-en" href="#" style="left:975px;top:147px;">ecoNODE</a>
+      <div class="ft-sep" style="left:975px;top:196px;width:66px;"></div>
+      <a class="ft-link" href="#" style="left:975px;top:227px;">태양광 솔루션</a>
 
       <!-- 플랫폼 링크 -->
-      <a class="ft-link ft-en" href="#" style="left:317px;top:87px;">eco Asset</a>
-      <a class="ft-link ft-en" href="#" style="left:317px;top:117px;">Energy Asset</a>
+      <a class="ft-link ft-en" href="#" style="left:1116px;top:107px;">eco Asset</a>
+      <a class="ft-link ft-en" href="#" style="left:1116px;top:147px;">Energy Asset</a>
 
-      <!-- 인사이트 링크 (↗ 아이콘) -->
-      <a class="ft-link ft-en" href="https://www.netzeronews.kr/" target="_blank" rel="noopener noreferrer" style="left:465px;top:90px;">NetZero News <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 7L7 1M7 1H3M7 1V5" stroke="rgba(255,255,255,0.8)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      <a class="ft-link" href="insight.html?page=eco" style="left:465px;top:120px;">친환경 기업정보 <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 7L7 1M7 1H3M7 1V5" stroke="rgba(255,255,255,0.8)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      <a class="ft-link" href="insight.html?page=green" style="left:465px;top:150px;">그린카 계산기 <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 7L7 1M7 1H3M7 1V5" stroke="rgba(255,255,255,0.8)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <!-- 인사이트 링크 -->
+      <a class="ft-link ft-en" href="https://www.netzeronews.kr/" target="_blank" rel="noopener noreferrer" style="left:1264px;top:107px;">NetZero News
+        <svg width="6" height="6" viewBox="0 0 8 8" fill="none" style="margin-left:2px;vertical-align:middle;"><path d="M1 7L7 1M7 1H3M7 1V5" stroke="#000" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="ft-link" href="insight.html?page=eco" style="left:1264px;top:147px;">친환경 기업정보</a>
+      <a class="ft-link" href="insight.html?page=green" style="left:1264px;top:187px;">그린카 계산기</a>
 
-      <!-- TOP 버튼 -->
-      <a class="top-btn" href="#" aria-label="맨 위로">
-        <div class="top-btn-circle">
-          <svg class="top-btn-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10 16V4M10 4L4 10M10 4L16 10" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span class="top-btn-label">TOP</span>
-        </div>
+      <!-- 디바이더 상단 (y=327) -->
+      <div class="ft-divider" style="top:327px;"></div>
+
+      <!-- 하단 링크 (y=338) -->
+      <a class="ft-bottom-link fw-bold" href="#" style="left:75px;">개인정보처리방침</a>
+      <a class="ft-bottom-link" href="#" style="left:206px;">공지사항</a>
+      <a class="ft-bottom-link" href="#" style="left:287px;">찾아오시는 길</a>
+      <a class="ft-bottom-link" href="#" style="left:396px;">문의하기</a>
+
+      <!-- 소셜 아이콘 (y=339) -->
+      <a class="ft-social" href="#" aria-label="Facebook" style="left:1277px;">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M10.5 9.5H12.3L12.8 7H10.5V5.8C10.5 5.1 10.8 4.5 11.8 4.5H13V2.3C13 2.3 11.9 2.1 10.9 2.1C8.7 2.1 7.5 3.4 7.5 5.5V7H5.3V9.5H7.5V16H10.5V9.5Z" fill="#000"/></svg>
+      </a>
+      <a class="ft-social" href="#" aria-label="Instagram" style="left:1312px;">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="2" width="14" height="14" rx="4" stroke="#000" stroke-width="1.3"/><circle cx="9" cy="9" r="3.2" stroke="#000" stroke-width="1.3"/><circle cx="13" cy="5" r="0.9" fill="#000"/></svg>
+      </a>
+      <a class="ft-social" href="#" aria-label="YouTube" style="left:1347px;">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="1.5" y="4" width="15" height="10" rx="2.5" stroke="#000" stroke-width="1.3"/><polygon points="7,7 12.5,9 7,11" fill="#000"/></svg>
       </a>
 
-      <!-- 디바이더 1 (top=267) -->
-      <div class="ft-divider" style="top:267px;"></div>
-
-      <!-- 소셜 아이콘 (top = 아이콘 상단, 18px 높이) -->
-      <a class="ft-social" href="#" aria-label="YouTube" style="left:1297px;top:279px;">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="1.5" y="4" width="15" height="10" rx="2.5" stroke="rgba(255,255,255,0.8)" stroke-width="1.2"/>
-          <polygon points="7,7 12.5,9 7,11" fill="rgba(255,255,255,0.8)"/>
-        </svg>
-      </a>
-      <a class="ft-social" href="#" aria-label="Instagram" style="left:1332px;top:279px;">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="2" y="2" width="14" height="14" rx="4" stroke="rgba(255,255,255,0.8)" stroke-width="1.2"/>
-          <circle cx="9" cy="9" r="3.2" stroke="rgba(255,255,255,0.8)" stroke-width="1.2"/>
-          <circle cx="13" cy="5" r="0.9" fill="rgba(255,255,255,0.8)"/>
-        </svg>
-      </a>
-      <a class="ft-social" href="#" aria-label="Facebook" style="left:1367px;top:279px;">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10.5 9.5H12.3L12.8 7H10.5V5.8C10.5 5.1 10.8 4.5 11.8 4.5H13V2.3C13 2.3 11.9 2.1 10.9 2.1C8.7 2.1 7.5 3.4 7.5 5.5V7H5.3V9.5H7.5V16H10.5V9.5Z" fill="rgba(255,255,255,0.8)"/>
-        </svg>
-      </a>
-
-      <!-- 하단 링크 (top = center Y = 287) -->
-      <a class="ft-bottom-link fw-bold" href="#" style="left:50px;top:287px;">개인정보처리방침</a>
-      <a class="ft-bottom-link" href="#" style="left:167px;top:287px;">사이트맵</a>
-      <a class="ft-bottom-link" href="#" style="left:238px;top:287px;">찾아오시는 길</a>
-      <a class="ft-bottom-link" href="#" style="left:335px;top:287px;">문의하기</a>
-      <a class="ft-bottom-link" href="#" style="left:406px;top:287px;">공지사항</a>
-
-      <!-- 디바이더 2 (top=309) -->
-      <div class="ft-divider" style="top:309px;"></div>
-
-      <!-- 흰색 로고 -->
-      <img class="ft-logo" src="https://www.figma.com/api/mcp/asset/7c192d98-853d-4be3-bc7a-661e371cb0b9" alt="ecobell">
+      <!-- 디바이더 하단 (y=369) -->
+      <div class="ft-divider" style="top:369px;"></div>
 
       <!-- 저작권 -->
       <p class="ft-copyright">ⓒ2026&nbsp;&nbsp;ecobell Co., Ltd. All rights reserved</p>
 
     </div>
   </footer>
+
+  <!-- ─── 플로팅 eco Asset 버튼 ─── -->
+  <a class="floating-ecoasset" href="#" aria-label="eco Asset 바로가기">
+    <img src="ecoasset_badge.png" alt="eco Asset">
+  </a>
 
   <!-- ─── IFRAME 모달 ─── -->
   <div class="iframe-modal-backdrop" id="iframe-modal-backdrop">
@@ -1069,10 +1107,25 @@
       if (e.key === 'Escape') closeSearch();
     });
 
-    // TOP 버튼
-    document.querySelector('.top-btn').addEventListener('click', e => {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    // ─── 알림 툴팁 위치 계산 (검색 아이콘 center 기준) ───
+    const notifTooltip = document.getElementById('notif-tooltip');
+    const notifArrow   = notifTooltip.querySelector('.notif-arrow');
+
+    function positionNotifTooltip() {
+      const btn    = document.getElementById('search-open-btn');
+      const rect   = btn.getBoundingClientRect();
+      const btnCx  = rect.left + rect.width / 2;   // 검색 아이콘 center x
+      const pillW  = 216;
+      notifTooltip.style.left = (btnCx - pillW / 2) + 'px';
+      notifArrow.style.marginLeft = (pillW / 2 - 10) + 'px'; // 삼각형(20px) 중앙
+    }
+
+    positionNotifTooltip();
+    window.addEventListener('resize', positionNotifTooltip);
+
+    // 닫기
+    document.getElementById('notif-close').addEventListener('click', () => {
+      notifTooltip.classList.add('hidden');
     });
 
     // ─── IFRAME 모달 ───
