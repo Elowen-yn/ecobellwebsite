@@ -488,31 +488,22 @@
     }
 
     /* ─── FOOTER ─── */
-    footer { position: relative; height: 409px; overflow: hidden; }
-    .footer-bg { position: absolute; inset: 0; background: linear-gradient(90deg, rgb(35,75,99) 0%, rgb(0,145,187) 35%, rgb(82,176,172) 70%, rgb(80,188,93) 100%); opacity: 0.8; }
-    .footer-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.2); }
-    .footer-inner { position: relative; z-index: 1; width: 1440px; margin: 0 auto; height: 100%; }
-    .ft-col-title { position: absolute; font-family: 'Chillax', sans-serif; font-weight: 600; font-size: 15px; color: #fff; letter-spacing: 0.45px; line-height: 1.6; white-space: nowrap; margin: 0; }
-    .ft-link { position: absolute; transform: translateY(-50%); font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 700; font-size: 13px; color: rgba(255,255,255,0.8); letter-spacing: 0.13px; line-height: 1.5; white-space: nowrap; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; transition: color 0.2s; }
-    .ft-link:hover { color: #fff; }
+    footer { position: relative; height: 453px; background: rgb(247,252,253); }
+    .footer-inner { position: relative; width: 1440px; margin: 0 auto; height: 100%; }
+    .ft-logo { position: absolute; left: 75px; top: 30px; width: 127px; height: 30px; object-fit: contain; }
+    .ft-company-info { position: absolute; left: 75px; top: 112px; font-family: 'Noto Sans KR', sans-serif; font-weight: 500; font-size: 14px; color: rgb(74,76,76); line-height: 1.85; white-space: pre-line; }
+    .ft-col-title { position: absolute; font-family: 'Chillax', sans-serif; font-weight: 600; font-size: 18px; color: #000; white-space: nowrap; margin: 0; top: 55px; }
+    .ft-link { position: absolute; font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 700; font-size: 15px; color: #000; white-space: nowrap; text-decoration: none; line-height: 17px; transition: opacity 0.2s; }
+    .ft-link:hover { opacity: 0.5; }
     .ft-link.ft-en { font-family: 'Chillax', sans-serif; font-weight: 500; }
-    .ft-sep { position: absolute; height: 1px; background: rgba(255,255,255,0.3); }
-    .ft-divider { position: absolute; left: 50px; right: 50px; height: 0.4px; background: rgba(255,255,255,0.35); }
-    .ft-bottom-link { position: absolute; transform: translateY(-50%); font-family: 'Noto Sans KR', sans-serif; font-weight: 400; font-size: 13px; color: #fff; text-decoration: none; letter-spacing: -0.26px; line-height: 20px; white-space: nowrap; transition: opacity 0.2s; }
-    .ft-bottom-link:hover { opacity: 0.7; }
-    .ft-bottom-link.fw-bold { font-weight: 600; }
-    .ft-social { position: absolute; opacity: 0.75; line-height: 0; transition: opacity 0.2s, transform 0.2s; }
-    .ft-social:hover { opacity: 1; transform: scale(1.15); }
-    .ft-logo { position: absolute; left: 52px; top: 328px; width: 131px; height: 31px; object-fit: contain; }
-    .ft-copyright { position: absolute; left: 1188px; top: 339px; font-family: 'Noto Sans KR', sans-serif; font-weight: 300; font-size: 12px; color: #fff; letter-spacing: -0.6px; line-height: 20px; white-space: nowrap; margin: 0; }
-    .top-btn { position: absolute; left: 1312px; top: 44px; width: 74px; display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; text-decoration: none; transition: transform 0.25s ease; }
-    .top-btn:hover { transform: translateY(-4px); }
-    .top-btn-circle { width: 40px; height: 40px; border: 1.5px solid rgba(255,255,255,0.6); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: border-color 0.2s, background 0.2s; }
-    .top-btn:hover .top-btn-circle { border-color: #fff; background: rgba(255,255,255,0.15); }
-    .top-btn-arrow { width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 8px solid rgba(255,255,255,0.8); transition: border-bottom-color 0.2s; }
-    .top-btn:hover .top-btn-arrow { border-bottom-color: #fff; }
-    .top-btn-label { font-family: 'Chillax', sans-serif; font-weight: 500; font-size: 11px; color: rgba(255,255,255,0.8); letter-spacing: 0.5px; transition: color 0.2s; }
-    .top-btn:hover .top-btn-label { color: #fff; }
+    .ft-sep { position: absolute; height: 0.5px; background: rgba(0,0,0,0.2); }
+    .ft-divider { position: absolute; left: 75px; right: 75px; height: 0.5px; background: rgba(0,0,0,0.15); }
+    .ft-bottom-link { position: absolute; font-family: 'Noto Sans KR', sans-serif; font-weight: 400; font-size: 14px; color: #000; text-decoration: none; white-space: nowrap; top: 338px; line-height: 20px; transition: opacity 0.2s; }
+    .ft-bottom-link:hover { opacity: 0.5; }
+    .ft-bottom-link.fw-bold { font-weight: 500; }
+    .ft-social { position: absolute; line-height: 0; opacity: 0.7; transition: opacity 0.2s, transform 0.2s; top: 339px; }
+    .ft-social:hover { opacity: 1; transform: scale(1.1); }
+    .ft-copyright { position: absolute; left: 1164px; top: 387px; font-family: 'Noto Sans KR', sans-serif; font-weight: 300; font-size: 12px; color: #000; white-space: nowrap; margin: 0; }
   </style>
 </head>
 <body>
@@ -852,58 +843,60 @@
 
   <!-- ─── FOOTER ─── -->
   <footer>
-    <div class="footer-bg"></div>
-    <div class="footer-overlay"></div>
     <div class="footer-inner">
 
-      <p class="ft-col-title" style="left:53px;top:44px;">기업소개</p>
-      <p class="ft-col-title" style="left:180px;top:44px;">솔루션</p>
-      <p class="ft-col-title" style="left:317px;top:44px;">플랫폼</p>
-      <p class="ft-col-title" style="left:465px;top:44px;">인사이트</p>
+      <img class="ft-logo" src="https://www.figma.com/api/mcp/asset/7f89b782-9cc2-4cf5-92b8-d3f849373b47" alt="ecobell">
 
-      <a class="ft-link" href="#" style="left:53px;top:87px;"><span style="font-family:'Chillax',sans-serif;font-weight:500;">CEO </span>인사말</a>
-      <a class="ft-link" href="#" style="left:53px;top:117px;">기업소개</a>
-      <a class="ft-link" href="#" style="left:53px;top:147px;">보도자료</a>
-      <a class="ft-link" href="#" style="left:53px;top:176px;">아카이브</a>
+      <p class="ft-company-info">㈜에코벨
 
-      <a class="ft-link" href="#" style="left:180px;top:87px;">전체 솔루션 맵</a>
-      <a class="ft-link ft-en" href="#" style="left:180px;top:117px;">ecoNODE</a>
-      <div class="ft-sep" style="left:180px;top:147px;width:66px;"></div>
-      <a class="ft-link" href="#" style="left:180px;top:177px;">태양광 솔루션</a>
+사업자 등록번호 : 598-87-02578  |  대표 : 김소연
+호스팅 서비스 : 주식회사 에코벨  |  통신판매업신고번호 : 2023-서울금천-1822
+08635 서울특별시 금천구 시흥대로 193, 701호(시흥동, 아람아이씨티타워)
+문의 : 02-892-9180  |  팩스 : 02-892-9181  |  이메일 : ecobell@ecobell.co.kr</p>
 
-      <a class="ft-link ft-en" href="#" style="left:317px;top:87px;">eco Asset</a>
-      <a class="ft-link ft-en" href="#" style="left:317px;top:117px;">Energy Asset</a>
+      <p class="ft-col-title" style="left:847px;">기업소개</p>
+      <p class="ft-col-title" style="left:975px;">솔루션</p>
+      <p class="ft-col-title" style="left:1116px;">플랫폼</p>
+      <p class="ft-col-title" style="left:1264px;">인사이트</p>
 
-      <a class="ft-link ft-en" href="https://www.netzeronews.kr/" target="_blank" rel="noopener noreferrer" style="left:465px;top:90px;">NetZero News <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 7L7 1M7 1H3M7 1V5" stroke="rgba(255,255,255,0.8)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      <a class="ft-link" href="insight.html?page=eco" style="left:465px;top:120px;">친환경 기업정보 <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 7L7 1M7 1H3M7 1V5" stroke="rgba(255,255,255,0.8)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      <a class="ft-link" href="insight.html?page=green" style="left:465px;top:150px;">그린카 계산기 <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 7L7 1M7 1H3M7 1V5" stroke="rgba(255,255,255,0.8)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="ft-link" href="#" style="left:847px;top:107px;">CEO 인사말</a>
+      <a class="ft-link" href="#" style="left:847px;top:147px;">기업소개</a>
+      <a class="ft-link" href="#" style="left:847px;top:187px;">보도자료</a>
+      <a class="ft-link" href="#" style="left:847px;top:227px;">아카이브</a>
 
-      <a class="top-btn" href="#" aria-label="맨 위로">
-        <div class="top-btn-circle"><div class="top-btn-arrow"></div></div>
-        <span class="top-btn-label">TOP</span>
+      <a class="ft-link" href="#" style="left:975px;top:107px;">전체 솔루션 맵</a>
+      <a class="ft-link ft-en" href="#" style="left:975px;top:147px;">ecoNODE</a>
+      <div class="ft-sep" style="left:975px;top:196px;width:66px;"></div>
+      <a class="ft-link" href="#" style="left:975px;top:227px;">태양광 솔루션</a>
+
+      <a class="ft-link ft-en" href="#" style="left:1116px;top:107px;">eco Asset</a>
+      <a class="ft-link ft-en" href="#" style="left:1116px;top:147px;">Energy Asset</a>
+
+      <a class="ft-link ft-en" href="https://www.netzeronews.kr/" target="_blank" rel="noopener noreferrer" style="left:1264px;top:107px;">NetZero News
+        <svg width="6" height="6" viewBox="0 0 8 8" fill="none" style="margin-left:2px;vertical-align:middle;"><path d="M1 7L7 1M7 1H3M7 1V5" stroke="#000" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="ft-link" href="insight.html?page=eco" style="left:1264px;top:147px;">친환경 기업정보</a>
+      <a class="ft-link" href="insight.html?page=green" style="left:1264px;top:187px;">그린카 계산기</a>
+
+      <div class="ft-divider" style="top:327px;"></div>
+
+      <a class="ft-bottom-link fw-bold" href="#" style="left:75px;">개인정보처리방침</a>
+      <a class="ft-bottom-link" href="contact.html" style="left:206px;">공지사항</a>
+      <a class="ft-bottom-link" href="#" style="left:287px;">찾아오시는 길</a>
+      <a class="ft-bottom-link" href="#" style="left:396px;">문의하기</a>
+
+      <a class="ft-social" href="#" aria-label="Facebook" style="left:1277px;">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M10.5 9.5H12.3L12.8 7H10.5V5.8C10.5 5.1 10.8 4.5 11.8 4.5H13V2.3C13 2.3 11.9 2.1 10.9 2.1C8.7 2.1 7.5 3.4 7.5 5.5V7H5.3V9.5H7.5V16H10.5V9.5Z" fill="#000"/></svg>
+      </a>
+      <a class="ft-social" href="#" aria-label="Instagram" style="left:1312px;">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="2" width="14" height="14" rx="4" stroke="#000" stroke-width="1.3"/><circle cx="9" cy="9" r="3.2" stroke="#000" stroke-width="1.3"/><circle cx="13" cy="5" r="0.9" fill="#000"/></svg>
+      </a>
+      <a class="ft-social" href="#" aria-label="YouTube" style="left:1347px;">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="1.5" y="4" width="15" height="10" rx="2.5" stroke="#000" stroke-width="1.3"/><polygon points="7,7 12.5,9 7,11" fill="#000"/></svg>
       </a>
 
-      <div class="ft-divider" style="top:267px;"></div>
+      <div class="ft-divider" style="top:369px;"></div>
 
-      <a class="ft-social" href="#" aria-label="YouTube" style="left:1297px;top:270px;">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="1.5" y="4" width="15" height="10" rx="2.5" stroke="rgba(255,255,255,0.8)" stroke-width="1.2"/><polygon points="7,7 12.5,9 7,11" fill="rgba(255,255,255,0.8)"/></svg>
-      </a>
-      <a class="ft-social" href="#" aria-label="Instagram" style="left:1332px;top:270px;">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="2" width="14" height="14" rx="4" stroke="rgba(255,255,255,0.8)" stroke-width="1.2"/><circle cx="9" cy="9" r="3.2" stroke="rgba(255,255,255,0.8)" stroke-width="1.2"/><circle cx="13" cy="5" r="0.9" fill="rgba(255,255,255,0.8)"/></svg>
-      </a>
-      <a class="ft-social" href="#" aria-label="Facebook" style="left:1367px;top:270px;">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M10.5 9.5H12.3L12.8 7H10.5V5.8C10.5 5.1 10.8 4.5 11.8 4.5H13V2.3C13 2.3 11.9 2.1 10.9 2.1C8.7 2.1 7.5 3.4 7.5 5.5V7H5.3V9.5H7.5V16H10.5V9.5Z" fill="rgba(255,255,255,0.8)"/></svg>
-      </a>
-
-      <a class="ft-bottom-link fw-bold" href="#" style="left:50px;top:287px;">개인정보처리방침</a>
-      <a class="ft-bottom-link" href="#" style="left:167px;top:287px;">사이트맵</a>
-      <a class="ft-bottom-link" href="#" style="left:238px;top:287px;">찾아오시는 길</a>
-      <a class="ft-bottom-link" href="#" style="left:335px;top:287px;">문의하기</a>
-      <a class="ft-bottom-link" href="contact.html" style="left:406px;top:287px;">공지사항</a>
-
-      <div class="ft-divider" style="top:309px;"></div>
-
-      <img class="ft-logo" src="https://www.figma.com/api/mcp/asset/7c192d98-853d-4be3-bc7a-661e371cb0b9" alt="ecobell">
       <p class="ft-copyright">ⓒ2026&nbsp;&nbsp;ecobell Co., Ltd. All rights reserved</p>
 
     </div>

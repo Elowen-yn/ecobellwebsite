@@ -123,19 +123,27 @@
 
     /* ─── LNB DROPDOWN ─── */
     .lnb {
-      position: absolute;
-      top: 79px; /* header 바로 아래 */
-      left: -1px; right: -1px; /* border 보정 */
+      position: fixed;
+      top: 79px;
+      left: 0; right: 0;
       height: 183px;
       background: #fff;
-      border: 0.3px solid #d9d9d9;
-      border-top: none;
+      border-bottom: 0.3px solid #d9d9d9;
       /* 초기 상태 (숨김) */
       opacity: 0;
       transform: translateY(-6px);
       pointer-events: none;
       transition: opacity 0.25s ease, transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
       z-index: 102;
+    }
+
+    .lnb-inner {
+      position: relative;
+      width: 1440px;
+      margin: 0 auto;
+      height: 100%;
+      border-left: 0.3px solid #d9d9d9;
+      border-right: 0.3px solid #d9d9d9;
     }
     .lnb.open {
       opacity: 1;
@@ -214,9 +222,9 @@
     }
 
     .search-overlay {
-      position: absolute;
+      position: fixed;
       top: 79px;
-      left: -1px; right: -1px;
+      left: 0; right: 0;
       height: 230px; /* 309px - 79px header */
       background: #f2f6f7;
       opacity: 0;
@@ -784,6 +792,7 @@
 
       <!-- LNB Dropdown -->
       <div class="lnb" id="lnb">
+        <div class="lnb-inner">
         <!-- Company -->
         <div class="lnb-col" data-col="company">
           <a href="#"><span style="font-family:'Chillax',sans-serif;font-weight:500;">CEO </span>인사말</a>
@@ -806,8 +815,8 @@
         <!-- Insight -->
         <div class="lnb-col" data-col="insight">
           <a href="https://www.netzeronews.kr/" class="en ext" target="_blank" rel="noopener noreferrer">NetZero News</a>
-          <a href="insight.html?page=eco" class="ext">친환경 기업정보</a>
-          <a href="insight.html?page=green" class="ext">그린카 계산기</a>
+          <a href="insight.html?page=eco">친환경 기업정보</a>
+          <a href="insight.html?page=green">그린카 계산기</a>
         </div>
         <!-- Contact Us -->
         <div class="lnb-col" data-col="contact">
@@ -815,6 +824,7 @@
           <a href="#">오시는 길</a>
           <a href="#">문의하기</a>
         </div>
+        </div><!-- /.lnb-inner -->
       </div>
 
       <!-- Search Overlay -->
@@ -918,7 +928,9 @@
       <img class="ft-logo" src="https://www.figma.com/api/mcp/asset/7f89b782-9cc2-4cf5-92b8-d3f849373b47" alt="ecobell">
 
       <!-- 회사 정보 -->
-      <p class="ft-company-info">사업자 등록번호 : 598-87-02578  |  대표 : 김소연
+      <p class="ft-company-info">㈜에코벨
+
+사업자 등록번호 : 598-87-02578  |  대표 : 김소연
 호스팅 서비스 : 주식회사 에코벨  |  통신판매업신고번호 : 2023-서울금천-1822
 08635 서울특별시 금천구 시흥대로 193, 701호(시흥동, 아람아이씨티타워)
 문의 : 02-892-9180  |  팩스 : 02-892-9181  |  이메일 : ecobell@ecobell.co.kr</p>
