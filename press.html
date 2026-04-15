@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440">
+  <title>보도자료 - Ecobell</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;600;700&family=Nanum+Square:wght@400;700;800&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=chillax@400,500,600,700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      min-width: 1440px;
+      background: #fff;
+      color: #000;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 79px;
+      background: #fff;
+      border-bottom: 0.3px solid rgba(0,0,0,0.1);
+      z-index: 999;
+      transition: box-shadow 0.3s ease;
+    }
+    header.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.07); }
+
+    .header-inner {
+      position: relative;
+      width: 1440px;
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo {
+      position: absolute;
+      left: 44px;
+      top: 50%; transform: translateY(-50%);
+      width: 127px; height: 30px;
+      transition: opacity 0.2s;
+    }
+    .logo img { width: 100%; height: 100%; object-fit: contain; }
+    .logo:hover { opacity: 0.75; }
+
+    nav {
+      position: absolute;
+      left: 50%; transform: translateX(-50%);
+      display: flex;
+      align-items: stretch;
+      height: 79px;
+    }
+
+    .nav-item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    nav.lnb-open .nav-item:nth-child(1) { transform: translateX(-54.5px); }
+    nav.lnb-open .nav-item:nth-child(2) { transform: translateX(-30px); }
+    nav.lnb-open .nav-item:nth-child(3) { transform: translateX(0.5px); }
+    nav.lnb-open .nav-item:nth-child(4) { transform: translateX(36.5px); }
+    nav.lnb-open .nav-item:nth-child(5) { transform: translateX(61.5px); }
+
+    .nav-link {
+      font-family: 'Chillax', sans-serif;
+      font-weight: 600;
+      font-size: 17px;
+      color: #000;
+      text-decoration: none;
+      letter-spacing: 0.51px;
+      line-height: 1.6;
+      padding: 0 22px;
+      white-space: nowrap;
+      position: relative;
+      display: flex;
+      align-items: center;
+      height: 100%;
+      transition: color 0.2s;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 22px; right: 22px;
+      bottom: 0;
+      height: 2px;
+      background: #000;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s ease;
+    }
+    .nav-item:not(.lnb-active) .nav-link:hover::after { transform: scaleX(1); }
+    .nav-item.lnb-active .nav-link { color: #1e8dcd; }
+
+    /* ─── LNB ─── */
+    .lnb {
+      position: fixed;
+      top: 79px;
+      left: 0; right: 0;
+      height: 183px;
+      background: #fff;
+      border-bottom: 0.3px solid #d9d9d9;
+      opacity: 0;
+      transform: translateY(-6px);
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 102;
+    }
+    .lnb-inner {
+      position: relative;
+      width: 1440px;
+      margin: 0 auto;
+      height: 100%;
+      border-left: 0.3px solid #d9d9d9;
+      border-right: 0.3px solid #d9d9d9;
+    }
+    .lnb.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+    .lnb-col {
+      position: absolute;
+      top: 0;
+      width: 154px;
+      height: 100%;
+      border-right: 0.3px solid #d9d9d9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 15px;
+      gap: 0;
+      transition: background 0.2s ease;
+    }
+    .lnb-col[data-col="company"]  { left: 335px; }
+    .lnb-col[data-col="solution"] { left: 489px; }
+    .lnb-col[data-col="platform"] { left: 643px; }
+    .lnb-col[data-col="insight"]  { left: 797px; }
+    .lnb-col[data-col="contact"]  { left: 951px; }
+    .lnb-col.active { background: #f2f6f7; border-top: 2px solid #1e8dcd; }
+
+    .lnb-col a {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      color: #000;
+      text-decoration: none;
+      letter-spacing: 0.14px;
+      line-height: 22px;
+      text-align: center;
+      display: block;
+      width: 100%;
+      padding: 5.5px 0;
+      transition: color 0.15s;
+    }
+    .lnb-col a.en { font-family: 'Chillax', sans-serif; font-weight: 500; }
+    .lnb-col a:hover { color: #1e8dcd; }
+    .lnb-col a.ext::after { content: ' ↗'; font-size: 11px; }
+    .lnb-sep { width: 81px; height: 0.5px; background: #d9d9d9; margin: 4px auto; flex-shrink: 0; }
+
+    /* ─── SEARCH OVERLAY ─── */
+    header.search-open { background: #f2f6f7; border-bottom-color: transparent; box-shadow: none; }
+    .search-overlay {
+      position: fixed;
+      top: 79px; left: 0; right: 0;
+      height: 230px;
+      background: #f2f6f7;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.28s cubic-bezier(0.4,0,0.2,1);
+      transform: translateY(-8px);
+      z-index: 100;
+    }
+    .search-overlay.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .search-content { position: relative; width: 1440px; margin: 0 auto; height: 100%; }
+    .search-input-row {
+      position: absolute;
+      top: 75px; left: 315px;
+      width: 811px;
+      display: flex;
+      align-items: center;
+    }
+    .search-input {
+      flex: 1;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 400;
+      font-size: 20px;
+      color: #000;
+      letter-spacing: 0.2px;
+      background: transparent;
+      border: none;
+      outline: none;
+      height: 36px;
+      padding: 0;
+    }
+    .search-input::placeholder { color: rgba(0,0,0,0.3); }
+    .search-submit {
+      background: none; border: none; cursor: pointer;
+      width: 17px; height: 17px; padding: 0;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0.6; transition: opacity 0.2s;
+    }
+    .search-submit:hover { opacity: 1; }
+    .search-divider {
+      position: absolute;
+      top: 121px; left: 315px;
+      width: 811px; height: 0.3px;
+      background: rgba(0,0,0,0.2);
+    }
+    .search-tags {
+      position: absolute;
+      top: 136px; left: 315px;
+      display: flex; gap: 9px;
+    }
+    .search-tag {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      color: rgba(0,0,0,0.55);
+      letter-spacing: 0.11px;
+      border: 0.3px solid rgba(0,0,0,0.15);
+      border-radius: 100px;
+      padding: 0 10px;
+      height: 22px;
+      background: transparent;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .search-tag:hover { border-color: rgba(0,0,0,0.4); color: rgba(0,0,0,0.85); }
+    .close-btn {
+      display: none;
+      background: none; border: none; cursor: pointer;
+      width: 20px; height: 20px; padding: 0;
+      align-items: center; justify-content: center;
+      font-size: 18px; color: #000;
+      opacity: 0.6; transition: opacity 0.2s;
+    }
+    .close-btn:hover { opacity: 1; }
+    header.search-open .search-btn { display: none; }
+    header.search-open .close-btn { display: flex; }
+
+    /* ─── HEADER RIGHT ─── */
+    .header-right {
+      position: absolute;
+      right: 45px;
+      top: 50%; transform: translateY(-50%);
+      display: flex; align-items: center; gap: 14px;
+    }
+    .search-btn {
+      background: none; border: none; cursor: pointer;
+      width: 20px; height: 21px; padding: 0;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.2s ease, opacity 0.2s;
+    }
+    .search-btn:hover { transform: scale(1.15); opacity: 0.7; }
+    .demo-btn {
+      display: flex; align-items: center; gap: 5px;
+      border: 0.3px solid rgba(0,0,0,0.5);
+      border-radius: 100px;
+      padding: 9px 10px 10px;
+      height: 25px;
+      cursor: pointer; text-decoration: none;
+      background: transparent;
+      transition: background 0.25s ease, border-color 0.25s ease;
+    }
+    .demo-btn:hover { background: #000; border-color: #000; }
+    .demo-btn:hover .demo-text { color: #fff; }
+    .demo-btn:hover .demo-arrow { transform: translate(2px, -2px); filter: invert(1); }
+    .demo-text {
+      font-family: 'Chillax', sans-serif;
+      font-weight: 500; font-size: 13px; color: #000;
+      letter-spacing: 0.13px; line-height: 0.8;
+      white-space: nowrap; transition: color 0.25s ease;
+    }
+    .demo-arrow { width: 8px; height: 8px; object-fit: contain; transition: transform 0.25s ease, filter 0.25s ease; }
+
+    /* ─── PAGE CONTENT ─── */
+    main { padding-top: 79px; }
+
+    .page-header {
+      position: relative;
+      width: 1440px;
+      margin: 0 auto;
+      padding: 39px 75px 102px;
+    }
+
+    /* 브레드크럼 */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 67px;
+    }
+    .breadcrumb-home {
+      width: 11px; height: 12px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .breadcrumb-sep {
+      width: 5px; height: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .breadcrumb a,
+    .breadcrumb span {
+      font-family: 'Chillax', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      color: #1e8ccc;
+      text-decoration: none;
+      letter-spacing: 0.13px;
+    }
+
+    /* 페이지 제목 영역 */
+    .page-title-row { display: block; }
+    .page-title-left {}
+    .page-title {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 800;
+      font-size: 45px;
+      color: #000;
+      line-height: 1.289;
+      letter-spacing: 0.45px;
+      margin-bottom: 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+    }
+    .page-title-dot {
+      width: 8px; height: 8px;
+      background: #1e8ccc;
+      border-radius: 50%;
+      flex-shrink: 0;
+      position: relative;
+      top: -4px;
+    }
+    .page-subtitle {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 400;
+      font-size: 18px;
+      color: #000;
+      letter-spacing: 0.18px;
+      line-height: 40px;
+    }
+
+    /* 검색바 */
+    .page-search {
+      position: absolute;
+      top: 257px;
+      right: 75px;
+      display: flex;
+      align-items: center;
+      border: 0.5px solid rgba(0, 0, 0, 0.3);
+      width: 338px;
+      height: 39px;
+      padding: 0 14px;
+      border-radius: 5px;
+    }
+    .page-search input {
+      flex: 1;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 400;
+      font-size: 15px;
+      color: #2d2d2d;
+      border: none; outline: none;
+      background: transparent;
+    }
+    .page-search input::placeholder { color: #2d2d2d; opacity: 0.6; }
+    .page-search button {
+      background: none; border: none; cursor: pointer;
+      padding: 0;
+      display: flex; align-items: center;
+      opacity: 0.7; transition: opacity 0.2s;
+    }
+    .page-search button:hover { opacity: 1; }
+
+    /* 카드 그리드 */
+    .press-grid {
+      width: 1440px;
+      margin: 0 auto;
+      padding: 0 75px 60px;
+      display: grid;
+      grid-template-columns: repeat(4, 290px);
+      gap: 30px 43px;
+    }
+
+    .press-card {
+      width: 290px;
+      display: block;
+    }
+
+    .press-card-thumb {
+      width: 290px;
+      height: 170px;
+      background: #e7e7e7;
+      object-fit: cover;
+      display: block;
+      border-radius: 20px;
+      transition: opacity 0.25s;
+      cursor: pointer;
+    }
+    .press-card-thumb:hover { opacity: 0.85; }
+
+    .press-card-body { padding-top: 22px; }
+
+    .press-card-title {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700;
+      font-size: 19px;
+      color: #000;
+      line-height: 1.5;
+      letter-spacing: 0.19px;
+      margin-bottom: 12px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      transition: color 0.2s;
+      text-decoration: none;
+    }
+    .press-card-title:hover { color: #1e8ccc; }
+
+    .press-card-date {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 400;
+      font-size: 15px;
+      color: #8b8b8b;
+      letter-spacing: 0.15px;
+      margin-bottom: 19px;
+    }
+
+    .press-card-tags {
+      position: relative;
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 6px;
+      overflow: hidden;
+    }
+    .press-card-tags::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 60px; height: 100%;
+      background: linear-gradient(to right, transparent, #fff);
+      pointer-events: none;
+    }
+    .press-card-tag {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      color: #8b8b8b;
+      background: #f6f6f6;
+      padding: 5px 10px;
+      height: 30px;
+      display: flex; align-items: center;
+      letter-spacing: 0.13px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      border-radius: 20px;
+      cursor: pointer;
+      border: none;
+      transition: background 0.15s, color 0.15s;
+    }
+    .press-card-tag:hover { background: #e8f4fb; color: #1e8ccc; }
+
+    /* 검색 결과 카운터 (page-header 안 absolute) */
+    .press-count {
+      display: none;
+      position: absolute;
+      top: 269px;
+      left: 75px;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: #000;
+      letter-spacing: 0.18px;
+      line-height: 23px;
+    }
+
+    /* 결과 없음 전체 영역 */
+    .press-no-results { display: none; }
+
+    /* 결과 없음 메시지 */
+    .press-no-results-msg {
+      padding: 86px 75px 146px;
+      text-align: center;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-size: 20px;
+      color: #000;
+      letter-spacing: 0.6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .press-no-results-icon {
+      display: block;
+      margin-bottom: 17px;
+      flex-shrink: 0;
+    }
+    .press-no-results-msg .msg-bold { font-weight: 700; }
+    .press-no-results-msg .msg-regular { font-weight: 400; }
+
+    /* 페이지네이션 */
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      padding: 20px 0 80px;
+    }
+    .pagination-btn {
+      width: 23px; height: 22px;
+      background: none; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0.5; transition: opacity 0.2s;
+      border-radius: 3px;
+    }
+    .pagination-btn:hover { opacity: 1; }
+    .pagination-num {
+      font-family: 'Chillax', sans-serif;
+      font-weight: 400;
+      font-size: 17px;
+      color: #000;
+      width: 38px; height: 22px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: color 0.2s;
+      text-decoration: none;
+    }
+    .pagination-num:hover { color: #1e8ccc; }
+    .pagination-num.active { color: #0091bb; font-weight: 600; }
+
+    /* ─── FOOTER ─── */
+    footer { position: relative; height: 453px; background: rgb(247,252,253); }
+    .footer-inner { position: relative; width: 1440px; margin: 0 auto; height: 100%; }
+    .ft-company-info {
+      position: absolute;
+      left: 75px; top: 112px;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 500; font-size: 14px;
+      color: rgb(74,76,76);
+      line-height: 23px;
+      letter-spacing: -0.28px;
+      white-space: pre-line;
+    }
+    .ft-col-title {
+      position: absolute;
+      font-family: 'Chillax', sans-serif;
+      font-weight: 600; font-size: 18px; color: #000;
+      white-space: nowrap; margin: 0; top: 55px;
+      letter-spacing: 0.54px; line-height: 28.8px;
+    }
+    .ft-link {
+      position: absolute;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700; font-size: 15px; color: #000;
+      white-space: nowrap; text-decoration: none;
+      line-height: 22.5px; letter-spacing: 0.15px;
+      transition: opacity 0.2s;
+    }
+    .ft-link:hover { opacity: 0.5; }
+    .ft-link.ft-en { font-family: 'Chillax', sans-serif; font-weight: 500; line-height: 16.5px; }
+    .ft-sep { position: absolute; height: 0.5px; background: rgba(0,0,0,0.2); }
+    .ft-divider { position: absolute; left: 75px; right: 75px; height: 0.5px; background: rgba(0,0,0,0.15); }
+    .ft-bottom-link {
+      position: absolute;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 400; font-size: 14px; color: #000;
+      text-decoration: none; white-space: nowrap;
+      top: 338px; line-height: 20px; letter-spacing: -0.28px;
+      transition: opacity 0.2s;
+    }
+    .ft-bottom-link:hover { opacity: 0.5; }
+    .ft-bottom-link.fw-bold { font-weight: 500; }
+    .ft-social {
+      position: absolute;
+      line-height: 0; opacity: 0.7;
+      transition: opacity 0.2s, transform 0.2s;
+      top: 339px;
+    }
+    .ft-social:hover { opacity: 1; transform: scale(1.1); }
+    .ft-copyright {
+      position: absolute;
+      left: 1164px; top: 387px;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 300; font-size: 12px; color: #000;
+      white-space: nowrap; margin: 0;
+    }
+
+    /* ─── 플로팅 버튼 ─── */
+    .floating-ecoasset {
+      position: fixed; right: 44px; bottom: 44px;
+      width: 65px; height: 48px;
+      cursor: pointer; z-index: 500;
+      transition: transform 0.2s ease, opacity 0.2s;
+      text-decoration: none;
+    }
+    .floating-ecoasset:hover { transform: scale(1.08); opacity: 0.9; }
+    .floating-ecoasset img { width: 100%; height: 100%; object-fit: contain; }
+  </style>
+</head>
+<body>
+
+  <!-- ─── HEADER ─── -->
+  <header id="header">
+    <div class="header-inner">
+
+      <a class="logo" href="index.html">
+        <img src="https://www.figma.com/api/mcp/asset/7f89b782-9cc2-4cf5-92b8-d3f849373b47" alt="ecobell">
+      </a>
+
+      <nav id="main-nav">
+        <div class="nav-item lnb-active" data-menu="company">
+          <a class="nav-link" href="#">Company</a>
+        </div>
+        <div class="nav-item" data-menu="solution">
+          <a class="nav-link" href="#">Solution</a>
+        </div>
+        <div class="nav-item" data-menu="platform">
+          <a class="nav-link" href="#">Platform</a>
+        </div>
+        <div class="nav-item" data-menu="insight">
+          <a class="nav-link" href="insight.html">Insight</a>
+        </div>
+        <div class="nav-item" data-menu="contact">
+          <a class="nav-link" href="contact.html">Contact Us</a>
+        </div>
+      </nav>
+
+      <div class="lnb" id="lnb">
+        <div class="lnb-inner">
+          <div class="lnb-col active" data-col="company">
+            <a href="#"><span style="font-family:'Chillax',sans-serif;font-weight:500;">CEO </span>인사말</a>
+            <a href="#">기업소개</a>
+            <a href="press.html">보도자료</a>
+            <a href="#">아카이브</a>
+          </div>
+          <div class="lnb-col" data-col="solution">
+            <a href="#">전체 솔루션 맵</a>
+            <a href="#" class="en">ecoNODE</a>
+            <div class="lnb-sep"></div>
+            <a href="#">태양광 솔루션</a>
+          </div>
+          <div class="lnb-col" data-col="platform">
+            <a href="#" class="en">eco Asset</a>
+            <a href="#" class="en">Energy Asset</a>
+          </div>
+          <div class="lnb-col" data-col="insight">
+            <a href="https://www.netzeronews.kr/" class="en ext" target="_blank" rel="noopener noreferrer">NetZero News</a>
+            <a href="insight.html?page=eco">친환경 기업정보</a>
+            <a href="insight.html?page=green">그린카 계산기</a>
+          </div>
+          <div class="lnb-col" data-col="contact">
+            <a href="contact.html">공지사항</a>
+            <a href="#">오시는 길</a>
+            <a href="#">문의하기</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="search-overlay" id="search-overlay">
+        <div class="search-content">
+          <div class="search-input-row">
+            <input class="search-input" type="text" placeholder="검색어를 입력해주세요." id="search-input" autocomplete="off">
+            <button class="search-submit" aria-label="검색">
+              <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
+                <circle cx="7" cy="7" r="5" stroke="#000" stroke-width="1.5"/>
+                <line x1="11" y1="11" x2="16" y2="16" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+          <div class="search-divider"></div>
+          <div class="search-tags">
+            <button class="search-tag" data-keyword="에코벨">#에코벨</button>
+            <button class="search-tag" data-keyword="에코에셋">#에코에셋</button>
+            <button class="search-tag" data-keyword="에너지에셋">#에너지에셋</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <button class="search-btn" aria-label="검색" id="search-open-btn">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <circle cx="8.5" cy="8.5" r="5.5" stroke="#000" stroke-width="1.5"/>
+            <line x1="13" y1="13" x2="18" y2="18" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <button class="close-btn" aria-label="닫기" id="search-close-btn">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <line x1="1" y1="1" x2="17" y2="17" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="17" y1="1" x2="1" y2="17" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <a class="demo-btn" href="#">
+          <span class="demo-text">DEMO</span>
+          <svg class="demo-arrow" width="8" height="8" viewBox="0 0 8 8" fill="none">
+            <path d="M1 7L7 1M7 1H3M7 1V5" stroke="#000" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <main>
+
+    <!-- 페이지 헤더 -->
+    <div class="page-header">
+      <!-- 브레드크럼 -->
+      <div class="breadcrumb">
+        <a href="index.html" class="breadcrumb-home" aria-label="홈">
+          <svg width="11" height="12" viewBox="0 0 11 12" fill="none">
+            <path d="M1 5L5.5 1L10 5V11H7V8H4V11H1V5Z" stroke="#1e8ccc" stroke-width="1.1" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <span class="breadcrumb-sep">
+          <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
+            <path d="M1 1L4 5L1 9" stroke="#1e8ccc" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <a href="#">Company</a>
+        <span class="breadcrumb-sep">
+          <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
+            <path d="M1 1L4 5L1 9" stroke="#1e8ccc" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span>보도자료</span>
+      </div>
+
+      <!-- 제목 + 검색 -->
+      <div class="page-title-row">
+        <div class="page-title-left">
+          <h1 class="page-title">
+            보도자료
+            <span class="page-title-dot"></span>
+          </h1>
+          <p class="page-subtitle">에코벨의 언론 보도자료를 만날 수 있습니다.</p>
+        </div>
+        <form class="page-search" onsubmit="return false;">
+          <input type="text" placeholder="검색어를 입력해 주세요" id="press-search-input">
+          <button type="submit" aria-label="검색">
+            <svg width="16" height="17" viewBox="0 0 16 17" fill="none">
+              <circle cx="6.5" cy="6.5" r="5" stroke="#2d2d2d" stroke-width="1.3"/>
+              <line x1="10.5" y1="11" x2="15" y2="15.5" stroke="#2d2d2d" stroke-width="1.3" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </form>
+      </div>
+      <span class="press-count" id="press-count">검색결과 <strong id="press-count-num">0</strong>건</span>
+    </div>
+
+    <!-- 보도자료 카드 그리드 -->
+    <div class="press-grid">
+
+      <div class="press-card">
+        <a class="press-card-thumb" href="press-article.html" style="background:#e7e7e7;"></a>
+        <div class="press-card-body">
+          <a class="press-card-title" href="press-article.html">에코벨, AI·MRV 탄소자산기술로 BIXPO 2025 8대 혁신기업 선정</a>
+          <p class="press-card-date">2025.10.30</p>
+          <div class="press-card-tags">
+            <button class="press-card-tag">#에코벨</button>
+            <button class="press-card-tag">#BIXPO</button>
+            <button class="press-card-tag">#탄소감축</button>
+            <button class="press-card-tag">#에코에셋</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="press-card">
+        <a class="press-card-thumb" href="press-article.html" style="background:#e7e7e7;"></a>
+        <div class="press-card-body">
+          <a class="press-card-title" href="press-article.html">에코벨, 재생에너지-탄소자산화 실증 추진…현장·데이터·AI 기술 결합</a>
+          <p class="press-card-date">2026.01.13</p>
+          <div class="press-card-tags">
+            <button class="press-card-tag">#에코벨</button>
+            <button class="press-card-tag">#에코에셋</button>
+            <button class="press-card-tag">#에코노드</button>
+            <button class="press-card-tag">#ESS</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="press-card">
+        <a class="press-card-thumb" href="press-article.html" style="background:#e7e7e7;"></a>
+        <div class="press-card-body">
+          <a class="press-card-title" href="press-article.html">에코벨, 초기창업패키지 및 ESG 그린지원금 선정 "탄소자산화 확장"</a>
+          <p class="press-card-date">2025.04.30</p>
+          <div class="press-card-tags">
+            <button class="press-card-tag">#에코벨</button>
+            <button class="press-card-tag">#탄소자산화</button>
+            <button class="press-card-tag">#에코에셋</button>
+            <button class="press-card-tag">#스타트업</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="press-card">
+        <a class="press-card-thumb" href="press-article.html" style="background:#e7e7e7;"></a>
+        <div class="press-card-body">
+          <a class="press-card-title" href="press-article.html">국내 독자기술 개발 '기업 탄소자산관리 플랫폼' "눈길"</a>
+          <p class="press-card-date">2025.02.05</p>
+          <div class="press-card-tags">
+            <button class="press-card-tag">#에코벨</button>
+            <button class="press-card-tag">#탄소배출권</button>
+            <button class="press-card-tag">#에코에셋</button>
+            <button class="press-card-tag">#스타트업</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="press-card">
+        <a class="press-card-thumb" href="press-article.html" style="background:#e7e7e7;"></a>
+        <div class="press-card-body">
+          <a class="press-card-title" href="press-article.html">에코벨, 케미코첨단소재와 탄소감축솔루션 활용 확산 MOU</a>
+          <p class="press-card-date">2023.08.07</p>
+          <div class="press-card-tags">
+            <button class="press-card-tag">#에코벨</button>
+            <button class="press-card-tag">#탄소감축솔루션</button>
+            <button class="press-card-tag">#ESG경영관리</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="press-card">
+        <a class="press-card-thumb" href="press-article.html" style="background:#e7e7e7;"></a>
+        <div class="press-card-body">
+          <a class="press-card-title" href="press-article.html">에코벨, 재생에너지-탄소자산화 실증 추진…현장·데이터·AI 기술 결합</a>
+          <p class="press-card-date">2026.01.13</p>
+          <div class="press-card-tags">
+            <button class="press-card-tag">#에코벨</button>
+            <button class="press-card-tag">#에코에셋</button>
+            <button class="press-card-tag">#에코노드</button>
+            <button class="press-card-tag">#ESS</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="press-card">
+        <a class="press-card-thumb" href="press-article.html" style="background:#e7e7e7;"></a>
+        <div class="press-card-body">
+          <a class="press-card-title" href="press-article.html">에코벨, 초기창업패키지 및 ESG 그린지원금 선정 "탄소자산화 확장"</a>
+          <p class="press-card-date">2025.04.30</p>
+          <div class="press-card-tags">
+            <button class="press-card-tag">#에코벨</button>
+            <button class="press-card-tag">#탄소자산화</button>
+            <button class="press-card-tag">#에코에셋</button>
+            <button class="press-card-tag">#스타트업</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="press-card">
+        <a class="press-card-thumb" href="press-article.html" style="background:#e7e7e7;"></a>
+        <div class="press-card-body">
+          <a class="press-card-title" href="press-article.html">국내 독자기술 개발 '기업 탄소자산관리 플랫폼' "눈길"</a>
+          <p class="press-card-date">2025.02.05</p>
+          <div class="press-card-tags">
+            <button class="press-card-tag">#에코벨</button>
+            <button class="press-card-tag">#탄소배출권</button>
+            <button class="press-card-tag">#에코에셋</button>
+            <button class="press-card-tag">#스타트업</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="press-card">
+        <a class="press-card-thumb" href="press-article.html" style="background:#e7e7e7;"></a>
+        <div class="press-card-body">
+          <a class="press-card-title" href="press-article.html">에코벨, 케미코첨단소재와 탄소감축솔루션 활용 확산 MOU</a>
+          <p class="press-card-date">2023.08.07</p>
+          <div class="press-card-tags">
+            <button class="press-card-tag">#에코벨</button>
+            <button class="press-card-tag">#탄소감축솔루션</button>
+            <button class="press-card-tag">#ESG경영관리</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="press-card">
+        <a class="press-card-thumb" href="press-article.html" style="background:#e7e7e7;"></a>
+        <div class="press-card-body">
+          <a class="press-card-title" href="press-article.html">에코벨, 재생에너지-탄소자산화 실증 추진…현장·데이터·AI 기술 결합</a>
+          <p class="press-card-date">2026.01.13</p>
+          <div class="press-card-tags">
+            <button class="press-card-tag">#에코벨</button>
+            <button class="press-card-tag">#에코에셋</button>
+            <button class="press-card-tag">#에코노드</button>
+            <button class="press-card-tag">#ESS</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="press-card">
+        <a class="press-card-thumb" href="press-article.html" style="background:#e7e7e7;"></a>
+        <div class="press-card-body">
+          <a class="press-card-title" href="press-article.html">에코벨, 초기창업패키지 및 ESG 그린지원금 선정 "탄소자산화 확장"</a>
+          <p class="press-card-date">2025.04.30</p>
+          <div class="press-card-tags">
+            <button class="press-card-tag">#에코벨</button>
+            <button class="press-card-tag">#탄소자산화</button>
+            <button class="press-card-tag">#에코에셋</button>
+            <button class="press-card-tag">#스타트업</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="press-card">
+        <a class="press-card-thumb" href="press-article.html" style="background:#e7e7e7;"></a>
+        <div class="press-card-body">
+          <a class="press-card-title" href="press-article.html">국내 독자기술 개발 '기업 탄소자산관리 플랫폼' "눈길"</a>
+          <p class="press-card-date">2025.02.05</p>
+          <div class="press-card-tags">
+            <button class="press-card-tag">#에코벨</button>
+            <button class="press-card-tag">#탄소배출권</button>
+            <button class="press-card-tag">#에코에셋</button>
+            <button class="press-card-tag">#스타트업</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 검색 결과 없음 -->
+    <div class="press-no-results" id="press-no-results">
+      <div class="press-no-results-msg">
+        <svg class="press-no-results-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 0.9375C6.7875 0.9375 2.5875 5.175 2.5875 10.3875V21.225C2.5875 21.5625 2.775 21.8625 3.075 22.0125L5.775 23.175C6.4875 23.475 7.275 23.6625 8.0625 23.6625C8.8875 23.6625 9.75 23.475 10.5375 23.1L10.7625 22.9875C11.85 22.4625 13.125 22.4625 14.2125 22.9875C15.825 23.775 17.7375 23.7375 19.35 22.875L21.075 21.975C21.3375 21.825 21.525 21.525 21.525 21.225V10.3875C21.4125 5.175 17.2125 0.9375 12 0.9375ZM19.725 20.7L18.4875 21.375C17.3625 21.975 16.0125 22.0125 14.8875 21.45C13.3125 20.7 11.55 20.7 9.975 21.45L9.75 21.5625C8.7 22.05 7.5 22.0875 6.45 21.6375L4.275 20.6625V10.3875C4.275 6.1125 7.725 2.625 12 2.625C16.275 2.625 19.725 6.1125 19.725 10.35V20.7Z" fill="#1E8DCD"/>
+          <path d="M9.1125 8.02539C8.4 8.02539 7.8375 8.58789 7.8375 9.30039C7.8375 10.0129 8.4 10.5754 9.1125 10.5754C9.825 10.5754 10.3875 10.0129 10.3875 9.30039C10.3875 8.58789 9.825 8.02539 9.1125 8.02539Z" fill="#1E8DCD"/>
+          <path d="M14.8875 8.02539C14.175 8.02539 13.6125 8.58789 13.6125 9.30039C13.6125 10.0129 14.175 10.5754 14.8875 10.5754C15.6 10.5754 16.1625 10.0129 16.1625 9.30039C16.1625 8.58789 15.6 8.02539 14.8875 8.02539Z" fill="#1E8DCD"/>
+          <path d="M12 13.3877C10.95 13.3877 10.0875 13.9502 10.0875 14.6627C10.0875 15.3752 10.95 15.9377 12 15.9377C13.05 15.9377 13.9125 15.3752 13.9125 14.6627C13.9125 13.9502 13.05 13.3877 12 13.3877Z" fill="#1E8DCD"/>
+        </svg>
+        <p><span class="msg-bold">'<span id="press-no-results-query"></span>'</span><span class="msg-regular">에 대한 검색 결과가 없습니다</span></p>
+      </div>
+    </div>
+
+    <!-- 페이지네이션 -->
+    <div class="pagination">
+      <button class="pagination-btn" aria-label="처음">
+        <svg width="7" height="7" viewBox="0 0 7 7" fill="none">
+          <path d="M6 1L3.5 3.5L6 6M3.5 1L1 3.5L3.5 6" stroke="#000" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button class="pagination-btn" aria-label="이전">
+        <svg width="4" height="7" viewBox="0 0 4 7" fill="none">
+          <path d="M3 1L1 3.5L3 6" stroke="#000" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <a class="pagination-num active" href="#">1</a>
+      <a class="pagination-num" href="#">2</a>
+      <a class="pagination-num" href="#">3</a>
+      <a class="pagination-num" href="#">4</a>
+      <a class="pagination-num" href="#">5</a>
+      <button class="pagination-btn" aria-label="다음">
+        <svg width="4" height="7" viewBox="0 0 4 7" fill="none">
+          <path d="M1 1L3 3.5L1 6" stroke="#000" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button class="pagination-btn" aria-label="마지막">
+        <svg width="7" height="7" viewBox="0 0 7 7" fill="none">
+          <path d="M1 1L3.5 3.5L1 6M3.5 1L6 3.5L3.5 6" stroke="#000" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+
+  </main>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="footer-inner">
+      <p class="ft-company-info">㈜에코벨
+
+사업자 등록번호 : 598-87-02578  |  대표 : 김소연
+호스팅 서비스 : 주식회사 에코벨  |  통신판매업신고번호 : 2023-서울금천-1822
+08635 서울특별시 금천구 시흥대로 193, 701호(시흥동, 아람아이씨티타워)
+문의 : 02-892-9180  |  팩스 : 02-892-9181  |  이메일 : ecobell@ecobell.co.kr</p>
+
+      <p class="ft-col-title" style="left:847px;">기업소개</p>
+      <p class="ft-col-title" style="left:975px;">솔루션</p>
+      <p class="ft-col-title" style="left:1116px;">플랫폼</p>
+      <p class="ft-col-title" style="left:1264px;">인사이트</p>
+
+      <a class="ft-link" href="#" style="left:847px;top:107px;">CEO 인사말</a>
+      <a class="ft-link" href="#" style="left:847px;top:147px;">기업소개</a>
+      <a class="ft-link" href="press.html" style="left:847px;top:187px;">보도자료</a>
+      <a class="ft-link" href="#" style="left:847px;top:227px;">아카이브</a>
+
+      <a class="ft-link" href="#" style="left:975px;top:107px;">전체 솔루션 맵</a>
+      <a class="ft-link ft-en" href="#" style="left:975px;top:147px;">ecoNODE</a>
+      <div class="ft-sep" style="left:975px;top:196px;width:66px;"></div>
+      <a class="ft-link" href="#" style="left:975px;top:227px;">태양광 솔루션</a>
+
+      <a class="ft-link ft-en" href="#" style="left:1116px;top:107px;">eco Asset</a>
+      <a class="ft-link ft-en" href="#" style="left:1116px;top:147px;">Energy Asset</a>
+
+      <a class="ft-link ft-en" href="https://www.netzeronews.kr/" target="_blank" rel="noopener noreferrer" style="left:1264px;top:107px;">NetZero News
+        <svg width="6" height="6" viewBox="0 0 8 8" fill="none" style="margin-left:2px;vertical-align:middle;"><path d="M1 7L7 1M7 1H3M7 1V5" stroke="#000" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="ft-link" href="insight.html?page=eco" style="left:1264px;top:147px;">친환경 기업정보</a>
+      <a class="ft-link" href="insight.html?page=green" style="left:1264px;top:187px;">그린카 계산기</a>
+
+      <div class="ft-divider" style="top:327px;"></div>
+
+      <a class="ft-bottom-link fw-bold" href="#" style="left:75px;">개인정보처리방침</a>
+      <a class="ft-bottom-link" href="#" style="left:206px;">공지사항</a>
+      <a class="ft-bottom-link" href="#" style="left:287px;">찾아오시는 길</a>
+      <a class="ft-bottom-link" href="#" style="left:396px;">문의하기</a>
+
+      <a class="ft-social" href="#" aria-label="Facebook" style="left:1277px;">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M10.5 9.5H12.3L12.8 7H10.5V5.8C10.5 5.1 10.8 4.5 11.8 4.5H13V2.3C13 2.3 11.9 2.1 10.9 2.1C8.7 2.1 7.5 3.4 7.5 5.5V7H5.3V9.5H7.5V16H10.5V9.5Z" fill="#000"/></svg>
+      </a>
+      <a class="ft-social" href="#" aria-label="Instagram" style="left:1312px;">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="2" width="14" height="14" rx="4" stroke="#000" stroke-width="1.3"/><circle cx="9" cy="9" r="3.2" stroke="#000" stroke-width="1.3"/><circle cx="13" cy="5" r="0.9" fill="#000"/></svg>
+      </a>
+      <a class="ft-social" href="#" aria-label="YouTube" style="left:1347px;">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="1.5" y="4" width="15" height="10" rx="2.5" stroke="#000" stroke-width="1.3"/><polygon points="7,7 12.5,9 7,11" fill="#000"/></svg>
+      </a>
+
+      <div class="ft-divider" style="top:369px;"></div>
+      <p class="ft-copyright">ⓒ2026&nbsp;&nbsp;ecobell Co., Ltd. All rights reserved</p>
+    </div>
+  </footer>
+
+  <a class="floating-ecoasset" href="#" aria-label="eco Asset 바로가기">
+    <img src="ecoasset_badge.png" alt="eco Asset">
+  </a>
+
+  <script>
+    window.addEventListener('scroll', () => {
+      document.getElementById('header').classList.toggle('scrolled', window.scrollY > 10);
+    });
+
+    const nav      = document.getElementById('main-nav');
+    const lnb      = document.getElementById('lnb');
+    const navItems = document.querySelectorAll('.nav-item');
+    const lnbCols  = document.querySelectorAll('.lnb-col');
+    let closeTimer;
+
+    function openLnb(menuName) {
+      clearTimeout(closeTimer);
+      nav.classList.add('lnb-open');
+      lnb.classList.add('open');
+      navItems.forEach(item => item.classList.toggle('lnb-active', item.dataset.menu === menuName));
+      lnbCols.forEach(col => col.classList.toggle('active', col.dataset.col === menuName));
+    }
+
+    function schedulClose() {
+      closeTimer = setTimeout(() => {
+        nav.classList.remove('lnb-open');
+        lnb.classList.remove('open');
+        navItems.forEach(i => i.classList.remove('lnb-active'));
+        lnbCols.forEach(c => c.classList.remove('active'));
+      }, 120);
+    }
+
+    navItems.forEach(item => {
+      item.addEventListener('mouseenter', () => openLnb(item.dataset.menu));
+      item.addEventListener('mouseleave', schedulClose);
+    });
+    lnb.addEventListener('mouseenter', () => clearTimeout(closeTimer));
+    lnb.addEventListener('mouseleave', schedulClose);
+    lnbCols.forEach(col => {
+      col.addEventListener('mouseenter', () => {
+        const menu = col.dataset.col;
+        navItems.forEach(item => item.classList.toggle('lnb-active', item.dataset.menu === menu));
+        lnbCols.forEach(c => c.classList.toggle('active', c.dataset.col === menu));
+      });
+    });
+
+    const searchOverlay  = document.getElementById('search-overlay');
+    const searchInput    = document.getElementById('search-input');
+    const searchOpenBtn  = document.getElementById('search-open-btn');
+    const searchCloseBtn = document.getElementById('search-close-btn');
+    const header         = document.getElementById('header');
+
+    function openSearch() {
+      header.classList.add('search-open');
+      searchOverlay.classList.add('open');
+      nav.classList.remove('lnb-open');
+      lnb.classList.remove('open');
+      navItems.forEach(i => i.classList.remove('lnb-active'));
+      lnbCols.forEach(c => c.classList.remove('active'));
+      setTimeout(() => searchInput.focus(), 50);
+    }
+    function closeSearch() {
+      header.classList.remove('search-open');
+      searchOverlay.classList.remove('open');
+    }
+    searchOpenBtn.addEventListener('click', openSearch);
+    searchCloseBtn.addEventListener('click', closeSearch);
+    document.querySelectorAll('.search-tag').forEach(tag => {
+      tag.addEventListener('click', () => { searchInput.value = tag.dataset.keyword; searchInput.focus(); });
+    });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSearch(); });
+
+    /* ─── 카드 필터링 ─── */
+    const pressSearchInput = document.getElementById('press-search-input');
+    const pressGrid = document.querySelector('.press-grid');
+    const pressNoResults = document.getElementById('press-no-results');
+    const pressCount = document.getElementById('press-count');
+    const pressCountNum = document.getElementById('press-count-num');
+    const pressNoResultsQuery = document.getElementById('press-no-results-query');
+    const pagination = document.querySelector('.pagination');
+
+    function filterCards(query) {
+      const q = query.trim().replace(/^#/, '').toLowerCase();
+      const cards = pressGrid.querySelectorAll('.press-card');
+      let visible = 0;
+      cards.forEach(card => {
+        const title = card.querySelector('.press-card-title').textContent.toLowerCase();
+        const tags = Array.from(card.querySelectorAll('.press-card-tag'))
+          .map(t => t.textContent.replace(/^#/, '').toLowerCase()).join(' ');
+        const match = !q || title.includes(q) || tags.includes(q);
+        card.style.display = match ? '' : 'none';
+        if (match) visible++;
+      });
+
+      if (q) {
+        pressCount.style.display = 'block';
+        pressCountNum.textContent = visible;
+        pressNoResultsQuery.textContent = query.trim().replace(/^#/, '');
+        pressNoResults.style.display = visible === 0 ? 'block' : 'none';
+        pressGrid.style.display = visible === 0 ? 'none' : '';
+        pagination.style.display = 'none';
+      } else {
+        pressCount.style.display = 'none';
+        pressNoResults.style.display = 'none';
+        pressGrid.style.display = '';
+        pagination.style.display = '';
+      }
+    }
+
+    document.querySelector('.page-search').addEventListener('submit', e => {
+      e.preventDefault();
+      filterCards(pressSearchInput.value);
+    });
+
+    pressGrid.addEventListener('click', e => {
+      const tag = e.target.closest('.press-card-tag');
+      if (!tag) return;
+      e.preventDefault();
+      e.stopPropagation();
+      const keyword = tag.textContent.replace(/^#/, '');
+      pressSearchInput.value = keyword;
+      pressSearchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      filterCards(keyword);
+    });
+  </script>
+</body>
+</html>
