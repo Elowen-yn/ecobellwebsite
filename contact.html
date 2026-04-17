@@ -24,11 +24,11 @@
       top: 0; left: 0; right: 0;
       height: 79px;
       background: #fff;
-      border-bottom: 0.3px solid rgba(0,0,0,0.1);
       z-index: 999;
-      transition: box-shadow 0.3s ease;
+      transition: box-shadow 0.3s ease, transform 0.35s cubic-bezier(0.4,0,0.2,1);
     }
     header.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.07); }
+    header.gnb-hidden { transform: translateY(-100%); }
     .header-inner {
       position: relative;
       width: 1440px;
@@ -50,6 +50,7 @@
     nav {
       position: absolute;
       left: 50%; transform: translateX(-50%);
+      top: 5px;
       display: flex;
       align-items: stretch;
       height: 79px;
@@ -60,11 +61,11 @@
       align-items: center;
       transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    nav.lnb-open .nav-item:nth-child(1) { transform: translateX(-54.5px); }
-    nav.lnb-open .nav-item:nth-child(2) { transform: translateX(-30px); }
-    nav.lnb-open .nav-item:nth-child(3) { transform: translateX(0.5px); }
-    nav.lnb-open .nav-item:nth-child(4) { transform: translateX(36.5px); }
-    nav.lnb-open .nav-item:nth-child(5) { transform: translateX(61.5px); }
+    nav.lnb-open .nav-item:nth-child(1) { transform: translateX(-63px); }
+    nav.lnb-open .nav-item:nth-child(2) { transform: translateX(-32px); }
+    nav.lnb-open .nav-item:nth-child(3) { transform: translateX(2px); }
+    nav.lnb-open .nav-item:nth-child(4) { transform: translateX(41px); }
+    nav.lnb-open .nav-item:nth-child(5) { transform: translateX(70px); }
     .nav-link {
       font-family: 'Chillax', sans-serif;
       font-weight: 600;
@@ -97,18 +98,23 @@
 
     /* ─── LNB ─── */
     .lnb {
-      position: absolute;
+      position: fixed;
       top: 79px;
-      left: -1px; right: -1px;
+      left: 0; right: 0;
       height: 183px;
       background: #fff;
-      border: 0.3px solid #d9d9d9;
-      border-top: none;
+      border-top: 0.3px solid #d9d9d9; border-bottom: 0.3px solid #d9d9d9;
       opacity: 0;
       transform: translateY(-6px);
       pointer-events: none;
       transition: opacity 0.25s ease, transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
       z-index: 102;
+    }
+    .lnb-inner {
+      position: relative;
+      width: 1440px;
+      margin: 0 auto;
+      height: 100%;
     }
     .lnb.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
     .lnb-col {
@@ -116,11 +122,11 @@
       top: 0;
       width: 154px;
       height: 100%;
-      border-right: 0.3px solid #d9d9d9;
+      border-right: 0.1px solid #d9d9d9;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-top: 15px;
+      padding-top: 21px;
       gap: 0;
       transition: background 0.2s ease;
     }
@@ -128,8 +134,8 @@
     .lnb-col[data-col="solution"] { left: 489px; }
     .lnb-col[data-col="platform"] { left: 643px; }
     .lnb-col[data-col="insight"]  { left: 797px; }
-    .lnb-col[data-col="contact"]  { left: 951px; }
-    .lnb-col.active { background: #f2f6f7; border-top: 2px solid #1e8dcd; }
+    .lnb-col[data-col="contact"]  { left: 951px; border-right: none; }
+    .lnb-col.active { background: #fafcfd; border-top: 2px solid #1e8dcd; padding-top: 21px; }
     .lnb-col a {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-weight: 700;
@@ -147,15 +153,15 @@
     .lnb-col a.en { font-family: 'Chillax', sans-serif; font-weight: 500; }
     .lnb-col a:hover { color: #1e8dcd; }
     .lnb-col a.ext::after { content: ' ↗'; font-size: 11px; }
-    .lnb-sep { width: 81px; height: 0.5px; background: #d9d9d9; margin: 4px auto; flex-shrink: 0; }
+    .lnb-sep { width: 81px; height: 0.5px; background: #d9d9d9; margin: 16px auto; flex-shrink: 0; }
 
     /* ─── SEARCH ─── */
-    header.search-open { background: #f2f6f7; border-bottom-color: transparent; box-shadow: none; }
+    header.search-open { background: #fafcfd; border-bottom-color: transparent; box-shadow: none; }
     .search-overlay {
       position: absolute;
       top: 79px; left: -1px; right: -1px;
       height: 230px;
-      background: #f2f6f7;
+      background: #fafcfd;
       opacity: 0; pointer-events: none;
       transition: opacity 0.25s ease, transform 0.28s cubic-bezier(0.4,0,0.2,1);
       transform: translateY(-8px);
@@ -194,7 +200,7 @@
     header.search-open .close-btn { display: flex; }
 
     /* ─── HEADER RIGHT ─── */
-    .header-right { position: absolute; right: 45px; top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 14px; }
+    .header-right { position: absolute; right: 45px; top: calc(50% + 5px); transform: translateY(-50%); display: flex; align-items: center; gap: 14px; }
     .search-btn { background: none; border: none; cursor: pointer; width: 20px; height: 21px; padding: 0; display: flex; align-items: center; justify-content: center; transition: transform 0.2s ease, opacity 0.2s; }
     .search-btn:hover { transform: scale(1.15); opacity: 0.7; }
     .demo-btn { display: flex; align-items: center; gap: 5px; border: 0.3px solid rgba(0,0,0,0.5); border-radius: 100px; padding: 9px 10px 10px; height: 25px; cursor: pointer; text-decoration: none; background: transparent; transition: background 0.25s ease, border-color 0.25s ease; }
@@ -306,7 +312,7 @@
     .notice-search-btn {
       position: absolute;
       right: 12px;
-      top: 50%; transform: translateY(-50%);
+      top: calc(50% + 5px); transform: translateY(-50%);
       background: none;
       border: none;
       cursor: pointer;
@@ -452,14 +458,14 @@
     .contact-banner-deco {
       position: absolute;
       right: 75px;
-      top: 50%; transform: translateY(-50%);
+      top: calc(50% + 5px); transform: translateY(-50%);
       width: 423px; height: 423px;
       opacity: 0.25;
     }
     .contact-banner-content {
       position: absolute;
       left: 75px;
-      top: 50%; transform: translateY(-50%);
+      top: calc(50% + 5px); transform: translateY(-50%);
     }
     .contact-banner-title {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
@@ -511,7 +517,7 @@
     .footer-inner { position: relative; width: 1440px; margin: 0 auto; height: 100%; }
     .ft-company-info { position: absolute; left: 75px; top: 112px; font-family: 'Noto Sans KR', sans-serif; font-weight: 500; font-size: 14px; color: rgb(74,76,76); line-height: 23px; letter-spacing: -0.28px; white-space: pre-line; }
     .ft-col-title { position: absolute; font-family: 'Chillax', sans-serif; font-weight: 600; font-size: 18px; color: #000; white-space: nowrap; margin: 0; top: 55px; letter-spacing: 0.54px; line-height: 28.8px; }
-    .ft-link { position: absolute; font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 700; font-size: 15px; color: #000; white-space: nowrap; text-decoration: none; line-height: 22.5px; letter-spacing: 0.15px; transition: opacity 0.2s; }
+    .ft-link { position: absolute; font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 700; font-size: 15px; color: #000; white-space: nowrap; text-decoration: none; line-height: 22.5px; letter-spacing: 0.15px; opacity: 0.8; transition: opacity 0.2s; }
     .ft-link:hover { opacity: 0.5; }
     .ft-link.ft-en { font-family: 'Chillax', sans-serif; font-weight: 500; line-height: 16.5px; }
     .ft-sep { position: absolute; height: 0.5px; background: rgba(0,0,0,0.2); }
@@ -543,8 +549,9 @@
       </nav>
 
       <div class="lnb" id="lnb">
+        <div class="lnb-inner">
         <div class="lnb-col" data-col="company">
-          <a href="#"><span style="font-family:'Chillax',sans-serif;font-weight:500;">CEO </span>인사말</a>
+          <a href="#">CEO 인사말</a>
           <a href="#">기업소개</a>
           <a href="#">보도자료</a>
           <a href="#">아카이브</a>
@@ -561,14 +568,15 @@
         </div>
         <div class="lnb-col" data-col="insight">
           <a href="https://www.netzeronews.kr/" class="en ext" target="_blank" rel="noopener noreferrer">NetZero News</a>
-          <a href="insight.html?page=eco" class="ext">친환경 기업정보</a>
-          <a href="insight.html?page=green" class="ext">그린카 계산기</a>
+          <a href="insight.html?page=eco">친환경 기업정보</a>
+          <a href="insight.html?page=green">그린카 계산기</a>
         </div>
         <div class="lnb-col" data-col="contact">
           <a href="contact.html">공지사항</a>
           <a href="#">오시는 길</a>
           <a href="#">문의하기</a>
         </div>
+        </div><!-- /.lnb-inner -->
       </div>
 
       <div class="search-overlay" id="search-overlay">
@@ -923,11 +931,19 @@
   </footer>
 
   <script>
-    // ─── 헤더 스크롤 ───
-    const header = document.getElementById('header');
+    // ─── 헤더 스크롤 (그림자 + 숨김) ───
+    let _lastScrollY = window.scrollY;
     window.addEventListener('scroll', () => {
-      header.classList.toggle('scrolled', window.scrollY > 10);
-    });
+      const cur = window.scrollY;
+      const header = document.getElementById('header');
+      header.classList.toggle('scrolled', cur > 10);
+      if (cur > _lastScrollY && cur > 80) {
+        header.classList.add('gnb-hidden');
+      } else {
+        header.classList.remove('gnb-hidden');
+      }
+      _lastScrollY = cur;
+    }, { passive: true });
 
     // ─── GNB / LNB ───
     const nav      = document.getElementById('main-nav');

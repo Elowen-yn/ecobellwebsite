@@ -24,11 +24,11 @@
       top: 0; left: 0; right: 0;
       height: 79px;
       background: #fff;
-      border-bottom: 0.3px solid rgba(0,0,0,0.1);
       z-index: 999;
-      transition: box-shadow 0.3s ease;
+      transition: box-shadow 0.3s ease, transform 0.35s cubic-bezier(0.4,0,0.2,1);
     }
     header.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.07); }
+    header.gnb-hidden { transform: translateY(-100%); }
     .header-inner {
       position: relative;
       width: 1440px; height: 100%;
@@ -37,7 +37,7 @@
     }
     .logo {
       position: absolute;
-      left: 44px; top: 50%; transform: translateY(-50%);
+      left: 44px; top: calc(50% + 5px); transform: translateY(-50%);
       width: 127px; height: 30px;
       transition: opacity 0.2s;
     }
@@ -47,6 +47,7 @@
     nav {
       position: absolute;
       left: 50%; transform: translateX(-50%);
+      top: 5px;
       display: flex; align-items: stretch;
       height: 79px;
     }
@@ -55,11 +56,11 @@
       display: flex; align-items: center;
       transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    nav.lnb-open .nav-item:nth-child(1) { transform: translateX(-54.5px); }
-    nav.lnb-open .nav-item:nth-child(2) { transform: translateX(-30px); }
-    nav.lnb-open .nav-item:nth-child(3) { transform: translateX(0.5px); }
-    nav.lnb-open .nav-item:nth-child(4) { transform: translateX(36.5px); }
-    nav.lnb-open .nav-item:nth-child(5) { transform: translateX(61.5px); }
+    nav.lnb-open .nav-item:nth-child(1) { transform: translateX(-63px); }
+    nav.lnb-open .nav-item:nth-child(2) { transform: translateX(-32px); }
+    nav.lnb-open .nav-item:nth-child(3) { transform: translateX(2px); }
+    nav.lnb-open .nav-item:nth-child(4) { transform: translateX(41px); }
+    nav.lnb-open .nav-item:nth-child(5) { transform: translateX(70px); }
     .nav-link {
       font-family: 'Chillax', sans-serif;
       font-weight: 600; font-size: 17px; color: #000;
@@ -82,7 +83,7 @@
     .lnb {
       position: fixed; top: 79px; left: 0; right: 0;
       height: 183px; background: #fff;
-      border-bottom: 0.3px solid #d9d9d9;
+      border-top: 0.3px solid #d9d9d9; border-bottom: 0.3px solid #d9d9d9;
       opacity: 0; transform: translateY(-6px);
       pointer-events: none;
       transition: opacity 0.25s ease, transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
@@ -90,22 +91,21 @@
     }
     .lnb-inner {
       position: relative; width: 1440px; margin: 0 auto; height: 100%;
-      border-left: 0.3px solid #d9d9d9; border-right: 0.3px solid #d9d9d9;
     }
     .lnb.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
     .lnb-col {
       position: absolute; top: 0; width: 154px; height: 100%;
-      border-right: 0.3px solid #d9d9d9;
+      border-right: 0.1px solid #d9d9d9;
       display: flex; flex-direction: column; align-items: center;
-      padding-top: 15px; gap: 0;
+      padding-top: 21px; gap: 0;
       transition: background 0.2s ease;
     }
     .lnb-col[data-col="company"]  { left: 335px; }
     .lnb-col[data-col="solution"] { left: 489px; }
     .lnb-col[data-col="platform"] { left: 643px; }
     .lnb-col[data-col="insight"]  { left: 797px; }
-    .lnb-col[data-col="contact"]  { left: 951px; }
-    .lnb-col.active { background: #f2f6f7; border-top: 2px solid #1e8dcd; }
+    .lnb-col[data-col="contact"]  { left: 951px; border-right: none; }
+    .lnb-col.active { background: #fafcfd; border-top: 2px solid #1e8dcd; padding-top: 21px; }
     .lnb-col a {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-weight: 700; font-size: 14px; color: #000;
@@ -116,12 +116,12 @@
     .lnb-col a.en { font-family: 'Chillax', sans-serif; font-weight: 500; }
     .lnb-col a:hover { color: #1e8dcd; }
     .lnb-col a.ext::after { content: ' ↗'; font-size: 11px; }
-    .lnb-sep { width: 81px; height: 0.5px; background: #d9d9d9; margin: 4px auto; flex-shrink: 0; }
+    .lnb-sep { width: 81px; height: 0.5px; background: #d9d9d9; margin: 16px auto; flex-shrink: 0; }
 
-    header.search-open { background: #f2f6f7; border-bottom-color: transparent; box-shadow: none; }
+    header.search-open { background: #fafcfd; border-bottom-color: transparent; box-shadow: none; }
     .search-overlay {
       position: fixed; top: 79px; left: 0; right: 0; height: 230px;
-      background: #f2f6f7; opacity: 0; pointer-events: none;
+      background: #fafcfd; opacity: 0; pointer-events: none;
       transition: opacity 0.25s ease, transform 0.28s cubic-bezier(0.4,0,0.2,1);
       transform: translateY(-8px); z-index: 100;
     }
@@ -152,7 +152,7 @@
     header.search-open .search-btn { display: none; }
     header.search-open .close-btn { display: flex; }
 
-    .header-right { position: absolute; right: 45px; top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 14px; }
+    .header-right { position: absolute; right: 45px; top: calc(50% + 5px); transform: translateY(-50%); display: flex; align-items: center; gap: 14px; }
     .search-btn { background: none; border: none; cursor: pointer; width: 20px; height: 21px; padding: 0; display: flex; align-items: center; justify-content: center; transition: transform 0.2s ease, opacity 0.2s; }
     .search-btn:hover { transform: scale(1.15); opacity: 0.7; }
     .demo-btn { display: flex; align-items: center; gap: 5px; border: 0.3px solid rgba(0,0,0,0.5); border-radius: 100px; padding: 9px 10px 10px; height: 25px; cursor: pointer; text-decoration: none; background: transparent; transition: background 0.25s ease, border-color 0.25s ease; }
@@ -300,7 +300,7 @@
     .footer-inner { position: relative; width: 1440px; margin: 0 auto; height: 100%; }
     .ft-company-info { position: absolute; left: 75px; top: 112px; font-family: 'Noto Sans KR', sans-serif; font-weight: 500; font-size: 14px; color: rgb(74,76,76); line-height: 23px; letter-spacing: -0.28px; white-space: pre-line; }
     .ft-col-title { position: absolute; font-family: 'Chillax', sans-serif; font-weight: 600; font-size: 18px; color: #000; white-space: nowrap; margin: 0; top: 55px; letter-spacing: 0.54px; line-height: 28.8px; }
-    .ft-link { position: absolute; font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 700; font-size: 15px; color: #000; white-space: nowrap; text-decoration: none; line-height: 22.5px; letter-spacing: 0.15px; transition: opacity 0.2s; }
+    .ft-link { position: absolute; font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 700; font-size: 15px; color: #000; white-space: nowrap; text-decoration: none; line-height: 22.5px; letter-spacing: 0.15px; opacity: 0.8; transition: opacity 0.2s; }
     .ft-link:hover { opacity: 0.5; }
     .ft-link.ft-en { font-family: 'Chillax', sans-serif; font-weight: 500; line-height: 16.5px; }
     .ft-sep { position: absolute; height: 0.5px; background: rgba(0,0,0,0.2); }
@@ -345,7 +345,7 @@
       <div class="lnb" id="lnb">
         <div class="lnb-inner">
           <div class="lnb-col active" data-col="company">
-            <a href="#"><span style="font-family:'Chillax',sans-serif;font-weight:500;">CEO </span>인사말</a>
+            <a href="#">CEO 인사말</a>
             <a href="#">기업소개</a>
             <a href="press.html">보도자료</a>
             <a href="#">아카이브</a>
@@ -391,6 +391,7 @@
           </div>
         </div>
       </div>
+
       <div class="header-right">
         <button class="search-btn" aria-label="검색" id="search-open-btn">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">

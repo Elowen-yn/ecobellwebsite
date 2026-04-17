@@ -26,11 +26,11 @@
       top: 0; left: 0; right: 0;
       height: 79px;
       background: #fff;
-      border-bottom: 0.3px solid rgba(0,0,0,0.1);
       z-index: 999;
-      transition: box-shadow 0.3s ease;
+      transition: box-shadow 0.3s ease, transform 0.35s cubic-bezier(0.4,0,0.2,1);
     }
     header.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.07); }
+    header.gnb-hidden { transform: translateY(-100%); }
 
     .header-inner {
       position: relative;
@@ -56,6 +56,7 @@
     nav {
       position: absolute;
       left: 50%; transform: translateX(-50%);
+      top: 5px;
       display: flex;
       align-items: stretch;
       height: 79px;
@@ -70,18 +71,18 @@
     }
 
     /*
-      GNB 일반 중심 위치 (page 기준):
-        Company   466.5px | Solution  596px | Platform 719.5px | Insight  837.5px | Contact Us 966.5px
-      LNB 컬럼 중심 위치:
-        Company   412px   | Solution  566px | Platform 720px   | Insight  874px   | Contact Us 1028px
+      GNB 일반 중심 위치 (nav 전체 620px, left=410px 기준):
+        Company 474.5 | Solution 598 | Platform 718.5 | Insight 833.5 | Contact Us 958.5
+      LNB 컬럼 중심 위치 (Figma):
+        Company 412   | Solution 566 | Platform 720   | Insight 874   | Contact Us 1028
       → translateX 변화량:
-        -54.5    -30      +0.5       +36.5     +61.5
+        -63      -32     +2       +41      +70
     */
-    nav.lnb-open .nav-item:nth-child(1) { transform: translateX(-54.5px); }
-    nav.lnb-open .nav-item:nth-child(2) { transform: translateX(-30px); }
-    nav.lnb-open .nav-item:nth-child(3) { transform: translateX(0.5px); }
-    nav.lnb-open .nav-item:nth-child(4) { transform: translateX(36.5px); }
-    nav.lnb-open .nav-item:nth-child(5) { transform: translateX(61.5px); }
+    nav.lnb-open .nav-item:nth-child(1) { transform: translateX(-63px); }
+    nav.lnb-open .nav-item:nth-child(2) { transform: translateX(-32px); }
+    nav.lnb-open .nav-item:nth-child(3) { transform: translateX(2px); }
+    nav.lnb-open .nav-item:nth-child(4) { transform: translateX(41px); }
+    nav.lnb-open .nav-item:nth-child(5) { transform: translateX(70px); }
 
     .nav-link {
       font-family: 'Chillax', sans-serif;
@@ -128,7 +129,7 @@
       left: 0; right: 0;
       height: 183px;
       background: #fff;
-      border-bottom: 0.3px solid #d9d9d9;
+      border-top: 0.3px solid #d9d9d9; border-bottom: 0.3px solid #d9d9d9;
       /* 초기 상태 (숨김) */
       opacity: 0;
       transform: translateY(-6px);
@@ -142,8 +143,6 @@
       width: 1440px;
       margin: 0 auto;
       height: 100%;
-      border-left: 0.3px solid #d9d9d9;
-      border-right: 0.3px solid #d9d9d9;
     }
     .lnb.open {
       opacity: 1;
@@ -157,11 +156,11 @@
       top: 0;
       width: 154px;
       height: 100%;
-      border-right: 0.3px solid #d9d9d9;
+      border-right: 0.1px solid #d9d9d9;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-top: 15px;
+      padding-top: 21px;
       gap: 0;
       transition: background 0.2s ease;
     }
@@ -170,12 +169,13 @@
     .lnb-col[data-col="solution"] { left: 489px; }
     .lnb-col[data-col="platform"] { left: 643px; }
     .lnb-col[data-col="insight"]  { left: 797px; }
-    .lnb-col[data-col="contact"]  { left: 951px; }
+    .lnb-col[data-col="contact"]  { left: 951px; border-right: none; }
 
     /* 호버된 컬럼 강조: 배경 + 상단 파란 띠 */
     .lnb-col.active {
-      background: #f2f6f7;
+      background: #fafcfd;
       border-top: 2px solid #1e8dcd;
+      padding-top: 21px;
     }
 
     /* LNB 링크 */
@@ -210,13 +210,13 @@
       width: 81px;
       height: 0.5px;
       background: #d9d9d9;
-      margin: 4px auto;
+      margin: 16px auto;
       flex-shrink: 0;
     }
 
     /* ─── SEARCH OVERLAY ─── */
     header.search-open {
-      background: #f2f6f7;
+      background: #fafcfd;
       border-bottom-color: transparent;
       box-shadow: none;
     }
@@ -226,7 +226,7 @@
       top: 79px;
       left: 0; right: 0;
       height: 230px; /* 309px - 79px header */
-      background: #f2f6f7;
+      background: #fafcfd;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.25s ease, transform 0.28s cubic-bezier(0.4,0,0.2,1);
@@ -348,7 +348,7 @@
     .header-right {
       position: absolute;
       right: 45px;
-      top: 50%; transform: translateY(-50%);
+      top: calc(50% + 5px); transform: translateY(-50%);
       display: flex;
       align-items: center;
       gap: 14px;
@@ -544,6 +544,7 @@
       text-decoration: none;
       line-height: 22.5px;
       letter-spacing: 0.15px;
+      opacity: 0.8;
       transition: opacity 0.2s;
     }
     .ft-link:hover { opacity: 0.5; }
@@ -714,7 +715,7 @@
       justify-content: space-between;
       padding: 0 18px;
       height: 48px;
-      background: #f2f6f7;
+      background: #fafcfd;
       border-bottom: 1px solid #e0e8ea;
       flex-shrink: 0;
     }
@@ -793,7 +794,7 @@
         <div class="lnb-inner">
         <!-- Company -->
         <div class="lnb-col" data-col="company">
-          <a href="#"><span style="font-family:'Chillax',sans-serif;font-weight:500;">CEO </span>인사말</a>
+          <a href="#">CEO 인사말</a>
           <a href="#">기업소개</a>
           <a href="press.html">보도자료</a>
           <a href="#">아카이브</a>
@@ -1013,10 +1014,19 @@
   </div>
 
   <script>
-    // ─── 헤더 스크롤 그림자 ───
+    // ─── 헤더 스크롤 (그림자 + 숨김) ───
+    let _lastScrollY = window.scrollY;
     window.addEventListener('scroll', () => {
-      document.getElementById('header').classList.toggle('scrolled', window.scrollY > 10);
-    });
+      const cur = window.scrollY;
+      const header = document.getElementById('header');
+      header.classList.toggle('scrolled', cur > 10);
+      if (cur > _lastScrollY && cur > 80) {
+        header.classList.add('gnb-hidden');
+      } else {
+        header.classList.remove('gnb-hidden');
+      }
+      _lastScrollY = cur;
+    }, { passive: true });
 
     // ─── GNB / LNB 인터랙션 ───
     const nav      = document.getElementById('main-nav');
@@ -1130,7 +1140,27 @@
     positionNotifTooltip();
     window.addEventListener('resize', positionNotifTooltip);
 
-    // 닫기
+    // 기본 숨김 상태
+    notifTooltip.classList.add('hidden');
+
+    // 검색 아이콘 호버 시에만 표시
+    let hideTimer = null;
+    const searchBtn = document.getElementById('search-open-btn');
+
+    function showTooltip() {
+      clearTimeout(hideTimer);
+      notifTooltip.classList.remove('hidden');
+    }
+    function scheduleHide() {
+      hideTimer = setTimeout(() => notifTooltip.classList.add('hidden'), 80);
+    }
+
+    searchBtn.addEventListener('mouseenter', showTooltip);
+    searchBtn.addEventListener('mouseleave', scheduleHide);
+    notifTooltip.addEventListener('mouseenter', showTooltip);
+    notifTooltip.addEventListener('mouseleave', scheduleHide);
+
+    // 닫기 버튼
     document.getElementById('notif-close').addEventListener('click', () => {
       notifTooltip.classList.add('hidden');
     });
