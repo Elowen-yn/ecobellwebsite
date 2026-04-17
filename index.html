@@ -613,12 +613,12 @@
     .notif-tooltip {
       position: fixed;
       top: 65px;
-      width: 216px;
+      width: 196px;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       pointer-events: auto;
-      z-index: 1000; /* header(999)보다 앞 → 항상 최상단 */
+      z-index: 1000;
       transition: opacity 0.2s ease, transform 0.2s ease;
     }
     .notif-tooltip.hidden {
@@ -626,27 +626,21 @@
       pointer-events: none;
       transform: translateY(-4px);
     }
-
-    /* 삼각형 — JS로 left 계산 후 margin-left는 항상 pill 중앙(108px) */
     .notif-arrow {
       width: 0; height: 0;
       border-left: 10px solid transparent;
       border-right: 10px solid transparent;
       border-bottom: 12px solid #000;
-      /* margin-left는 JS에서 동적으로 설정 */
     }
-
-    /* 검은 pill */
     .notif-pill {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      width: 216px;
+      justify-content: center;
+      width: 196px;
       height: 27px;
       background: #000;
-      border-radius: 4px;
+      border-radius: 7px;
       padding: 0 10px;
-      gap: 8px;
     }
     .notif-text {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
@@ -656,18 +650,6 @@
       letter-spacing: 0.12px;
       white-space: nowrap;
     }
-    .notif-close {
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-      display: flex;
-      align-items: center;
-      flex-shrink: 0;
-      opacity: 0.7;
-      transition: opacity 0.15s;
-    }
-    .notif-close:hover { opacity: 1; }
 
     /* ─── 플로팅 eco Asset 버튼 ─── */
     .floating-ecoasset {
@@ -797,7 +779,7 @@
           <a href="company-ceo.html">CEO 인사말</a>
           <a href="#">기업소개</a>
           <a href="press.html">보도자료</a>
-          <a href="#">아카이브</a>
+          <a href="archive.html">아카이브</a>
         </div>
         <!-- Solution -->
         <div class="lnb-col" data-col="solution">
@@ -857,13 +839,7 @@
       <div class="notif-tooltip" id="notif-tooltip">
         <div class="notif-arrow"></div>
         <div class="notif-pill">
-          <span class="notif-text">필요한 정보를 검색해 확인해보세요.</span>
-          <button class="notif-close" id="notif-close" aria-label="닫기">
-            <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <line x1="0.5" y1="0.5" x2="6.5" y2="6.5" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/>
-              <line x1="6.5" y1="0.5" x2="0.5" y2="6.5" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/>
-            </svg>
-          </button>
+          <span class="notif-text">필요한 정보를 검색해 확인해보세요</span>
         </div>
       </div>
 
@@ -1132,9 +1108,9 @@
       const btn    = document.getElementById('search-open-btn');
       const rect   = btn.getBoundingClientRect();
       const btnCx  = rect.left + rect.width / 2;   // 검색 아이콘 center x
-      const pillW  = 216;
+      const pillW  = 196;
       notifTooltip.style.left = (btnCx - pillW / 2) + 'px';
-      notifArrow.style.marginLeft = (pillW / 2 - 10) + 'px'; // 삼각형(20px) 중앙
+      notifArrow.style.marginLeft = (pillW / 2 - 10) + 'px';
     }
 
     positionNotifTooltip();
@@ -1160,10 +1136,7 @@
     notifTooltip.addEventListener('mouseenter', showTooltip);
     notifTooltip.addEventListener('mouseleave', scheduleHide);
 
-    // 닫기 버튼
-    document.getElementById('notif-close').addEventListener('click', () => {
-      notifTooltip.classList.add('hidden');
-    });
+
 
     // ─── IFRAME 모달 ───
     const iframeBackdrop = document.getElementById('iframe-modal-backdrop');

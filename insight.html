@@ -25,6 +25,7 @@
       height: 79px;
       background: #fff;
       z-index: 999;
+      overflow: visible;
       transition: box-shadow 0.3s ease, transform 0.35s cubic-bezier(0.4,0,0.2,1);
     }
     header.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.07); }
@@ -304,6 +305,13 @@
     .ft-social { position: absolute; line-height: 0; opacity: 0.7; transition: opacity 0.2s, transform 0.2s; top: 339px; }
     .ft-social:hover { opacity: 1; transform: scale(1.1); }
     .ft-copyright { position: absolute; left: 1164px; top: 387px; font-family: 'Noto Sans KR', sans-serif; font-weight: 300; font-size: 12px; color: #000; letter-spacing: -0.6px; line-height: 20px; white-space: nowrap; margin: 0; }
+
+    /* ─── 알림 툴팁 ─── */
+    .notif-tooltip { position: fixed; top: 65px; width: 196px; display: flex; flex-direction: column; align-items: flex-start; pointer-events: auto; z-index: 1000; transition: opacity 0.2s ease, transform 0.2s ease; }
+    .notif-tooltip.hidden { opacity: 0; pointer-events: none; transform: translateY(-4px); }
+    .notif-arrow { width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-bottom: 12px solid #000; }
+    .notif-pill { display: flex; align-items: center; justify-content: center; width: 196px; height: 27px; background: #000; border-radius: 7px; padding: 0 10px; }
+    .notif-text { font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 800; font-size: 12px; color: #fff; letter-spacing: 0.12px; white-space: nowrap; }
   </style>
 </head>
 <body>
@@ -327,10 +335,10 @@
       <div class="lnb" id="lnb">
         <div class="lnb-inner">
         <div class="lnb-col" data-col="company">
-          <a href="#">CEO 인사말</a>
+          <a href="company-ceo.html">CEO 인사말</a>
           <a href="#">기업소개</a>
-          <a href="#">보도자료</a>
-          <a href="#">아카이브</a>
+          <a href="press.html">보도자료</a>
+          <a href="archive.html">아카이브</a>
         </div>
         <div class="lnb-col" data-col="solution">
           <a href="#">전체 솔루션 맵</a>
@@ -369,6 +377,13 @@
             <button class="search-tag" data-keyword="에코에셋">#에코에셋</button>
             <button class="search-tag" data-keyword="에너지에셋">#에너지에셋</button>
           </div>
+        </div>
+      </div>
+
+      <div class="notif-tooltip" id="notif-tooltip">
+        <div class="notif-arrow"></div>
+        <div class="notif-pill">
+          <span class="notif-text">필요한 정보를 검색해 확인해보세요</span>
         </div>
       </div>
 
@@ -556,6 +571,24 @@
     });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSearch(); });
 
+    // ─── 알림 툴팁 ───
+    const notifTooltip = document.getElementById('notif-tooltip');
+    const notifArrow = notifTooltip.querySelector('.notif-arrow');
+    function positionNotifTooltip() {
+      const btn = document.getElementById('search-open-btn');
+      const rect = btn.getBoundingClientRect();
+      const pillW = 196;
+      notifTooltip.style.left = (rect.left + rect.width / 2 - pillW / 2) + 'px';
+      notifArrow.style.marginLeft = (pillW / 2 - 10) + 'px';
+    }
+    positionNotifTooltip();
+    window.addEventListener('resize', positionNotifTooltip);
+    notifTooltip.classList.add('hidden');
+    let hideTimer = null;
+    searchOpenBtn.addEventListener('mouseenter', () => { clearTimeout(hideTimer); notifTooltip.classList.remove('hidden'); });
+    searchOpenBtn.addEventListener('mouseleave', () => { hideTimer = setTimeout(() => notifTooltip.classList.add('hidden'), 80); });
+    notifTooltip.addEventListener('mouseenter', () => clearTimeout(hideTimer));
+    notifTooltip.addEventListener('mouseleave', () => { hideTimer = setTimeout(() => notifTooltip.classList.add('hidden'), 80); });
 
     // ─── 인사이트 탭 & URL 파라미터 ───
     const urls = {

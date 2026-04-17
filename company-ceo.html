@@ -165,13 +165,11 @@
     .demo-arrow-svg { transition: transform 0.25s ease, filter 0.25s ease; }
 
     /* ─── 알림 툴팁 ─── */
-    .notif-tooltip { position: fixed; top: 65px; width: 216px; display: flex; flex-direction: column; align-items: flex-start; pointer-events: auto; z-index: 1000; transition: opacity 0.2s ease, transform 0.2s ease; }
+    .notif-tooltip { position: fixed; top: 65px; width: 196px; display: flex; flex-direction: column; align-items: flex-start; pointer-events: auto; z-index: 1000; transition: opacity 0.2s ease, transform 0.2s ease; }
     .notif-tooltip.hidden { opacity: 0; pointer-events: none; transform: translateY(-4px); }
     .notif-arrow { width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-bottom: 12px solid #000; }
-    .notif-pill { display: flex; align-items: center; justify-content: space-between; width: 216px; height: 27px; background: #000; border-radius: 4px; padding: 0 10px; gap: 8px; }
+    .notif-pill { display: flex; align-items: center; justify-content: center; width: 196px; height: 27px; background: #000; border-radius: 7px; padding: 0 10px; }
     .notif-text { font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 800; font-size: 12px; color: #fff; letter-spacing: 0.12px; white-space: nowrap; }
-    .notif-close { background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center; flex-shrink: 0; opacity: 0.7; transition: opacity 0.15s; }
-    .notif-close:hover { opacity: 1; }
 
     /* ─── 플로팅 버튼 ─── */
     .floating-ecoasset { position: fixed; right: 44px; bottom: 44px; width: 65px; height: 48px; cursor: pointer; z-index: 500; transition: transform 0.2s ease, opacity 0.2s; text-decoration: none; }
@@ -197,17 +195,17 @@
       /* 전체 뷰포트 너비에 맞춘 그라디언트 배경 */
       background: linear-gradient(to bottom,
         #ffffff 0px,
-        #ffffff 308px,
-        #f3fbfc 1224px
+        #ffffff 325px,
+        #f3fbfc 1414px
       );
-      min-height: 1224px;
+      min-height: 1414px;
     }
 
     .ceo-section {
       position: relative;
       width: 1440px;
       margin: 0 auto;
-      min-height: 1224px;
+      min-height: 1414px;
     }
 
     /* 브레드크럼 + H1 — press.html .page-header 구조와 동일 */
@@ -236,22 +234,21 @@
       line-height: 1.289; letter-spacing: 0.45px;
     }
 
-    /* 데코 SVG (초록 오른쪽 끝 = 사진 왼쪽 끝, z:3)
-       SVG 235px 기준 초록 우측 x=160.3 → 320px 렌더 시 218px
-       사진 left=1021 → SVG left = 1021-218+3 = 806 */
+    /* 데코 SVG */
     .ceo-deco {
       position: absolute;
-      top: 150px; left: 848px;
-      width: 320px; height: 320px;
+      top: 187px; left: 854px;
+      width: 225px; height: 225px;
       z-index: 3;
       pointer-events: none;
+      transform: rotate(180deg) scaleY(-1) scaleX(-1);
     }
 
     /* CEO 사진 (z:2) */
     .ceo-photo {
       position: absolute;
-      top: 214px; left: 1063px;
-      width: 332px; height: 393px;
+      top: 290px; left: 946px;
+      width: 365px; height: 431px;
       object-fit: cover;
       border-radius: 5px;
       z-index: 2;
@@ -261,7 +258,7 @@
     /* 인용구 (흰 배경 하단) */
     .ceo-quote {
       position: absolute;
-      top: 279px; left: 75px;
+      top: 346px; left: 129px;
       width: 714px;
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-weight: 800; font-size: 27px; color: #000;
@@ -273,10 +270,10 @@
     /* 본문 (그라디언트 구간) */
     .ceo-message {
       position: absolute;
-      top: 401px; left: 75px;
-      width: 770px;
-      font-family: 'Noto Sans KR', sans-serif;
-      font-weight: 350; font-size: 20px; color: #000;
+      top: 469px; left: 129px;
+      width: 683px;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 400; font-size: 17px; color: #000;
       line-height: 36px; letter-spacing: 0;
       text-align: justify;
       z-index: 1;
@@ -292,17 +289,26 @@
     }
 
     /* CEO 이름 */
-    /* CEO 이름: photo bottom(607px) + 42px gap = top 649px */
     .ceo-name {
       position: absolute;
-      top: 649px; left: 1069px;
-      font-family: 'Noto Sans KR', sans-serif;
-      font-size: 22px; color: #000;
-      line-height: 30px; letter-spacing: -0.44px;
+      top: 760px; left: 946px;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-size: 20px; color: #000;
+      line-height: 30px; letter-spacing: -0.40px;
       z-index: 2;
     }
-    .ceo-name-title { font-weight: 350; display: block; }
+    .ceo-name-title { font-weight: 400; display: block; }
     .ceo-name-person { font-weight: 800; display: block; }
+
+    /* 서명/직인 사각형 */
+    .ceo-signature {
+      position: absolute;
+      top: 760px; left: 1166px;
+      width: 145px; height: 52px;
+      background: #d9d9d9;
+      border-radius: 2px;
+      z-index: 2;
+    }
 
     /* ─── FOOTER ─── */
     footer { position: relative; height: 453px; background: rgb(247,252,253); }
@@ -356,7 +362,7 @@
             <a href="company-ceo.html" class="active-link">CEO 인사말</a>
             <a href="#">기업소개</a>
             <a href="press.html">보도자료</a>
-            <a href="#">아카이브</a>
+            <a href="archive.html">아카이브</a>
           </div>
           <div class="lnb-col" data-col="solution">
             <a href="#">전체 솔루션 맵</a>
@@ -404,13 +410,7 @@
       <div class="notif-tooltip" id="notif-tooltip">
         <div class="notif-arrow"></div>
         <div class="notif-pill">
-          <span class="notif-text">필요한 정보를 검색해 확인해보세요.</span>
-          <button class="notif-close" id="notif-close" aria-label="닫기">
-            <svg width="7" height="7" viewBox="0 0 7 7" fill="none">
-              <line x1="0.5" y1="0.5" x2="6.5" y2="6.5" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/>
-              <line x1="6.5" y1="0.5" x2="0.5" y2="6.5" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/>
-            </svg>
-          </button>
+          <span class="notif-text">필요한 정보를 검색해 확인해보세요</span>
         </div>
       </div>
 
@@ -472,11 +472,14 @@
       <!-- CEO 사진 (top:214 left:1021 / 332×393, z:2) -->
       <img class="ceo-photo" src="assets/ceo-photo.png" alt="에코벨 대표이사 김소연">
 
-      <!-- CEO 이름 (top:649 left:1027, z:2) -->
+      <!-- CEO 이름 -->
       <p class="ceo-name">
         <span class="ceo-name-title">에코벨 대표이사</span>
         <span class="ceo-name-person">김소연</span>
       </p>
+
+      <!-- 서명/직인 사각형 -->
+      <div class="ceo-signature" aria-hidden="true"></div>
 
       <!-- 인용구 (top:279 left:88 / 흰 배경 하단) -->
       <p class="ceo-quote">에코벨은 에너지 데이터의 조화로운 연결을 통해
@@ -640,7 +643,7 @@
       const btn = document.getElementById('search-open-btn');
       const rect = btn.getBoundingClientRect();
       const btnCx = rect.left + rect.width / 2;
-      const pillW = 216;
+      const pillW = 196;
       notifTooltip.style.left = (btnCx - pillW / 2) + 'px';
       notifArrow.style.marginLeft = (pillW / 2 - 10) + 'px';
     }
@@ -653,7 +656,17 @@
     searchOpenBtn.addEventListener('mouseleave', () => { hideTimer = setTimeout(() => notifTooltip.classList.add('hidden'), 80); });
     notifTooltip.addEventListener('mouseenter', () => clearTimeout(hideTimer));
     notifTooltip.addEventListener('mouseleave', () => { hideTimer = setTimeout(() => notifTooltip.classList.add('hidden'), 80); });
-    document.getElementById('notif-close').addEventListener('click', () => notifTooltip.classList.add('hidden'));
+
+    // 페이지 제목 클릭 → LNB 해당 링크와 동일 동작
+    const pageTitle = document.querySelector('.page-title');
+    if (pageTitle) {
+      const currentFile = location.pathname.split('/').pop() || 'index.html';
+      const lnbLink = document.querySelector(`.lnb-col a[href="${currentFile}"]`);
+      if (lnbLink) {
+        pageTitle.style.cursor = 'pointer';
+        pageTitle.addEventListener('click', () => { window.location.href = lnbLink.getAttribute('href'); });
+      }
+    }
   </script>
 </body>
 </html>

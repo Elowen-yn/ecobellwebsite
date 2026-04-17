@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=1440">
-  <title>보도자료 - Ecobell</title>
+  <title>아카이브 - Ecobell</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;600;700&family=Nanum+Square:wght@400;700;800&display=swap" rel="stylesheet">
@@ -286,7 +286,7 @@
       position: relative;
       width: 1440px;
       margin: 0 auto;
-      padding: 39px 75px 102px;
+      padding: 39px 75px 44px;
     }
 
     /* 브레드크럼 */
@@ -314,9 +314,13 @@
       letter-spacing: 0.13px;
     }
 
-    /* 페이지 제목 영역 */
-    .page-title-row { display: block; }
-    .page-title-left {}
+    /* 페이지 제목 + 탭 행 */
+    .page-title-tab-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
     .page-title {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-weight: 800;
@@ -324,187 +328,309 @@
       color: #000;
       line-height: 1.289;
       letter-spacing: 0.45px;
-      margin-bottom: 0;
+    }
+
+    /* ─── 아카이브 탭 ─── */
+    .archive-tabs {
       display: flex;
-      align-items: flex-start;
-      gap: 9px;
-    }
-    .page-title-dot {
-      width: 8px; height: 8px;
-      background: #1e8ccc;
-      border-radius: 50%;
-      flex-shrink: 0;
-      position: relative;
-      top: -4px;
-    }
-    .page-subtitle {
-      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 400;
-      font-size: 18px;
-      color: #000;
-      letter-spacing: 0.18px;
-      line-height: 40px;
+      border: 0.5px solid #d9d9d9;
+      border-radius: 3px;
+      overflow: hidden;
+      margin-top: 8px;
     }
 
-    /* 검색바 */
-    .page-search {
-      position: absolute;
-      top: 257px;
-      right: 75px;
-      display: flex;
-      align-items: center;
-      border: 0.5px solid rgba(0, 0, 0, 0.3);
-      width: 338px;
-      height: 39px;
-      padding: 0 14px;
-      border-radius: 5px;
-    }
-    .page-search input {
-      flex: 1;
-      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 400;
-      font-size: 15px;
-      color: #2d2d2d;
-      border: none; outline: none;
-      background: transparent;
-    }
-    .page-search input::placeholder { color: #2d2d2d; opacity: 0.6; }
-    .page-search button {
-      background: none; border: none; cursor: pointer;
-      padding: 0;
-      display: flex; align-items: center;
-      opacity: 0.7; transition: opacity 0.2s;
-    }
-    .page-search button:hover { opacity: 1; }
-
-    /* 카드 그리드 */
-    .press-grid {
-      width: 1440px;
-      margin: 0 auto;
-      padding: 0 75px 60px;
-      display: grid;
-      grid-template-columns: repeat(4, 290px);
-      gap: 40px 43px;
-    }
-
-    .press-card {
-      width: 290px;
-      display: block;
-    }
-
-    .press-card-thumb {
-      width: 290px;
-      height: 170px;
-      background: #e7e7e7;
-      object-fit: cover;
-      display: block;
-      border-radius: 20px;
-      transition: opacity 0.25s;
-      cursor: pointer;
-    }
-    .press-card-thumb:hover { opacity: 0.85; }
-
-    .press-card-body { padding-top: 26px; padding-left: 6px; padding-right: 7px; }
-
-    .press-card-title {
+    .archive-tab {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-weight: 700;
-      font-size: 18px;
+      font-size: 14px;
       color: #000;
-      line-height: 1.5;
-      letter-spacing: -0.18px;
-      margin-bottom: 7px;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      transition: color 0.2s;
-      text-decoration: none;
-    }
-    .press-card-title:hover { color: #1e8ccc; }
-
-    .press-card-date {
-      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 400;
-      font-size: 13px;
-      color: #8c8c8c;
-      letter-spacing: -0.26px;
-      margin-bottom: 11px;
-    }
-
-    .press-card-tags {
-      position: relative;
-      display: flex;
-      flex-wrap: nowrap;
-      gap: 6px;
-      overflow: hidden;
-    }
-    .press-card-tags::after {
-      content: '';
-      position: absolute;
-      top: 0; right: 0;
-      width: 60px; height: 100%;
-      background: linear-gradient(to right, transparent, #fff);
-      pointer-events: none;
-    }
-    .press-card-tag {
-      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 700;
-      font-size: 12px;
-      color: #8c8c8c;
-      background: #f6f6f6;
-      padding: 2.5px 10px;
-      height: 25px;
-      display: flex; align-items: center;
-      letter-spacing: -0.24px;
-      white-space: nowrap;
-      flex-shrink: 0;
-      border-radius: 20px;
+      letter-spacing: 0.14px;
+      padding: 11px 32px;
       cursor: pointer;
       border: none;
-      transition: background 0.15s, color 0.15s;
+      background: #f8f8f8;
+      border-left: 0.5px solid #d9d9d9;
+      white-space: nowrap;
+      transition: background 0.2s, color 0.2s;
     }
-    .press-card-tag:hover { background: #e8f4fb; color: #1e8ccc; }
+    .archive-tab:first-child { border-left: none; }
+    .archive-tab.active {
+      background: #fff;
+      color: #1e8dcd;
+      border-top: 2px solid #1e8dcd;
+      padding-top: 9px;
+    }
+    .archive-tab:not(.active):hover { background: #f0f0f0; }
 
-    /* 검색 결과 카운터 (page-header 안 absolute) */
-    .press-count {
+    /* ─── 섹션 제목 ─── */
+    .archive-content { min-height: 400px; }
+
+    .archive-section-wrap {
       display: none;
-      position: absolute;
-      top: 269px;
-      left: 75px;
+    }
+    .archive-section-wrap.active { display: block; }
+
+    .archive-section-title {
+      width: 1440px;
+      margin: 0 auto;
+      padding: 40px 75px 30px;
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 700;
+      font-weight: 800;
+      font-size: 24px;
+      color: #000;
+      letter-spacing: 0.24px;
+    }
+
+    /* ─── 기업소개서 탭 ─── */
+
+    /* 주요 브로셔 패널 */
+    .archive-featured-panel {
+      width: 100%;
+      background: #ebf6f8;
+      padding: 40px 0 50px;
+    }
+    .archive-featured-inner {
+      width: 1440px;
+      margin: 0 auto;
+      padding: 0 75px;
+    }
+    .archive-featured-year {
+      font-family: 'Chillax', sans-serif;
+      font-weight: 600;
       font-size: 18px;
       color: #000;
-      letter-spacing: 0.18px;
-      line-height: 23px;
+      letter-spacing: 0.54px;
+      margin-bottom: 24px;
     }
-
-    /* 결과 없음 전체 영역 */
-    .press-no-results { display: none; }
-
-    /* 결과 없음 메시지 */
-    .press-no-results-msg {
-      padding: 86px 75px 146px;
-      text-align: center;
-      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-size: 20px;
-      color: #000;
-      letter-spacing: 0.6px;
+    .archive-featured-center {
       display: flex;
       flex-direction: column;
       align-items: center;
     }
-    .press-no-results-icon {
+    .archive-featured-img {
+      width: 240px;
+      height: 160px;
+      background: #c8dde3;
+      border-radius: 4px;
+      object-fit: cover;
       display: block;
-      margin-bottom: 17px;
+      margin-bottom: 18px;
+    }
+    .archive-featured-btns {
+      display: flex;
+      gap: 16px;
+    }
+    .archive-dl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 20px;
+      border: 0.5px solid rgba(0,0,0,0.3);
+      border-radius: 3px;
+      background: #fff;
+      cursor: pointer;
+      text-decoration: none;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      color: #000;
+      letter-spacing: 0.13px;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .archive-dl-btn:hover { background: #1e8dcd; border-color: #1e8dcd; color: #fff; }
+    .archive-dl-btn:hover svg path { stroke: #fff; }
+    .archive-dl-sep {
+      display: inline-block;
+      width: 0.5px;
+      height: 12px;
+      background: rgba(0,0,0,0.3);
+      margin: 0 2px;
+      vertical-align: middle;
+    }
+    .archive-dl-btn .dl-lang { font-family: 'Chillax', sans-serif; font-weight: 500; }
+
+    /* 목록 행 */
+    .archive-list {
+      width: 1440px;
+      margin: 0 auto;
+      padding: 20px 75px 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .archive-list-row {
+      display: flex;
+      align-items: center;
+      background: #fff;
+      border: 0.5px solid #e5e5e5;
+      border-radius: 3px;
+      padding: 17px 24px;
+      gap: 0;
+    }
+    .archive-list-year {
+      font-family: 'Chillax', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      color: #1e8dcd;
+      letter-spacing: 0.48px;
+      width: 70px;
       flex-shrink: 0;
     }
-    .press-no-results-msg .msg-bold { font-weight: 700; }
-    .press-no-results-msg .msg-regular { font-weight: 400; }
+    .archive-list-title {
+      flex: 1;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      color: #000;
+      letter-spacing: 0.15px;
+    }
+    .archive-list-downloads {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .archive-list-dl {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Chillax', sans-serif;
+      font-weight: 500;
+      font-size: 13px;
+      color: #000;
+      text-decoration: none;
+      border: none;
+      background: none;
+      cursor: pointer;
+      letter-spacing: 0.39px;
+      opacity: 0.7;
+      padding: 0;
+      transition: color 0.2s, opacity 0.2s;
+    }
+    .archive-list-dl:hover { color: #1e8dcd; opacity: 1; }
 
-    /* CTA 배너 */
-    .press-cta-banner {
+    /* ─── 지명원/카탈로그 탭 ─── */
+    .archive-catalog-grid {
+      width: 1440px;
+      margin: 0 auto;
+      padding: 0 75px 60px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+    }
+    .archive-catalog-card {
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+    }
+    .archive-catalog-thumb {
+      width: 100%;
+      aspect-ratio: 155 / 207;
+      background: #e0e0e0;
+      border-radius: 3px;
+      position: relative;
+      overflow: hidden;
+    }
+    .archive-catalog-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .archive-catalog-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.62);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.22s ease;
+    }
+    .archive-catalog-card:hover .archive-catalog-overlay { opacity: 1; }
+    .archive-catalog-dl-circle {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      color: #fff;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.11px;
+      text-decoration: none;
+    }
+    .archive-catalog-title {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      color: #000;
+      text-align: center;
+      margin-top: 14px;
+      letter-spacing: 0.14px;
+      line-height: 1.5;
+    }
+
+    /* ─── IR 탭 ─── */
+    .archive-ir-wrap {
+      width: 1440px;
+      margin: 0 auto;
+      padding: 0 75px 60px;
+    }
+    .archive-ir-table {
+      width: 100%;
+      border-collapse: collapse;
+      border-top: 1.5px solid #1e8dcd;
+    }
+    .archive-ir-table thead tr {
+      border-bottom: 0.5px solid #d9d9d9;
+    }
+    .archive-ir-table th {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      color: rgba(0,0,0,0.45);
+      letter-spacing: 0.12px;
+      padding: 13px 0;
+      text-align: center;
+    }
+    .archive-ir-table th:nth-child(2) { text-align: left; padding-left: 24px; }
+    .archive-ir-table td {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      color: #000;
+      padding: 18px 0;
+      border-bottom: 0.5px solid #f0f0f0;
+      text-align: center;
+    }
+    .archive-ir-table td:nth-child(2) {
+      text-align: left;
+      padding-left: 24px;
+      font-size: 15px;
+    }
+    .archive-ir-table td:nth-child(1) { width: 80px; color: rgba(0,0,0,0.5); font-size: 14px; }
+    .archive-ir-table td:nth-child(3) { width: 180px; color: rgba(0,0,0,0.55); font-size: 13px; font-weight: 400; }
+    .archive-ir-table td:nth-child(4) { width: 120px; }
+    .archive-ir-attach {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0.6;
+      transition: opacity 0.2s;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+    .archive-ir-attach:hover { opacity: 1; }
+
+    /* ─── CTA BANNER ─── */
+    .archive-cta-banner {
       width: 100%;
       height: 359px;
       background-image: url('assets/press-cta-bg.png');
@@ -513,13 +639,13 @@
       position: relative;
       overflow: hidden;
     }
-    .press-cta-inner {
+    .archive-cta-inner {
       position: absolute;
       left: 112px;
       top: 62px;
       width: 620px;
     }
-    .press-cta-title {
+    .archive-cta-title {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-weight: 700;
       font-size: 28px;
@@ -528,7 +654,7 @@
       letter-spacing: 0.84px;
       margin-bottom: 15px;
     }
-    .press-cta-btn {
+    .archive-cta-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -545,12 +671,12 @@
       margin-bottom: 28px;
       transition: background 0.2s;
     }
-    .press-cta-btn:hover { background: #1e8dcd; }
-    .press-cta-contacts {
+    .archive-cta-btn:hover { background: #1e8dcd; }
+    .archive-cta-contacts {
       display: flex;
       align-items: center;
     }
-    .press-cta-phone {
+    .archive-cta-phone, .archive-cta-email {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-weight: 800;
       font-size: 18px;
@@ -558,50 +684,12 @@
       letter-spacing: 0.54px;
       color: #000;
     }
-    .press-cta-vdivider {
+    .archive-cta-vdivider {
       width: 0.5px;
       height: 46px;
       background: rgba(0,0,0,0.15);
       margin: 0 35px 0 44px;
     }
-    .press-cta-email {
-      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 800;
-      font-size: 18px;
-      line-height: 25px;
-      letter-spacing: 0.54px;
-      color: #000;
-    }
-
-    /* 페이지네이션 */
-    .pagination {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0;
-      padding: 20px 0 80px;
-    }
-    .pagination-btn {
-      width: 23px; height: 22px;
-      background: none; border: none; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      opacity: 0.5; transition: opacity 0.2s;
-      border-radius: 3px;
-    }
-    .pagination-btn:hover { opacity: 1; }
-    .pagination-num {
-      font-family: 'Chillax', sans-serif;
-      font-weight: 400;
-      font-size: 17px;
-      color: #000;
-      width: 38px; height: 22px;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      transition: color 0.2s;
-      text-decoration: none;
-    }
-    .pagination-num:hover { color: #1e8ccc; }
-    .pagination-num.active { color: #0091bb; font-weight: 600; }
 
     /* ─── FOOTER ─── */
     footer { position: relative; height: 453px; background: rgb(247,252,253); }
@@ -812,260 +900,258 @@
             <path d="M1 1L4 5L1 9" stroke="#1e8ccc" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </span>
-        <span>보도자료</span>
+        <span>아카이브</span>
       </div>
 
-      <!-- 제목 + 검색 -->
-      <div class="page-title-row">
-        <div class="page-title-left">
-          <h1 class="page-title">
-            보도자료
-            <span class="page-title-dot"></span>
-          </h1>
-          <p class="page-subtitle">에코벨의 언론 보도자료를 만날 수 있습니다.</p>
-        </div>
-        <form class="page-search" onsubmit="return false;">
-          <input type="text" placeholder="검색어를 입력해 주세요" id="press-search-input">
-          <button type="submit" aria-label="검색">
-            <svg width="16" height="17" viewBox="0 0 16 17" fill="none">
-              <circle cx="6.5" cy="6.5" r="5" stroke="#2d2d2d" stroke-width="1.3"/>
-              <line x1="10.5" y1="11" x2="15" y2="15.5" stroke="#2d2d2d" stroke-width="1.3" stroke-linecap="round"/>
-            </svg>
-          </button>
-        </form>
-      </div>
-      <span class="press-count" id="press-count">검색결과 <strong id="press-count-num">0</strong>건</span>
-    </div>
-
-    <!-- 보도자료 카드 그리드 -->
-    <div class="press-grid">
-
-      <div class="press-card">
-        <a class="press-card-thumb" href="press-article.html" style="background:#e7e7e7;"></a>
-        <div class="press-card-body">
-          <a class="press-card-title" href="press-article.html">에코벨, AI·MRV 탄소자산기술로 BIXPO 2025 8대 혁신기업 선정</a>
-          <p class="press-card-date">2025.10.30</p>
-          <div class="press-card-tags">
-            <button class="press-card-tag">#에코벨</button>
-            <button class="press-card-tag">#BIXPO</button>
-            <button class="press-card-tag">#탄소감축</button>
-            <button class="press-card-tag">#에코에셋</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="press-card">
-        <a class="press-card-thumb" href="press-article.html" style="background:#e7e7e7;"></a>
-        <div class="press-card-body">
-          <a class="press-card-title" href="press-article.html">에코벨, 재생에너지-탄소자산화 실증 추진…현장·데이터·AI 기술 결합</a>
-          <p class="press-card-date">2026.01.13</p>
-          <div class="press-card-tags">
-            <button class="press-card-tag">#에코벨</button>
-            <button class="press-card-tag">#에코에셋</button>
-            <button class="press-card-tag">#에코노드</button>
-            <button class="press-card-tag">#ESS</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="press-card">
-        <a class="press-card-thumb" href="press-article.html" style="background:#e7e7e7;"></a>
-        <div class="press-card-body">
-          <a class="press-card-title" href="press-article.html">에코벨, 초기창업패키지 및 ESG 그린지원금 선정 "탄소자산화 확장"</a>
-          <p class="press-card-date">2025.04.30</p>
-          <div class="press-card-tags">
-            <button class="press-card-tag">#에코벨</button>
-            <button class="press-card-tag">#탄소자산화</button>
-            <button class="press-card-tag">#에코에셋</button>
-            <button class="press-card-tag">#스타트업</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="press-card">
-        <a class="press-card-thumb" href="press-article.html" style="background:#e7e7e7;"></a>
-        <div class="press-card-body">
-          <a class="press-card-title" href="press-article.html">국내 독자기술 개발 '기업 탄소자산관리 플랫폼' "눈길"</a>
-          <p class="press-card-date">2025.02.05</p>
-          <div class="press-card-tags">
-            <button class="press-card-tag">#에코벨</button>
-            <button class="press-card-tag">#탄소배출권</button>
-            <button class="press-card-tag">#에코에셋</button>
-            <button class="press-card-tag">#스타트업</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="press-card">
-        <a class="press-card-thumb" href="press-article.html" style="background:#e7e7e7;"></a>
-        <div class="press-card-body">
-          <a class="press-card-title" href="press-article.html">에코벨, 케미코첨단소재와 탄소감축솔루션 활용 확산 MOU</a>
-          <p class="press-card-date">2023.08.07</p>
-          <div class="press-card-tags">
-            <button class="press-card-tag">#에코벨</button>
-            <button class="press-card-tag">#탄소감축솔루션</button>
-            <button class="press-card-tag">#ESG경영관리</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="press-card">
-        <a class="press-card-thumb" href="press-article.html" style="background:#e7e7e7;"></a>
-        <div class="press-card-body">
-          <a class="press-card-title" href="press-article.html">에코벨, 재생에너지-탄소자산화 실증 추진…현장·데이터·AI 기술 결합</a>
-          <p class="press-card-date">2026.01.13</p>
-          <div class="press-card-tags">
-            <button class="press-card-tag">#에코벨</button>
-            <button class="press-card-tag">#에코에셋</button>
-            <button class="press-card-tag">#에코노드</button>
-            <button class="press-card-tag">#ESS</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="press-card">
-        <a class="press-card-thumb" href="press-article.html" style="background:#e7e7e7;"></a>
-        <div class="press-card-body">
-          <a class="press-card-title" href="press-article.html">에코벨, 초기창업패키지 및 ESG 그린지원금 선정 "탄소자산화 확장"</a>
-          <p class="press-card-date">2025.04.30</p>
-          <div class="press-card-tags">
-            <button class="press-card-tag">#에코벨</button>
-            <button class="press-card-tag">#탄소자산화</button>
-            <button class="press-card-tag">#에코에셋</button>
-            <button class="press-card-tag">#스타트업</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="press-card">
-        <a class="press-card-thumb" href="press-article.html" style="background:#e7e7e7;"></a>
-        <div class="press-card-body">
-          <a class="press-card-title" href="press-article.html">국내 독자기술 개발 '기업 탄소자산관리 플랫폼' "눈길"</a>
-          <p class="press-card-date">2025.02.05</p>
-          <div class="press-card-tags">
-            <button class="press-card-tag">#에코벨</button>
-            <button class="press-card-tag">#탄소배출권</button>
-            <button class="press-card-tag">#에코에셋</button>
-            <button class="press-card-tag">#스타트업</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="press-card">
-        <a class="press-card-thumb" href="press-article.html" style="background:#e7e7e7;"></a>
-        <div class="press-card-body">
-          <a class="press-card-title" href="press-article.html">에코벨, 케미코첨단소재와 탄소감축솔루션 활용 확산 MOU</a>
-          <p class="press-card-date">2023.08.07</p>
-          <div class="press-card-tags">
-            <button class="press-card-tag">#에코벨</button>
-            <button class="press-card-tag">#탄소감축솔루션</button>
-            <button class="press-card-tag">#ESG경영관리</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="press-card">
-        <a class="press-card-thumb" href="press-article.html" style="background:#e7e7e7;"></a>
-        <div class="press-card-body">
-          <a class="press-card-title" href="press-article.html">에코벨, 재생에너지-탄소자산화 실증 추진…현장·데이터·AI 기술 결합</a>
-          <p class="press-card-date">2026.01.13</p>
-          <div class="press-card-tags">
-            <button class="press-card-tag">#에코벨</button>
-            <button class="press-card-tag">#에코에셋</button>
-            <button class="press-card-tag">#에코노드</button>
-            <button class="press-card-tag">#ESS</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="press-card">
-        <a class="press-card-thumb" href="press-article.html" style="background:#e7e7e7;"></a>
-        <div class="press-card-body">
-          <a class="press-card-title" href="press-article.html">에코벨, 초기창업패키지 및 ESG 그린지원금 선정 "탄소자산화 확장"</a>
-          <p class="press-card-date">2025.04.30</p>
-          <div class="press-card-tags">
-            <button class="press-card-tag">#에코벨</button>
-            <button class="press-card-tag">#탄소자산화</button>
-            <button class="press-card-tag">#에코에셋</button>
-            <button class="press-card-tag">#스타트업</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="press-card">
-        <a class="press-card-thumb" href="press-article.html" style="background:#e7e7e7;"></a>
-        <div class="press-card-body">
-          <a class="press-card-title" href="press-article.html">국내 독자기술 개발 '기업 탄소자산관리 플랫폼' "눈길"</a>
-          <p class="press-card-date">2025.02.05</p>
-          <div class="press-card-tags">
-            <button class="press-card-tag">#에코벨</button>
-            <button class="press-card-tag">#탄소배출권</button>
-            <button class="press-card-tag">#에코에셋</button>
-            <button class="press-card-tag">#스타트업</button>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- 검색 결과 없음 -->
-    <div class="press-no-results" id="press-no-results">
-      <div class="press-no-results-msg">
-        <svg class="press-no-results-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 0.9375C6.7875 0.9375 2.5875 5.175 2.5875 10.3875V21.225C2.5875 21.5625 2.775 21.8625 3.075 22.0125L5.775 23.175C6.4875 23.475 7.275 23.6625 8.0625 23.6625C8.8875 23.6625 9.75 23.475 10.5375 23.1L10.7625 22.9875C11.85 22.4625 13.125 22.4625 14.2125 22.9875C15.825 23.775 17.7375 23.7375 19.35 22.875L21.075 21.975C21.3375 21.825 21.525 21.525 21.525 21.225V10.3875C21.4125 5.175 17.2125 0.9375 12 0.9375ZM19.725 20.7L18.4875 21.375C17.3625 21.975 16.0125 22.0125 14.8875 21.45C13.3125 20.7 11.55 20.7 9.975 21.45L9.75 21.5625C8.7 22.05 7.5 22.0875 6.45 21.6375L4.275 20.6625V10.3875C4.275 6.1125 7.725 2.625 12 2.625C16.275 2.625 19.725 6.1125 19.725 10.35V20.7Z" fill="#1E8DCD"/>
-          <path d="M9.1125 8.02539C8.4 8.02539 7.8375 8.58789 7.8375 9.30039C7.8375 10.0129 8.4 10.5754 9.1125 10.5754C9.825 10.5754 10.3875 10.0129 10.3875 9.30039C10.3875 8.58789 9.825 8.02539 9.1125 8.02539Z" fill="#1E8DCD"/>
-          <path d="M14.8875 8.02539C14.175 8.02539 13.6125 8.58789 13.6125 9.30039C13.6125 10.0129 14.175 10.5754 14.8875 10.5754C15.6 10.5754 16.1625 10.0129 16.1625 9.30039C16.1625 8.58789 15.6 8.02539 14.8875 8.02539Z" fill="#1E8DCD"/>
-          <path d="M12 13.3877C10.95 13.3877 10.0875 13.9502 10.0875 14.6627C10.0875 15.3752 10.95 15.9377 12 15.9377C13.05 15.9377 13.9125 15.3752 13.9125 14.6627C13.9125 13.9502 13.05 13.3877 12 13.3877Z" fill="#1E8DCD"/>
-        </svg>
-        <p><span class="msg-bold">'<span id="press-no-results-query"></span>'</span><span class="msg-regular">에 대한 검색 결과가 없습니다</span></p>
-      </div>
-
-      <!-- CTA 배너 -->
-      <div class="press-cta-banner">
-        <div class="press-cta-inner">
-          <p class="press-cta-title">찾으시는 정보가 없으신가요?<br>문의하기를 통해 빠르게 답변 받아보세요.</p>
-          <a class="press-cta-btn" href="contact.html">
-            문의하기
-            <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
-              <path d="M1 1L4 5L1 9" stroke="#fff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-          <div class="press-cta-contacts">
-            <div class="press-cta-phone">전화 상담<br>02-892-9180</div>
-            <div class="press-cta-vdivider"></div>
-            <div class="press-cta-email">이메일 상담<br>ecobell@ecobell.co.kr</div>
-          </div>
+      <!-- 제목 + 탭 -->
+      <div class="page-title-tab-row">
+        <h1 class="page-title">아카이브</h1>
+        <div class="archive-tabs" id="archive-tabs">
+          <button class="archive-tab active" data-tab="intro">기업 홍보자료</button>
+          <button class="archive-tab" data-tab="catalog">카탈로그/지명원</button>
+          <button class="archive-tab" data-tab="ir">IR</button>
         </div>
       </div>
     </div>
 
-    <!-- 페이지네이션 -->
-    <div class="pagination">
-      <button class="pagination-btn" aria-label="처음">
-        <svg width="7" height="7" viewBox="0 0 7 7" fill="none">
-          <path d="M6 1L3.5 3.5L6 6M3.5 1L1 3.5L3.5 6" stroke="#000" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-      <button class="pagination-btn" aria-label="이전">
-        <svg width="4" height="7" viewBox="0 0 4 7" fill="none">
-          <path d="M3 1L1 3.5L3 6" stroke="#000" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-      <a class="pagination-num active" href="#">1</a>
-      <a class="pagination-num" href="#">2</a>
-      <a class="pagination-num" href="#">3</a>
-      <a class="pagination-num" href="#">4</a>
-      <a class="pagination-num" href="#">5</a>
-      <button class="pagination-btn" aria-label="다음">
-        <svg width="4" height="7" viewBox="0 0 4 7" fill="none">
-          <path d="M1 1L3 3.5L1 6" stroke="#000" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-      <button class="pagination-btn" aria-label="마지막">
-        <svg width="7" height="7" viewBox="0 0 7 7" fill="none">
-          <path d="M1 1L3.5 3.5L1 6M3.5 1L6 3.5L3.5 6" stroke="#000" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
+    <!-- ─── 탭 콘텐츠 ─── -->
+    <div class="archive-content">
+
+      <!-- 탭 1: 기업 홍보자료 (기업소개서) -->
+      <div class="archive-section-wrap active" id="tab-intro">
+        <div class="archive-section-title">기업소개서</div>
+
+        <!-- 2026 주요 브로셔 패널 -->
+        <div class="archive-featured-panel">
+          <div class="archive-featured-inner">
+            <p class="archive-featured-year">2026</p>
+            <div class="archive-featured-center">
+              <div class="archive-featured-img" aria-hidden="true"></div>
+              <div class="archive-featured-btns">
+                <a class="archive-dl-btn" href="#">
+                  국문
+                  <span class="archive-dl-sep"></span>
+                  <span class="dl-lang">KOR</span>
+                  <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                    <path d="M6.5 1V9M6.5 9L3.5 6M6.5 9L9.5 6" stroke="#000" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="1.5" y1="12" x2="11.5" y2="12" stroke="#000" stroke-width="1.3" stroke-linecap="round"/>
+                  </svg>
+                </a>
+                <a class="archive-dl-btn" href="#">
+                  영문
+                  <span class="archive-dl-sep"></span>
+                  <span class="dl-lang">ENG</span>
+                  <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                    <path d="M6.5 1V9M6.5 9L3.5 6M6.5 9L9.5 6" stroke="#000" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="1.5" y1="12" x2="11.5" y2="12" stroke="#000" stroke-width="1.3" stroke-linecap="round"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 연도별 목록 -->
+        <div class="archive-list">
+          <div class="archive-list-row">
+            <span class="archive-list-year">2025</span>
+            <span class="archive-list-title">2025 기업소개서</span>
+            <div class="archive-list-downloads">
+              <a class="archive-list-dl" href="#">
+                <span class="dl-lang">KOR</span>
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M6 1V8M6 8L3.5 5.5M6 8L8.5 5.5" stroke="#000" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                  <line x1="1" y1="11" x2="11" y2="11" stroke="#000" stroke-width="1.3" stroke-linecap="round"/>
+                </svg>
+              </a>
+              <a class="archive-list-dl" href="#">
+                <span class="dl-lang">ENG</span>
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M6 1V8M6 8L3.5 5.5M6 8L8.5 5.5" stroke="#000" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                  <line x1="1" y1="11" x2="11" y2="11" stroke="#000" stroke-width="1.3" stroke-linecap="round"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="archive-list-row">
+            <span class="archive-list-year">2024</span>
+            <span class="archive-list-title">2024 기업소개서</span>
+            <div class="archive-list-downloads">
+              <a class="archive-list-dl" href="#">
+                <span class="dl-lang">KOR</span>
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M6 1V8M6 8L3.5 5.5M6 8L8.5 5.5" stroke="#000" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                  <line x1="1" y1="11" x2="11" y2="11" stroke="#000" stroke-width="1.3" stroke-linecap="round"/>
+                </svg>
+              </a>
+              <a class="archive-list-dl" href="#">
+                <span class="dl-lang">ENG</span>
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M6 1V8M6 8L3.5 5.5M6 8L8.5 5.5" stroke="#000" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                  <line x1="1" y1="11" x2="11" y2="11" stroke="#000" stroke-width="1.3" stroke-linecap="round"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 탭 2: 지명원/카탈로그 -->
+      <div class="archive-section-wrap" id="tab-catalog">
+        <div class="archive-section-title">지명원/카탈로그</div>
+
+        <div class="archive-catalog-grid">
+
+          <div class="archive-catalog-card">
+            <div class="archive-catalog-thumb">
+              <!-- 실제 이미지 있을 경우: <img src="assets/catalog-solar.png" alt="태양광 발전사업 지명원"> -->
+              <div class="archive-catalog-overlay">
+                <a class="archive-catalog-dl-circle" href="#">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path d="M9 2V13M9 13L5 9M9 13L13 9" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="2" y1="16.5" x2="16" y2="16.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                  <span>다운받기</span>
+                </a>
+              </div>
+            </div>
+            <p class="archive-catalog-title">태양광 발전사업 지명원</p>
+          </div>
+
+          <div class="archive-catalog-card">
+            <div class="archive-catalog-thumb">
+              <div class="archive-catalog-overlay">
+                <a class="archive-catalog-dl-circle" href="#">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path d="M9 2V13M9 13L5 9M9 13L13 9" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="2" y1="16.5" x2="16" y2="16.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                  <span>다운받기</span>
+                </a>
+              </div>
+            </div>
+            <p class="archive-catalog-title">에코노드 RTU 지명원</p>
+          </div>
+
+          <div class="archive-catalog-card">
+            <div class="archive-catalog-thumb">
+              <div class="archive-catalog-overlay">
+                <a class="archive-catalog-dl-circle" href="#">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path d="M9 2V13M9 13L5 9M9 13L13 9" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="2" y1="16.5" x2="16" y2="16.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                  <span>다운받기</span>
+                </a>
+              </div>
+            </div>
+            <p class="archive-catalog-title">에코에셋 탄소자산화 플랫폼</p>
+          </div>
+
+          <div class="archive-catalog-card">
+            <div class="archive-catalog-thumb">
+              <div class="archive-catalog-overlay">
+                <a class="archive-catalog-dl-circle" href="#">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path d="M9 2V13M9 13L5 9M9 13L13 9" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="2" y1="16.5" x2="16" y2="16.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                  <span>다운받기</span>
+                </a>
+              </div>
+            </div>
+            <p class="archive-catalog-title">에너지에셋 생에너지 통합관리</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 탭 3: IR -->
+      <div class="archive-section-wrap" id="tab-ir">
+        <div class="archive-section-title">사업보고서</div>
+
+        <div class="archive-ir-wrap">
+          <table class="archive-ir-table">
+            <thead>
+              <tr>
+                <th>no</th>
+                <th>공지제목</th>
+                <th>작성일</th>
+                <th>첨부파일</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>4</td>
+                <td>2025년 제3 기 감사보고서</td>
+                <td>2024.11.13</td>
+                <td>
+                  <button class="archive-ir-attach" aria-label="첨부파일 다운로드">
+                    <svg width="16" height="18" viewBox="0 0 16 18" fill="none">
+                      <path d="M14.5 8L7.5 15C6.1 16.4 3.9 16.4 2.5 15C1.1 13.6 1.1 11.4 2.5 10L9.5 3C10.4 2.1 11.9 2.1 12.8 3C13.7 3.9 13.7 5.4 12.8 6.3L6.2 12.9C5.8 13.3 5.2 13.3 4.8 12.9C4.4 12.5 4.4 11.9 4.8 11.5L10.5 5.8" stroke="#000" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>2025년 제3 기 사업보고서</td>
+                <td>2024.11.13</td>
+                <td>
+                  <button class="archive-ir-attach" aria-label="첨부파일 다운로드">
+                    <svg width="16" height="18" viewBox="0 0 16 18" fill="none">
+                      <path d="M14.5 8L7.5 15C6.1 16.4 3.9 16.4 2.5 15C1.1 13.6 1.1 11.4 2.5 10L9.5 3C10.4 2.1 11.9 2.1 12.8 3C13.7 3.9 13.7 5.4 12.8 6.3L6.2 12.9C5.8 13.3 5.2 13.3 4.8 12.9C4.4 12.5 4.4 11.9 4.8 11.5L10.5 5.8" stroke="#000" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>2024년 제2 기 감사보고서</td>
+                <td>2024.11.13</td>
+                <td>
+                  <button class="archive-ir-attach" aria-label="첨부파일 다운로드">
+                    <svg width="16" height="18" viewBox="0 0 16 18" fill="none">
+                      <path d="M14.5 8L7.5 15C6.1 16.4 3.9 16.4 2.5 15C1.1 13.6 1.1 11.4 2.5 10L9.5 3C10.4 2.1 11.9 2.1 12.8 3C13.7 3.9 13.7 5.4 12.8 6.3L6.2 12.9C5.8 13.3 5.2 13.3 4.8 12.9C4.4 12.5 4.4 11.9 4.8 11.5L10.5 5.8" stroke="#000" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>2024년 제2 기 사업보고서</td>
+                <td>2024.11.13</td>
+                <td>
+                  <button class="archive-ir-attach" aria-label="첨부파일 다운로드">
+                    <svg width="16" height="18" viewBox="0 0 16 18" fill="none">
+                      <path d="M14.5 8L7.5 15C6.1 16.4 3.9 16.4 2.5 15C1.1 13.6 1.1 11.4 2.5 10L9.5 3C10.4 2.1 11.9 2.1 12.8 3C13.7 3.9 13.7 5.4 12.8 6.3L6.2 12.9C5.8 13.3 5.2 13.3 4.8 12.9C4.4 12.5 4.4 11.9 4.8 11.5L10.5 5.8" stroke="#000" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div><!-- /.archive-content -->
+
+    <!-- CTA 배너 -->
+    <div class="archive-cta-banner">
+      <div class="archive-cta-inner">
+        <p class="archive-cta-title">더 궁금한 점이 있으신가요?<br>문의하기를 통해 빠르게 답변 받아보세요.</p>
+        <a class="archive-cta-btn" href="contact.html">
+          문의하기
+          <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
+            <path d="M1 1L4 5L1 9" stroke="#fff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <div class="archive-cta-contacts">
+          <div class="archive-cta-phone">전화 상담<br>02-892-9180</div>
+          <div class="archive-cta-vdivider"></div>
+          <div class="archive-cta-email">이메일 상담<br>ecobell@ecobell.co.kr</div>
+        </div>
+      </div>
     </div>
 
   </main>
@@ -1085,10 +1171,10 @@
       <p class="ft-col-title" style="left:1116px;">플랫폼</p>
       <p class="ft-col-title" style="left:1264px;">인사이트</p>
 
-      <a class="ft-link" href="#" style="left:847px;top:107px;">CEO 인사말</a>
+      <a class="ft-link" href="company-ceo.html" style="left:847px;top:107px;">CEO 인사말</a>
       <a class="ft-link" href="#" style="left:847px;top:147px;">기업소개</a>
       <a class="ft-link" href="press.html" style="left:847px;top:187px;">보도자료</a>
-      <a class="ft-link" href="#" style="left:847px;top:227px;">아카이브</a>
+      <a class="ft-link" href="archive.html" style="left:847px;top:227px;">아카이브</a>
 
       <a class="ft-link" href="#" style="left:975px;top:107px;">전체 솔루션 맵</a>
       <a class="ft-link ft-en" href="#" style="left:975px;top:147px;">ecoNODE</a>
@@ -1107,9 +1193,9 @@
       <div class="ft-divider" style="top:327px;"></div>
 
       <a class="ft-bottom-link fw-bold" href="#" style="left:75px;">개인정보처리방침</a>
-      <a class="ft-bottom-link" href="#" style="left:206px;">공지사항</a>
+      <a class="ft-bottom-link" href="contact.html" style="left:206px;">공지사항</a>
       <a class="ft-bottom-link" href="#" style="left:287px;">찾아오시는 길</a>
-      <a class="ft-bottom-link" href="#" style="left:396px;">문의하기</a>
+      <a class="ft-bottom-link" href="contact.html" style="left:396px;">문의하기</a>
 
       <a class="ft-social" href="#" aria-label="Facebook" style="left:1277px;">
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M10.5 9.5H12.3L12.8 7H10.5V5.8C10.5 5.1 10.8 4.5 11.8 4.5H13V2.3C13 2.3 11.9 2.1 10.9 2.1C8.7 2.1 7.5 3.4 7.5 5.5V7H5.3V9.5H7.5V16H10.5V9.5Z" fill="#000"/></svg>
@@ -1149,7 +1235,7 @@
       lnbCols.forEach(col => col.classList.toggle('active', col.dataset.col === menuName));
     }
 
-    function schedulClose() {
+    function scheduleClose() {
       closeTimer = setTimeout(() => {
         nav.classList.remove('lnb-open');
         lnb.classList.remove('open');
@@ -1160,10 +1246,10 @@
 
     navItems.forEach(item => {
       item.addEventListener('mouseenter', () => openLnb(item.dataset.menu));
-      item.addEventListener('mouseleave', schedulClose);
+      item.addEventListener('mouseleave', scheduleClose);
     });
     lnb.addEventListener('mouseenter', () => clearTimeout(closeTimer));
-    lnb.addEventListener('mouseleave', schedulClose);
+    lnb.addEventListener('mouseleave', scheduleClose);
     lnbCols.forEach(col => {
       col.addEventListener('mouseenter', () => {
         const menu = col.dataset.col;
@@ -1171,6 +1257,9 @@
         lnbCols.forEach(c => c.classList.toggle('active', c.dataset.col === menu));
       });
     });
+
+    // 기본 active 탭 설정 (Company)
+    navItems.forEach(item => item.classList.toggle('lnb-active', item.dataset.menu === 'company'));
 
     const searchOverlay  = document.getElementById('search-overlay');
     const searchInput    = document.getElementById('search-input');
@@ -1217,64 +1306,31 @@
     notifTooltip.addEventListener('mouseenter', () => clearTimeout(hideTimer));
     notifTooltip.addEventListener('mouseleave', () => { hideTimer = setTimeout(() => notifTooltip.classList.add('hidden'), 80); });
 
-    /* ─── 카드 필터링 ─── */
-    const pressSearchInput = document.getElementById('press-search-input');
-    const pressGrid = document.querySelector('.press-grid');
-    const pressNoResults = document.getElementById('press-no-results');
-    const pressCount = document.getElementById('press-count');
-    const pressCountNum = document.getElementById('press-count-num');
-    const pressNoResultsQuery = document.getElementById('press-no-results-query');
-    const pagination = document.querySelector('.pagination');
+    // ─── 탭 전환 ───
+    const tabs = document.querySelectorAll('.archive-tab');
+    const sections = document.querySelectorAll('.archive-section-wrap');
 
-    function filterCards(query) {
-      const q = query.trim().replace(/^#/, '').toLowerCase();
-      const cards = pressGrid.querySelectorAll('.press-card');
-      let visible = 0;
-      cards.forEach(card => {
-        const title = card.querySelector('.press-card-title').textContent.toLowerCase();
-        const tags = Array.from(card.querySelectorAll('.press-card-tag'))
-          .map(t => t.textContent.replace(/^#/, '').toLowerCase()).join(' ');
-        const match = !q || title.includes(q) || tags.includes(q);
-        card.style.display = match ? '' : 'none';
-        if (match) visible++;
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.tab;
+        tabs.forEach(t => t.classList.remove('active'));
+        sections.forEach(s => s.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('tab-' + target).classList.add('active');
       });
+    });
 
-      if (q) {
-        pressCount.style.display = 'block';
-        pressCountNum.textContent = visible;
-        pressNoResultsQuery.textContent = query.trim().replace(/^#/, '');
-        pressNoResults.style.display = visible === 0 ? 'block' : 'none';
-        pressGrid.style.display = visible === 0 ? 'none' : '';
-        pagination.style.display = 'none';
-      } else {
-        pressCount.style.display = 'none';
-        pressNoResults.style.display = 'none';
-        pressGrid.style.display = '';
-        pagination.style.display = '';
-      }
+    // URL hash로 탭 초기화 (#ir, #catalog)
+    const hash = location.hash.replace('#', '');
+    if (hash === 'ir' || hash === 'catalog' || hash === 'intro') {
+      const matchTab = document.querySelector(`.archive-tab[data-tab="${hash}"]`);
+      if (matchTab) matchTab.click();
     }
 
-    document.querySelector('.page-search').addEventListener('submit', e => {
-      e.preventDefault();
-      filterCards(pressSearchInput.value);
-    });
-
-    pressGrid.addEventListener('click', e => {
-      const tag = e.target.closest('.press-card-tag');
-      if (!tag) return;
-      e.preventDefault();
-      e.stopPropagation();
-      const keyword = tag.textContent.replace(/^#/, '');
-      pressSearchInput.value = keyword;
-      pressSearchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      filterCards(keyword);
-    });
-
-    // 페이지 제목 클릭 → LNB 해당 링크와 동일 동작
+    // 페이지 제목 클릭 → LNB 아카이브 링크
     const pageTitle = document.querySelector('.page-title');
     if (pageTitle) {
-      const currentFile = location.pathname.split('/').pop() || 'index.html';
-      const lnbLink = document.querySelector(`.lnb-col a[href="${currentFile}"]`);
+      const lnbLink = document.querySelector('.lnb-col a[href="archive.html"]');
       if (lnbLink) {
         pageTitle.style.cursor = 'pointer';
         pageTitle.addEventListener('click', () => { window.location.href = lnbLink.getAttribute('href'); });
