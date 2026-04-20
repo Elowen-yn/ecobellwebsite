@@ -507,9 +507,7 @@
     .press-cta-banner {
       width: 100%;
       height: 359px;
-      background-image: url('assets/press-cta-bg.png');
-      background-size: 100% 100%;
-      background-repeat: no-repeat;
+      background: #F6FFFD url('assets/press-cta-deco.png') right center / auto 100% no-repeat;
       position: relative;
       overflow: hidden;
     }
@@ -542,6 +540,7 @@
       font-weight: 800;
       font-size: 16px;
       letter-spacing: 0.48px;
+      border-radius: 10px;
       margin-bottom: 28px;
       transition: background 0.2s;
     }
@@ -550,27 +549,28 @@
       display: flex;
       align-items: center;
     }
-    .press-cta-phone {
+    .press-cta-phone, .press-cta-email {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 800;
-      font-size: 18px;
       line-height: 25px;
-      letter-spacing: 0.54px;
-      color: #000;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .press-cta-phone .cta-label, .press-cta-email .cta-label {
+      font-weight: 800;
+      font-size: 15px;
+      color: #A9A9A9;
+    }
+    .press-cta-phone .cta-value, .press-cta-email .cta-value {
+      font-weight: 800;
+      font-size: 17px;
+      color: #5E5E5E;
     }
     .press-cta-vdivider {
       width: 0.5px;
       height: 46px;
       background: rgba(0,0,0,0.15);
       margin: 0 35px 0 44px;
-    }
-    .press-cta-email {
-      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 800;
-      font-size: 18px;
-      line-height: 25px;
-      letter-spacing: 0.54px;
-      color: #000;
     }
 
     /* 페이지네이션 */
@@ -704,14 +704,14 @@
           <a class="nav-link" href="insight.html">Insight</a>
         </div>
         <div class="nav-item" data-menu="contact">
-          <a class="nav-link" href="contact.html">Contact Us</a>
+          <a class="nav-link" href="notice.html">Contact Us</a>
         </div>
       </nav>
 
       <div class="lnb" id="lnb">
         <div class="lnb-inner">
           <div class="lnb-col active" data-col="company">
-            <a href="company-ceo.html">CEO 인사말</a>
+            <a href="ceo.html">CEO 인사말</a>
             <a href="#">기업소개</a>
             <a href="press.html">보도자료</a>
             <a href="archive.html">아카이브</a>
@@ -732,7 +732,7 @@
             <a href="insight.html?page=green">그린카 계산기</a>
           </div>
           <div class="lnb-col" data-col="contact">
-            <a href="contact.html">공지사항</a>
+            <a href="notice.html">공지사항</a>
             <a href="#">오시는 길</a>
             <a href="#">문의하기</a>
           </div>
@@ -1024,16 +1024,22 @@
       <div class="press-cta-banner">
         <div class="press-cta-inner">
           <p class="press-cta-title">찾으시는 정보가 없으신가요?<br>문의하기를 통해 빠르게 답변 받아보세요.</p>
-          <a class="press-cta-btn" href="contact.html">
+          <a class="press-cta-btn" href="notice.html">
             문의하기
             <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
               <path d="M1 1L4 5L1 9" stroke="#fff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </a>
           <div class="press-cta-contacts">
-            <div class="press-cta-phone">전화 상담<br>02-892-9180</div>
+            <div class="press-cta-phone">
+              <span class="cta-label">전화 상담</span>
+              <span class="cta-value">02-892-9180</span>
+            </div>
             <div class="press-cta-vdivider"></div>
-            <div class="press-cta-email">이메일 상담<br>ecobell@ecobell.co.kr</div>
+            <div class="press-cta-email">
+              <span class="cta-label">이메일 상담</span>
+              <span class="cta-value">ecobell@ecobell.co.kr</span>
+            </div>
           </div>
         </div>
       </div>
