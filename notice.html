@@ -220,10 +220,10 @@
     }
     .breadcrumb-item {
       font-family: 'Chillax', sans-serif;
-      font-weight: 500;
-      font-size: 15px;
+      font-weight: 400;
+      font-size: 13px;
       color: #1e8dcd;
-      letter-spacing: 0.39px;
+      letter-spacing: 0.13px;
       text-decoration: none;
       white-space: nowrap;
       transition: opacity 0.2s;
@@ -240,7 +240,7 @@
     .contact-page-inner {
       width: 1440px;
       margin: 0 auto;
-      padding: 39px 75px 0;
+      padding: 39px 75px 76px;
     }
 
     /* 페이지 타이틀 */
@@ -269,7 +269,7 @@
       letter-spacing: 0.18px;
       line-height: 23.4px;
     }
-    .notice-count-num { color: #0091bb; }
+    .notice-count-num { color: #1e8dcd; }
     .notice-search {
       display: flex;
       align-items: center;
@@ -313,7 +313,7 @@
     .notice-search-btn {
       position: absolute;
       right: 12px;
-      top: calc(50% + 5px); transform: translateY(-50%);
+      top: 50%; transform: translateY(-50%);
       background: none;
       border: none;
       cursor: pointer;
@@ -321,7 +321,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      opacity: 0.6;
+      opacity: 0.85;
       transition: opacity 0.2s;
     }
     .notice-search-btn:hover { opacity: 1; }
@@ -330,16 +330,16 @@
     .notice-table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 13px;
+      margin-top: 18px;
     }
     .notice-table thead tr {
-      border-top: 0.5px solid #000;
-      border-bottom: 0.5px solid #000;
+      border-top: 2px solid #1e8dcd;
+      border-bottom: 0.3px solid rgba(30,141,205,0.6);
     }
     .notice-table th {
       font-family: 'Chillax', sans-serif;
       font-weight: 400;
-      font-size: 15px;
+      font-size: 14px;
       color: #5d5d5d;
       text-align: center;
       height: 53px;
@@ -353,7 +353,7 @@
     .notice-table td {
       height: 70px;
       text-align: center;
-      border-bottom: 0.5px solid rgba(0,0,0,0.12);
+      border-bottom: 0.3px solid rgba(30,141,205,0.6);
       vertical-align: middle;
     }
     .notice-table td:nth-child(2) { text-align: left; padding-left: 20px; }
@@ -383,8 +383,35 @@
       line-height: 22.1px;
       cursor: pointer;
       transition: color 0.15s;
+      text-decoration: none;
+      display: block;
     }
     .td-title:hover { color: #1e8dcd; }
+
+    /* 검색 결과 없음 */
+    .notice-empty {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 0 120px;
+      gap: 18px;
+    }
+    .notice-empty.visible { display: flex; }
+    .notice-empty-icon {
+      width: 24px; height: 24px;
+    }
+    .notice-empty-text {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 400;
+      font-size: 18px;
+      color: #5d5d5d;
+      letter-spacing: 0.18px;
+    }
+    .notice-empty-text em {
+      font-style: normal;
+      font-weight: 700;
+    }
     .td-author {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-weight: 400;
@@ -412,8 +439,9 @@
       align-items: center;
       justify-content: center;
       gap: 30px;
-      height: 70px;
-      border-top: 0.5px solid rgba(0,0,0,0.12);
+      padding-top: 70px;
+      padding-bottom: 0;
+      border-top: 2px solid #1e8dcd;
     }
     .page-arrow-group {
       display: flex;
@@ -451,38 +479,42 @@
     .contact-banner {
       position: relative;
       width: 100%;
-      height: 432px;
-      background: #F6FFFD url('assets/press-cta-deco.png') right center / auto 100% no-repeat;
+      height: 359px;
+      background:
+        url('assets/press-cta-deco.png') right center / auto 100% no-repeat,
+        #EEFCF9;
       overflow: hidden;
       margin-top: 0;
     }
     .contact-banner-deco { display: none; }
     .contact-banner-content {
       position: absolute;
-      left: 75px;
-      top: calc(50% + 5px); transform: translateY(-50%);
+      left: 112px;
+      top: 62px;
     }
     .contact-banner-title {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 800;
-      font-size: 33px;
+      font-weight: 700;
+      font-size: 28px;
       color: #000;
-      line-height: 1.52;
-      margin-bottom: 34px;
+      line-height: 45px;
+      letter-spacing: 0.84px;
+      margin-bottom: 15px;
     }
     .contact-banner-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 130px;
+      gap: 8px;
+      width: 119px;
       height: 40px;
       background: #000;
       color: #fff;
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-weight: 800;
-      font-size: 15px;
+      font-size: 16px;
       text-decoration: none;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.48px;
       border-radius: 10px;
       transition: background 0.2s;
       margin-bottom: 28px;
@@ -490,7 +522,7 @@
     .contact-banner-btn:hover { background: #1e8dcd; }
     .contact-banner-info {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       gap: 0;
     }
     .contact-info-item {
@@ -513,8 +545,8 @@
     .contact-info-divider {
       width: 0.5px;
       height: 46px;
-      background: rgba(0,0,0,0.25);
-      margin: 0 35px;
+      background: rgba(0,0,0,0.15);
+      margin: 0 35px 0 44px;
       align-self: center;
     }
 
@@ -550,7 +582,7 @@
     <div class="header-inner">
 
       <a class="logo" href="index.html">
-        <img src="https://www.figma.com/api/mcp/asset/7f89b782-9cc2-4cf5-92b8-d3f849373b47" alt="ecobell">
+        <img src="assets/logo.png" alt="ecobell">
       </a>
 
       <nav id="main-nav">
@@ -670,7 +702,7 @@
           <div class="notice-search-input-wrap">
             <input class="notice-search-input" type="text" placeholder="검색어를 입력해 주세요">
             <button class="notice-search-btn" aria-label="검색">
-              <svg width="17" height="17" viewBox="0 0 17 17" fill="none"><circle cx="7" cy="7" r="5" stroke="#000" stroke-width="1.5"/><line x1="11" y1="11" x2="16" y2="16" stroke="#000" stroke-width="1.5" stroke-linecap="round"/></svg>
+              <svg width="19" height="19" viewBox="0 0 19 19" fill="none"><path d="M8.64102 16.3728C12.911 16.3728 16.3724 12.9113 16.3724 8.64139C16.3724 4.37144 12.911 0.909973 8.64102 0.909973C4.37107 0.909973 0.909603 4.37144 0.909603 8.64139C0.909603 12.9113 4.37107 16.3728 8.64102 16.3728Z" stroke="#1E8DCD" stroke-width="1.8" stroke-linecap="round"/><path d="M14.6543 14.6543L18.0904 18.0905" stroke="#1E8DCD" stroke-width="1.8" stroke-linecap="round"/></svg>
             </button>
           </div>
         </div>
@@ -700,11 +732,9 @@
           <!-- 고정 공지 (핀) -->
           <tr>
             <td class="td-no pinned">
-              <svg width="23" height="23" viewBox="0 0 23 23" fill="none">
-                <path d="M14 2L21 9L16.5 13.5L17 19L11.5 14.5L6 20L5 14L2 11L8 10.5L14 2Z" fill="#1e8dcd" opacity="0.85"/>
-              </svg>
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M16.7906 6.72187L11.7 5.93438L9.39371 1.09688C9.22495 0.759375 8.77495 0.759375 8.6062 1.09688L6.29995 5.9625L1.23746 6.72187C0.87183 6.77812 0.731205 7.25625 1.01246 7.50938L4.69683 11.3063L3.82495 16.6219C3.7687 16.9875 4.13433 17.2969 4.47183 17.0719L9.0562 14.5687L13.6125 17.0719C13.9218 17.2406 14.3156 16.9594 14.2312 16.6219L13.3593 11.3063L17.0437 7.50938C17.2687 7.25625 17.1562 6.77812 16.7906 6.72187Z" fill="#1E8DCD"/></svg>
             </td>
-            <td class="td-title">영업시간 변경에 따른 문의시간 안내</td>
+            <td><a class="td-title" href="notice-article.html">영업시간 변경에 따른 문의시간 안내</a></td>
             <td class="td-author">경영지원부</td>
             <td class="td-date">2024.11.13</td>
             <td class="td-views">12</td>
@@ -714,11 +744,9 @@
           </tr>
           <tr>
             <td class="td-no pinned">
-              <svg width="23" height="23" viewBox="0 0 23 23" fill="none">
-                <path d="M14 2L21 9L16.5 13.5L17 19L11.5 14.5L6 20L5 14L2 11L8 10.5L14 2Z" fill="#1e8dcd" opacity="0.85"/>
-              </svg>
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M16.7906 6.72187L11.7 5.93438L9.39371 1.09688C9.22495 0.759375 8.77495 0.759375 8.6062 1.09688L6.29995 5.9625L1.23746 6.72187C0.87183 6.77812 0.731205 7.25625 1.01246 7.50938L4.69683 11.3063L3.82495 16.6219C3.7687 16.9875 4.13433 17.2969 4.47183 17.0719L9.0562 14.5687L13.6125 17.0719C13.9218 17.2406 14.3156 16.9594 14.2312 16.6219L13.3593 11.3063L17.0437 7.50938C17.2687 7.25625 17.1562 6.77812 16.7906 6.72187Z" fill="#1E8DCD"/></svg>
             </td>
-            <td class="td-title">ecoNODE ver.2 출시 안내</td>
+            <td><a class="td-title" href="notice-article.html">ecoNODE ver.2 출시 안내</a></td>
             <td class="td-author">기술운영부</td>
             <td class="td-date">2024.11.13</td>
             <td class="td-views">67</td>
@@ -728,11 +756,9 @@
           </tr>
           <tr>
             <td class="td-no pinned">
-              <svg width="23" height="23" viewBox="0 0 23 23" fill="none">
-                <path d="M14 2L21 9L16.5 13.5L17 19L11.5 14.5L6 20L5 14L2 11L8 10.5L14 2Z" fill="#1e8dcd" opacity="0.85"/>
-              </svg>
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M16.7906 6.72187L11.7 5.93438L9.39371 1.09688C9.22495 0.759375 8.77495 0.759375 8.6062 1.09688L6.29995 5.9625L1.23746 6.72187C0.87183 6.77812 0.731205 7.25625 1.01246 7.50938L4.69683 11.3063L3.82495 16.6219C3.7687 16.9875 4.13433 17.2969 4.47183 17.0719L9.0562 14.5687L13.6125 17.0719C13.9218 17.2406 14.3156 16.9594 14.2312 16.6219L13.3593 11.3063L17.0437 7.50938C17.2687 7.25625 17.1562 6.77812 16.7906 6.72187Z" fill="#1E8DCD"/></svg>
             </td>
-            <td class="td-title">에코벨 개인정보 처리방침 변경 안내</td>
+            <td><a class="td-title" href="notice-article.html">에코벨 개인정보 처리방침 변경 안내</a></td>
             <td class="td-author">기술운영부</td>
             <td class="td-date">2024.11.13</td>
             <td class="td-views">123</td>
@@ -743,7 +769,7 @@
           <!-- 일반 공지 -->
           <tr>
             <td class="td-no">100</td>
-            <td class="td-title">ecoPlanet(에코플레닛) 서비스 종료 안내</td>
+            <td><a class="td-title" href="notice-article.html">ecoPlanet(에코플레닛) 서비스 종료 안내</a></td>
             <td class="td-author">기술운영부</td>
             <td class="td-date">2024.11.13</td>
             <td class="td-views">6</td>
@@ -751,7 +777,7 @@
           </tr>
           <tr>
             <td class="td-no">99</td>
-            <td class="td-title">에코벨 이용약관 개정 안내</td>
+            <td><a class="td-title" href="notice-article.html">에코벨 이용약관 개정 안내</a></td>
             <td class="td-author">기술운영부</td>
             <td class="td-date">2024.11.13</td>
             <td class="td-views">15</td>
@@ -761,7 +787,7 @@
           </tr>
           <tr>
             <td class="td-no">98</td>
-            <td class="td-title">에코벨 개인정보 처리방침 변경 안내</td>
+            <td><a class="td-title" href="notice-article.html">에코벨 개인정보 처리방침 변경 안내</a></td>
             <td class="td-author">기술운영부</td>
             <td class="td-date">2024.11.13</td>
             <td class="td-views">24</td>
@@ -771,7 +797,7 @@
           </tr>
           <tr>
             <td class="td-no">97</td>
-            <td class="td-title">에코벨 공식 웹사이트 이전 안내</td>
+            <td><a class="td-title" href="notice-article.html">에코벨 공식 웹사이트 이전 안내</a></td>
             <td class="td-author">사업부</td>
             <td class="td-date">2024.11.13</td>
             <td class="td-views">602</td>
@@ -781,7 +807,7 @@
           </tr>
           <tr>
             <td class="td-no">96</td>
-            <td class="td-title">마케팅 정보 수신동의 확인 안내</td>
+            <td><a class="td-title" href="notice-article.html">마케팅 정보 수신동의 확인 안내</a></td>
             <td class="td-author">사업부</td>
             <td class="td-date">2024.11.13</td>
             <td class="td-views">404</td>
@@ -791,7 +817,7 @@
           </tr>
           <tr>
             <td class="td-no">95</td>
-            <td class="td-title">E-ASSET(에너지 에셋) 이용약관 개정 안내</td>
+            <td><a class="td-title" href="notice-article.html">E-ASSET(에너지 에셋) 이용약관 개정 안내</a></td>
             <td class="td-author">기술운영부</td>
             <td class="td-date">2024.11.13</td>
             <td class="td-views">89</td>
@@ -801,7 +827,7 @@
           </tr>
           <tr>
             <td class="td-no">94</td>
-            <td class="td-title">계약직 채용 공고 (2023.00.00 ~ 2023.00.00)</td>
+            <td><a class="td-title" href="notice-article.html">계약직 채용 공고 (2023.00.00 ~ 2023.00.00)</a></td>
             <td class="td-author">경영지원부</td>
             <td class="td-date">2024.11.13</td>
             <td class="td-views">45</td>
@@ -811,35 +837,46 @@
           </tr>
           <tr>
             <td class="td-no">93</td>
-            <td class="td-title">에코벨 체험형 인턴 모집 공고 (2028.XX.XX ~ 2028.XX.XX)</td>
+            <td><a class="td-title" href="notice-article.html">에코벨 체험형 인턴 모집 공고 (2028.XX.XX ~ 2028.XX.XX)</a></td>
             <td class="td-author">경영지원부</td>
             <td class="td-date">2024.11.13</td>
-            <td class="td-views">1,231</td>
+            <td class="td-views">1231</td>
             <td class="td-attach">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12 3L17 8L8 17C6.3 18.7 3.5 18.7 1.8 17C0.1 15.3 0.1 12.5 1.8 10.8L10.5 2.1C11.7 0.9 13.6 0.9 14.8 2.1C16 3.3 16 5.2 14.8 6.4L7.1 14.1C6.4 14.8 5.3 14.8 4.6 14.1C3.9 13.4 3.9 12.3 4.6 11.6L12 4.2" stroke="#000" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </td>
           </tr>
           <tr>
             <td class="td-no">92</td>
-            <td class="td-title">설 연휴 휴무일 안내</td>
+            <td><a class="td-title" href="notice-article.html">설 연휴 휴무일 안내</a></td>
             <td class="td-author">경영지원부</td>
             <td class="td-date">2024.11.13</td>
-            <td class="td-views">4,566</td>
+            <td class="td-views">4566</td>
             <td class="td-attach"></td>
           </tr>
           <tr>
             <td class="td-no">91</td>
-            <td class="td-title">ecoPlanet 서비스 종료 안내</td>
+            <td><a class="td-title" href="notice-article.html">ecoPlanet 서비스 종료 안내</a></td>
             <td class="td-author">기술운영부</td>
             <td class="td-date">2024.11.13</td>
-            <td class="td-views">786,453</td>
+            <td class="td-views">786453</td>
             <td class="td-attach"></td>
           </tr>
         </tbody>
       </table>
 
+      <!-- 검색 결과 없음 -->
+      <div class="notice-empty" id="notice-empty">
+        <svg class="notice-empty-icon" width="52" height="52" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 0.9375C6.78749 0.9375 2.58749 5.175 2.58749 10.3875V21.225C2.58749 21.5625 2.77499 21.8625 3.07499 22.0125L5.77499 23.175C6.48749 23.475 7.27499 23.6625 8.06249 23.6625C8.88749 23.6625 9.74999 23.475 10.5375 23.1L10.7625 22.9875C11.85 22.4625 13.125 22.4625 14.2125 22.9875C15.825 23.775 17.7375 23.7375 19.35 22.875L21.075 21.975C21.3375 21.825 21.525 21.525 21.525 21.225V10.3875C21.4125 5.175 17.2125 0.9375 12 0.9375ZM19.725 20.7L18.4875 21.375C17.3625 21.975 16.0125 22.0125 14.8875 21.45C13.3125 20.7 11.55 20.7 9.97499 21.45L9.74999 21.5625C8.69999 22.05 7.49999 22.0875 6.44999 21.6375L4.27499 20.6625V10.3875C4.27499 6.1125 7.72499 2.625 12 2.625C16.275 2.625 19.725 6.1125 19.725 10.35V20.7Z" fill="#1e8dcd"/>
+          <path d="M9.11249 8.02539C8.39999 8.02539 7.83749 8.58789 7.83749 9.30039C7.83749 10.0129 8.39999 10.5754 9.11249 10.5754C9.82499 10.5754 10.3875 10.0129 10.3875 9.30039C10.3875 8.58789 9.82499 8.02539 9.11249 8.02539Z" fill="#1e8dcd"/>
+          <path d="M14.8875 8.02539C14.175 8.02539 13.6125 8.58789 13.6125 9.30039C13.6125 10.0129 14.175 10.5754 14.8875 10.5754C15.6 10.5754 16.1625 10.0129 16.1625 9.30039C16.1625 8.58789 15.6 8.02539 14.8875 8.02539Z" fill="#1e8dcd"/>
+          <path d="M12 13.3877C10.95 13.3877 10.0875 13.9502 10.0875 14.6627C10.0875 15.3752 10.95 15.9377 12 15.9377C13.05 15.9377 13.9125 15.3752 13.9125 14.6627C13.9125 13.9502 13.05 13.3877 12 13.3877Z" fill="#1e8dcd"/>
+        </svg>
+        <p class="notice-empty-text"><em id="notice-empty-keyword">'검색어'</em>에 대한 검색 결과가 없습니다</p>
+      </div>
+
       <!-- 페이지네이션 -->
-      <div class="notice-pagination">
+      <div class="notice-pagination" id="notice-pagination">
         <div class="page-arrow-group">
           <button class="page-arrow" aria-label="첫 페이지">
             <svg width="7" height="7" viewBox="0 0 7 7" fill="none"><path d="M4 1L1 3.5L4 6" stroke="rgba(0,0,0,0.6)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 1L4 3.5L7 6" stroke="rgba(0,0,0,0.6)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -853,11 +890,6 @@
         <span class="page-num">3</span>
         <span class="page-num">4</span>
         <span class="page-num">5</span>
-        <span class="page-num">6</span>
-        <span class="page-num">7</span>
-        <span class="page-num">8</span>
-        <span class="page-num">9</span>
-        <span class="page-num">10</span>
         <div class="page-arrow-group">
           <button class="page-arrow" aria-label="다음 페이지">
             <svg width="5" height="7" viewBox="0 0 5 7" fill="none"><path d="M1 1L4 3.5L1 6" stroke="rgba(0,0,0,0.6)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -877,8 +909,8 @@
       <img src="ecoasset_badge.png" alt="" style="width:100%;height:100%;object-fit:contain;opacity:0.3;">
     </div>
     <div class="contact-banner-content">
-      <p class="contact-banner-title">더 궁금한 점이 있으신가요?<br>문의하기를 통해 빠르게 답변 받아 보세요.</p>
-      <a class="contact-banner-btn" href="#">문의하기</a>
+      <p class="contact-banner-title">더 궁금한 점이 있으신가요?<br>문의하기를 통해 빠르게 답변 받아보세요.</p>
+      <a class="contact-banner-btn" href="#">문의하기 <svg width="8" height="12" viewBox="0 0 8 12" fill="none"><path d="M1 1L6 6L1 11" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></a>
       <div class="contact-banner-info">
         <div class="contact-info-item">
           <span class="cta-label">전화 상담</span>
@@ -1055,6 +1087,54 @@
         btn.classList.add('active');
       });
     });
+
+    // ─── 테이블 검색 필터 ───
+    const noticeSearchInput = document.querySelector('.notice-search-input');
+    const noticeSearchBtn   = document.querySelector('.notice-search-btn');
+    const noticeTableBody   = document.querySelector('.notice-table tbody');
+    const noticeEmpty       = document.getElementById('notice-empty');
+    const noticePagination  = document.getElementById('notice-pagination');
+    const noticeEmptyKw     = document.getElementById('notice-empty-keyword');
+    const noticeCount       = document.querySelector('.notice-count-num');
+
+    function runSearch() {
+      const kw = noticeSearchInput.value.trim();
+      if (!kw) {
+        document.querySelectorAll('.notice-table tbody tr').forEach(r => r.style.display = '');
+        noticeEmpty.classList.remove('visible');
+        noticePagination.style.display = '';
+        document.querySelector('.notice-count').innerHTML = '<span class="notice-count-num">100</span>건';
+        document.querySelector('.contact-banner-title').innerHTML = '더 궁금한 점이 있으신가요?<br>문의하기를 통해 빠르게 답변 받아보세요.';
+        return;
+      }
+      const rows = document.querySelectorAll('.notice-table tbody tr');
+      let visible = 0;
+      rows.forEach(row => {
+        const title = row.querySelector('.td-title');
+        if (title && title.textContent.includes(kw)) {
+          row.style.display = '';
+          visible++;
+        } else {
+          row.style.display = 'none';
+        }
+      });
+      const bannerTitle = document.querySelector('.contact-banner-title');
+      const noticeCountWrap = document.querySelector('.notice-count');
+      if (visible === 0) {
+        noticeEmpty.classList.add('visible');
+        noticePagination.style.display = 'none';
+        noticeEmptyKw.textContent = `'${kw}'`;
+        if (bannerTitle) bannerTitle.innerHTML = '찾으시는 정보가 없으신가요?<br>문의하기를 통해 빠르게 답변 받아보세요.';
+        if (noticeCountWrap) noticeCountWrap.innerHTML = '검색결과 <span class="notice-count-num">0</span>건';
+      } else {
+        noticeEmpty.classList.remove('visible');
+        noticePagination.style.display = '';
+        if (bannerTitle) bannerTitle.innerHTML = '더 궁금한 점이 있으신가요?<br>문의하기를 통해 빠르게 답변 받아보세요.';
+        if (noticeCountWrap) noticeCountWrap.innerHTML = `검색결과 <span class="notice-count-num">${visible}</span>건`;
+      }
+    }
+    noticeSearchBtn.addEventListener('click', runSearch);
+    noticeSearchInput.addEventListener('keydown', e => { if (e.key === 'Enter') runSearch(); });
 
     // ─── Contact Us GNB 활성화 (현재 페이지) ───
     const contactItem = document.querySelector('[data-menu="contact"]');
