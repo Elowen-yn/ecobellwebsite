@@ -381,7 +381,6 @@
     }
     .demo-btn:hover { background: #000; border-color: #000; }
     .demo-btn:hover .demo-text { color: #fff; }
-    .demo-btn:hover .demo-arrow { transform: translate(2px, -2px); filter: invert(1); }
 
     .demo-text {
       font-family: 'Chillax', sans-serif;
@@ -392,11 +391,6 @@
       line-height: 0.8;
       white-space: nowrap;
       transition: color 0.25s ease;
-    }
-    .demo-arrow {
-      width: 8px; height: 8px;
-      object-fit: contain;
-      transition: transform 0.25s ease, filter 0.25s ease;
     }
 
     /* ─── HERO ─── */
@@ -803,7 +797,7 @@
         <div class="lnb-col" data-col="contact">
           <a href="notice.html">공지사항</a>
           <a href="#">오시는 길</a>
-          <a href="#">문의하기</a>
+          <a href="contact.html">문의하기</a>
         </div>
         </div><!-- /.lnb-inner -->
       </div>
@@ -845,10 +839,10 @@
 
       <!-- Header Right -->
       <div class="header-right">
+        <span class="gnb-sep" style="color:rgba(0,0,0,0.2);font-size:16px;line-height:1;user-select:none;">|</span>
         <button class="search-btn" aria-label="검색" id="search-open-btn">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="8.5" cy="8.5" r="5.5" stroke="#000" stroke-width="1.5"/>
-            <line x1="13" y1="13" x2="18" y2="18" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21.1063 19.1469L15.4344 14.5406C17.7719 11.3438 17.5313 6.7719 14.6094 3.8844C13.0626 2.33752 11 1.47815 8.80005 1.47815C6.60005 1.47815 4.53755 2.33752 2.99067 3.8844C-0.206201 7.08127 -0.206201 12.3063 2.99067 15.5031C4.53755 17.05 6.60005 17.9094 8.80005 17.9094C10.8969 17.9094 12.8563 17.1188 14.4032 15.7094L20.1438 20.35C20.2813 20.4531 20.4532 20.5219 20.6251 20.5219C20.8657 20.5219 21.0719 20.4188 21.2094 20.2469C21.4844 19.9032 21.4501 19.4219 21.1063 19.1469ZM8.80005 16.3625C7.01255 16.3625 5.36255 15.675 4.09067 14.4032C1.47817 11.7907 1.47817 7.56252 4.09067 4.9844C5.36255 3.71252 7.01255 3.02502 8.80005 3.02502C10.5875 3.02502 12.2375 3.71252 13.5094 4.9844C16.1219 7.5969 16.1219 11.825 13.5094 14.4032C12.2719 15.675 10.5875 16.3625 8.80005 16.3625Z" fill="#000"/>
           </svg>
         </button>
         <button class="close-btn" aria-label="닫기" id="search-close-btn">
@@ -857,11 +851,8 @@
             <line x1="17" y1="1" x2="1" y2="17" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
         </button>
-        <a class="demo-btn" href="#">
-          <span class="demo-text">DEMO</span>
-          <svg class="demo-arrow" width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M1 7L7 1M7 1H3M7 1V5" stroke="#000" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+        <a class="demo-btn" href="contact.html">
+          <span class="demo-text">문의하기</span>
         </a>
       </div>
 
@@ -893,6 +884,16 @@
     <div class="section-white-content" style="min-height:500px;background:#f6f6f6;"></div>
     <div class="section-white-content" style="min-height:400px;"></div>
 
+    <!-- CTA 섹션 -->
+    <section style="background:#1a1a1a;padding:120px 0;text-align:center;">
+      <p style="font-family:'Noto Sans KR',sans-serif;font-weight:400;font-size:16px;color:rgba(255,255,255,0.6);letter-spacing:-0.32px;margin-bottom:24px;">에코벨에 대해 궁금하신 것이 있으신가요?</p>
+      <h2 style="font-family:'Noto Sans KR',sans-serif;font-weight:700;font-size:52px;color:#fff;letter-spacing:-1.04px;margin-bottom:48px;line-height:1.2;">무엇이든 물어보세요</h2>
+      <a href="contact.html" style="display:inline-flex;align-items:center;gap:8px;background:#fff;border-radius:100px;padding:16px 32px;font-family:'Noto Sans KR',sans-serif;font-weight:600;font-size:16px;color:#000;text-decoration:none;transition:background 0.2s,color 0.2s;">
+        문의하기
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M12 2H6M12 2V8" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </section>
+
   </main>
 
   <!-- ─── FOOTER ─── -->
@@ -908,42 +909,47 @@
 문의 : 02-892-9180  |  팩스 : 02-892-9181  |  이메일 : ecobell@ecobell.co.kr</p>
 
       <!-- 컬럼 타이틀 -->
-      <p class="ft-col-title" style="left:847px;">기업소개</p>
-      <p class="ft-col-title" style="left:975px;">솔루션</p>
-      <p class="ft-col-title" style="left:1116px;">플랫폼</p>
-      <p class="ft-col-title" style="left:1264px;">인사이트</p>
+      <p class="ft-col-title" style="left:398px;">회사정보</p>
+      <p class="ft-col-title" style="left:555px;">솔루션</p>
+      <p class="ft-col-title" style="left:727px;">플랫폼</p>
+      <p class="ft-col-title" style="left:907px;">인사이트</p>
+      <p class="ft-col-title" style="left:1103px;">문의하기</p>
 
-      <!-- 기업소개 링크 -->
-      <a class="ft-link" href="ceo.html" style="left:847px;top:107px;">CEO 인사말</a>
-      <a class="ft-link" href="#" style="left:847px;top:147px;">기업소개</a>
-      <a class="ft-link" href="#" style="left:847px;top:187px;">보도자료</a>
-      <a class="ft-link" href="#" style="left:847px;top:227px;">아카이브</a>
+      <!-- 회사정보 링크 -->
+      <a class="ft-link" href="ceo.html" style="left:398px;top:107px;">CEO 인사말</a>
+      <a class="ft-link" href="#" style="left:398px;top:147px;">회사소개</a>
+      <a class="ft-link" href="press.html" style="left:398px;top:187px;">보도자료</a>
+      <a class="ft-link" href="archive.html" style="left:398px;top:227px;">아카이브</a>
 
       <!-- 솔루션 링크 -->
-      <a class="ft-link" href="#" style="left:975px;top:107px;">전체 솔루션 맵</a>
-      <a class="ft-link ft-en" href="#" style="left:975px;top:147px;">ecoNODE</a>
-      <div class="ft-sep" style="left:975px;top:196px;width:66px;"></div>
-      <a class="ft-link" href="#" style="left:975px;top:227px;">태양광 솔루션</a>
+      <a class="ft-link" href="#" style="left:555px;top:107px;">전체 솔루션 맵</a>
+      <a class="ft-link ft-en" href="#" style="left:555px;top:147px;">ecoNODE</a>
+      <div class="ft-sep" style="left:555px;top:196px;width:66px;"></div>
+      <a class="ft-link" href="#" style="left:555px;top:227px;">태양광 솔루션</a>
 
       <!-- 플랫폼 링크 -->
-      <a class="ft-link ft-en" href="#" style="left:1116px;top:107px;">eco Asset</a>
-      <a class="ft-link ft-en" href="#" style="left:1116px;top:147px;">Energy Asset</a>
+      <a class="ft-link ft-en" href="#" style="left:727px;top:107px;">eco Asset</a>
+      <a class="ft-link ft-en" href="#" style="left:727px;top:147px;">Energy Asset</a>
 
       <!-- 인사이트 링크 -->
-      <a class="ft-link ft-en" href="https://www.netzeronews.kr/" target="_blank" rel="noopener noreferrer" style="left:1264px;top:107px;">NetZero News
+      <a class="ft-link ft-en" href="https://www.netzeronews.kr/" target="_blank" rel="noopener noreferrer" style="left:907px;top:107px;">NetZero News
         <svg width="6" height="6" viewBox="0 0 8 8" fill="none" style="margin-left:2px;vertical-align:middle;"><path d="M1 7L7 1M7 1H3M7 1V5" stroke="#000" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
-      <a class="ft-link" href="insight.html?page=eco" style="left:1264px;top:147px;">친환경 기업정보</a>
-      <a class="ft-link" href="insight.html?page=green" style="left:1264px;top:187px;">그린카 계산기</a>
+      <a class="ft-link" href="insight.html?page=eco" style="left:907px;top:147px;">친환경 기업정보</a>
+      <a class="ft-link" href="insight.html?page=green" style="left:907px;top:187px;">그린카 계산기</a>
+
+      <!-- 문의하기 링크 -->
+      <a class="ft-link" href="contact.html" style="left:1103px;top:107px;">문의하기</a>
+      <a class="ft-link" href="notice.html" style="left:1103px;top:147px;">공지사항</a>
+      <a class="ft-link" href="#" style="left:1103px;top:187px;">오시는 길</a>
 
       <!-- 디바이더 상단 (y=327) -->
       <div class="ft-divider" style="top:327px;"></div>
 
-      <!-- 하단 링크 (y=338) -->
+      <!-- 하단 링크 -->
       <a class="ft-bottom-link fw-bold" href="#" style="left:75px;">개인정보처리방침</a>
-      <a class="ft-bottom-link" href="#" style="left:206px;">공지사항</a>
-      <a class="ft-bottom-link" href="#" style="left:287px;">찾아오시는 길</a>
-      <a class="ft-bottom-link" href="#" style="left:396px;">문의하기</a>
+      <a class="ft-bottom-link" href="#" style="left:233px;">이용약관</a>
+      <a class="ft-bottom-link" href="#" style="left:314px;">이메일무단수집거부</a>
 
       <!-- 소셜 아이콘 (y=339) -->
       <a class="ft-social" href="#" aria-label="Facebook" style="left:1277px;">
