@@ -13,7 +13,7 @@
     html { scroll-behavior: smooth; }
     body {
       font-family: 'Noto Sans KR', sans-serif;
-      min-width: 978px;
+      min-width: 1163px;
       background: #fff;
       color: #000;
     }
@@ -55,6 +55,7 @@
     nav {
       position: absolute;
       left: 198px;
+      right: 324px; /* 돋보기/구분선(224px) + 최소 간격(100px) */
       top: 0;
       display: flex;
       align-items: stretch;
@@ -66,11 +67,11 @@
       align-items: center;
       transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    nav.lnb-open .nav-item:nth-child(1) { transform: translateX(0px); }
-    nav.lnb-open .nav-item:nth-child(2) { transform: translateX(48px); }
-    nav.lnb-open .nav-item:nth-child(3) { transform: translateX(98px); }
-    nav.lnb-open .nav-item:nth-child(4) { transform: translateX(153px); }
-    nav.lnb-open .nav-item:nth-child(5) { transform: translateX(199px); }
+    nav.lnb-open .nav-item:nth-child(1) { transform: translateX(-10px); }
+    nav.lnb-open .nav-item:nth-child(2) { transform: translateX(15px); }
+    nav.lnb-open .nav-item:nth-child(3) { transform: translateX(43px); }
+    nav.lnb-open .nav-item:nth-child(4) { transform: translateX(77px); }
+    nav.lnb-open .nav-item:nth-child(5) { transform: translateX(101px); }
     .nav-link {
       font-family: 'Chillax', sans-serif;
       font-weight: 600; font-size: 17px; color: #000;
@@ -101,16 +102,15 @@
     .lnb-inner { position: relative; width: 1440px; margin: 0 auto; height: 100%; }
     .lnb.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
     .lnb-col {
-      position: absolute; top: 0; width: 154px; height: 100%;
-      border-right: 0.1px solid #d9d9d9;
+      position: absolute; top: 0; width: 132px; height: 100%;
       display: flex; flex-direction: column; align-items: center;
       padding-top: 21px; gap: 0; transition: background 0.2s ease;
     }
     .lnb-col[data-col="company"]  { left: 177px; }
-    .lnb-col[data-col="solution"] { left: 331px; }
-    .lnb-col[data-col="platform"] { left: 485px; }
-    .lnb-col[data-col="insight"]  { left: 639px; }
-    .lnb-col[data-col="contact"]  { left: 793px; border-right: none; }
+    .lnb-col[data-col="solution"] { left: 309px; }
+    .lnb-col[data-col="platform"] { left: 441px; }
+    .lnb-col[data-col="insight"]  { left: 574px; }
+    .lnb-col[data-col="contact"]  { left: 706px; }
     .lnb-col.active { background: #fafcfd; border-top: 2px solid #1e8dcd; padding-top: 21px; }
     .lnb-col a {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
@@ -123,7 +123,7 @@
     .lnb-col a:hover { color: #1e8dcd; }
     .lnb-col a.active-link { color: #1e8dcd; }
     .lnb-col a.ext::after { content: ' ↗'; font-size: 11px; }
-    .lnb-sep { width: 81px; height: 0.5px; background: #d9d9d9; margin: 16px auto; flex-shrink: 0; }
+    .lnb-sep { width: 70px; height: 0.5px; background: #d9d9d9; margin: 16px auto; flex-shrink: 0; }
 
     /* ─── SEARCH ─── */
     header.search-open { background: #fafcfd; box-shadow: none; }
@@ -149,19 +149,57 @@
     .search-tags { position: absolute; top: 136px; left: 315px; display: flex; gap: 9px; }
     .search-tag { font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 700; font-size: 11px; color: rgba(0,0,0,0.55); border: 0.3px solid rgba(0,0,0,0.15); border-radius: 100px; padding: 0 10px; height: 22px; background: transparent; cursor: pointer; transition: border-color 0.2s, color 0.2s; }
     .search-tag:hover { border-color: rgba(0,0,0,0.4); color: rgba(0,0,0,0.85); }
-    .close-btn { display: none; background: none; border: none; cursor: pointer; width: 20px; height: 20px; padding: 0; align-items: center; justify-content: center; opacity: 0.6; transition: opacity 0.2s; }
+    .search-icon-wrap {
+      position: relative;
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .search-tooltip {
+      position: absolute;
+      top: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.78);
+      color: #fff;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.4px;
+      padding: 5px 10px;
+      border-radius: 4px;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.18s ease;
+      z-index: 1001;
+    }
+    .search-tooltip::before {
+      content: '';
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 5px solid transparent;
+      border-bottom-color: rgba(0,0,0,0.78);
+    }
+    .search-icon-wrap:hover .search-tooltip { opacity: 1; }
+    header.search-open .search-tooltip { opacity: 0 !important; pointer-events: none; }
+    .close-btn { display: flex; background: none; border: none; cursor: pointer; width: 20px; height: 20px; padding: 0; align-items: center; justify-content: center; opacity: 0; pointer-events: none; position: absolute; transform: rotate(-180deg) scale(0.5); transition: opacity 0.25s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
     .close-btn:hover { opacity: 1; }
-    header.search-open .search-btn { display: none; }
-    header.search-open .close-btn { display: flex; }
+    header.search-open .search-btn { opacity: 0; pointer-events: none; transform: rotate(90deg) scale(0.7); }
+    header.search-open .close-btn { opacity: 0.6; pointer-events: auto; transform: rotate(0deg) scale(1); }
 
     /* ─── HEADER RIGHT ─── */
     .header-right { position: absolute; right: 45px; top: calc(50% + 5px); transform: translateY(-50%); display: flex; align-items: center; gap: 25px; }
-    .search-btn { background: none; border: none; cursor: pointer; width: 20px; height: 21px; padding: 0; display: flex; align-items: center; justify-content: center; transition: transform 0.2s ease, opacity 0.2s; }
+    .search-btn { background: none; border: none; cursor: pointer; width: 20px; height: 21px; padding: 0; display: flex; align-items: center; justify-content: center; position: absolute; transition: transform 0.2s ease, opacity 0.2s; }
     .search-btn:hover { transform: scale(1.15); opacity: 0.7; }
     .demo-btn { display: flex; align-items: center; gap: 5px; border: 0.3px solid rgba(0,0,0,0.5); border-radius: 100px; padding: 0 18px; height: 34px; cursor: pointer; text-decoration: none; background: transparent; transition: background 0.25s ease, border-color 0.25s ease; }
     .demo-btn:hover { background: #000; border-color: #000; }
     .demo-btn:hover .demo-text { color: #fff; }
-    .demo-text { font-family: 'Chillax', sans-serif; font-weight: 500; font-size: 16px; color: #000; letter-spacing: 0.16px; line-height: 0.8; white-space: nowrap; transition: color 0.25s ease; position: relative; top: 1px; }
+    .demo-text { font-family: 'Chillax', sans-serif; font-weight: 500; font-size: 13px; color: #000; letter-spacing: 0.16px; line-height: 0.8; white-space: nowrap; transition: color 0.25s ease; position: relative; top: 1.5px; }
 
         /* ─── 헤더 오버플로 ─── */
     header { overflow: visible; }
@@ -312,9 +350,9 @@
       background: #2a2a2a;
     }
     .footer-inner { position: relative; width: 100%; max-width: 1440px; margin: 0 auto; height: 100%; }
-    .ft-company-info { position: absolute; right: 45px; top: 211px; font-family: 'Noto Sans KR', sans-serif; font-weight: 450; font-size: 15px; color: rgba(255,255,255,0.5); line-height: 23px; letter-spacing: -0.28px; white-space: pre-line; text-align: right; }
-    .ft-col-title { position: absolute; font-family: 'Chillax', sans-serif; font-weight: 600; font-size: 19px; color: #fff; white-space: nowrap; margin: 0; top: 41px; letter-spacing: 0.54px; line-height: 28.8px; }
-    .ft-link { position: absolute; font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 500; font-size: 16px; color: #fff; white-space: nowrap; text-decoration: none; line-height: 22.5px; letter-spacing: 0.15px; opacity: 1; transition: opacity 0.2s; }
+    .ft-company-info { position: absolute; right: 45px; top: 211px; font-family: 'Noto Sans KR', sans-serif; font-weight: 450; font-size: 13px; color: rgba(255,255,255,0.5); line-height: 23px; letter-spacing: -0.28px; white-space: pre-line; text-align: right; }
+    .ft-col-title { position: absolute; font-family: 'Chillax', sans-serif; font-weight: 600; font-size: 16px; color: #fff; white-space: nowrap; margin: 0; top: 41px; letter-spacing: 0.54px; line-height: 28.8px; }
+    .ft-link { position: absolute; font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 500; font-size: 14px; color: #fff; white-space: nowrap; text-decoration: none; line-height: 22.5px; letter-spacing: 0.15px; opacity: 1; transition: opacity 0.2s; }
     .ft-link:hover { opacity: 0.55; }
     .ft-link.ft-en { font-family: 'Chillax', sans-serif; font-weight: 400; line-height: 16.5px; }
     .ft-sep { position: absolute; height: 0.5px; background: rgba(255,255,255,0.3); }
@@ -408,6 +446,7 @@
 
       <div class="header-right">
         <span class="gnb-sep" style="color:rgba(0,0,0,0.2);font-size:16px;line-height:1;user-select:none;">|</span>
+        <div class="search-icon-wrap">
         <button class="search-btn" aria-label="검색" id="search-open-btn">
           <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M21.1063 19.1469L15.4344 14.5406C17.7719 11.3438 17.5313 6.7719 14.6094 3.8844C13.0626 2.33752 11 1.47815 8.80005 1.47815C6.60005 1.47815 4.53755 2.33752 2.99067 3.8844C-0.206201 7.08127 -0.206201 12.3063 2.99067 15.5031C4.53755 17.05 6.60005 17.9094 8.80005 17.9094C10.8969 17.9094 12.8563 17.1188 14.4032 15.7094L20.1438 20.35C20.2813 20.4531 20.4532 20.5219 20.6251 20.5219C20.8657 20.5219 21.0719 20.4188 21.2094 20.2469C21.4844 19.9032 21.4501 19.4219 21.1063 19.1469ZM8.80005 16.3625C7.01255 16.3625 5.36255 15.675 4.09067 14.4032C1.47817 11.7907 1.47817 7.56252 4.09067 4.9844C5.36255 3.71252 7.01255 3.02502 8.80005 3.02502C10.5875 3.02502 12.2375 3.71252 13.5094 4.9844C16.1219 7.5969 16.1219 11.825 13.5094 14.4032C12.2719 15.675 10.5875 16.3625 8.80005 16.3625Z" fill="#000"/>
@@ -419,6 +458,8 @@
             <line x1="17" y1="1" x2="1" y2="17" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
         </button>
+        <span class="search-tooltip">검색</span>
+        </div>
         <a class="demo-btn" href="contact.html">
           <span class="demo-text">문의하기</span>
         </a>
@@ -503,28 +544,28 @@
       <p class="ft-col-title" style="left:554px;">인사이트</p>
       <p class="ft-col-title" style="left:750px;">문의하기</p>
 
-      <a class="ft-link" href="ceo.html" style="left:45px;top:96px;">CEO 인사말</a>
-      <a class="ft-link" href="#" style="left:45px;top:131px;">회사소개</a>
-      <a class="ft-link" href="press.html" style="left:45px;top:166px;">보도자료</a>
-      <a class="ft-link" href="archive.html" style="left:45px;top:201px;">아카이브</a>
+      <a class="ft-link" href="ceo.html" style="left:45px;top:86px;">CEO 인사말</a>
+      <a class="ft-link" href="#" style="left:45px;top:121px;">회사소개</a>
+      <a class="ft-link" href="press.html" style="left:45px;top:156px;">보도자료</a>
+      <a class="ft-link" href="archive.html" style="left:45px;top:191px;">아카이브</a>
 
-      <a class="ft-link" href="#" style="left:202px;top:97px;">전체 솔루션 맵</a>
-      <a class="ft-link ft-en" href="#" style="left:202px;top:131px;">ecoNODE</a>
-      <div class="ft-sep" style="left:202px;top:171px;width:80px;"></div>
-      <a class="ft-link" href="#" style="left:202px;top:201px;">태양광 솔루션</a>
+      <a class="ft-link" href="#" style="left:202px;top:87px;">전체 솔루션 맵</a>
+      <a class="ft-link ft-en" href="#" style="left:202px;top:121px;">ecoNODE</a>
+      <div class="ft-sep" style="left:202px;top:161px;width:80px;"></div>
+      <a class="ft-link" href="#" style="left:202px;top:191px;">태양광 솔루션</a>
 
-      <a class="ft-link ft-en" href="#" style="left:374px;top:97px;">eco Asset</a>
-      <a class="ft-link ft-en" href="#" style="left:374px;top:131px;">Energy Asset</a>
+      <a class="ft-link ft-en" href="#" style="left:374px;top:87px;">eco Asset</a>
+      <a class="ft-link ft-en" href="#" style="left:374px;top:121px;">Energy Asset</a>
 
-      <a class="ft-link ft-en" href="https://www.netzeronews.kr/" target="_blank" rel="noopener noreferrer" style="left:554px;top:96px;">NetZero News
+      <a class="ft-link ft-en" href="https://www.netzeronews.kr/" target="_blank" rel="noopener noreferrer" style="left:554px;top:86px;">NetZero News
         <svg width="6" height="6" viewBox="0 0 8 8" fill="none" style="margin-left:2px;vertical-align:middle;"><path d="M1 7L7 1M7 1H3M7 1V5" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
-      <a class="ft-link" href="insight.html?page=eco" style="left:554px;top:131px;">친환경 기업정보</a>
-      <a class="ft-link" href="insight.html?page=green" style="left:554px;top:166px;">그린카 계산기</a>
+      <a class="ft-link" href="insight.html?page=eco" style="left:554px;top:121px;">친환경 기업정보</a>
+      <a class="ft-link" href="insight.html?page=green" style="left:554px;top:156px;">그린카 계산기</a>
 
-      <a class="ft-link ft-en" href="contact.html" style="left:750px;top:97px;">문의하기</a>
-      <a class="ft-link ft-en" href="notice.html" style="left:750px;top:131px;">공지사항</a>
-      <a class="ft-link ft-en" href="#" style="left:750px;top:166px;">오시는길</a>
+      <a class="ft-link ft-en" href="contact.html" style="left:750px;top:87px;">문의하기</a>
+      <a class="ft-link ft-en" href="notice.html" style="left:750px;top:121px;">공지사항</a>
+      <a class="ft-link ft-en" href="#" style="left:750px;top:156px;">오시는길</a>
 
       <div class="ft-divider" style="top:305px;"></div>
 
@@ -562,6 +603,7 @@
       header.classList.toggle('scrolled', cur > 10);
       if (cur > _lastScrollY && cur > 80) header.classList.add('gnb-hidden');
       else header.classList.remove('gnb-hidden');
+      if (cur > _lastScrollY && header.classList.contains('search-open')) closeSearch();
       _lastScrollY = cur;
     }, { passive: true });
 
@@ -619,18 +661,8 @@
       header.classList.remove('search-open');
       searchOverlay.classList.remove('open');
     }
-    // 클릭으로도 열기
     searchOpenBtn.addEventListener('click', openSearch);
     searchCloseBtn.addEventListener('click', closeSearch);
-
-    // ─── 검색 아이콘 hover → 검색창 즉시 표시 ───
-    let searchHoverTimer = null;
-    function scheduleSearchClose() { searchHoverTimer = setTimeout(closeSearch, 150); }
-    function cancelSearchClose() { clearTimeout(searchHoverTimer); }
-    searchOpenBtn.addEventListener('mouseenter', () => { cancelSearchClose(); openSearch(); });
-    searchOpenBtn.addEventListener('mouseleave', scheduleSearchClose);
-    searchOverlay.addEventListener('mouseenter', cancelSearchClose);
-    searchOverlay.addEventListener('mouseleave', scheduleSearchClose);
     document.querySelectorAll('.search-tag').forEach(tag => {
       tag.addEventListener('click', () => { searchInput.value = tag.dataset.keyword; searchInput.focus(); });
     });
