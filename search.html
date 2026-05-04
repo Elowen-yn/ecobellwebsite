@@ -136,7 +136,7 @@
       height: 100%; margin: 0 auto;
     }
 
-    /* Breadcrumb: 91px from hero top (= 22px below header), right-aligned */
+    /* Breadcrumb: top 91px from page top, right: 45px */
     .hero-breadcrumb {
       position: absolute;
       top: 91px;
@@ -205,7 +205,7 @@
     .search-main-inner {
       position: relative; width: 100%; max-width: 1440px;
       margin: 0 auto; padding: 0 75px;
-      display: flex; min-height: 600px;
+      display: flex; min-height: 743px;
     }
     /* Vertical divider at 343px from left (between sidebar end 308px and content start 382px) */
     .search-main-inner::before {
@@ -247,7 +247,7 @@
 
     /* ─── RESULTS AREA ─── */
     .search-results-area {
-      flex: 1; padding-left: 74px; padding-top: 61px; padding-bottom: 80px;
+      flex: 1; padding-left: 74px; padding-top: 61px; padding-bottom: 58px;
     }
     .result-header {
       display: flex; align-items: baseline;
@@ -262,6 +262,7 @@
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-weight: 700; font-size: 20px; color: #000; letter-spacing: 0.2px;
     }
+    .result-count-num { color: #1e8dcd; }
     .sort-select {
       width: 126px; height: 39px;
       border: 0.5px solid rgba(0,0,0,0.25); border-radius: 5px;
@@ -536,9 +537,9 @@
         <div class="result-header">
           <div class="result-query">
             <span class="result-query-text" id="result-query-text"></span>
-            <span class="result-count" id="result-count">검색 결과 0건</span>
+            <span class="result-count" id="result-count">검색 결과 <span class="result-count-num" id="result-count-num">0</span>건</span>
           </div>
-          <select class="sort-select">
+          <select class="sort-select" id="sort-select">
             <option>정확도순</option>
             <option>최신순</option>
           </select>
@@ -702,19 +703,22 @@
       document.getElementById('cat-faq').textContent = `FAQ(${counts.faq||0})`;
 
       document.getElementById('result-query-text').textContent = kw ? `'${kw}'` : '';
-      document.getElementById('result-count').textContent = `검색 결과 ${catFiltered.length}건`;
+      document.getElementById('result-count-num').textContent = catFiltered.length;
 
       const listEl = document.getElementById('results-list');
       const emptyEl = document.getElementById('search-empty');
       const paginEl = document.getElementById('search-pagination');
 
+      const sortEl = document.getElementById('sort-select');
       if (!kw || catFiltered.length === 0) {
         listEl.innerHTML = ''; listEl.style.display = 'none';
         paginEl.style.display = 'none';
+        sortEl.style.display = 'none';
         emptyEl.classList.add('visible');
         document.getElementById('empty-keyword').textContent = kw ? `'${kw}'` : '';
       } else {
         emptyEl.classList.remove('visible');
+        sortEl.style.display = '';
         listEl.style.display = ''; paginEl.style.display = '';
 
         const arrowSvg = `<svg width="5" height="9" viewBox="0 0 5 9" fill="none"><path d="M1 1L4 4.5L1 8" stroke="#8f8f8f" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;

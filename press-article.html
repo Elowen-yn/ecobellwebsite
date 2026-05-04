@@ -202,7 +202,8 @@
     main { padding-top: 79px; }
 
     .article-wrapper {
-      width: 1440px;
+      position: relative;
+      width: 100%; max-width: 1440px;
       margin: 0 auto;
       padding: 39px 75px 80px;
     }
@@ -210,7 +211,8 @@
     /* 브레드크럼 */
     .breadcrumb {
       display: flex; align-items: center; gap: 6px;
-      margin-bottom: 67px;
+      position: absolute; top: 12px; right: 45px;
+      margin-bottom: 0;
     }
     .breadcrumb a, .breadcrumb span {
       font-family: 'Chillax', sans-serif;
@@ -223,7 +225,7 @@
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-weight: 800; font-size: 45px; color: #000;
       line-height: 1.289; letter-spacing: 0.45px;
-      margin-bottom: 79px;
+      margin-top: 0; margin-bottom: 79px;
     }
 
     /* 구분선 */

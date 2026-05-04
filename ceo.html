@@ -244,13 +244,14 @@
     /* 브레드크럼 + H1 — press.html .page-header 구조와 동일 */
     .page-header {
       position: relative;
-      width: 1440px;
+      width: 100%; max-width: 1440px;
       margin: 0 auto;
       padding: 39px 75px 0;
     }
     .breadcrumb {
       display: flex; align-items: center; gap: 6px;
-      margin-bottom: 67px;
+      position: absolute; top: 12px; right: 45px;
+      margin-bottom: 0;
     }
     .breadcrumb-home { width: 11px; height: 12px; display: flex; align-items: center; }
     .breadcrumb-sep { width: 5px; height: 10px; display: flex; align-items: center; }
@@ -265,6 +266,7 @@
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-weight: 800; font-size: 45px; color: #000;
       line-height: 1.289; letter-spacing: 0.45px;
+      margin-top: 0;
     }
 
     /* 데코 SVG */
