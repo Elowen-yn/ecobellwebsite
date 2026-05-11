@@ -10,7 +10,8 @@
   <link href="https://api.fontshare.com/v2/css?f[]=chillax@400,500,600,700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overscroll-behavior: none;
+        }
     body {
       font-family: 'Noto Sans KR', sans-serif;
       min-width: 1100px;
@@ -78,11 +79,11 @@
       → translateX 변화량:
         0        +48     +98      +153     +199
     */
-    nav.lnb-open .nav-item:nth-child(1) { transform: translateX(-10px); }
-    nav.lnb-open .nav-item:nth-child(2) { transform: translateX(15px); }
-    nav.lnb-open .nav-item:nth-child(3) { transform: translateX(43px); }
-    nav.lnb-open .nav-item:nth-child(4) { transform: translateX(77px); }
-    nav.lnb-open .nav-item:nth-child(5) { transform: translateX(101px); }
+    nav.lnb-open .nav-item:nth-child(1) { transform: translateX(0px); }
+    nav.lnb-open .nav-item:nth-child(2) { transform: translateX(25px); }
+    nav.lnb-open .nav-item:nth-child(3) { transform: translateX(53px); }
+    nav.lnb-open .nav-item:nth-child(4) { transform: translateX(87px); }
+    nav.lnb-open .nav-item:nth-child(5) { transform: translateX(111px); }
 
     .nav-link {
       font-family: 'Chillax', sans-serif;
@@ -165,11 +166,11 @@
       transition: background 0.2s ease;
     }
     /* Figma LNB 컬럼 x 좌표 (1440px 기준) */
-    .lnb-col[data-col="company"]  { left: 177px; }
-    .lnb-col[data-col="solution"] { left: 309px; }
-    .lnb-col[data-col="platform"] { left: 441px; }
-    .lnb-col[data-col="insight"]  { left: 574px; }
-    .lnb-col[data-col="contact"]  { left: 706px; }
+    .lnb-col[data-col="company"]  { left: 187px; }
+    .lnb-col[data-col="solution"] { left: 319px; }
+    .lnb-col[data-col="platform"] { left: 451px; }
+    .lnb-col[data-col="insight"]  { left: 584px; }
+    .lnb-col[data-col="contact"]  { left: 716px; }
 
     /* 호버된 컬럼 강조: 배경 + 상단 파란 띠 */
     .lnb-col.active {
@@ -181,7 +182,7 @@
     /* LNB 링크 */
     .lnb-col a {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 700;
+      font-weight: 600;
       font-size: 14px;
       color: #000;
       text-decoration: none;
@@ -195,7 +196,7 @@
     }
     .lnb-col a.en {
       font-family: 'Chillax', sans-serif;
-      font-weight: 500;
+      font-weight: 450;
     }
     .lnb-col a:hover { color: #1e8dcd; }
 
@@ -225,7 +226,7 @@
       position: fixed;
       top: 69px;
       left: 0; right: 0; min-width: 1100px;
-      height: 240px; /* 309px - 69px header */
+      height: 202px; /* 271px - 69px header */
       background: #fafcfd;
       border-bottom: 0.2px solid rgba(0,0,0,0.3);
       opacity: 0;
@@ -248,10 +249,10 @@
       height: 100%;
     }
 
-    /* 입력 필드 (viewport y=164 → overlay top y=95) */
+    /* 입력 필드 (viewport y=126 → overlay top y=57) */
     .search-input-row {
       position: absolute;
-      top: 95px;
+      top: 57px;
       left: 23.9583%;  /* 345/1440 */
       right: 24.0278%; /* 346/1440 */
       display: flex;
@@ -289,10 +290,10 @@
     .search-submit:hover { opacity: 1; }
     .search-submit img { width: 17px; height: 17px; object-fit: contain; }
 
-    /* 구분선 (viewport y=209 → overlay top y=140) */
+    /* 구분선 (viewport y=171 → overlay top y=102) */
     .search-divider {
       position: absolute;
-      top: 140px;
+      top: 102px;
       left: 23.9583%;  /* 345/1440 */
       right: 24.0278%; /* 346/1440 */
       width: auto;
@@ -300,10 +301,10 @@
       background: rgba(0,0,0,0.2);
     }
 
-    /* 해시태그 추천 (viewport y=224 → overlay top y=155) */
+    /* 해시태그 추천 (viewport y=186 → overlay top y=117) */
     .search-tags {
       position: absolute;
-      top: 155px;
+      top: 117px;
       left: 23.9583%; /* 345/1440 */
       display: flex;
       gap: 9px;
@@ -463,79 +464,118 @@
       .lnb-inner    { max-width: none; }
     }
 
-    /* ─── 브레드크럼 ─── */
+    /* ─── ECO HERO ─── */
+    .insight-page { padding-top: 69px; min-height: 0; background: transparent; }
+
+    .eco-hero {
+      position: relative;
+      height: 372px;
+      overflow: hidden;
+      background: #0a2f3a;
+    }
+    .eco-hero-bg {
+      position: absolute; inset: 0;
+      background: url('assets/insight-hero-bg.jpg') center/cover no-repeat;
+    }
+    .eco-hero-overlay {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0.38);
+    }
+    /* ─── BREADCRUMB ─── */
     .breadcrumb {
       display: flex; align-items: center; gap: 6px;
-      position: absolute; top: 12px; right: 45px;
-      margin-bottom: 0;
+      position: absolute; top: 18px; right: 48px;
+      z-index: 2;
+    }
+    @media (min-width: 1441px) {
+      .breadcrumb { right: calc((100% - 1440px) / 2 + 48px); }
     }
     .breadcrumb-home { width: 11px; height: 12px; display: flex; align-items: center; }
-    .breadcrumb-sep { width: 5px; height: 10px; display: flex; align-items: center; }
+    .breadcrumb-sep  { width: 5px;  height: 10px; display: flex; align-items: center; }
     .breadcrumb a,
     .breadcrumb span {
       font-family: 'Chillax', sans-serif;
       font-weight: 400; font-size: 13px;
-      color: #1e8dcd;
+      color: rgba(255,255,255,0.85);
       text-decoration: none; letter-spacing: 0.13px;
     }
-    @media (min-width: 1441px) {
-      .insight-page-inner { max-width: none; }
+    .breadcrumb a[href]:not(.breadcrumb-home) { cursor: pointer; }
+    .breadcrumb a[href]:not(.breadcrumb-home):hover { opacity: 0.7; }
+    .eco-hero-content {
+      position: absolute;
+      top: 100px; left: 0; right: 0;
+      text-align: center;
+      z-index: 1;
+    }
+    .eco-hero-title {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 800;
+      font-size: 50px;
+      color: #fff;
+      letter-spacing: 0.55px;
+      line-height: 1.3;
+      margin-bottom: 18px;
+    }
+    .eco-hero-sub {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 400;
+      font-size: 18px;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.18px;
+      line-height: 1.7;
     }
 
-    /* ─── INSIGHT 콘텐츠 ─── */
-    .insight-page {
-      padding-top: 79px;
-      min-height: calc(100vh - 409px);
-      background: #fafcfd;
-    }
-    .insight-page-inner {
+    /* ─── ECO EMBED SECTION ─── */
+    .eco-embed-section {
       position: relative;
-      width: 100%;
-      max-width: 1440px;
-      margin: 0 auto;
-      padding: 39px 75px 80px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      z-index: 2;
+      margin-top: -65px;
+      padding: 0 50px 0;
     }
-    .insight-page-tabs {
-      display: flex;
-      gap: 0;
-      margin-top: 13px;
-      align-self: flex-start;
+    .eco-embed-wrapper {
+      position: relative;
     }
-    .insight-page-tab {
-      padding: 12px 32px;
-      font-family: 'Noto Sans KR', sans-serif;
-      font-size: 15px;
-      font-weight: 600;
-      color: #888;
-      background: #e4ecef;
+    .eco-embed-newtab {
+      position: absolute;
+      top: -32px;
+      left: 0;
+      width: 33px;
+      height: 32px;
+      padding: 0;
+      margin: 0;
       border: none;
-      border-radius: 8px 8px 0 0;
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s;
-    }
-    .insight-page-tab.active { background: #fff; color: #234b63; }
-    .insight-page-tab:hover:not(.active) { background: #d8e6ea; color: #555; }
-    .insight-page-frame {
       background: #fff;
-      border-radius: 0 8px 8px 8px;
-      overflow: hidden;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-      width: 100%;
-      height: 950px;
+      border-radius: 6px 6px 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s;
     }
-    .insight-page-frame iframe {
-      display: block;
+    .eco-embed-newtab:hover { background: #f0f4f8; }
+    .eco-embed-box {
+      background: #d9d9d9;
       width: 100%;
-      height: 100%;
-      border: none;
+      height: 850px;
+      overflow: hidden;
+      border-radius: 0;
+
+    }
+    .eco-embed-box iframe {
+      display: block; width: 100%; height: calc(100% + 100px); border: none;
+      transform: translateY(-100px);
+    }
+    @media (min-width: 1441px) {
+      .eco-embed-section { padding-left: calc((100% - 1340px) / 2); padding-right: calc((100% - 1340px) / 2); }
     }
 
     /* ─── FOOTER ─── */
     footer {
-      position: relative;
+      position: sticky;
+      bottom: 0;
+      z-index: 0;
+      min-width: 1100px;
       height: 442px;
       background: #2a2a2a;
     }
@@ -554,8 +594,40 @@
     .ft-social:hover { opacity: 0.7; transform: scale(1.1); }
     .ft-copyright { position: absolute; left: 45px; top: 357px; font-family: 'Noto Sans KR', sans-serif; font-weight: 300; font-size: 12px; color: rgba(255,255,255,0.8); white-space: pre-line; margin: 0; }
 
-        /* ─── 헤더 오버플로 ─── */
+        /* ─── CTA ─── */
+    .cta-contact-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 218px; height: 42px;
+      border: 0.8px solid #fff;
+      background: transparent;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 800; font-size: 16px; color: #fff;
+      letter-spacing: 0.48px; text-decoration: none;
+      position: relative; overflow: hidden;
+    }
+    .cta-contact-btn::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 150px; height: 150px;
+      background: rgba(255,255,255,0.18);
+      border-radius: 50%;
+      transition: transform 0.5s ease;
+      z-index: 0;
+    }
+    .cta-contact-btn:hover::before { transform: translate(-50%, -50%) scale(5); }
+    .cta-contact-btn span { position: relative; z-index: 1; }
+
+    /* ─── 헤더 오버플로 ─── */
     header { overflow: visible; }
+
+    /* ─── 푸터 오버레이 효과 ─── */
+    body > *:not(header):not(footer):not(.floating-ecoasset):not(.iframe-modal-backdrop) {
+      position: relative;
+      z-index: 1;
+      background: #fff;
+    }
   </style>
 </head>
 <body>
@@ -679,37 +751,64 @@
 
   <!-- ─── 인사이트 콘텐츠 ─── -->
   <div class="insight-page">
-    <div class="insight-page-inner">
+    <!-- Hero -->
+    <div class="eco-hero">
+      <div class="eco-hero-bg"></div>
+      <div class="eco-hero-overlay"></div>
+
       <!-- 브레드크럼 -->
-            <div class="breadcrumb">
+      <div class="breadcrumb">
         <a href="index.html" class="breadcrumb-home" aria-label="홈">
           <svg width="11" height="12" viewBox="0 0 11 12" fill="none">
-            <path d="M1 5L5.5 1L10 5V11H7V8H4V11H1V5Z" stroke="#1e8dcd" stroke-width="1.1" stroke-linejoin="round"/>
+            <path d="M1 5L5.5 1L10 5V11H7V8H4V11H1V5Z" stroke="rgba(255,255,255,0.85)" stroke-width="1.1" stroke-linejoin="round"/>
           </svg>
         </a>
         <span class="breadcrumb-sep">
           <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
-            <path d="M1 1L4 5L1 9" stroke="#1e8dcd" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M1 1L4 5L1 9" stroke="rgba(255,255,255,0.6)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </span>
-        <a href="#">Insight</a>
+        <span>Insight</span>
         <span class="breadcrumb-sep">
           <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
-            <path d="M1 1L4 5L1 9" stroke="#1e8dcd" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M1 1L4 5L1 9" stroke="rgba(255,255,255,0.6)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </span>
-        <span class="breadcrumb-item current" id="breadcrumb-current"></span>
+        <a id="breadcrumb-current" href="" onclick="location.reload();return false;"></a>
       </div>
 
-      <div class="insight-page-tabs">
-        <button class="insight-page-tab" data-page="eco">친환경 기업정보</button>
-        <button class="insight-page-tab" data-page="green">그린카 계산기</button>
+      <!-- 타이틀 -->
+      <div class="eco-hero-content">
+        <h1 class="eco-hero-title" id="hero-title">친환경 기업정보</h1>
+        <p class="eco-hero-sub" id="hero-sub">빅데이터로 분석한 친환경 기술 및 기업 정보 시스템을 통해<br>지금 바로 검증된 ESG 경영 파트너를 검색하고 연결해 보세요.</p>
       </div>
-      <div class="insight-page-frame">
-        <iframe id="insight-iframe" src="" title="인사이트"></iframe>
+    </div>
+
+    <!-- 임베드 -->
+    <div class="eco-embed-section">
+      <div class="eco-embed-wrapper">
+        <button class="eco-embed-newtab" id="embed-back" aria-label="이전 페이지">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 1.5L4 6.5L9 11.5" stroke="#1E8DCD" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="eco-embed-box">
+          <iframe id="insight-iframe" src="" title="인사이트"></iframe>
+        </div>
       </div>
     </div>
   </div>
+
+  <!-- ─── CTA 섹션 ─── -->
+  <section style="position:relative;width:100%;height:296px;overflow:hidden;display:flex;align-items:center;justify-content:center;">
+    <div style="position:absolute;inset:0;background:url('assets/cta-bg.png') center/cover no-repeat;"></div>
+    <div style="position:absolute;inset:0;background:rgba(0,49,77,0.85);"></div>
+    <div style="position:relative;text-align:center;">
+      <p style="font-family:'Nanum Square','NanumSquare',sans-serif;font-weight:900;font-size:30px;color:#fff;letter-spacing:0.84px;line-height:40px;margin:0 0 8px;">무엇이든 물어보세요</p>
+      <p style="font-family:'Nanum Square','NanumSquare',sans-serif;font-weight:500;font-size:16px;color:#fff;letter-spacing:0.84px;line-height:40px;margin:0 0 18px;">특정 비즈니스 솔루션 문의부터 일반 문의까지 에코벨이 도와드립니다.</p>
+      <a href="contact.html" class="cta-contact-btn"><span>문의하기</span></a>
+    </div>
+  </section>
 
   <!-- ─── FOOTER ─── -->
   <footer>
@@ -744,9 +843,9 @@
       <a class="ft-link" href="insight.html?page=eco" style="left:554px;top:121px;">친환경 기업정보</a>
       <a class="ft-link" href="insight.html?page=green" style="left:554px;top:156px;">그린카 계산기</a>
 
-      <a class="ft-link ft-en" href="contact.html" style="left:750px;top:87px;">문의하기</a>
-      <a class="ft-link ft-en" href="notice.html" style="left:750px;top:121px;">공지사항</a>
-      <a class="ft-link ft-en" href="#" style="left:750px;top:156px;">오시는길</a>
+      <a class="ft-link ft-en" href="notice.html" style="left:750px;top:87px;">공지사항</a>
+      <a class="ft-link ft-en" href="#" style="left:750px;top:121px;">오시는길</a>
+      <a class="ft-link ft-en" href="contact.html" style="left:750px;top:156px;">문의하기</a>
 
       <div class="ft-divider" style="top:305px;"></div>
 
@@ -901,28 +1000,42 @@
       green: 'https://ecobell.co.kr/sub/green_calculator.php'
     };
     const titles = { eco: '친환경 기업정보', green: '그린카 계산기' };
+    const heroTitles = { eco: '친환경 기업정보', green: '그린카 계산기' };
+    const heroSubs = {
+      eco: '빅데이터로 분석한 친환경 기술 및 기업 정보 시스템을 통해<br>지금 바로 검증된 ESG 경영 파트너를 검색하고 연결해 보세요.',
+      green: '내 차량을 전기·수소차로 전환하면 어떤 변화가 생길까요?<br>탄소 절감 수치와 실질적인 경제적 이익을 지금 바로 확인해 보세요.'
+    };
+    const heroBgs = {
+      eco:   "url('assets/insight-hero-bg.jpg')",
+      green: "url('assets/greencar-hero-bg.jpg')"
+    };
 
-    const iframe             = document.getElementById('insight-iframe');
-    const tabs               = document.querySelectorAll('.insight-page-tab');
-    const breadcrumbCurrent  = document.getElementById('breadcrumb-current');
+    const iframe            = document.getElementById('insight-iframe');
+    const breadcrumbCurrent = document.getElementById('breadcrumb-current');
+    const heroTitleEl       = document.getElementById('hero-title');
+    const heroSubEl         = document.getElementById('hero-sub');
+    const embedBack = document.getElementById('embed-back');
+    embedBack.addEventListener('click', () => {
+      try { iframe.contentWindow.history.back(); } catch(e) { iframe.src = iframe.src; }
+    });
 
     function setTab(page) {
-      tabs.forEach(t => t.classList.toggle('active', t.dataset.page === page));
-      iframe.src = urls[page] || urls.eco;
+      const url = urls[page] || urls.eco;
+      iframe.src = url;
       const title = titles[page] || '인사이트';
       document.title = title + ' — Ecobell';
       breadcrumbCurrent.textContent = title;
+      heroTitleEl.textContent = heroTitles[page] || title;
+      heroSubEl.innerHTML = heroSubs[page] || '';
+      document.querySelector('.eco-hero-bg').style.background = (heroBgs[page] || heroBgs.eco) + ' center/cover no-repeat';
+      document.querySelector('.eco-embed-box').style.height = (page === 'green' ? '770px' : '850px');
       history.replaceState(null, '', 'insight.html?page=' + page);
     }
 
-    // URL 파라미터로 초기 탭 결정
+    // URL 파라미터로 초기 페이지 결정
     const params = new URLSearchParams(location.search);
     const initPage = params.get('page') === 'green' ? 'green' : 'eco';
     setTab(initPage);
-
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => setTab(tab.dataset.page));
-    });
   </script>
 </body>
 </html>

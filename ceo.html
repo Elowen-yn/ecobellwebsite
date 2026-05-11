@@ -10,7 +10,8 @@
   <link href="https://api.fontshare.com/v2/css?f[]=chillax@400,500,600,700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overscroll-behavior: none;
+        }
     body {
       font-family: 'Noto Sans KR', sans-serif;
       min-width: 1100px;
@@ -23,11 +24,11 @@
       position: fixed;
       top: 0; left: 0; right: 0; min-width: 1100px;
       height: 69px;
-      background: #fff;
+      background: #E9F4FA;
       z-index: 999;
       transition: box-shadow 0.3s ease, transform 0.35s cubic-bezier(0.4,0,0.2,1);
     }
-    header.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.07); }
+    header.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.07); background: #fff; }
     header.gnb-hidden { transform: translateY(-100%); }
 
     .header-inner {
@@ -78,11 +79,11 @@
       → translateX 변화량:
         0        +48     +98      +153     +199
     */
-    nav.lnb-open .nav-item:nth-child(1) { transform: translateX(-10px); }
-    nav.lnb-open .nav-item:nth-child(2) { transform: translateX(15px); }
-    nav.lnb-open .nav-item:nth-child(3) { transform: translateX(43px); }
-    nav.lnb-open .nav-item:nth-child(4) { transform: translateX(77px); }
-    nav.lnb-open .nav-item:nth-child(5) { transform: translateX(101px); }
+    nav.lnb-open .nav-item:nth-child(1) { transform: translateX(0px); }
+    nav.lnb-open .nav-item:nth-child(2) { transform: translateX(25px); }
+    nav.lnb-open .nav-item:nth-child(3) { transform: translateX(53px); }
+    nav.lnb-open .nav-item:nth-child(4) { transform: translateX(87px); }
+    nav.lnb-open .nav-item:nth-child(5) { transform: translateX(111px); }
 
     .nav-link {
       font-family: 'Chillax', sans-serif;
@@ -165,11 +166,11 @@
       transition: background 0.2s ease;
     }
     /* Figma LNB 컬럼 x 좌표 (1440px 기준) */
-    .lnb-col[data-col="company"]  { left: 177px; }
-    .lnb-col[data-col="solution"] { left: 309px; }
-    .lnb-col[data-col="platform"] { left: 441px; }
-    .lnb-col[data-col="insight"]  { left: 574px; }
-    .lnb-col[data-col="contact"]  { left: 706px; }
+    .lnb-col[data-col="company"]  { left: 187px; }
+    .lnb-col[data-col="solution"] { left: 319px; }
+    .lnb-col[data-col="platform"] { left: 451px; }
+    .lnb-col[data-col="insight"]  { left: 584px; }
+    .lnb-col[data-col="contact"]  { left: 716px; }
 
     /* 호버된 컬럼 강조: 배경 + 상단 파란 띠 */
     .lnb-col.active {
@@ -181,7 +182,7 @@
     /* LNB 링크 */
     .lnb-col a {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 700;
+      font-weight: 600;
       font-size: 14px;
       color: #000;
       text-decoration: none;
@@ -195,7 +196,7 @@
     }
     .lnb-col a.en {
       font-family: 'Chillax', sans-serif;
-      font-weight: 500;
+      font-weight: 450;
     }
     .lnb-col a:hover { color: #1e8dcd; }
 
@@ -225,7 +226,7 @@
       position: fixed;
       top: 69px;
       left: 0; right: 0; min-width: 1100px;
-      height: 240px; /* 309px - 69px header */
+      height: 202px; /* 271px - 69px header */
       background: #fafcfd;
       border-bottom: 0.2px solid rgba(0,0,0,0.3);
       opacity: 0;
@@ -248,10 +249,10 @@
       height: 100%;
     }
 
-    /* 입력 필드 (viewport y=164 → overlay top y=95) */
+    /* 입력 필드 (viewport y=126 → overlay top y=57) */
     .search-input-row {
       position: absolute;
-      top: 95px;
+      top: 57px;
       left: 23.9583%;  /* 345/1440 */
       right: 24.0278%; /* 346/1440 */
       display: flex;
@@ -289,10 +290,10 @@
     .search-submit:hover { opacity: 1; }
     .search-submit img { width: 17px; height: 17px; object-fit: contain; }
 
-    /* 구분선 (viewport y=209 → overlay top y=140) */
+    /* 구분선 (viewport y=171 → overlay top y=102) */
     .search-divider {
       position: absolute;
-      top: 140px;
+      top: 102px;
       left: 23.9583%;  /* 345/1440 */
       right: 24.0278%; /* 346/1440 */
       width: auto;
@@ -300,10 +301,10 @@
       background: rgba(0,0,0,0.2);
     }
 
-    /* 해시태그 추천 (viewport y=224 → overlay top y=155) */
+    /* 해시태그 추천 (viewport y=186 → overlay top y=117) */
     .search-tags {
       position: absolute;
-      top: 155px;
+      top: 117px;
       left: 23.9583%; /* 345/1440 */
       display: flex;
       gap: 9px;
@@ -469,7 +470,7 @@
     .floating-ecoasset img { width: 100%; height: 100%; object-fit: contain; }
 
     /* ─── PAGE ─── */
-    main { padding-top: 79px; }
+    main { padding-top: 69px; }
 
     /*
       Figma 좌표 기준 (frame top = content y=0):
@@ -485,12 +486,9 @@
 
     .ceo-bg {
       position: relative;
-      /* 전체 뷰포트 너비에 맞춘 그라디언트 배경 */
-      background: linear-gradient(to bottom,
-        #ffffff 0px,
-        #ffffff 325px,
-        #f3fbfc 1414px
-      );
+      background:
+        linear-gradient(to bottom, #E9F4FA, #ffffff) no-repeat top / 100% 604px,
+        #ffffff;
       min-height: 1414px;
     }
 
@@ -506,12 +504,15 @@
       position: relative;
       width: 100%; max-width: 1440px;
       margin: 0 auto;
-      padding: 39px 75px 0;
+      padding: 100px 75px 0;
     }
     .breadcrumb {
       display: flex; align-items: center; gap: 6px;
-      position: absolute; top: 12px; right: 45px;
-      margin-bottom: 0;
+      position: absolute; top: 18px; right: 48px;
+      margin-bottom: 0; z-index: 10;
+    }
+    @media (min-width: 1441px) {
+      .breadcrumb { right: calc((100% - 1440px) / 2 + 48px); }
     }
     .breadcrumb-home { width: 11px; height: 12px; display: flex; align-items: center; }
     .breadcrumb-sep { width: 5px; height: 10px; display: flex; align-items: center; }
@@ -522,28 +523,29 @@
       color: #1e8dcd;
       text-decoration: none; letter-spacing: 0.13px;
     }
+    .breadcrumb a[href]:not(.breadcrumb-home) { cursor: pointer; }
+    .breadcrumb a[href]:not(.breadcrumb-home):hover { opacity: 0.7; }
     .page-title {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 800; font-size: 45px; color: #000;
+      font-weight: 800; font-size: 50px; color: #000;
       line-height: 1.289; letter-spacing: 0.45px;
-      margin-top: 0;
+      margin-top: 0; text-align: center;
     }
 
     /* 데코 SVG */
     .ceo-deco {
       position: absolute;
-      top: 187px; left: 854px;
-      width: 225px; height: 225px;
+      top: 213px; left: 879px;
+      width: 208px; height: 210px;
       z-index: 3;
       pointer-events: none;
-      transform: rotate(180deg) scaleY(-1) scaleX(-1);
     }
 
     /* CEO 사진 (z:2) */
     .ceo-photo {
       position: absolute;
-      top: 290px; left: 946px;
-      width: 365px; height: 431px;
+      top: 308px; left: 943px;
+      width: 329px; height: 390px;
       object-fit: cover;
       border-radius: 5px;
       z-index: 2;
@@ -553,11 +555,11 @@
     /* 인용구 (흰 배경 하단) */
     .ceo-quote {
       position: absolute;
-      top: 346px; left: 129px;
-      width: 714px;
+      top: 338px; left: 170px;
+      width: 661px;
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 800; font-size: 27px; color: #000;
-      line-height: 40px; letter-spacing: -0.54px;
+      font-weight: 800; font-size: 25px; color: #000;
+      line-height: 32px; letter-spacing: -0.54px;
       white-space: pre-line;
       z-index: 1;
     }
@@ -565,8 +567,8 @@
     /* 본문 (그라디언트 구간) */
     .ceo-message {
       position: absolute;
-      top: 469px; left: 129px;
-      width: 683px;
+      top: 447px; left: 170px;
+      width: 666px;
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-weight: 400; font-size: 17px; color: #000;
       line-height: 36px; letter-spacing: 0;
@@ -586,7 +588,7 @@
     /* CEO 이름 */
     .ceo-name {
       position: absolute;
-      top: 760px; left: 946px;
+      top: 733px; left: 943px;
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-size: 20px; color: #000;
       line-height: 30px; letter-spacing: -0.40px;
@@ -598,16 +600,44 @@
     /* 서명/직인 사각형 */
     .ceo-signature {
       position: absolute;
-      top: 760px; left: 1166px;
-      width: 145px; height: 52px;
+      top: 733px; left: 1142px;
+      width: 131px; height: 47px;
       background: #d9d9d9;
       border-radius: 2px;
       z-index: 2;
     }
 
+    /* ─── CTA ─── */
+    .cta-contact-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 218px; height: 42px;
+      border: 0.8px solid #fff;
+      background: transparent;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 800; font-size: 16px; color: #fff;
+      letter-spacing: 0.48px; text-decoration: none;
+      position: relative; overflow: hidden;
+    }
+    .cta-contact-btn::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 150px; height: 150px;
+      background: rgba(255,255,255,0.18);
+      border-radius: 50%;
+      transition: transform 0.5s ease;
+      z-index: 0;
+    }
+    .cta-contact-btn:hover::before { transform: translate(-50%, -50%) scale(5); }
+    .cta-contact-btn span { position: relative; z-index: 1; }
+
     /* ─── FOOTER ─── */
     footer {
-      position: relative;
+      position: sticky;
+      bottom: 0;
+      z-index: 0;
+      min-width: 1100px;
       height: 442px;
       background: #2a2a2a;
     }
@@ -625,6 +655,13 @@
     .ft-social { position: absolute; line-height: 0; opacity: 1; transition: opacity 0.2s, transform 0.2s; top: 323px; }
     .ft-social:hover { opacity: 0.7; transform: scale(1.1); }
     .ft-copyright { position: absolute; left: 45px; top: 357px; font-family: 'Noto Sans KR', sans-serif; font-weight: 300; font-size: 12px; color: rgba(255,255,255,0.8); white-space: pre-line; margin: 0; }
+
+    /* ─── 푸터 오버레이 효과 ─── */
+    body > *:not(header):not(footer):not(.floating-ecoasset):not(.iframe-modal-backdrop) {
+      position: relative;
+      z-index: 1;
+      background: #fff;
+    }
   </style>
 </head>
 <body>
@@ -760,13 +797,13 @@
             <path d="M1 1L4 5L1 9" stroke="#1e8dcd" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </span>
-        <a href="#">Company</a>
+        <span>Company</span>
         <span class="breadcrumb-sep">
           <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
             <path d="M1 1L4 5L1 9" stroke="#1e8dcd" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </span>
-        <span>CEO 인사말</span>
+        <a href="" onclick="location.reload();return false;">CEO 인사말</a>
       </div>
       <section class="ceo-section">
 
@@ -798,10 +835,10 @@
       <div class="ceo-message">
         <p>안녕하십니까. 에코벨 대표이사 김소연입니다.</p>
         <p>에코벨의 성장을 위해 변함없는 신뢰와 성원을 보내주시는 모든 이해관계자 여러분께 깊은 감사를 드립니다.</p>
-        <p>에너지 전환이 가속화되는 가운데, 데이터 기반의 에너지 관리 역량은 기업 경쟁력을 좌우하는 핵심 요소로 자리 잡고 있습니다. 이러한 흐름 속에서 에코벨은 에너지와 탄소 데이터를 가치 있는 흐름으로 잇는 연결자로 자리매김하며, 2023년 설립 이후 분산된 데이터를 체계적으로 수집·분석하여 친환경 시장의 새로운 기준을 만들어가고 있습니다.</p>
+        <p style="text-align-last:justify;">에너지 전환이 가속화되는 가운데, 데이터 기반의 에너지 관리 역량은 기업 경쟁력을 좌우하는<br>핵심 요소로 자리 잡고 있습니다. 이러한 흐름 속에서 에코벨은 에너지와 탄소 데이터를 가치 있는 흐름으로 잇는 연결자로 자리매김하며, 2023년 설립 이후 분산된 데이터를 체계적으로 수집·<br><span style="text-align:left;display:block;text-align-last:left;">분석하여 친환경 시장의 새로운 기준을 만들어가고 있습니다.</span></p>
         <p>자체 RTU 솔루션인 ecoNODE를 통해 수집된 정밀한 데이터는 기업의 합리적인 의사결정과 만나 경영의 효율을 높입니다. 이렇게 도출된 결과는 다시 탄소배출권 시장과 연결되어, 환경적 가치와 경제적 가치가 함께 실현되는 구조를 만들어갑니다.</p>
-        <p>우리가 주목하는 진정한 가치는 화합<span class="orchestrate">Orchestrate</span>에 있습니다. 데이터와 기술, 그리고 사람이 조화를 이루는 비즈니스 하모니를 통해, 친환경 에너지 전환을 가속화하고 기업의 지속 가능한 성장과 친환경 미래를 함께 만들어가겠습니다.</p>
-        <p>기술을 데이터로, 데이터를 가치로, 그리고 그 가치를 우리 모두의 행복으로 이어가는 여정에 에코벨이 함께하겠습니다.</p>
+        <p style="text-align-last:justify;">우리가 주목하는 진정한 가치는 화합<span class="orchestrate">Orchestrate</span>에 있습니다. 데이터와 기술, 그리고 사람이<br><span style="display:block;text-align:left;text-align-last:left;">조화를 이루는 비즈니스 하모니를 통해, 친환경 에너지 전환을 가속화하고 기업의 지속 가능한 성장과 친환경 미래를 함께 만들어가겠습니다.</span></p>
+        <p style="text-align-last:justify;">기술을 데이터로, 데이터를 가치로, 그리고 그 가치를 우리 모두의 행복으로 이어가는 여정에<br><span style="display:block;text-align:left;text-align-last:left;">에코벨이 함께하겠습니다.</span></p>
         <p>감사합니다.</p>
       </div>
 
@@ -809,6 +846,17 @@
     </div>
 
   </main>
+
+  <!-- ─── CTA 섹션 ─── -->
+  <section style="position:relative;width:100%;height:296px;overflow:hidden;display:flex;align-items:center;justify-content:center;margin-top:-100px;">
+    <div style="position:absolute;inset:0;background:url('assets/cta-bg.png') center/cover no-repeat;"></div>
+    <div style="position:absolute;inset:0;background:rgba(0,49,77,0.85);"></div>
+    <div style="position:relative;text-align:center;">
+      <p style="font-family:'Nanum Square','NanumSquare',sans-serif;font-weight:900;font-size:30px;color:#fff;letter-spacing:0.84px;line-height:40px;margin:0 0 8px;">무엇이든 물어보세요</p>
+      <p style="font-family:'Nanum Square','NanumSquare',sans-serif;font-weight:500;font-size:16px;color:#fff;letter-spacing:0.84px;line-height:40px;margin:0 0 18px;">특정 비즈니스 솔루션 문의부터 일반 문의까지 에코벨이 도와드립니다.</p>
+      <a href="contact.html" class="cta-contact-btn"><span>문의하기</span></a>
+    </div>
+  </section>
 
   <!-- ─── FOOTER ─── -->
   <footer>
@@ -843,9 +891,9 @@
       <a class="ft-link" href="insight.html?page=eco" style="left:554px;top:121px;">친환경 기업정보</a>
       <a class="ft-link" href="insight.html?page=green" style="left:554px;top:156px;">그린카 계산기</a>
 
-      <a class="ft-link ft-en" href="contact.html" style="left:750px;top:87px;">문의하기</a>
-      <a class="ft-link ft-en" href="notice.html" style="left:750px;top:121px;">공지사항</a>
-      <a class="ft-link ft-en" href="#" style="left:750px;top:156px;">오시는길</a>
+      <a class="ft-link ft-en" href="notice.html" style="left:750px;top:87px;">공지사항</a>
+      <a class="ft-link ft-en" href="#" style="left:750px;top:121px;">오시는길</a>
+      <a class="ft-link ft-en" href="contact.html" style="left:750px;top:156px;">문의하기</a>
 
       <div class="ft-divider" style="top:305px;"></div>
 

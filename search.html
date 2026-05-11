@@ -10,7 +10,8 @@
   <link href="https://api.fontshare.com/v2/css?f[]=chillax@400,500,600,700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overscroll-behavior: none;
+        }
     body {
       font-family: 'Noto Sans KR', sans-serif;
       min-width: 1100px;
@@ -78,11 +79,11 @@
       → translateX 변화량:
         0        +48     +98      +153     +199
     */
-    nav.lnb-open .nav-item:nth-child(1) { transform: translateX(-10px); }
-    nav.lnb-open .nav-item:nth-child(2) { transform: translateX(15px); }
-    nav.lnb-open .nav-item:nth-child(3) { transform: translateX(43px); }
-    nav.lnb-open .nav-item:nth-child(4) { transform: translateX(77px); }
-    nav.lnb-open .nav-item:nth-child(5) { transform: translateX(101px); }
+    nav.lnb-open .nav-item:nth-child(1) { transform: translateX(0px); }
+    nav.lnb-open .nav-item:nth-child(2) { transform: translateX(25px); }
+    nav.lnb-open .nav-item:nth-child(3) { transform: translateX(53px); }
+    nav.lnb-open .nav-item:nth-child(4) { transform: translateX(87px); }
+    nav.lnb-open .nav-item:nth-child(5) { transform: translateX(111px); }
 
     .nav-link {
       font-family: 'Chillax', sans-serif;
@@ -165,11 +166,11 @@
       transition: background 0.2s ease;
     }
     /* Figma LNB 컬럼 x 좌표 (1440px 기준) */
-    .lnb-col[data-col="company"]  { left: 177px; }
-    .lnb-col[data-col="solution"] { left: 309px; }
-    .lnb-col[data-col="platform"] { left: 441px; }
-    .lnb-col[data-col="insight"]  { left: 574px; }
-    .lnb-col[data-col="contact"]  { left: 706px; }
+    .lnb-col[data-col="company"]  { left: 187px; }
+    .lnb-col[data-col="solution"] { left: 319px; }
+    .lnb-col[data-col="platform"] { left: 451px; }
+    .lnb-col[data-col="insight"]  { left: 584px; }
+    .lnb-col[data-col="contact"]  { left: 716px; }
 
     /* 호버된 컬럼 강조: 배경 + 상단 파란 띠 */
     .lnb-col.active {
@@ -181,7 +182,7 @@
     /* LNB 링크 */
     .lnb-col a {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 700;
+      font-weight: 600;
       font-size: 14px;
       color: #000;
       text-decoration: none;
@@ -195,7 +196,7 @@
     }
     .lnb-col a.en {
       font-family: 'Chillax', sans-serif;
-      font-weight: 500;
+      font-weight: 450;
     }
     .lnb-col a:hover { color: #1e8dcd; }
 
@@ -225,7 +226,7 @@
       position: fixed;
       top: 69px;
       left: 0; right: 0; min-width: 1100px;
-      height: 240px; /* 309px - 69px header */
+      height: 202px; /* 271px - 69px header */
       background: #fafcfd;
       border-bottom: 0.2px solid rgba(0,0,0,0.3);
       opacity: 0;
@@ -248,10 +249,10 @@
       height: 100%;
     }
 
-    /* 입력 필드 (viewport y=164 → overlay top y=95) */
+    /* 입력 필드 (viewport y=126 → overlay top y=57) */
     .search-input-row {
       position: absolute;
-      top: 95px;
+      top: 57px;
       left: 23.9583%;  /* 345/1440 */
       right: 24.0278%; /* 346/1440 */
       display: flex;
@@ -289,10 +290,10 @@
     .search-submit:hover { opacity: 1; }
     .search-submit img { width: 17px; height: 17px; object-fit: contain; }
 
-    /* 구분선 (viewport y=209 → overlay top y=140) */
+    /* 구분선 (viewport y=171 → overlay top y=102) */
     .search-divider {
       position: absolute;
-      top: 140px;
+      top: 102px;
       left: 23.9583%;  /* 345/1440 */
       right: 24.0278%; /* 346/1440 */
       width: auto;
@@ -300,10 +301,10 @@
       background: rgba(0,0,0,0.2);
     }
 
-    /* 해시태그 추천 (viewport y=224 → overlay top y=155) */
+    /* 해시태그 추천 (viewport y=186 → overlay top y=117) */
     .search-tags {
       position: absolute;
-      top: 155px;
+      top: 117px;
       left: 23.9583%; /* 345/1440 */
       display: flex;
       gap: 9px;
@@ -464,10 +465,10 @@
     }
 
     /* ─── SEARCH HERO ─── */
-    /* Total 309px; first 69px behind fixed header; visible area = 240px below header */
+    /* Total 271px; first 69px behind fixed header; visible area = 202px below header */
     .search-hero {
       background: #fafcfd;
-      height: 309px;
+      height: 271px;
       position: relative;
       border-bottom: 0.2px solid rgba(0,0,0,0.15);
     }
@@ -483,6 +484,9 @@
       position: absolute; top: 91px; right: 45px;
       margin-bottom: 0;
     }
+    @media (min-width: 1441px) {
+      .breadcrumb { right: calc((100% - 1440px) / 2 + 48px); }
+    }
     .breadcrumb-home { width: 11px; height: 12px; display: flex; align-items: center; }
     .breadcrumb-sep { width: 5px; height: 10px; display: flex; align-items: center; }
     .breadcrumb a,
@@ -496,10 +500,10 @@
       .search-hero-inner { max-width: none; }
     }
 
-    /* Search input row: 164px from hero top, 749px wide centered */
+    /* Search input row: 126px from hero top, 749px wide centered */
     .hero-input-row {
       position: absolute;
-      top: 164px;
+      top: 126px;
       left: 50%; transform: translateX(-50%);
       width: 749px;
       display: flex; align-items: center;
@@ -519,19 +523,19 @@
     }
     .search-hero-btn:hover { opacity: 1; }
 
-    /* Divider: 209px from hero top */
+    /* Divider: 171px from hero top */
     .hero-divider {
       position: absolute;
-      top: 209px;
+      top: 171px;
       left: 50%; transform: translateX(-50%);
       width: 749px; height: 0;
       border-bottom: 1.2px solid rgba(0,0,0,0.2);
     }
 
-    /* Tags: 224px from hero top */
+    /* Tags: 186px from hero top */
     .hero-tags {
       position: absolute;
-      top: 224px;
+      top: 186px;
       left: 50%; transform: translateX(-50%);
       width: 749px;
       display: flex; gap: 9px;
@@ -741,7 +745,8 @@
     .cta-contact-btn span { position: relative; z-index: 1; }
 
     /* ─── FOOTER ─── */
-    footer { position: relative; height: 442px; background: #2a2a2a; }
+    footer {
+      overflow: visible; position: fixed; bottom: 0; left: 0; right: 0; min-width: 1100px; z-index: 0; height: 442px; background: #2a2a2a; }
     .footer-inner { position: relative; width: 100%; max-width: 1440px; margin: 0 auto; height: 100%; }
     .ft-company-info { position: absolute; right: 45px; top: 211px; font-family: 'Noto Sans KR', sans-serif; font-weight: 450; font-size: 13px; color: rgba(255,255,255,0.5); line-height: 23px; letter-spacing: -0.28px; white-space: pre-line; text-align: right; }
     .ft-col-title { position: absolute; font-family: 'Chillax', sans-serif; font-weight: 600; font-size: 16px; color: #fff; white-space: nowrap; top: 41px; letter-spacing: 0.54px; line-height: 28.8px; }
@@ -756,6 +761,13 @@
     .ft-social { position: absolute; line-height: 0; transition: opacity 0.2s, transform 0.2s; top: 323px; }
     .ft-social:hover { opacity: 0.7; transform: scale(1.1); }
     .ft-copyright { position: absolute; left: 45px; top: 357px; font-family: 'Noto Sans KR', sans-serif; font-weight: 300; font-size: 12px; color: rgba(255,255,255,0.8); white-space: pre-line; }
+
+    /* ─── 푸터 오버레이 효과 ─── */
+    body > *:not(header):not(footer):not(.floating-ecoasset):not(.iframe-modal-backdrop) {
+      position: relative;
+      z-index: 1;
+      background: #fff;
+    }
   </style>
 </head>
 <body>
@@ -854,21 +866,6 @@
 
       <!-- Header Right -->
       <div class="header-right">
-        <span class="gnb-sep" style="color:rgba(0,0,0,0.2);font-size:16px;line-height:1;user-select:none;">|</span>
-        <div class="search-icon-wrap">
-        <button class="search-btn" aria-label="검색" id="search-open-btn">
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M21.1063 19.1469L15.4344 14.5406C17.7719 11.3438 17.5313 6.7719 14.6094 3.8844C13.0626 2.33752 11 1.47815 8.80005 1.47815C6.60005 1.47815 4.53755 2.33752 2.99067 3.8844C-0.206201 7.08127 -0.206201 12.3063 2.99067 15.5031C4.53755 17.05 6.60005 17.9094 8.80005 17.9094C10.8969 17.9094 12.8563 17.1188 14.4032 15.7094L20.1438 20.35C20.2813 20.4531 20.4532 20.5219 20.6251 20.5219C20.8657 20.5219 21.0719 20.4188 21.2094 20.2469C21.4844 19.9032 21.4501 19.4219 21.1063 19.1469ZM8.80005 16.3625C7.01255 16.3625 5.36255 15.675 4.09067 14.4032C1.47817 11.7907 1.47817 7.56252 4.09067 4.9844C5.36255 3.71252 7.01255 3.02502 8.80005 3.02502C10.5875 3.02502 12.2375 3.71252 13.5094 4.9844C16.1219 7.5969 16.1219 11.825 13.5094 14.4032C12.2719 15.675 10.5875 16.3625 8.80005 16.3625Z" fill="#000"/>
-          </svg>
-        </button>
-        <button class="close-btn" aria-label="닫기" id="search-close-btn">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <line x1="1" y1="1" x2="17" y2="17" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="17" y1="1" x2="1" y2="17" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-        </button>
-        <span class="search-tooltip">검색</span>
-        </div>
         <a class="demo-btn" href="contact.html">
           <span class="demo-text">문의하기</span>
         </a>
@@ -1044,9 +1041,9 @@
       <a class="ft-link ft-en" href="https://www.netzeronews.kr/" target="_blank" rel="noopener noreferrer" style="left:554px;top:86px;">NetZero News</a>
       <a class="ft-link" href="insight.html?page=eco" style="left:554px;top:121px;">친환경 기업정보</a>
       <a class="ft-link" href="insight.html?page=green" style="left:554px;top:156px;">그린카 계산기</a>
-      <a class="ft-link ft-en" href="contact.html" style="left:750px;top:87px;">문의하기</a>
-      <a class="ft-link ft-en" href="notice.html" style="left:750px;top:121px;">공지사항</a>
-      <a class="ft-link ft-en" href="#" style="left:750px;top:156px;">오시는길</a>
+      <a class="ft-link ft-en" href="notice.html" style="left:750px;top:87px;">공지사항</a>
+      <a class="ft-link ft-en" href="#" style="left:750px;top:121px;">오시는길</a>
+      <a class="ft-link ft-en" href="contact.html" style="left:750px;top:156px;">문의하기</a>
       <div class="ft-divider" style="top:305px;"></div>
       <a class="ft-bottom-link fw-bold" href="#" style="left:45px;">개인정보처리방침</a>
       <a class="ft-bottom-link" href="#" style="left:173px;">이용약관</a>
@@ -1163,8 +1160,8 @@
     }
 
     // 클릭으로도 열기
-    searchOpenBtn.addEventListener('click', openSearch);
-    searchCloseBtn.addEventListener('click', closeSearch);
+    if (searchOpenBtn) searchOpenBtn.addEventListener('click', openSearch);
+    if (searchCloseBtn) searchCloseBtn.addEventListener('click', closeSearch);
 
     // 해시태그 클릭 → 입력창에 채우기
     document.querySelectorAll('.search-tag').forEach(tag => {
@@ -1192,6 +1189,9 @@
 
     // ─── Mock data ───
     const MOCK = [
+      { cat:'company', sub:'CEO 인사말', href:'ceo.html',
+        title:'CEO 인사말 — 에코벨 대표이사 김소연',
+        excerpt:'안녕하십니까. 에코벨 대표이사 김소연입니다. 에코벨의 성장을 위해 변함없는 신뢰와 성원을 보내주시는 모든 이해관계자 여러분께 깊은 감사를 드립니다. 에너지 전환이 가속화되는 가운데, 데이터 기반의 에너지 관리 역량은 기업 경쟁력을 좌우하는 핵심 요소로 자리 잡고 있습니다. 이러한 흐름 속에서 에코벨은 에너지와 탄소 데이터를 가치 있는 흐름으로 잇는 연결자로 자리매김하며, 2023년 설립 이후 분산된 데이터를 체계적으로 수집·분석하여 친환경 시장의 새로운 기준을 만들어가고 있습니다. 자체 RTU 솔루션인 ecoNODE를 통해 수집된 정밀한 데이터는 기업의 합리적인 의사결정과 만나 경영의 효율을 높입니다. 이렇게 도출된 결과는 다시 탄소배출권 시장과 연결되어, 환경적 가치와 경제적 가치가 함께 실현되는 구조를 만들어갑니다. 우리가 주목하는 진정한 가치는 화합Orchestrate에 있습니다. 데이터와 기술, 그리고 사람이 조화를 이루는 비즈니스 하모니를 통해, 친환경 에너지 전환을 가속화하고 기업의 지속 가능한 성장과 친환경 미래를 함께 만들어가겠습니다. 에코벨은 에너지 데이터의 조화로운 연결을 통해 기업과 사회가 함께 성장하는 내일의 하모니를 만들어가겠습니다.' },
       { cat:'company', sub:'보도자료', href:'press-article.html',
         title:'에코벨, ESG 경영 우수기업 선정 — 지속가능경영 보고서 발간',
         excerpt:'주식회사 에코벨이 2024년도 ESG 경영 우수기업으로 선정되었습니다. 에코벨은 탄소중립 목표 달성을 위한 다양한 솔루션을 제공하며 지속 가능한 미래를 선도하고 있습니다.' },
@@ -1233,11 +1233,17 @@
     let curQuery = '', curCat = 'all', curPage = 1;
 
     function renderPagination(total, page) {
-      const paginEl  = document.getElementById('search-pagination');
-      const numsEl   = document.getElementById('page-numbers');
-      const totalPages = Math.ceil(total / PAGE_SIZE);
+      const paginEl      = document.getElementById('search-pagination');
+      const numsEl       = document.getElementById('page-numbers');
+      const resultsArea  = document.querySelector('.search-results-area');
+      const totalPages   = Math.ceil(total / PAGE_SIZE);
 
-      if (totalPages <= 1) { paginEl.style.display = 'none'; return; }
+      if (totalPages <= 1) {
+        paginEl.style.display = 'none';
+        resultsArea.style.paddingBottom = '258px';
+        return;
+      }
+      resultsArea.style.paddingBottom = '';
 
       paginEl.style.display = '';
       const groupStart = Math.floor((page - 1) / 5) * 5 + 1;
@@ -1285,6 +1291,7 @@
       if (!kw || catFiltered.length === 0) {
         listEl.innerHTML = ''; listEl.style.display = 'none';
         document.getElementById('search-pagination').style.display = 'none';
+        document.querySelector('.search-results-area').style.paddingBottom = '258px';
         sortEl.style.display = 'none';
         emptyEl.classList.add('visible');
         document.getElementById('empty-keyword').textContent = kw ? `'${kw}'` : '';

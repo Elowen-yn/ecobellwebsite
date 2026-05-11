@@ -10,7 +10,8 @@
   <link href="https://api.fontshare.com/v2/css?f[]=chillax@400,500,600,700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overscroll-behavior: none;
+        }
     body {
       font-family: 'Noto Sans KR', sans-serif;
       min-width: 1100px;
@@ -78,11 +79,11 @@
       → translateX 변화량:
         0        +48     +98      +153     +199
     */
-    nav.lnb-open .nav-item:nth-child(1) { transform: translateX(-10px); }
-    nav.lnb-open .nav-item:nth-child(2) { transform: translateX(15px); }
-    nav.lnb-open .nav-item:nth-child(3) { transform: translateX(43px); }
-    nav.lnb-open .nav-item:nth-child(4) { transform: translateX(77px); }
-    nav.lnb-open .nav-item:nth-child(5) { transform: translateX(101px); }
+    nav.lnb-open .nav-item:nth-child(1) { transform: translateX(0px); }
+    nav.lnb-open .nav-item:nth-child(2) { transform: translateX(25px); }
+    nav.lnb-open .nav-item:nth-child(3) { transform: translateX(53px); }
+    nav.lnb-open .nav-item:nth-child(4) { transform: translateX(87px); }
+    nav.lnb-open .nav-item:nth-child(5) { transform: translateX(111px); }
 
     .nav-link {
       font-family: 'Chillax', sans-serif;
@@ -165,11 +166,11 @@
       transition: background 0.2s ease;
     }
     /* Figma LNB 컬럼 x 좌표 (1440px 기준) */
-    .lnb-col[data-col="company"]  { left: 177px; }
-    .lnb-col[data-col="solution"] { left: 309px; }
-    .lnb-col[data-col="platform"] { left: 441px; }
-    .lnb-col[data-col="insight"]  { left: 574px; }
-    .lnb-col[data-col="contact"]  { left: 706px; }
+    .lnb-col[data-col="company"]  { left: 187px; }
+    .lnb-col[data-col="solution"] { left: 319px; }
+    .lnb-col[data-col="platform"] { left: 451px; }
+    .lnb-col[data-col="insight"]  { left: 584px; }
+    .lnb-col[data-col="contact"]  { left: 716px; }
 
     /* 호버된 컬럼 강조: 배경 + 상단 파란 띠 */
     .lnb-col.active {
@@ -181,7 +182,7 @@
     /* LNB 링크 */
     .lnb-col a {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 700;
+      font-weight: 600;
       font-size: 14px;
       color: #000;
       text-decoration: none;
@@ -195,7 +196,7 @@
     }
     .lnb-col a.en {
       font-family: 'Chillax', sans-serif;
-      font-weight: 500;
+      font-weight: 450;
     }
     .lnb-col a:hover { color: #1e8dcd; }
 
@@ -225,7 +226,7 @@
       position: fixed;
       top: 69px;
       left: 0; right: 0; min-width: 1100px;
-      height: 240px; /* 309px - 69px header */
+      height: 202px; /* 271px - 69px header */
       background: #fafcfd;
       border-bottom: 0.2px solid rgba(0,0,0,0.3);
       opacity: 0;
@@ -248,10 +249,10 @@
       height: 100%;
     }
 
-    /* 입력 필드 (viewport y=164 → overlay top y=95) */
+    /* 입력 필드 (viewport y=126 → overlay top y=57) */
     .search-input-row {
       position: absolute;
-      top: 95px;
+      top: 57px;
       left: 23.9583%;  /* 345/1440 */
       right: 24.0278%; /* 346/1440 */
       display: flex;
@@ -289,10 +290,10 @@
     .search-submit:hover { opacity: 1; }
     .search-submit img { width: 17px; height: 17px; object-fit: contain; }
 
-    /* 구분선 (viewport y=209 → overlay top y=140) */
+    /* 구분선 (viewport y=171 → overlay top y=102) */
     .search-divider {
       position: absolute;
-      top: 140px;
+      top: 102px;
       left: 23.9583%;  /* 345/1440 */
       right: 24.0278%; /* 346/1440 */
       width: auto;
@@ -300,10 +301,10 @@
       background: rgba(0,0,0,0.2);
     }
 
-    /* 해시태그 추천 (viewport y=224 → overlay top y=155) */
+    /* 해시태그 추천 (viewport y=186 → overlay top y=117) */
     .search-tags {
       position: absolute;
-      top: 155px;
+      top: 117px;
       left: 23.9583%; /* 345/1440 */
       display: flex;
       gap: 9px;
@@ -463,7 +464,7 @@
     }
 
     /* ─── ARTICLE ─── */
-    main { padding-top: 79px; }
+    main { padding-top: 69px; }
 
     .article-wrapper {
       position: relative;
@@ -475,8 +476,11 @@
     /* 브레드크럼 */
     .breadcrumb {
       display: flex; align-items: center; gap: 6px;
-      position: absolute; top: 12px; right: 45px;
+      position: absolute; top: 18px; right: 48px;
       margin-bottom: 0;
+    }
+    @media (min-width: 1441px) {
+      .breadcrumb { right: calc((100% - 1440px) / 2 + 48px); }
     }
     .breadcrumb-home { width: 11px; height: 12px; display: flex; align-items: center; }
     .breadcrumb-sep { width: 5px; height: 10px; display: flex; align-items: center; }
@@ -487,6 +491,8 @@
       color: #1e8dcd;
       text-decoration: none; letter-spacing: 0.13px;
     }
+    .breadcrumb a[href]:not(.breadcrumb-home) { cursor: pointer; }
+    .breadcrumb a[href]:not(.breadcrumb-home):hover { opacity: 0.7; }
     @media (min-width: 1441px) {
       .article-wrapper { max-width: none; }
     }
@@ -586,6 +592,7 @@
 
     /* 목록 버튼 (중앙 정렬, 구분선 아래 44px) */
     .article-footer {
+      overflow: visible;
       margin-top: 44px;
       display: flex;
       justify-content: center;
@@ -606,7 +613,7 @@
 
     /* ─── FOOTER ─── */
     footer {
-      position: relative;
+      position: fixed; bottom: 0; left: 0; right: 0; min-width: 1100px; z-index: 0;
       height: 442px;
       background: #2a2a2a;
     }
@@ -631,6 +638,13 @@
 
         /* ─── 헤더 오버플로 ─── */
     header { overflow: visible; }
+
+    /* ─── 푸터 오버레이 효과 ─── */
+    body > *:not(header):not(footer):not(.floating-ecoasset):not(.iframe-modal-backdrop) {
+      position: relative;
+      z-index: 1;
+      background: #fff;
+    }
   </style>
 </head>
 <body>
@@ -767,7 +781,7 @@
             <path d="M1 1L4 5L1 9" stroke="#1e8dcd" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </span>
-        <a href="#">Company</a>
+        <span>Company</span>
         <span class="breadcrumb-sep">
           <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
             <path d="M1 1L4 5L1 9" stroke="#1e8dcd" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
@@ -863,9 +877,9 @@
       <a class="ft-link" href="insight.html?page=eco" style="left:554px;top:121px;">친환경 기업정보</a>
       <a class="ft-link" href="insight.html?page=green" style="left:554px;top:156px;">그린카 계산기</a>
 
-      <a class="ft-link ft-en" href="contact.html" style="left:750px;top:87px;">문의하기</a>
-      <a class="ft-link ft-en" href="notice.html" style="left:750px;top:121px;">공지사항</a>
-      <a class="ft-link ft-en" href="#" style="left:750px;top:156px;">오시는길</a>
+      <a class="ft-link ft-en" href="notice.html" style="left:750px;top:87px;">공지사항</a>
+      <a class="ft-link ft-en" href="#" style="left:750px;top:121px;">오시는길</a>
+      <a class="ft-link ft-en" href="contact.html" style="left:750px;top:156px;">문의하기</a>
 
       <div class="ft-divider" style="top:305px;"></div>
       <a class="ft-bottom-link fw-bold" href="#" style="left:45px;">개인정보처리방침</a>
