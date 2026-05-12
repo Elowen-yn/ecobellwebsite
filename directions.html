@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>오시는 길 - Ecobell</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;600;700&family=Nanum+Square:wght@400;700;800&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=chillax@400,500,600,700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; overscroll-behavior: none; }
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      min-width: 1100px;
+      background: #fff;
+      color: #000;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0; min-width: 1100px;
+      height: 69px;
+      background: #fff;
+      z-index: 999;
+      transition: box-shadow 0.3s ease, transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+    header.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.07); }
+    header.gnb-hidden { transform: translateY(-100%); }
+
+    .header-inner {
+      position: relative;
+      width: 100%; max-width: 1440px; height: 100%;
+      margin: 0 auto;
+      display: flex; align-items: center;
+    }
+
+    .logo {
+      position: absolute; left: 44px;
+      top: 50%; transform: translateY(-50%);
+      width: 110px; height: 26px;
+      transition: opacity 0.2s;
+    }
+    .logo img { width: 100%; height: 100%; object-fit: contain; }
+    .logo:hover { opacity: 0.75; }
+
+    nav {
+      position: absolute;
+      left: 198px; right: 324px;
+      top: 0;
+      display: flex; align-items: stretch;
+      height: 69px;
+    }
+
+    .nav-item {
+      position: relative;
+      display: flex; align-items: center;
+      transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    nav.lnb-open .nav-item:nth-child(1) { transform: translateX(0px); }
+    nav.lnb-open .nav-item:nth-child(2) { transform: translateX(25px); }
+    nav.lnb-open .nav-item:nth-child(3) { transform: translateX(53px); }
+    nav.lnb-open .nav-item:nth-child(4) { transform: translateX(87px); }
+    nav.lnb-open .nav-item:nth-child(5) { transform: translateX(111px); }
+
+    .nav-link {
+      font-family: 'Chillax', sans-serif;
+      font-weight: 500; font-size: 15.5px; color: #000;
+      text-decoration: none; letter-spacing: 0.46px; line-height: 1.6;
+      padding: 0 17px; white-space: nowrap;
+      position: relative; display: flex; align-items: center;
+      height: 100%; transition: color 0.2s;
+    }
+    .nav-link::after {
+      content: ''; position: absolute;
+      left: 17px; right: 17px; bottom: 0;
+      height: 2px; background: #000;
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.25s ease;
+    }
+    .nav-item:not(.lnb-active) .nav-link:hover::after { transform: scaleX(1); }
+    .nav-item.lnb-active .nav-link { color: #1e8dcd; }
+
+    .lnb {
+      position: fixed; top: 69px; left: 0; right: 0; min-width: 1100px;
+      height: 202px; background: #fff;
+      border-top: 0.3px solid #d9d9d9; border-bottom: 0.3px solid #d9d9d9;
+      opacity: 0; transform: translateY(-6px); pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 102;
+    }
+    .lnb-inner {
+      position: relative; width: 100%; max-width: 1440px;
+      margin: 0 auto; height: 100%;
+    }
+    .lnb.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+    .lnb-col {
+      position: absolute; top: 0; width: 132px; height: 100%;
+      display: flex; flex-direction: column; align-items: center;
+      padding-top: 29px; gap: 0;
+      transition: background 0.2s ease;
+    }
+    .lnb-col[data-col="company"]  { left: 187px; }
+    .lnb-col[data-col="solution"] { left: 319px; }
+    .lnb-col[data-col="platform"] { left: 451px; }
+    .lnb-col[data-col="insight"]  { left: 584px; }
+    .lnb-col[data-col="contact"]  { left: 716px; }
+
+    .lnb-col.active {
+      background: #fafcfd;
+      border-top: 2px solid #1e8dcd;
+      padding-top: 27px;
+    }
+    .lnb-col a {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 600; font-size: 14px; color: #000;
+      text-decoration: none; letter-spacing: 0.14px; line-height: 21px;
+      text-align: center; display: block; width: 100%;
+      padding: 7px 0; transition: color 0.15s;
+    }
+    .lnb-col a.en { font-family: 'Chillax', sans-serif; font-weight: 450; }
+    .lnb-col a:hover { color: #1e8dcd; }
+    .lnb-col a.ext::after { content: ' ↗'; font-size: 11px; }
+    .lnb-sep { width: 70px; height: 0.5px; background: #d9d9d9; margin: 14px auto 24px; flex-shrink: 0; }
+
+    header.search-open { background: #fafcfd; border-bottom-color: transparent; box-shadow: none; }
+    .search-overlay {
+      position: fixed; top: 69px; left: 0; right: 0; min-width: 1100px;
+      height: 202px; background: #fafcfd;
+      border-bottom: 0.2px solid rgba(0,0,0,0.3);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.28s cubic-bezier(0.4,0,0.2,1);
+      transform: translateY(-8px); z-index: 100;
+    }
+    .search-overlay.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .search-content { position: relative; width: 100%; max-width: 1440px; margin: 0 auto; height: 100%; }
+    .search-input-row {
+      position: absolute; top: 57px;
+      left: 23.9583%; right: 24.0278%;
+      display: flex; align-items: center; gap: 0;
+    }
+    .search-input {
+      flex: 1;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 400; font-size: 20px; color: #000;
+      letter-spacing: 0.2px; line-height: 1.5;
+      background: transparent; border: none; outline: none;
+      height: 36px; padding: 0;
+    }
+    .search-input::placeholder { color: rgba(0,0,0,0.3); }
+    .search-submit {
+      background: none; border: none; cursor: pointer;
+      width: 17px; height: 17px; padding: 0;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; opacity: 0.6; transition: opacity 0.2s;
+    }
+    .search-submit:hover { opacity: 1; }
+    .search-divider {
+      position: absolute; top: 102px;
+      left: 23.9583%; right: 24.0278%;
+      height: 0.3px; background: rgba(0,0,0,0.2);
+    }
+    .search-tags {
+      position: absolute; top: 117px; left: 23.9583%;
+      display: flex; gap: 9px;
+    }
+    .search-tag {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700; font-size: 11.6px; color: rgba(0,0,0,0.55);
+      letter-spacing: 0.11px; border: 0.3px solid rgba(0,0,0,0.15);
+      border-radius: 100px; padding: 0 10.5px; height: 23px;
+      background: transparent; cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .search-tag:hover { border-color: rgba(0,0,0,0.4); color: rgba(0,0,0,0.85); }
+
+    .search-icon-wrap { position: relative; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; }
+    .search-tooltip {
+      position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%);
+      background: rgba(0,0,0,0.78); color: #fff;
+      font-family: 'Noto Sans KR', sans-serif; font-size: 11px; font-weight: 400;
+      letter-spacing: 0.4px; padding: 5px 10px; border-radius: 4px;
+      white-space: nowrap; pointer-events: none; opacity: 0;
+      transition: opacity 0.18s ease; z-index: 1001;
+    }
+    .search-tooltip::before {
+      content: ''; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%);
+      border: 5px solid transparent; border-bottom-color: rgba(0,0,0,0.78);
+    }
+    .search-icon-wrap:hover .search-tooltip { opacity: 1; }
+    header.search-open .search-tooltip { opacity: 0 !important; pointer-events: none; }
+
+    .close-btn {
+      display: flex; background: none; border: none; cursor: pointer;
+      width: 20px; height: 20px; padding: 0;
+      align-items: center; justify-content: center;
+      font-size: 18px; color: #000; opacity: 0; pointer-events: none;
+      position: absolute;
+      transform: rotate(-180deg) scale(0.5);
+      transition: opacity 0.25s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .close-btn:hover { opacity: 1; }
+
+    header.search-open .search-btn { opacity: 0; pointer-events: none; transform: rotate(90deg) scale(0.7); }
+    header.search-open .close-btn { opacity: 0.6; pointer-events: auto; transform: rotate(0deg) scale(1); }
+
+    .header-right {
+      position: absolute; right: 45px;
+      top: 50%; transform: translateY(-50%);
+      display: flex; align-items: center; gap: 25px;
+    }
+    .search-btn {
+      background: none; border: none; cursor: pointer;
+      width: 20px; height: 21px; padding: 0;
+      display: flex; align-items: center; justify-content: center;
+      position: absolute;
+      transition: transform 0.2s ease, opacity 0.2s;
+    }
+    .search-btn:hover { transform: scale(1.15); opacity: 0.7; }
+    .search-btn svg { display: block; }
+
+    .demo-btn {
+      display: flex; align-items: center; gap: 5px;
+      border: 0.3px solid rgba(0,0,0,0.5); border-radius: 100px;
+      padding: 0 18px; height: 34px; cursor: pointer;
+      text-decoration: none; background: transparent;
+      overflow: hidden; position: relative;
+      transition: border-color 0.25s ease;
+    }
+    .demo-btn::before {
+      content: ''; position: absolute; left: 0; top: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 34px; height: 34px; background: #000; border-radius: 50%;
+      transition: transform 0.45s ease;
+    }
+    .demo-btn:hover::before { transform: translate(-50%, -50%) scale(10); }
+    .demo-btn:hover { border-color: #000; }
+    .demo-btn:hover .demo-text { color: #fff; }
+    .demo-text {
+      font-family: 'Chillax', sans-serif; font-weight: 500; font-size: 13px;
+      color: #000; letter-spacing: 0.16px; line-height: 0.8; white-space: nowrap;
+      transition: color 0.25s ease; position: relative; top: 1.5px;
+    }
+
+    @media (min-width: 1441px) {
+      .header-inner { max-width: none; }
+      .lnb-inner    { max-width: none; }
+    }
+
+    /* ─── BREADCRUMB ─── */
+    .breadcrumb {
+      display: flex; align-items: center; gap: 6px;
+      position: absolute; top: 18px; right: 48px; left: auto;
+      height: auto; z-index: 10;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700; font-size: 13px;
+    }
+    .breadcrumb a, .breadcrumb span { color: #1e8ccc; text-decoration: none; }
+    .breadcrumb a:hover { opacity: 0.75; }
+    .breadcrumb-sep { display: flex; align-items: center; }
+
+    /* ─── DIRECTIONS ─── */
+    .directions-bg {
+      margin-top: 69px;
+    }
+
+    .directions-hero {
+      position: relative;
+      width: 100%; min-width: 1100px;
+      height: 260px;
+      background: linear-gradient(to right, #E9F4FA, #ffffff);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 100px;
+    }
+
+    .directions-hero-title {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 800; font-size: 50px;
+      color: #000; text-align: center;
+      letter-spacing: 0.55px;
+    }
+
+    .directions-content {
+      width: 100%; min-width: 1100px;
+    }
+
+    .directions-content-inner {
+      position: relative;
+      width: 100%; max-width: 1440px;
+      margin: 0 auto;
+      padding: 74px 170px 100px;
+      display: flex; align-items: flex-start;
+    }
+
+    @media (min-width: 1441px) {
+      .directions-content-inner { max-width: none; }
+    }
+
+    .directions-info {
+      width: 457px;
+      flex-shrink: 0;
+    }
+
+    .directions-branch-title {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 800; font-size: 39px;
+      color: #000; letter-spacing: 0.4px;
+      margin-bottom: 27px;
+      display: flex; align-items: center; gap: 12px;
+    }
+
+    .directions-branch-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #1e8ccc;
+      flex-shrink: 0;
+    }
+
+    .directions-address {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 300; font-size: 16px;
+      color: #000; line-height: 28px;
+      letter-spacing: -0.34px;
+    }
+    .directions-address + .directions-address {
+      margin-top: 20px;
+    }
+    .directions-tel-label {
+      color: #1e8ccc;
+      font-weight: 500;
+    }
+
+    .directions-map {
+      width: 643px; height: 404px;
+      background: #d9d9d9;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .directions-map iframe {
+      width: 100%; height: 100%;
+      border: none; display: block;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      position: sticky; bottom: 0; z-index: 0;
+      min-width: 1100px; height: 442px;
+      background: #2a2a2a;
+    }
+    .footer-inner { position: relative; width: 100%; max-width: 1440px; margin: 0 auto; height: 100%; }
+    .ft-company-info { position: absolute; right: 45px; top: 211px; font-family: 'Noto Sans KR', sans-serif; font-weight: 450; font-size: 13px; color: rgba(255,255,255,0.5); line-height: 23px; letter-spacing: -0.28px; white-space: pre-line; text-align: right; }
+    .ft-col-title { position: absolute; font-family: 'Chillax', sans-serif; font-weight: 600; font-size: 16px; color: #fff; white-space: nowrap; margin: 0; top: 41px; letter-spacing: 0.5px; line-height: 28.8px; }
+    .ft-link { position: absolute; font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 500; font-size: 14px; color: #fff; white-space: nowrap; text-decoration: none; line-height: 35px; letter-spacing: 0.5px; opacity: 1; transition: opacity 0.2s; }
+    .ft-link:hover { opacity: 0.55; }
+    .ft-link.ft-en { font-family: 'Chillax', sans-serif; font-weight: 400; line-height: 35px; }
+    .ft-sep { position: absolute; height: 0.5px; background: rgba(255,255,255,0.3); }
+    .ft-divider { position: absolute; left: 45px; right: 45px; height: 0.5px; background: rgba(255,255,255,0.2); }
+    .ft-bottom-link { position: absolute; font-family: 'Noto Sans KR', sans-serif; font-weight: 300; font-size: 13px; color: rgba(255,255,255,0.8); text-decoration: none; white-space: nowrap; top: 323px; line-height: 23px; letter-spacing: -0.28px; transition: opacity 0.2s; }
+    .ft-bottom-link:hover { opacity: 0.55; }
+    .ft-bottom-link.fw-bold { font-weight: 500; color: #fff; }
+    .ft-social { position: absolute; line-height: 0; opacity: 1; transition: opacity 0.2s, transform 0.2s; top: 323px; }
+    .ft-social:hover { opacity: 0.7; transform: scale(1.1); }
+    .ft-copyright { position: absolute; left: 45px; top: 357px; font-family: 'Noto Sans KR', sans-serif; font-weight: 300; font-size: 12px; color: rgba(255,255,255,0.8); white-space: pre-line; margin: 0; }
+
+    /* ─── 푸터 오버레이 효과 ─── */
+    body > *:not(header):not(footer):not(.floating-ecoasset):not(.iframe-modal-backdrop) {
+      position: relative;
+      z-index: 1;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── HEADER ─── -->
+  <header id="header">
+    <div class="header-inner">
+
+      <a class="logo" href="index.html">
+        <img src="assets/logo.png" alt="ecobell">
+      </a>
+
+      <nav id="main-nav">
+        <div class="nav-item" data-menu="company">
+          <a class="nav-link" href="#">Company</a>
+        </div>
+        <div class="nav-item" data-menu="solution">
+          <a class="nav-link" href="#">Solution</a>
+        </div>
+        <div class="nav-item" data-menu="platform">
+          <a class="nav-link" href="#">Platform</a>
+        </div>
+        <div class="nav-item" data-menu="insight">
+          <a class="nav-link" href="insight.html">Insight</a>
+        </div>
+        <div class="nav-item" data-menu="contact">
+          <a class="nav-link" href="notice.html">Contact Us</a>
+        </div>
+      </nav>
+
+      <div class="lnb" id="lnb">
+        <div class="lnb-inner">
+          <div class="lnb-col" data-col="company">
+            <a href="ceo.html">CEO 인사말</a>
+            <a href="#">기업소개</a>
+            <a href="press.html">보도자료</a>
+            <a href="archive.html">아카이브</a>
+          </div>
+          <div class="lnb-col" data-col="solution">
+            <a href="#">전체 솔루션 맵</a>
+            <a href="#" class="en">ecoNODE</a>
+            <div class="lnb-sep"></div>
+            <a href="#">태양광 솔루션</a>
+          </div>
+          <div class="lnb-col" data-col="platform">
+            <a href="#" class="en">eco Asset</a>
+            <a href="#" class="en">Energy Asset</a>
+          </div>
+          <div class="lnb-col" data-col="insight">
+            <a href="https://www.netzeronews.kr/" class="en ext" target="_blank" rel="noopener noreferrer">NetZero News</a>
+            <a href="insight.html?page=eco">친환경 기업정보</a>
+            <a href="insight.html?page=green">그린카 계산기</a>
+          </div>
+          <div class="lnb-col" data-col="contact">
+            <a href="notice.html">공지사항</a>
+            <a href="directions.html">오시는 길</a>
+            <a href="contact.html">문의하기</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="search-overlay" id="search-overlay">
+        <div class="search-content">
+          <div class="search-input-row">
+            <input class="search-input" type="text" placeholder="검색어를 입력해주세요." id="search-input" autocomplete="off">
+            <button class="search-submit" aria-label="검색">
+              <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
+                <circle cx="7" cy="7" r="5" stroke="#000" stroke-width="1.5"/>
+                <line x1="11" y1="11" x2="16" y2="16" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+          <div class="search-divider"></div>
+          <div class="search-tags">
+            <button class="search-tag" data-keyword="에코벨">#에코벨</button>
+            <button class="search-tag" data-keyword="에코에셋">#에코에셋</button>
+            <button class="search-tag" data-keyword="에너지에셋">#에너지에셋</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <span class="gnb-sep" style="color:rgba(0,0,0,0.2);font-size:16px;line-height:1;user-select:none;">|</span>
+        <div class="search-icon-wrap">
+          <button class="search-btn" aria-label="검색" id="search-open-btn">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+              <path d="M21.1063 19.1469L15.4344 14.5406C17.7719 11.3438 17.5313 6.7719 14.6094 3.8844C13.0626 2.33752 11 1.47815 8.80005 1.47815C6.60005 1.47815 4.53755 2.33752 2.99067 3.8844C-0.206201 7.08127 -0.206201 12.3063 2.99067 15.5031C4.53755 17.05 6.60005 17.9094 8.80005 17.9094C10.8969 17.9094 12.8563 17.1188 14.4032 15.7094L20.1438 20.35C20.2813 20.4531 20.4532 20.5219 20.6251 20.5219C20.8657 20.5219 21.0719 20.4188 21.2094 20.2469C21.4844 19.9032 21.4501 19.4219 21.1063 19.1469ZM8.80005 16.3625C7.01255 16.3625 5.36255 15.675 4.09067 14.4032C1.47817 11.7907 1.47817 7.56252 4.09067 4.9844C5.36255 3.71252 7.01255 3.02502 8.80005 3.02502C10.5875 3.02502 12.2375 3.71252 13.5094 4.9844C16.1219 7.5969 16.1219 11.825 13.5094 14.4032C12.2719 15.675 10.5875 16.3625 8.80005 16.3625Z" fill="#000"/>
+            </svg>
+          </button>
+          <button class="close-btn" aria-label="닫기" id="search-close-btn">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <line x1="1" y1="1" x2="17" y2="17" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="17" y1="1" x2="1" y2="17" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <span class="search-tooltip">검색</span>
+        </div>
+        <a class="demo-btn" href="contact.html">
+          <span class="demo-text">문의하기</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ─── MAIN ─── -->
+  <div class="directions-bg">
+
+    <!-- 브레드크럼 -->
+    <div class="breadcrumb">
+      <a href="index.html" class="breadcrumb-home" aria-label="홈">
+        <svg width="11" height="12" viewBox="0 0 11 12" fill="none">
+          <path d="M1 5L5.5 1L10 5V11H7V8H4V11H1V5Z" stroke="#1e8ccc" stroke-width="1.1" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <span class="breadcrumb-sep">
+        <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
+          <path d="M1 1L4 5L1 9" stroke="#1e8ccc" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span>Contact Us</span>
+      <span class="breadcrumb-sep">
+        <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
+          <path d="M1 1L4 5L1 9" stroke="#1e8ccc" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <a href="directions.html">오시는길</a>
+    </div>
+
+    <!-- 히어로 -->
+    <section class="directions-hero">
+      <h1 class="directions-hero-title">오시는길</h1>
+    </section>
+
+    <!-- 콘텐츠 -->
+    <div class="directions-content">
+      <div class="directions-content-inner">
+
+        <!-- 좌: 주소 정보 -->
+        <div class="directions-info">
+          <h2 class="directions-branch-title">
+            본사
+            <span class="directions-branch-dot"></span>
+          </h2>
+          <p class="directions-address">
+            08635, 서울특별시 금천구 시흥대로 193, 701호<br>
+            (시흥동, 아람아이씨티타워)
+          </p>
+          <p class="directions-address">
+            <span class="directions-tel-label">TEL</span> .&nbsp;&nbsp;&nbsp;&nbsp;02-892-9180<br>
+            <span class="directions-tel-label">FAX</span> .&nbsp;&nbsp;&nbsp;&nbsp;02-892-9181
+          </p>
+        </div>
+
+        <!-- 우: 지도 -->
+        <div class="directions-map" id="directions-map">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d101337.36750461363!2d126.80955477246758!3d37.465615349123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b61006db22ec9%3A0x2b136a17fdcd3f57!2zKOyjvCnsl5DsvZTrsqg!5e0!3m2!1sko!2skr!4v1778551398671!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="footer-inner">
+      <p class="ft-company-info">㈜에코벨
+사업자 등록번호 : 598-87-02578  |  대표 : 김소연
+호스팅 서비스 : 주식회사 에코벨 | 통신판매업신고번호 : 2023-서울금천-1822</p>
+
+      <p class="ft-col-title" style="left:45px;">회사정보</p>
+      <p class="ft-col-title" style="left:202px;">솔루션</p>
+      <p class="ft-col-title" style="left:374px;">플랫폼</p>
+      <p class="ft-col-title" style="left:554px;">인사이트</p>
+      <p class="ft-col-title" style="left:750px;">문의하기</p>
+
+      <a class="ft-link" href="ceo.html" style="left:45px;top:86px;">CEO 인사말</a>
+      <a class="ft-link" href="#" style="left:45px;top:121px;">회사소개</a>
+      <a class="ft-link" href="press.html" style="left:45px;top:156px;">보도자료</a>
+      <a class="ft-link" href="archive.html" style="left:45px;top:191px;">아카이브</a>
+
+      <a class="ft-link" href="#" style="left:202px;top:87px;">전체 솔루션 맵</a>
+      <a class="ft-link ft-en" href="#" style="left:202px;top:121px;">ecoNODE</a>
+      <div class="ft-sep" style="left:202px;top:161px;width:80px;"></div>
+      <a class="ft-link" href="#" style="left:202px;top:191px;">태양광 솔루션</a>
+
+      <a class="ft-link ft-en" href="#" style="left:374px;top:87px;">eco Asset</a>
+      <a class="ft-link ft-en" href="#" style="left:374px;top:121px;">Energy Asset</a>
+
+      <a class="ft-link ft-en" href="https://www.netzeronews.kr/" target="_blank" rel="noopener noreferrer" style="left:554px;top:86px;">NetZero News
+        <svg width="6" height="6" viewBox="0 0 8 8" fill="none" style="margin-left:2px;vertical-align:middle;"><path d="M1 7L7 1M7 1H3M7 1V5" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="ft-link" href="insight.html?page=eco" style="left:554px;top:121px;">친환경 기업정보</a>
+      <a class="ft-link" href="insight.html?page=green" style="left:554px;top:156px;">그린카 계산기</a>
+
+      <a class="ft-link ft-en" href="notice.html" style="left:750px;top:87px;">공지사항</a>
+      <a class="ft-link ft-en" href="directions.html" style="left:750px;top:121px;">오시는길</a>
+      <a class="ft-link ft-en" href="contact.html" style="left:750px;top:156px;">문의하기</a>
+
+      <div class="ft-divider" style="top:305px;"></div>
+
+      <a class="ft-bottom-link fw-bold" href="#" style="left:45px;">개인정보처리방침</a>
+      <a class="ft-bottom-link" href="#" style="left:173px;">이용약관</a>
+      <a class="ft-bottom-link" href="#" style="left:250px;">이메일무단수집거부</a>
+      <a class="ft-bottom-link" href="#" style="left:383px;">자주 묻는 질문(FAQ)</a>
+
+      <a class="ft-social" href="#" aria-label="YouTube" style="left:1283px;">
+        <svg width="22" height="23" viewBox="0 0 22 23" fill="none"><rect x="1.5" y="5" width="19" height="13" rx="3" stroke="#fff" stroke-width="1.3"/><polygon points="8.5,8.5 15.5,11.5 8.5,14.5" fill="#fff"/></svg>
+      </a>
+      <a class="ft-social" href="#" aria-label="Instagram" style="left:1328px;">
+        <svg width="22" height="23" viewBox="0 0 22 23" fill="none"><rect x="2" y="2.5" width="18" height="18" rx="5" stroke="#fff" stroke-width="1.3"/><circle cx="11" cy="11.5" r="4" stroke="#fff" stroke-width="1.3"/><circle cx="16" cy="6.5" r="1.1" fill="#fff"/></svg>
+      </a>
+      <a class="ft-social" href="#" aria-label="Facebook" style="left:1372px;">
+        <svg width="22" height="23" viewBox="0 0 22 23" fill="none"><path d="M12.5 11.5H14.8L15.5 8.5H12.5V6.8C12.5 5.9 12.9 5.2 14.2 5.2H15.8V2.6C15.8 2.6 14.3 2.3 12.9 2.3C10.1 2.3 8.5 3.9 8.5 6.5V8.5H5.8V11.5H8.5V20.5H12.5V11.5Z" fill="#fff"/></svg>
+      </a>
+
+      <p class="ft-copyright">서울시 금천구 시흥대로 193, 701호(08635)
+ⓒ ecobell Co., Ltd. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // ─── 헤더 스크롤 ───
+    let _lastScrollY = window.scrollY;
+    window.addEventListener('scroll', () => {
+      const cur = window.scrollY;
+      const header = document.getElementById('header');
+      header.classList.toggle('scrolled', cur > 10);
+      if (cur > _lastScrollY && cur > 80) {
+        header.classList.add('gnb-hidden');
+      } else {
+        header.classList.remove('gnb-hidden');
+      }
+      if (cur > _lastScrollY && header.classList.contains('search-open')) closeSearch();
+      _lastScrollY = cur;
+    }, { passive: true });
+
+    // ─── GNB / LNB ───
+    const nav      = document.getElementById('main-nav');
+    const lnb      = document.getElementById('lnb');
+    const navItems = document.querySelectorAll('.nav-item');
+    const lnbCols  = document.querySelectorAll('.lnb-col');
+    let closeTimer;
+
+    function openLnb(menuName) {
+      clearTimeout(closeTimer);
+      nav.classList.add('lnb-open');
+      lnb.classList.add('open');
+      navItems.forEach(item => item.classList.toggle('lnb-active', item.dataset.menu === menuName));
+      lnbCols.forEach(col => col.classList.toggle('active', col.dataset.col === menuName));
+    }
+
+    function schedulClose() {
+      closeTimer = setTimeout(() => {
+        nav.classList.remove('lnb-open');
+        lnb.classList.remove('open');
+        navItems.forEach(i => i.classList.remove('lnb-active'));
+        lnbCols.forEach(c => c.classList.remove('active'));
+      }, 120);
+    }
+
+    navItems.forEach(item => {
+      item.addEventListener('mouseenter', () => openLnb(item.dataset.menu));
+      item.addEventListener('mouseleave', schedulClose);
+    });
+    lnb.addEventListener('mouseenter', () => clearTimeout(closeTimer));
+    lnb.addEventListener('mouseleave', schedulClose);
+    lnbCols.forEach(col => {
+      col.addEventListener('mouseenter', () => {
+        const menu = col.dataset.col;
+        navItems.forEach(item => item.classList.toggle('lnb-active', item.dataset.menu === menu));
+        lnbCols.forEach(c => c.classList.toggle('active', c.dataset.col === menu));
+      });
+    });
+
+    // ─── 검색 ───
+    const searchOverlay  = document.getElementById('search-overlay');
+    const searchInput    = document.getElementById('search-input');
+    const searchOpenBtn  = document.getElementById('search-open-btn');
+    const searchCloseBtn = document.getElementById('search-close-btn');
+
+    function openSearch() {
+      header.classList.add('search-open');
+      searchOverlay.classList.add('open');
+      nav.classList.remove('lnb-open');
+      lnb.classList.remove('open');
+      navItems.forEach(i => i.classList.remove('lnb-active'));
+      lnbCols.forEach(c => c.classList.remove('active'));
+      setTimeout(() => searchInput.focus(), 50);
+    }
+    function closeSearch() {
+      header.classList.remove('search-open');
+      searchOverlay.classList.remove('open');
+    }
+
+    searchOpenBtn.addEventListener('click', openSearch);
+    searchCloseBtn.addEventListener('click', closeSearch);
+    document.querySelectorAll('.search-tag').forEach(tag => {
+      tag.addEventListener('click', () => { searchInput.value = tag.dataset.keyword; searchInput.focus(); });
+    });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSearch(); });
+    document.querySelector('.search-submit').addEventListener('click', () => {
+      const kw = searchInput.value.trim();
+      if (kw) window.location.href = 'search.html?q=' + encodeURIComponent(kw);
+    });
+    searchInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { const kw = searchInput.value.trim(); if (kw) window.location.href = 'search.html?q=' + encodeURIComponent(kw); }
+    });
+
+    // Contact Us GNB 활성화
+    const contactItem = document.querySelector('[data-menu="contact"]');
+    if (contactItem) contactItem.querySelector('.nav-link').style.color = '#1e8dcd';
+  </script>
+</body>
+</html>

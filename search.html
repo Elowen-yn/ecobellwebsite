@@ -305,22 +305,16 @@
     .search-tags {
       position: absolute;
       top: 117px;
-      left: 23.9583%; /* 345/1440 */
+      left: 50%; transform: translateX(-50%);
+      width: 749px;
       display: flex;
       gap: 9px;
     }
     .search-tag {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 700;
-      font-size: 11px;
-      color: rgba(0,0,0,0.55);
-      letter-spacing: 0.11px;
-      border: 0.3px solid rgba(0,0,0,0.15);
-      border-radius: 100px;
-      padding: 0 10px;
-      height: 22px;
-      background: transparent;
-      cursor: pointer;
+      font-weight: 700; font-size: 11.6px; color: rgba(0,0,0,0.55);
+      border: 0.3px solid rgba(0,0,0,0.15); border-radius: 100px;
+      padding: 0 10.5px; height: 23px; background: transparent; cursor: pointer;
       transition: border-color 0.2s, color 0.2s;
     }
     .search-tag:hover {
@@ -467,7 +461,7 @@
     /* ─── SEARCH HERO ─── */
     /* Total 271px; first 69px behind fixed header; visible area = 202px below header */
     .search-hero {
-      background: #fafcfd;
+      background: #fafcfd !important;
       height: 271px;
       position: relative;
       border-bottom: 0.2px solid rgba(0,0,0,0.15);
@@ -542,9 +536,9 @@
     }
     .hero-tag {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 700; font-size: 11px; color: rgba(0,0,0,0.55);
+      font-weight: 700; font-size: 11.6px; color: rgba(0,0,0,0.55);
       border: 0.3px solid rgba(0,0,0,0.15); border-radius: 100px;
-      padding: 0 10px; height: 22px; background: transparent; cursor: pointer;
+      padding: 0 10.5px; height: 23px; background: transparent; cursor: pointer;
       transition: border-color 0.2s, color 0.2s;
     }
     .hero-tag:hover { border-color: rgba(0,0,0,0.4); color: rgba(0,0,0,0.85); }
@@ -663,18 +657,19 @@
     /* ─── EMPTY STATE ─── */
     .search-empty { display: none; flex-direction: column; align-items: center; padding-top: 47px; }
     .search-empty.visible { display: flex; }
-    .search-empty-icon { margin-bottom: 30px; }
+    .search-empty-icon { margin-bottom: 20px; display: flex; justify-content: center; }
     .search-empty-title {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 700; font-size: 25px; color: #000;
+      font-weight: 500; font-size: 20px; color: #000;
       letter-spacing: 0.25px; margin-bottom: 35px;
-      text-align: left; width: 490px;
+      text-align: center; width: 490px;
     }
-    .search-empty-tips { width: 490px; list-style: none; }
+    .search-empty-title .kw { font-weight: 800; }
+    .search-empty-tips { width: 490px; list-style: none; text-align: left; padding-left: 20px; }
     .search-empty-tips li {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 400; font-size: 16px; color: #000;
-      letter-spacing: 0.16px; line-height: 2.2;
+      font-weight: 400; font-size: 13px; color: #000;
+      letter-spacing: 0.13px; line-height: 2.2;
     }
 
     /* ─── PAGINATION (Fix 3: no blue top border) ─── */
@@ -777,7 +772,7 @@
     <div class="header-inner">
 
       <!-- Logo -->
-      <a class="logo" href="#">
+      <a class="logo" href="index.html">
         <img src="assets/logo.png" alt="ecobell">
       </a>
 
@@ -831,7 +826,7 @@
         <!-- Contact Us -->
         <div class="lnb-col" data-col="contact">
           <a href="notice.html">공지사항</a>
-          <a href="#">오시는 길</a>
+          <a href="directions.html">오시는 길</a>
           <a href="contact.html">문의하기</a>
         </div>
         </div><!-- /.lnb-inner -->
@@ -965,14 +960,9 @@
         <!-- Empty state -->
         <div class="search-empty" id="search-empty">
           <div class="search-empty-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M12 2.25C7.44 2.25 3.75 5.97 3.75 10.53V19.5C3.75 19.79 3.91 20.05 4.17 20.19L6.27 21.15C6.88 21.42 7.55 21.56 8.22 21.56C8.93 21.56 9.67 21.4 10.34 21.07L10.54 20.97C11.46 20.5 12.54 20.5 13.46 20.97C14.87 21.67 16.55 21.64 17.94 20.89L19.47 20.09C19.7 19.96 19.86 19.71 19.86 19.43V10.5C19.86 5.97 16.17 2.25 12 2.25ZM18.36 18.98L17.22 19.58C16.17 20.13 14.91 20.16 13.84 19.6C12.43 18.88 10.77 18.88 9.36 19.6L9.16 19.7C8.2 20.15 7.08 20.18 6.09 19.76L5.25 19.38V10.53C5.25 6.8 8.28 3.75 12 3.75C15.72 3.75 18.75 6.8 18.75 10.5V18.98H18.36Z" fill="#1e8dcd"/>
-              <circle cx="9.25" cy="10.75" r="1.25" fill="#1e8dcd"/>
-              <circle cx="14.75" cy="10.75" r="1.25" fill="#1e8dcd"/>
-              <path d="M10 14C10 14 10.67 15 12 15C13.33 15 14 14 14 14" stroke="#1e8dcd" stroke-width="1.2" stroke-linecap="round"/>
-            </svg>
+            <img src="assets/ghost-icon.png" width="24" height="24" alt="검색 결과 없음" style="display:block;">
           </div>
-          <p class="search-empty-title"><span id="empty-keyword">'검색어'</span>에 대한 검색 결과가 없습니다</p>
+          <p class="search-empty-title"><span class="kw" id="empty-keyword">'검색어'</span>에 대한 검색 결과가 없습니다</p>
           <ul class="search-empty-tips">
             <li>∙ 검색어의 철자가 정확한지 확인해 주세요.</li>
             <li>∙ 한글을 영어로 혹은 영어를 한글로 입력했는지 확인해 주세요.</li>
@@ -1042,7 +1032,7 @@
       <a class="ft-link" href="insight.html?page=eco" style="left:554px;top:121px;">친환경 기업정보</a>
       <a class="ft-link" href="insight.html?page=green" style="left:554px;top:156px;">그린카 계산기</a>
       <a class="ft-link ft-en" href="notice.html" style="left:750px;top:87px;">공지사항</a>
-      <a class="ft-link ft-en" href="#" style="left:750px;top:121px;">오시는길</a>
+      <a class="ft-link ft-en" href="directions.html" style="left:750px;top:121px;">오시는길</a>
       <a class="ft-link ft-en" href="contact.html" style="left:750px;top:156px;">문의하기</a>
       <div class="ft-divider" style="top:305px;"></div>
       <a class="ft-bottom-link fw-bold" href="#" style="left:45px;">개인정보처리방침</a>

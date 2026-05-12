@@ -312,7 +312,7 @@
     .search-tag {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-weight: 700;
-      font-size: 11px;
+      font-size: 11.6px;
       color: rgba(0,0,0,0.55);
       letter-spacing: 0.11px;
       border: 0.3px solid rgba(0,0,0,0.15);
@@ -489,14 +489,14 @@
       background:
         linear-gradient(to bottom, #E9F4FA, #ffffff) no-repeat top / 100% 604px,
         #ffffff;
-      min-height: 1414px;
+      min-height: 1300px;
     }
 
     .ceo-section {
       position: relative;
       width: 1440px;
       margin: 0 auto;
-      min-height: 1414px;
+      min-height: 1300px;
     }
 
     /* 브레드크럼 + H1 — press.html .page-header 구조와 동일 */
@@ -535,7 +535,7 @@
     /* 데코 SVG */
     .ceo-deco {
       position: absolute;
-      top: 213px; left: 879px;
+      top: 228px; left: 879px;
       width: 208px; height: 210px;
       z-index: 3;
       pointer-events: none;
@@ -555,11 +555,11 @@
     /* 인용구 (흰 배경 하단) */
     .ceo-quote {
       position: absolute;
-      top: 338px; left: 170px;
+      top: 310px; left: 170px;
       width: 661px;
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-weight: 800; font-size: 25px; color: #000;
-      line-height: 32px; letter-spacing: -0.54px;
+      line-height: 42px; letter-spacing: -0.54px;
       white-space: pre-line;
       z-index: 1;
     }
@@ -567,11 +567,11 @@
     /* 본문 (그라디언트 구간) */
     .ceo-message {
       position: absolute;
-      top: 447px; left: 170px;
+      top: 442px; left: 170px;
       width: 666px;
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-weight: 400; font-size: 17px; color: #000;
-      line-height: 36px; letter-spacing: 0;
+      line-height: 32px; letter-spacing: 0;
       text-align: justify;
       z-index: 1;
     }
@@ -588,7 +588,7 @@
     /* CEO 이름 */
     .ceo-name {
       position: absolute;
-      top: 733px; left: 943px;
+      top: 728px; left: 943px;
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-size: 20px; color: #000;
       line-height: 30px; letter-spacing: -0.40px;
@@ -597,13 +597,12 @@
     .ceo-name-title { font-weight: 400; display: block; }
     .ceo-name-person { font-weight: 800; display: block; }
 
-    /* 서명/직인 사각형 */
+    /* 서명 이미지 */
     .ceo-signature {
       position: absolute;
-      top: 733px; left: 1142px;
-      width: 131px; height: 47px;
-      background: #d9d9d9;
-      border-radius: 2px;
+      top: 733px; left: 1100px;
+      width: 181px; height: 51px;
+      object-fit: contain;
       z-index: 2;
     }
 
@@ -662,6 +661,18 @@
       z-index: 1;
       background: #fff;
     }
+
+    /* ─── 스크롤 등장 모션 ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body>
@@ -671,7 +682,7 @@
     <div class="header-inner">
 
       <!-- Logo -->
-      <a class="logo" href="#">
+      <a class="logo" href="index.html">
         <img src="assets/logo.png" alt="ecobell">
       </a>
 
@@ -725,7 +736,7 @@
         <!-- Contact Us -->
         <div class="lnb-col" data-col="contact">
           <a href="notice.html">공지사항</a>
-          <a href="#">오시는 길</a>
+          <a href="directions.html">오시는 길</a>
           <a href="contact.html">문의하기</a>
         </div>
         </div><!-- /.lnb-inner -->
@@ -813,33 +824,33 @@
       </div>
 
       <!-- 데코 SVG (top:150 left:806 / 초록 우측=사진 좌측, z:3) -->
-      <img class="ceo-deco" src="assets/ceo-deco.svg" alt="" aria-hidden="true">
+      <img class="ceo-deco reveal" data-reveal-group="photo" src="assets/ceo-deco.svg" alt="" aria-hidden="true">
 
       <!-- CEO 사진 (top:214 left:1021 / 332×393, z:2) -->
-      <img class="ceo-photo" src="assets/ceo-photo.png" alt="에코벨 대표이사 김소연">
+      <img class="ceo-photo reveal" data-reveal-group="photo" src="assets/ceo-photo.png" alt="에코벨 대표이사 김소연">
 
       <!-- CEO 이름 -->
-      <p class="ceo-name">
+      <p class="ceo-name reveal" data-reveal-group="name">
         <span class="ceo-name-title">에코벨 대표이사</span>
         <span class="ceo-name-person">김소연</span>
       </p>
 
-      <!-- 서명/직인 사각형 -->
-      <div class="ceo-signature" aria-hidden="true"></div>
+      <!-- 서명 이미지 -->
+      <img class="ceo-signature reveal" data-reveal-group="name" src="assets/ceo-signature.png" alt="김소연 서명" aria-hidden="true">
 
       <!-- 인용구 (top:279 left:88 / 흰 배경 하단) -->
-      <p class="ceo-quote">에코벨은 에너지 데이터의 조화로운 연결을 통해
+      <p class="ceo-quote reveal">에코벨은 에너지 데이터의 조화로운 연결을 통해
 기업과 사회가 함께 성장하는 내일의 하모니를 만들어가겠습니다.</p>
 
       <!-- 본문 (top:401 left:88 / 문단별 p태그, 문단간격 15px) -->
       <div class="ceo-message">
-        <p>안녕하십니까. 에코벨 대표이사 김소연입니다.</p>
-        <p>에코벨의 성장을 위해 변함없는 신뢰와 성원을 보내주시는 모든 이해관계자 여러분께 깊은 감사를 드립니다.</p>
-        <p style="text-align-last:justify;">에너지 전환이 가속화되는 가운데, 데이터 기반의 에너지 관리 역량은 기업 경쟁력을 좌우하는<br>핵심 요소로 자리 잡고 있습니다. 이러한 흐름 속에서 에코벨은 에너지와 탄소 데이터를 가치 있는 흐름으로 잇는 연결자로 자리매김하며, 2023년 설립 이후 분산된 데이터를 체계적으로 수집·<br><span style="text-align:left;display:block;text-align-last:left;">분석하여 친환경 시장의 새로운 기준을 만들어가고 있습니다.</span></p>
-        <p>자체 RTU 솔루션인 ecoNODE를 통해 수집된 정밀한 데이터는 기업의 합리적인 의사결정과 만나 경영의 효율을 높입니다. 이렇게 도출된 결과는 다시 탄소배출권 시장과 연결되어, 환경적 가치와 경제적 가치가 함께 실현되는 구조를 만들어갑니다.</p>
-        <p style="text-align-last:justify;">우리가 주목하는 진정한 가치는 화합<span class="orchestrate">Orchestrate</span>에 있습니다. 데이터와 기술, 그리고 사람이<br><span style="display:block;text-align:left;text-align-last:left;">조화를 이루는 비즈니스 하모니를 통해, 친환경 에너지 전환을 가속화하고 기업의 지속 가능한 성장과 친환경 미래를 함께 만들어가겠습니다.</span></p>
-        <p style="text-align-last:justify;">기술을 데이터로, 데이터를 가치로, 그리고 그 가치를 우리 모두의 행복으로 이어가는 여정에<br><span style="display:block;text-align:left;text-align-last:left;">에코벨이 함께하겠습니다.</span></p>
-        <p>감사합니다.</p>
+        <p class="reveal" data-reveal-delay="50">안녕하십니까. 에코벨 대표이사 김소연입니다.</p>
+        <p class="reveal" data-reveal-delay="50">에코벨의 성장을 위해 변함없는 신뢰와 성원을 보내주시는 모든 이해관계자 여러분께 깊은 감사를 드립니다.</p>
+        <p class="reveal" data-reveal-delay="50" style="text-align-last:justify;">에너지 전환이 가속화되는 가운데, 데이터 기반의 에너지 관리 역량은 기업 경쟁력을 좌우하는<br>핵심 요소로 자리 잡고 있습니다. 이러한 흐름 속에서 에코벨은 에너지와 탄소 데이터를 가치 있는 흐름으로 잇는 연결자로 자리매김하며, 2023년 설립 이후 분산된 데이터를 체계적으로 수집·<br><span style="text-align:left;display:block;text-align-last:left;">분석하여 친환경 시장의 새로운 기준을 만들어가고 있습니다.</span></p>
+        <p class="reveal" data-reveal-delay="50">자체 RTU 솔루션인 ecoNODE를 통해 수집된 정밀한 데이터는 기업의 합리적인 의사결정과 만나 경영의 효율을 높입니다. 이렇게 도출된 결과는 다시 탄소배출권 시장과 연결되어, 환경적 가치와 경제적 가치가 함께 실현되는 구조를 만들어갑니다.</p>
+        <p class="reveal" data-reveal-delay="50" style="text-align-last:justify;">우리가 주목하는 진정한 가치는 화합<span class="orchestrate">Orchestrate</span>에 있습니다. 데이터와 기술, 그리고 사람이<br><span style="display:block;text-align:justify;text-align-last:justify;">조화를 이루는 비즈니스 하모니를 통해, 친환경 에너지 전환을 가속화하고 기업의 지속 가능한</span><span style="display:block;text-align:left;text-align-last:left;">성장과 친환경 미래를 함께 만들어가겠습니다.</span></p>
+        <p class="reveal" data-reveal-delay="50" style="text-align-last:justify;">기술을 데이터로, 데이터를 가치로, 그리고 그 가치를 우리 모두의 행복으로 이어가는 여정에<br><span style="display:block;text-align:left;text-align-last:left;">에코벨이 함께하겠습니다.</span></p>
+        <p class="reveal" data-reveal-delay="50">감사합니다.</p>
       </div>
 
     </section>
@@ -892,7 +903,7 @@
       <a class="ft-link" href="insight.html?page=green" style="left:554px;top:156px;">그린카 계산기</a>
 
       <a class="ft-link ft-en" href="notice.html" style="left:750px;top:87px;">공지사항</a>
-      <a class="ft-link ft-en" href="#" style="left:750px;top:121px;">오시는길</a>
+      <a class="ft-link ft-en" href="directions.html" style="left:750px;top:121px;">오시는길</a>
       <a class="ft-link ft-en" href="contact.html" style="left:750px;top:156px;">문의하기</a>
 
       <div class="ft-divider" style="top:305px;"></div>
@@ -1045,6 +1056,33 @@
 
 
 
+
+    // ─── 스크롤 등장 모션 ───
+    const revealEls = document.querySelectorAll('.reveal');
+
+    function showGroup(groupName) {
+      document.querySelectorAll(`.reveal[data-reveal-group="${groupName}"]`)
+        .forEach(el => el.classList.add('visible'));
+    }
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const group = el.dataset.revealGroup;
+        const delay = parseInt(el.dataset.revealDelay) || 0;
+        if (group) {
+          setTimeout(() => showGroup(group), delay);
+          document.querySelectorAll(`.reveal[data-reveal-group="${group}"]`)
+            .forEach(g => revealObserver.unobserve(g));
+        } else {
+          setTimeout(() => el.classList.add('visible'), delay);
+          revealObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealEls.forEach(el => revealObserver.observe(el));
 
     // 페이지 제목 클릭 → LNB 해당 링크와 동일 동작
     const pageTitle = document.querySelector('.page-title');
