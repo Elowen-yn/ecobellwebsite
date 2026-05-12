@@ -665,13 +665,18 @@
     /* ─── 스크롤 등장 모션 ─── */
     .reveal {
       opacity: 0;
-      transform: translateY(32px);
-      transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-                  transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateY(28px);
+      transition: opacity 0.65s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .reveal.visible {
       opacity: 1;
       transform: translateY(0);
+    }
+    /* 나가는 방향 — 빠르게 사라짐 */
+    .reveal:not(.visible) {
+      transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
   </style>
 </head>
@@ -844,13 +849,13 @@
 
       <!-- 본문 (top:401 left:88 / 문단별 p태그, 문단간격 15px) -->
       <div class="ceo-message">
-        <p class="reveal" data-reveal-delay="50">안녕하십니까. 에코벨 대표이사 김소연입니다.</p>
-        <p class="reveal" data-reveal-delay="50">에코벨의 성장을 위해 변함없는 신뢰와 성원을 보내주시는 모든 이해관계자 여러분께 깊은 감사를 드립니다.</p>
-        <p class="reveal" data-reveal-delay="50" style="text-align-last:justify;">에너지 전환이 가속화되는 가운데, 데이터 기반의 에너지 관리 역량은 기업 경쟁력을 좌우하는<br>핵심 요소로 자리 잡고 있습니다. 이러한 흐름 속에서 에코벨은 에너지와 탄소 데이터를 가치 있는 흐름으로 잇는 연결자로 자리매김하며, 2023년 설립 이후 분산된 데이터를 체계적으로 수집·<br><span style="text-align:left;display:block;text-align-last:left;">분석하여 친환경 시장의 새로운 기준을 만들어가고 있습니다.</span></p>
-        <p class="reveal" data-reveal-delay="50">자체 RTU 솔루션인 ecoNODE를 통해 수집된 정밀한 데이터는 기업의 합리적인 의사결정과 만나 경영의 효율을 높입니다. 이렇게 도출된 결과는 다시 탄소배출권 시장과 연결되어, 환경적 가치와 경제적 가치가 함께 실현되는 구조를 만들어갑니다.</p>
-        <p class="reveal" data-reveal-delay="50" style="text-align-last:justify;">우리가 주목하는 진정한 가치는 화합<span class="orchestrate">Orchestrate</span>에 있습니다. 데이터와 기술, 그리고 사람이<br><span style="display:block;text-align:justify;text-align-last:justify;">조화를 이루는 비즈니스 하모니를 통해, 친환경 에너지 전환을 가속화하고 기업의 지속 가능한</span><span style="display:block;text-align:left;text-align-last:left;">성장과 친환경 미래를 함께 만들어가겠습니다.</span></p>
-        <p class="reveal" data-reveal-delay="50" style="text-align-last:justify;">기술을 데이터로, 데이터를 가치로, 그리고 그 가치를 우리 모두의 행복으로 이어가는 여정에<br><span style="display:block;text-align:left;text-align-last:left;">에코벨이 함께하겠습니다.</span></p>
-        <p class="reveal" data-reveal-delay="50">감사합니다.</p>
+        <p class="reveal" data-reveal-delay="0" data-hide-group="message">안녕하십니까. 에코벨 대표이사 김소연입니다.</p>
+        <p class="reveal" data-reveal-delay="50" data-hide-group="message">에코벨의 성장을 위해 변함없는 신뢰와 성원을 보내주시는 모든 이해관계자 여러분께 깊은 감사를 드립니다.</p>
+        <p class="reveal" data-reveal-delay="100" data-hide-group="message" style="text-align-last:justify;">에너지 전환이 가속화되는 가운데, 데이터 기반의 에너지 관리 역량은 기업 경쟁력을 좌우하는<br>핵심 요소로 자리 잡고 있습니다. 이러한 흐름 속에서 에코벨은 에너지와 탄소 데이터를 가치 있는 흐름으로 잇는 연결자로 자리매김하며, 2023년 설립 이후 분산된 데이터를 체계적으로 수집·<br><span style="text-align:left;display:block;text-align-last:left;">분석하여 친환경 시장의 새로운 기준을 만들어가고 있습니다.</span></p>
+        <p class="reveal" data-reveal-delay="150" data-hide-group="message">자체 RTU 솔루션인 ecoNODE를 통해 수집된 정밀한 데이터는 기업의 합리적인 의사결정과 만나 경영의 효율을 높입니다. 이렇게 도출된 결과는 다시 탄소배출권 시장과 연결되어, 환경적 가치와 경제적 가치가 함께 실현되는 구조를 만들어갑니다.</p>
+        <p class="reveal" data-reveal-delay="200" data-hide-group="message" style="text-align-last:justify;">우리가 주목하는 진정한 가치는 화합<span class="orchestrate">Orchestrate</span>에 있습니다. 데이터와 기술, 그리고 사람이<br><span style="display:block;text-align:justify;text-align-last:justify;">조화를 이루는 비즈니스 하모니를 통해, 친환경 에너지 전환을 가속화하고 기업의 지속 가능한</span><span style="display:block;text-align:left;text-align-last:left;">성장과 친환경 미래를 함께 만들어가겠습니다.</span></p>
+        <p class="reveal" data-reveal-delay="250" data-hide-group="message" style="text-align-last:justify;">기술을 데이터로, 데이터를 가치로, 그리고 그 가치를 우리 모두의 행복으로 이어가는 여정에<br><span style="display:block;text-align:left;text-align-last:left;">에코벨이 함께하겠습니다.</span></p>
+        <p class="reveal" data-reveal-delay="300" data-hide-group="message">감사합니다.</p>
       </div>
 
     </section>
@@ -1057,30 +1062,55 @@
 
 
 
-    // ─── 스크롤 등장 모션 ───
+    // ─── 스크롤 등장 모션 (양방향) ───
     const revealEls = document.querySelectorAll('.reveal');
+    const revealTimers = new Map();
 
-    function showGroup(groupName) {
+    let scrollingUp = false;
+    let lastScrollY = window.scrollY;
+    window.addEventListener('scroll', () => {
+      scrollingUp = window.scrollY < lastScrollY;
+      lastScrollY = window.scrollY;
+    }, { passive: true });
+
+    function showGroup(groupName, noLift) {
       document.querySelectorAll(`.reveal[data-reveal-group="${groupName}"]`)
-        .forEach(el => el.classList.add('visible'));
+        .forEach(el => {
+          el.style.transform = noLift ? 'translateY(0)' : '';
+          el.classList.add('visible');
+        });
     }
 
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
         const el = entry.target;
         const group = el.dataset.revealGroup;
         const delay = parseInt(el.dataset.revealDelay) || 0;
-        if (group) {
-          setTimeout(() => showGroup(group), delay);
-          document.querySelectorAll(`.reveal[data-reveal-group="${group}"]`)
-            .forEach(g => revealObserver.unobserve(g));
-        } else {
-          setTimeout(() => el.classList.add('visible'), delay);
-          revealObserver.unobserve(el);
+
+        // 기존 예약된 타이머 취소
+        if (revealTimers.has(el)) {
+          clearTimeout(revealTimers.get(el));
+          revealTimers.delete(el);
+        }
+
+        if (entry.intersectionRatio >= 0.1) {
+          // 10% 이상 보일 때 등장 — 위로 스크롤 시 제자리 페이드인, 지연 없음
+          const actualDelay = scrollingUp ? 0 : delay;
+          const up = scrollingUp;
+          const t = setTimeout(() => {
+            if (up) el.style.transform = 'translateY(0)';
+            else el.style.transform = '';
+            if (group) showGroup(group, up);
+            else el.classList.add('visible');
+          }, actualDelay);
+          revealTimers.set(el, t);
+        } else if (entry.intersectionRatio === 0) {
+          // 완전히 화면 밖으로 나갔을 때 — 각 요소 개별 숨김
+          el.style.transform = '';
+          el.classList.remove('visible');
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: [0, 0.1] });
 
     revealEls.forEach(el => revealObserver.observe(el));
 

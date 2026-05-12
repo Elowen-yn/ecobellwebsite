@@ -467,96 +467,179 @@
     /* ─── PAGE CONTENT ─── */
     main { padding-top: 69px; }
 
-    .page-header {
+    /* ─── PRESS HERO ─── */
+    .press-hero {
+      position: relative;
+      width: 100%;
+      height: 318px;
+      background: url('assets/press-hero-bg.png') center center / cover no-repeat;
+      overflow: hidden;
+    }
+    .press-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+    }
+    .press-hero-inner {
       position: relative;
       width: 100%; max-width: 1440px;
+      height: 100%;
       margin: 0 auto;
-      padding: 39px 75px 102px;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 1;
     }
-
-    /* 브레드크럼 */
-    .breadcrumb {
+    .press-hero-breadcrumb {
+      position: absolute;
+      top: 18px; right: 48px;
       display: flex; align-items: center; gap: 6px;
-      position: absolute; top: 18px; right: 48px;
-      margin-bottom: 0;
     }
-    @media (min-width: 1441px) {
-      .breadcrumb { right: calc((100% - 1440px) / 2 + 48px); }
-    }
-    .breadcrumb-home { width: 11px; height: 12px; display: flex; align-items: center; }
-    .breadcrumb-sep { width: 5px; height: 10px; display: flex; align-items: center; }
-    .breadcrumb a,
-    .breadcrumb span {
+    .press-hero-breadcrumb a,
+    .press-hero-breadcrumb span {
       font-family: 'Chillax', sans-serif;
       font-weight: 400; font-size: 13px;
-      color: #1e8dcd;
+      color: rgba(255,255,255,0.8);
       text-decoration: none; letter-spacing: 0.13px;
     }
-    .breadcrumb a[href]:not(.breadcrumb-home) { cursor: pointer; }
-    .breadcrumb a[href]:not(.breadcrumb-home):hover { opacity: 0.7; }
-    @media (min-width: 1441px) {
-      .page-header { max-width: none; }
-    }
-
-    /* 페이지 제목 영역 */
-    .page-title-row { display: block; margin-top: 0; }
-    .page-title-left {}
-    .page-title {
+    .press-hero-breadcrumb a:hover { opacity: 0.7; }
+    .press-hero-sep { width: 5px; height: 10px; display: flex; align-items: center; }
+    .press-hero-title {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 800;
-      font-size: 45px;
-      color: #000;
-      line-height: 1.289;
-      letter-spacing: 0.45px;
-      margin-bottom: 0;
-      display: flex;
-      align-items: flex-start;
-      gap: 9px;
+      font-weight: 800; font-size: 55px; color: #fff;
+      letter-spacing: 0.55px; text-align: center;
     }
-    .page-title-dot {
-      width: 8px; height: 8px;
-      background: #1e8ccc;
-      border-radius: 50%;
-      flex-shrink: 0;
-      position: relative;
-      top: -4px;
-    }
-    .page-subtitle {
-      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 400;
-      font-size: 18px;
-      color: #000;
-      letter-spacing: 0.18px;
-      line-height: 40px;
-    }
-
-    /* 검색바 */
-    .page-search {
+    .press-hero-sns {
       position: absolute;
-      top: 257px;
-      right: 75px;
+      bottom: 28px; right: 75px;
+      display: flex; align-items: center; gap: 20px;
+    }
+    .press-hero-sns-label {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 800; font-size: 20px; color: #fff;
+    }
+    .press-hero-sns-icons { display: flex; gap: 14px; align-items: center; }
+    .press-hero-sns-icons a {
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0.85; transition: opacity 0.2s; text-decoration: none;
+    }
+    .press-hero-sns-icons a:hover { opacity: 1; }
+
+    /* ─── FEATURED ARTICLE ─── */
+    .press-featured-section {
+      width: 100%;
+      padding: 50px 45px 24px;
+    }
+    .press-featured-wrap {
+      max-width: 1350px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .press-featured-inner {
       display: flex;
-      align-items: center;
-      border: 0.5px solid rgba(0, 0, 0, 0.3);
-      width: 338px;
-      height: 39px;
-      padding: 0 14px;
-      border-radius: 5px;
+      background: #f2f2f2;
+      height: 380px;
+      overflow: hidden;
+    }
+    .press-featured-image {
+      width: 540px; height: 380px;
+      flex-shrink: 0; display: block;
+      text-decoration: none;
+      background: #c0c0c0;
+      transition: opacity 0.2s;
+      object-fit: cover;
+    }
+    .press-featured-image:hover { opacity: 0.9; }
+    .press-featured-body {
+      padding: 44px 50px;
+      display: flex; flex-direction: column;
+      gap: 14px; justify-content: center;
+    }
+    .press-featured-date {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-size: 16px; font-weight: 700; color: #000;
+    }
+    .press-featured-title {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-size: 28px; font-weight: 800; color: #000;
+      line-height: 1.45; text-decoration: none;
+      display: -webkit-box; -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical; overflow: hidden;
+      transition: color 0.2s;
+    }
+    .press-featured-title:hover { color: #1e8dcd; }
+    .press-featured-desc {
+      font-size: 14px; color: #000; line-height: 1.7;
+      display: -webkit-box; -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .press-featured-more {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-size: 12px; font-weight: 800; color: #1e8dcd;
+      text-decoration: none;
+    }
+    .press-featured-more:hover { text-decoration: underline; }
+    .press-featured-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 41px; height: 89px;
+      background: rgba(255,255,255,0.92);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; border: none; z-index: 2;
+      transition: background 0.2s;
+    }
+    .press-featured-nav:hover { background: #fff; }
+    .press-featured-nav.prev { left: 0; }
+    .press-featured-nav.next { right: 0; }
+    .press-featured-dots {
+      display: flex; gap: 8px;
+      align-items: center; justify-content: center;
+      margin-top: 16px;
+    }
+    .press-featured-dot {
+      width: 11px; height: 11px;
+      border-radius: 50%; background: #000;
+      opacity: 0.2; cursor: pointer; border: none;
+      transition: opacity 0.25s;
+    }
+    .press-featured-dot.active { opacity: 1; }
+    .press-featured-dot-next {
+      width: 20px; height: 20px;
+      border-radius: 50%; background: #000;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; border: none; margin-left: 4px;
+      transition: background 0.2s;
+    }
+    .press-featured-dot-next:hover { background: #1e8dcd; }
+
+    /* ─── PRESS SEARCH ROW ─── */
+    .press-search-row {
+      width: 100%; max-width: 1440px;
+      margin: 0 auto;
+      padding: 10px 75px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: relative;
+    }
+    .press-count {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700; font-size: 18px; color: #000;
+      letter-spacing: 0.18px; line-height: 23px;
+      display: none;
+    }
+    .page-search {
+      display: flex; align-items: center;
+      border: 0.5px solid rgba(0,0,0,0.3);
+      width: 433px; height: 50px;
+      padding: 0 18px; border-radius: 5px;
     }
     .page-search input {
       flex: 1;
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 400;
-      font-size: 15px;
-      color: #2d2d2d;
-      border: none; outline: none;
-      background: transparent;
+      font-weight: 400; font-size: 18px; color: #606060;
+      border: none; outline: none; background: transparent;
     }
-    .page-search input::placeholder { color: #2d2d2d; opacity: 0.6; }
+    .page-search input::placeholder { color: #606060; opacity: 0.85; }
     .page-search button {
       background: none; border: none; cursor: pointer;
-      padding: 0;
-      display: flex; align-items: center;
+      padding: 0; display: flex; align-items: center;
       opacity: 0.7; transition: opacity 0.2s;
     }
     .page-search button:hover { opacity: 1; }
@@ -650,112 +733,67 @@
     }
     .press-card-tag:hover { background: #e8f4fb; color: #1e8ccc; }
 
-    /* 검색 결과 카운터 (page-header 안 absolute) */
-    .press-count {
-      display: none;
-      position: absolute;
-      top: 269px;
-      left: 75px;
-      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 700;
-      font-size: 18px;
-      color: #000;
-      letter-spacing: 0.18px;
-      line-height: 23px;
-    }
 
     /* 결과 없음 전체 영역 */
     .press-no-results { display: none; }
 
     /* 결과 없음 메시지 */
     .press-no-results-msg {
-      padding: 86px 75px 146px;
+      padding: 80px 75px 80px;
       text-align: center;
-      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-size: 20px;
-      color: #000;
-      letter-spacing: 0.6px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      gap: 20px;
     }
     .press-no-results-icon {
       display: block;
-      margin-bottom: 17px;
       flex-shrink: 0;
     }
-    .press-no-results-msg .msg-bold { font-weight: 700; }
-    .press-no-results-msg .msg-regular { font-weight: 400; }
+    .press-no-results-title {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700; font-size: 25px; color: #000;
+      letter-spacing: 0.25px;
+    }
+    .press-no-results-tips {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 400; font-size: 16px;
+      color: rgba(0,0,0,0.7);
+      line-height: 2;
+      text-align: left;
+      list-style: none;
+    }
+    .press-no-results-tips li::before { content: '∙ '; }
 
     /* CTA 배너 */
     .press-cta-banner {
-      width: 100%;
-      height: 359px;
-      background: #F6FFFD url('assets/press-cta-deco.png') right center / auto 100% no-repeat;
-      position: relative;
-      overflow: hidden;
+      position: relative; width: 100%; height: 296px;
+      overflow: hidden; display: flex;
+      align-items: center; justify-content: center;
     }
-    .press-cta-inner {
+    .cta-contact-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 218px; height: 42px;
+      border: 0.8px solid #fff;
+      background: transparent;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 800; font-size: 16px; color: #fff;
+      letter-spacing: 0.48px; text-decoration: none;
+      position: relative; overflow: hidden;
+    }
+    .cta-contact-btn::before {
+      content: '';
       position: absolute;
-      left: 112px;
-      top: 62px;
-      width: 620px;
+      left: 0; top: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 150px; height: 150px;
+      background: rgba(255,255,255,0.18);
+      border-radius: 50%;
+      transition: transform 0.5s ease;
+      z-index: 0;
     }
-    .press-cta-title {
-      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 700;
-      font-size: 28px;
-      color: #000;
-      line-height: 45px;
-      letter-spacing: 0.84px;
-      margin-bottom: 15px;
-    }
-    .press-cta-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      width: 119px;
-      height: 40px;
-      background: #000;
-      color: #fff;
-      text-decoration: none;
-      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 800;
-      font-size: 16px;
-      letter-spacing: 0.48px;
-      border-radius: 10px;
-      margin-bottom: 28px;
-      transition: background 0.2s;
-    }
-    .press-cta-btn:hover { background: #1e8dcd; }
-    .press-cta-contacts {
-      display: flex;
-      align-items: center;
-    }
-    .press-cta-phone, .press-cta-email {
-      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      line-height: 25px;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-    .press-cta-phone .cta-label, .press-cta-email .cta-label {
-      font-weight: 800;
-      font-size: 15px;
-      color: #A9A9A9;
-    }
-    .press-cta-phone .cta-value, .press-cta-email .cta-value {
-      font-weight: 800;
-      font-size: 17px;
-      color: #5E5E5E;
-    }
-    .press-cta-vdivider {
-      width: 0.5px;
-      height: 46px;
-      background: rgba(0,0,0,0.15);
-      margin: 0 35px 0 44px;
-    }
+    .cta-contact-btn:hover::before { transform: translate(-50%, -50%) scale(5); }
+    .cta-contact-btn span { position: relative; z-index: 1; }
 
     /* 페이지네이션 */
     .pagination {
@@ -996,49 +1034,81 @@
 
   <main>
 
-    <!-- 페이지 헤더 -->
-    <div class="page-header">
-      <!-- 브레드크럼 -->
-            <div class="breadcrumb">
-        <a href="index.html" class="breadcrumb-home" aria-label="홈">
-          <svg width="11" height="12" viewBox="0 0 11 12" fill="none">
-            <path d="M1 5L5.5 1L10 5V11H7V8H4V11H1V5Z" stroke="#1e8dcd" stroke-width="1.1" stroke-linejoin="round"/>
-          </svg>
-        </a>
-        <span class="breadcrumb-sep">
-          <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
-            <path d="M1 1L4 5L1 9" stroke="#1e8dcd" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </span>
-        <span>Company</span>
-        <span class="breadcrumb-sep">
-          <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
-            <path d="M1 1L4 5L1 9" stroke="#1e8dcd" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </span>
-        <a href="" onclick="location.reload();return false;">보도자료</a>
-      </div>
-
-      <!-- 제목 + 검색 -->
-      <div class="page-title-row">
-        <div class="page-title-left">
-          <h1 class="page-title">
-            보도자료
-            <span class="page-title-dot"></span>
-          </h1>
-          <p class="page-subtitle">에코벨의 언론 보도자료를 만날 수 있습니다.</p>
-        </div>
-        <form class="page-search" onsubmit="return false;">
-          <input type="text" placeholder="검색어를 입력해 주세요" id="press-search-input">
-          <button type="submit" aria-label="검색">
-            <svg width="16" height="17" viewBox="0 0 16 17" fill="none">
-              <circle cx="6.5" cy="6.5" r="5" stroke="#2d2d2d" stroke-width="1.3"/>
-              <line x1="10.5" y1="11" x2="15" y2="15.5" stroke="#2d2d2d" stroke-width="1.3" stroke-linecap="round"/>
+    <!-- ─── 히어로 ─── -->
+    <section class="press-hero">
+      <div class="press-hero-inner">
+        <!-- 브레드크럼 -->
+        <div class="press-hero-breadcrumb">
+          <a href="index.html" aria-label="홈">
+            <svg width="11" height="12" viewBox="0 0 11 12" fill="none">
+              <path d="M1 5L5.5 1L10 5V11H7V8H4V11H1V5Z" stroke="rgba(255,255,255,0.8)" stroke-width="1.1" stroke-linejoin="round"/>
             </svg>
-          </button>
-        </form>
+          </a>
+          <span class="press-hero-sep">
+            <svg width="5" height="10" viewBox="0 0 5 10" fill="none"><path d="M1 1L4 5L1 9" stroke="rgba(255,255,255,0.8)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span>Company</span>
+          <span class="press-hero-sep">
+            <svg width="5" height="10" viewBox="0 0 5 10" fill="none"><path d="M1 1L4 5L1 9" stroke="rgba(255,255,255,0.8)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <a href="" onclick="location.reload();return false;">보도자료</a>
+        </div>
+
+        <!-- 제목 -->
+        <h1 class="press-hero-title">보도자료</h1>
+
+        <!-- SNS -->
+        <div class="press-hero-sns">
+          <span class="press-hero-sns-label">에코벨 SNS 바로가기</span>
+          <div class="press-hero-sns-icons">
+            <a href="#" aria-label="LinkedIn">
+              <img src="assets/icons/press-sns-1.svg" alt="LinkedIn" width="28" height="28">
+            </a>
+            <a href="https://www.instagram.com/ecobell.co.kr/" target="_blank" aria-label="Instagram">
+              <img src="assets/icons/press-sns-2.svg" alt="Instagram" width="28" height="28">
+            </a>
+            <a href="https://www.youtube.com/@yt_ecobell" target="_blank" aria-label="YouTube">
+              <img src="assets/icons/press-sns-3.svg" alt="YouTube" width="28" height="28">
+            </a>
+          </div>
+        </div>
       </div>
+    </section>
+
+    <!-- ─── 대표 기사 슬라이더 ─── -->
+    <section class="press-featured-section">
+      <div class="press-featured-wrap">
+        <div class="press-featured-inner" id="press-featured-inner">
+          <a class="press-featured-image" href="press-article.html" id="featured-img" style="background:#c0c8cf;"></a>
+          <div class="press-featured-body">
+            <p class="press-featured-date" id="featured-date">2025-02-05</p>
+            <a class="press-featured-title" href="press-article.html" id="featured-title">"재생에너지+VPP+탄소자산화" 통합...'에너지 혁신 드림팀' 출범 "눈길"</a>
+            <p class="press-featured-desc" id="featured-desc">주식회사 에코벨이 온실가스 감축 데이터를 수집·분석하고 이를 디지털화된 배출권으로 전환하는 '에코에셋(ecoASSET)' 플랫폼을 개발했다고 5일 발표했다.</p>
+            <a class="press-featured-more" href="press-article.html" id="featured-more">자세히 보기</a>
+          </div>
+        </div>
+        <button class="press-featured-nav prev" id="featured-prev" aria-label="이전">
+          <svg width="7" height="13" viewBox="0 0 7 13" fill="none"><path d="M6 1L1 6.5L6 12" stroke="#000" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="press-featured-nav next" id="featured-next" aria-label="다음">
+          <svg width="7" height="13" viewBox="0 0 7 13" fill="none"><path d="M1 1L6 6.5L1 12" stroke="#000" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="press-featured-dots" id="featured-dots"></div>
+      </div>
+    </section>
+
+    <!-- ─── 검색 ─── -->
+    <div class="press-search-row">
       <span class="press-count" id="press-count">검색결과 <strong id="press-count-num">0</strong>건</span>
+      <form class="page-search" onsubmit="return false;">
+        <input type="text" placeholder="보도자료 키워드 검색" id="press-search-input">
+        <button type="submit" aria-label="검색">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+            <circle cx="9" cy="9" r="6.5" stroke="#606060" stroke-width="1.5"/>
+            <line x1="14" y1="14" x2="20" y2="20" stroke="#606060" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </form>
     </div>
 
     <!-- 보도자료 카드 그리드 -->
@@ -1215,36 +1285,24 @@
     <!-- 검색 결과 없음 -->
     <div class="press-no-results" id="press-no-results">
       <div class="press-no-results-msg">
-        <svg class="press-no-results-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 0.9375C6.7875 0.9375 2.5875 5.175 2.5875 10.3875V21.225C2.5875 21.5625 2.775 21.8625 3.075 22.0125L5.775 23.175C6.4875 23.475 7.275 23.6625 8.0625 23.6625C8.8875 23.6625 9.75 23.475 10.5375 23.1L10.7625 22.9875C11.85 22.4625 13.125 22.4625 14.2125 22.9875C15.825 23.775 17.7375 23.7375 19.35 22.875L21.075 21.975C21.3375 21.825 21.525 21.525 21.525 21.225V10.3875C21.4125 5.175 17.2125 0.9375 12 0.9375ZM19.725 20.7L18.4875 21.375C17.3625 21.975 16.0125 22.0125 14.8875 21.45C13.3125 20.7 11.55 20.7 9.975 21.45L9.75 21.5625C8.7 22.05 7.5 22.0875 6.45 21.6375L4.275 20.6625V10.3875C4.275 6.1125 7.725 2.625 12 2.625C16.275 2.625 19.725 6.1125 19.725 10.35V20.7Z" fill="#1E8DCD"/>
-          <path d="M9.1125 8.02539C8.4 8.02539 7.8375 8.58789 7.8375 9.30039C7.8375 10.0129 8.4 10.5754 9.1125 10.5754C9.825 10.5754 10.3875 10.0129 10.3875 9.30039C10.3875 8.58789 9.825 8.02539 9.1125 8.02539Z" fill="#1E8DCD"/>
-          <path d="M14.8875 8.02539C14.175 8.02539 13.6125 8.58789 13.6125 9.30039C13.6125 10.0129 14.175 10.5754 14.8875 10.5754C15.6 10.5754 16.1625 10.0129 16.1625 9.30039C16.1625 8.58789 15.6 8.02539 14.8875 8.02539Z" fill="#1E8DCD"/>
-          <path d="M12 13.3877C10.95 13.3877 10.0875 13.9502 10.0875 14.6627C10.0875 15.3752 10.95 15.9377 12 15.9377C13.05 15.9377 13.9125 15.3752 13.9125 14.6627C13.9125 13.9502 13.05 13.3877 12 13.3877Z" fill="#1E8DCD"/>
-        </svg>
-        <p><span class="msg-bold">'<span id="press-no-results-query"></span>'</span><span class="msg-regular">에 대한 검색 결과가 없습니다</span></p>
+        <img class="press-no-results-icon" src="assets/press-ghost.svg" alt="" width="24" height="24">
+        <p class="press-no-results-title">'<span id="press-no-results-query"></span>'에 대한 검색 결과가 없습니다</p>
+        <ul class="press-no-results-tips">
+          <li>검색어의 철자가 정확한지 확인해 주세요.</li>
+          <li>한글을 영어로 혹은 영어를 한글로 입력했는지 확인해 주세요.</li>
+          <li>검색어의 단어수를 줄이거나, 보다 일반적인 단어로 다시 검색해 주세요.</li>
+          <li>두 단어 이상의 검색어인 경우, 띄어쓰기를 확인해 주세요.</li>
+        </ul>
       </div>
 
       <!-- CTA 배너 -->
       <div class="press-cta-banner">
-        <div class="press-cta-inner">
-          <p class="press-cta-title">찾으시는 정보가 없으신가요?<br>문의하기를 통해 빠르게 답변 받아보세요.</p>
-          <a class="press-cta-btn" href="notice.html">
-            문의하기
-            <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
-              <path d="M1 1L4 5L1 9" stroke="#fff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-          <div class="press-cta-contacts">
-            <div class="press-cta-phone">
-              <span class="cta-label">전화 상담</span>
-              <span class="cta-value">02-892-9180</span>
-            </div>
-            <div class="press-cta-vdivider"></div>
-            <div class="press-cta-email">
-              <span class="cta-label">이메일 상담</span>
-              <span class="cta-value">ecobell@ecobell.co.kr</span>
-            </div>
-          </div>
+        <div style="position:absolute;inset:0;background:url('assets/cta-bg.png') center/cover no-repeat;"></div>
+        <div style="position:absolute;inset:0;background:rgba(0,49,77,0.85);"></div>
+        <div style="position:relative;text-align:center;">
+          <p style="font-family:'Nanum Square','NanumSquare',sans-serif;font-weight:900;font-size:30px;color:#fff;letter-spacing:0.84px;line-height:40px;margin:0 0 8px;">무엇이든 물어보세요</p>
+          <p style="font-family:'Nanum Square','NanumSquare',sans-serif;font-weight:500;font-size:16px;color:#fff;letter-spacing:0.84px;line-height:40px;margin:0 0 18px;">특정 비즈니스 솔루션 문의부터 일반 문의까지 에코벨이 도와드립니다.</p>
+          <a href="contact.html" class="cta-contact-btn"><span>문의하기</span></a>
         </div>
       </div>
     </div>
@@ -1464,6 +1522,67 @@
 
 
 
+
+    /* ─── 대표 기사 슬라이더 ─── */
+    const FEATURED = [
+      {
+        date: '2025-02-05',
+        title: '"재생에너지+VPP+탄소자산화" 통합...\'에너지 혁신 드림팀\' 출범 "눈길"',
+        desc: '주식회사 에코벨이 온실가스 감축 데이터를 수집·분석하고 이를 디지털화된 배출권으로 전환하는 \'에코에셋(ecoASSET)\' 플랫폼을 개발했다고 5일 발표했다.',
+        href: 'press-article.html'
+      },
+      {
+        date: '2026.01.13',
+        title: '에코벨, 재생에너지-탄소자산화 실증 추진…현장·데이터·AI 기술 결합',
+        desc: '에코벨이 재생에너지와 탄소자산화를 결합한 실증 프로젝트를 추진하며 현장 데이터와 AI 기술을 통합한 혁신적인 접근 방식으로 주목받고 있다.',
+        href: 'press-article.html'
+      },
+      {
+        date: '2025.04.30',
+        title: '에코벨, 초기창업패키지 및 ESG 그린지원금 선정 "탄소자산화 확장"',
+        desc: '에코벨이 초기창업패키지 및 ESG 그린지원금에 선정되어 탄소자산화 기술 개발과 사업 확장에 더욱 박차를 가할 예정이다.',
+        href: 'press-article.html'
+      }
+    ];
+    let featuredIdx = 0;
+
+    function renderFeatured(idx) {
+      const item = FEATURED[idx];
+      document.getElementById('featured-date').textContent = item.date;
+      document.getElementById('featured-title').textContent = item.title;
+      document.getElementById('featured-title').href = item.href;
+      document.getElementById('featured-desc').textContent = item.desc;
+      document.getElementById('featured-more').href = item.href;
+      document.querySelectorAll('.press-featured-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === idx);
+      });
+    }
+
+    function buildDots() {
+      const dotsEl = document.getElementById('featured-dots');
+      dotsEl.innerHTML = '';
+      FEATURED.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'press-featured-dot' + (i === 0 ? ' active' : '');
+        dot.addEventListener('click', () => { featuredIdx = i; renderFeatured(i); });
+        dotsEl.appendChild(dot);
+      });
+      const nextBtn = document.createElement('button');
+      nextBtn.className = 'press-featured-dot-next';
+      nextBtn.innerHTML = '<svg width="8" height="10" viewBox="0 0 8 10" fill="none"><path d="M1 1L6 5L1 9" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      nextBtn.addEventListener('click', () => { featuredIdx = (featuredIdx + 1) % FEATURED.length; renderFeatured(featuredIdx); });
+      dotsEl.appendChild(nextBtn);
+    }
+
+    buildDots();
+    document.getElementById('featured-prev').addEventListener('click', () => {
+      featuredIdx = (featuredIdx - 1 + FEATURED.length) % FEATURED.length;
+      renderFeatured(featuredIdx);
+    });
+    document.getElementById('featured-next').addEventListener('click', () => {
+      featuredIdx = (featuredIdx + 1) % FEATURED.length;
+      renderFeatured(featuredIdx);
+    });
 
     /* ─── 카드 필터링 ─── */
     const pressSearchInput = document.getElementById('press-search-input');

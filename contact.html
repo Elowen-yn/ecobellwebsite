@@ -458,6 +458,27 @@
       .lnb-inner    { max-width: none; }
     }
 
+    /* ─── 컨텐츠 레이아웃 ─── */
+    .contact-page {
+      padding-top: 69px; /* fixed header 높이 */
+      position: relative;
+    }
+    .contact-page::before {
+      content: '';
+      position: absolute;
+      height: 278px;
+      background: linear-gradient(to bottom, #E9F4FA 0%, #FFFFFF 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .contact-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 100px 170px 50px;
+    }
+
     /* ─── BREADCRUMB ─── */
     .breadcrumb {
       display: flex; align-items: center; gap: 6px;
@@ -482,33 +503,62 @@
     /* ─── 메인 뷰: 타이틀 ─── */
     .main-title {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 800; font-size: 42px;
+      font-weight: 800; font-size: 35px;
       color: #000; line-height: 1.3; letter-spacing: 0.42px;
-      margin-top: 10px; margin-bottom: 14px;
+      margin-top: 0; margin-bottom: 14px;
+      text-align: center;
     }
-    .main-title .blue { color: #1e8dcd; }
     .main-subtitle {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 400; font-size: 17px;
+      font-weight: 400; font-size: 18px;
       color: #000; letter-spacing: 0.17px; line-height: 1.5;
-      margin-bottom: 28px;
+      margin-bottom: 23px;
     }
 
     /* 자주 묻는 질문 버튼 */
     .faq-btn {
       display: inline-flex; align-items: center; gap: 7px;
-      border: 0.8px solid rgba(0,0,0,0.3); border-radius: 100px;
-      padding: 8px 16px; background: transparent; cursor: pointer;
-      text-decoration: none; transition: border-color 0.2s, background 0.2s;
+      border: none; border-radius: 5px;
+      padding: 10px 18px; background: #1e8dcd; cursor: pointer;
+      text-decoration: none; transition: background 0.2s;
       margin-bottom: 36px;
     }
-    .faq-btn:hover { border-color: #1e8dcd; background: rgba(30,141,205,0.04); }
+    .faq-btn:hover { background: #1679b3; }
     .faq-btn-text {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 700; font-size: 14px; color: #000; letter-spacing: 0.14px;
-      transition: color 0.2s;
+      font-weight: 700; font-size: 14px; color: #fff; letter-spacing: 0.14px;
     }
-    .faq-btn:hover .faq-btn-text { color: #1e8dcd; }
+    /* 폼 뷰 자주 묻는 질문 버튼 (아웃라인 스타일) */
+    .faq-btn-outline {
+      display: inline-flex; align-items: center; gap: 9px;
+      border: 0.5px solid rgba(0,0,0,1); border-radius: 5px;
+      padding: 10px 18px; background: transparent; cursor: pointer;
+      text-decoration: none; transition: border-color 0.4s;
+      margin-bottom: 0; position: relative; overflow: hidden; margin-top: 0.5px;
+    }
+    .faq-btn-outline::before {
+      content: '';
+      position: absolute;
+      left: -10px; top: 50%;
+      width: 36px; height: 36px;
+      background: #1e8dcd;
+      border-radius: 50%;
+      transform: translateY(-50%) scale(0);
+      transform-origin: center;
+      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 0;
+    }
+    .faq-btn-outline:hover::before { transform: translateY(-50%) scale(8); }
+    .faq-btn-outline:hover { border-color: #1e8dcd; }
+    .faq-btn-outline .faq-btn-text {
+      color: rgba(45,45,45,1); position: relative; z-index: 1;
+      transition: color 0.3s; font-size: 12px;
+    }
+    .faq-btn-outline:hover .faq-btn-text { color: #fff; }
+    .faq-btn-outline svg { position: relative; z-index: 1; display: block; }
+    .faq-btn-outline .faq-btn-text { line-height: 1; }
+    .faq-btn-outline .faq-arrow { transition: stroke 0.3s; }
+    .faq-btn-outline:hover .faq-arrow { stroke: #fff !important; }
 
     /* ─── 문의 유형 카드 그리드 ─── */
     .inquiry-cards {
@@ -519,15 +569,15 @@
     }
     .inquiry-card {
       display: flex; align-items: center; gap: 20px;
-      padding: 0 28px;
-      height: 110px;
-      border: 1px solid #e4e4e4;
-      border-radius: 8px;
+      padding: 10px 40px;
+      height: 105px;
+      border: 0.5px solid rgba(30, 141, 205, 0.5);
+      border-radius: 15px;
       cursor: pointer;
-      background: #fff;
+      background: #F7FAFA;
       position: relative;
       overflow: hidden;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
       text-decoration: none;
     }
     .inquiry-card::before {
@@ -543,8 +593,7 @@
     }
     .inquiry-card:hover::before { transform: translate(-50%, -50%) scale(5); }
     .inquiry-card:hover {
-      border-color: #1e8dcd;
-      box-shadow: 0 2px 12px rgba(30,141,205,0.18);
+      box-shadow: 0 4px 16px rgba(30,141,205,0.18);
     }
     .inquiry-card-icon {
       width: 44px; height: 44px; flex-shrink: 0;
@@ -555,9 +604,11 @@
     }
     .inquiry-card:hover .inquiry-card-icon { color: #fff; }
     .inquiry-card-icon svg { width: 30px; height: 30px; }
+    .inquiry-card-icon img { width: 30px; height: 30px; object-fit: contain; position: relative; z-index: 1; transition: filter 0.3s ease; }
+    .inquiry-card:hover .inquiry-card-icon img { filter: brightness(0) invert(1); }
     .inquiry-card-label {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 700; font-size: 17px; color: #000; letter-spacing: 0.17px;
+      font-weight: 700; font-size: 18px; color: #000; letter-spacing: 0.17px;
       position: relative; z-index: 1;
       transition: color 0.3s ease;
     }
@@ -567,7 +618,7 @@
     .member-section { margin-bottom: 60px; }
     .member-title {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 800; font-size: 24px; color: #000;
+      font-weight: 800; font-size: 23px; color: #000;
       line-height: 1.5; letter-spacing: 0.24px; margin-bottom: 24px;
     }
     .platform-cards {
@@ -577,15 +628,15 @@
     }
     .platform-card {
       position: relative;
-      padding: 28px 30px;
-      border: 1px solid #e4e4e4;
-      border-radius: 8px;
+      padding: 28px 35px;
+      border: 0.5px solid rgba(30, 141, 205, 0.5);
+      border-radius: 15px;
       text-decoration: none;
-      background: #fff;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      background: #F7FAFA;
+      transition: box-shadow 0.2s;
       display: block;
     }
-    .platform-card:hover { border-color: #1e8dcd; box-shadow: 0 2px 12px rgba(30,141,205,0.08); }
+    .platform-card:hover { box-shadow: 0 4px 16px rgba(30,141,205,0.12); }
     .platform-card-arrow {
       position: absolute; top: 22px; right: 22px;
       opacity: 0.5; transition: opacity 0.2s;
@@ -593,37 +644,65 @@
     .platform-card:hover .platform-card-arrow { opacity: 1; }
     .platform-card-name {
       font-family: 'Chillax', sans-serif; font-weight: 600;
-      font-size: 20px; color: #000; margin-bottom: 12px; letter-spacing: 0.4px;
+      font-size: 18px; color: #000; margin-bottom: 12px; letter-spacing: 0.4px;
     }
     .platform-card-desc {
       font-family: 'Noto Sans KR', sans-serif; font-weight: 400;
       font-size: 14px; color: #5d5d5d; line-height: 22px; letter-spacing: -0.28px;
     }
 
+    /* ─── SNS 배너 섹션 ─── */
+    .sns-section {
+      background: #FAFAFA !important;
+      padding: 60px 0;
+      margin-top: -50px;
+      margin-bottom: 453px;
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      margin-top: 0;
+    }
+    .sns-title {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 800; font-size: 25px; color: #000;
+      letter-spacing: 0.33px; margin-bottom: 32px; margin-top: 5px;
+    }
+    .sns-icons {
+      display: flex; align-items: center; justify-content: center; gap: 15px; margin-top: -5px;
+    }
+    .sns-icon {
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.2s, opacity 0.2s;
+      text-decoration: none;
+    }
+    .sns-icon:hover { transform: scale(1.1); opacity: 0.85; }
+    .sns-icon img { width: 65px; height: 65px; object-fit: cover; border-radius: 50%; }
+
     /* ─── 서비스 시간 섹션 ─── */
-    .hours-section { margin-top: 0; }
+    .hours-section { margin-top: 10px; }
     .hours-title {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-weight: 800; font-size: 20px; color: #000;
       letter-spacing: 0.2px; margin-bottom: 18px;
     }
-    .hours-divider { width: 100%; height: 0.5px; background: rgba(0,0,0,0.15); margin-bottom: 22px; }
-    .hours-row { display: flex; align-items: flex-start; justify-content: space-between; }
+    .hours-divider { width: 100%; height: 1px; background: rgba(30,140,204,1); margin-bottom: 0; }
+    .hours-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 20px 0; }
     .hours-text {
-      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 400; font-size: 15px; color: #2d2d2d;
-      line-height: 28px; letter-spacing: 0.15px;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 500; font-size: 15px; color: #000;
+      line-height: 28px; letter-spacing: 0.32px;
+    }
+    .hours-vline {
+      width: 0.5px; height: 50px; background: rgba(30,140,204,1); flex-shrink: 0;
     }
     .hours-tel {
-      display: flex; flex-direction: column; align-items: flex-end; gap: 2px;
+      display: flex; align-items: center; gap: 0; margin-left: 21px;
     }
-    .hours-tel-label {
-      font-family: 'Chillax', sans-serif; font-weight: 500;
-      font-size: 14px; color: #1e8dcd; letter-spacing: 0.14px;
-    }
-    .hours-tel-num {
-      font-family: 'Chillax', sans-serif; font-weight: 600;
-      font-size: 18px; color: #000; letter-spacing: 0.18px;
+    .hours-tel-text {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 500; font-size: 14px; color: #000;
+      letter-spacing: 0.54px; line-height: 1.5; text-align: left;
+      white-space: pre-line;
     }
 
     /* ─── 폼 뷰 ─── */
@@ -643,18 +722,18 @@
     }
     .back-btn:hover { color: #1e8dcd; }
     .back-btn .back-circle {
-      width: 30px; height: 30px; border: 1px solid rgba(0,0,0,0.2);
+      width: 30px; height: 30px; background: #1e8dcd; border: none;
       border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      transition: border-color 0.2s, background 0.2s;
+      transition: background 0.2s;
     }
-    .back-btn:hover .back-circle { border-color: #1e8dcd; background: rgba(30,141,205,0.06); }
+    .back-btn:hover .back-circle { background: #1679b3; }
 
     .form-nav-divider { width: 100%; height: 0.5px; background: rgba(0,0,0,0.15); margin-bottom: 32px; }
 
     /* 폼 타이틀 */
     .form-page-title {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 800; font-size: 38px; color: #000;
+      font-weight: 800; font-size: 28px; color: #000;
       letter-spacing: 0.38px; margin-bottom: 36px;
     }
 
@@ -727,7 +806,7 @@
     }
 
     /* 제출 버튼 */
-    .submit-row { display: flex; justify-content: center; margin-top: 48px; }
+    .submit-row { display: flex; justify-content: center; margin-top: 48px; margin-bottom: 100px; }
     .submit-btn {
       display: inline-flex; align-items: center; justify-content: center;
       width: 210px; height: 52px;
@@ -760,7 +839,7 @@
 
     /* ─── FOOTER ─── */
     footer {
-      overflow: visible; position: fixed; bottom: 0; left: 0; right: 0; min-width: 1100px; z-index: 0; background: rgb(247,252,253); overflow: hidden; }
+      overflow: visible; position: fixed; bottom: 0; left: 0; right: 0; min-width: 1100px; z-index: 0; background: rgb(42,42,42); overflow: hidden; }
     .footer-inner { position: relative; width: 100%; max-width: 100%; max-width: 1440px; margin: 0 auto; height: 453px; }
     .ft-company-info { position: absolute; right: 45px; top: 211px; font-family: 'Noto Sans KR', sans-serif; font-weight: 450; font-size: 13px; color: rgba(255,255,255,0.5); line-height: 23px; letter-spacing: -0.28px; white-space: pre-line; text-align: right; }
     .ft-col-title { position: absolute; font-family: 'Chillax', sans-serif; font-weight: 600; font-size: 16px; color: #fff; white-space: nowrap; margin: 0; top: 41px; letter-spacing: 0.54px; }
@@ -831,7 +910,7 @@
     @media (max-width: 1280px) {
       .header-inner { width: 100%; padding: 0 30px; }
       .lnb-inner { width: 100%; }
-      .contact-inner { padding: 40px 50px 100px; }
+      .contact-inner { padding: 100px 50px 100px; }
       .search-content { width: 100%; }
       .search-input-row { left: 200px; width: 600px; }
       .search-divider { left: 200px; width: 600px; }
@@ -857,8 +936,8 @@
     }
 
     @media (max-width: 1100px) {
-      .contact-inner { padding: 40px 40px 80px; }
-      .main-title { font-size: 34px; }
+      .contact-inner { padding: 100px 40px 80px; }
+      .main-title { font-size: 38px; }
       .inquiry-card { padding: 0 20px; gap: 25px; }
       .inquiry-card-label { font-size: 15px; }
       .form-row-4 { grid-template-columns: repeat(2, 1fr); }
@@ -1019,90 +1098,53 @@
       </div>
 
       <!-- 타이틀 -->
-      <h1 class="main-title"><span class="blue">에코벨</span>에 대해 궁금하신가요?</h1>
-      <p class="main-subtitle">문의 유형에 따라 답변을 이메일로 안내해드립니다.</p>
+      <h1 class="main-title"><span style="color:#1e8dcd;">에코벨</span>에 대해 궁금하신가요?</h1>
 
       <!-- 자주 묻는 질문 버튼 -->
-      <a class="faq-btn" href="#">
-        <span class="faq-btn-text">자주 묻는 질문</span>
-        <svg width="7" height="11" viewBox="0 0 7 11" fill="none"><path d="M1 1L5.5 5.5L1 10" stroke="#000" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
+      <div style="display:flex; justify-content:center; margin-top:30px; margin-bottom:80px;">
+        <a class="faq-btn" href="#" style="margin-bottom:0;">
+          <span class="faq-btn-text">자주 묻는 질문</span>
+          <svg width="7" height="11" viewBox="0 0 7 11" fill="none"><path d="M1 1L5.5 5.5L1 10" stroke="#fff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <p class="main-subtitle">원하는 항목을 클릭해 문의 주시면, 빠른 시간 안에 이메일로 답변드립니다.</p>
 
       <!-- 문의 유형 카드 -->
       <div class="inquiry-cards">
         <button class="inquiry-card" data-type="partnership">
           <span class="inquiry-card-icon">
-            <!-- 파트너십 아이콘 -->
-            <svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 15C12.7614 15 15 12.7614 15 10C15 7.23858 12.7614 5 10 5C7.23858 5 5 7.23858 5 10C5 12.7614 7.23858 15 10 15Z" stroke="#1e8dcd" stroke-width="1.5"/>
-              <path d="M20 25C22.7614 25 25 22.7614 25 20C25 17.2386 22.7614 15 20 15C17.2386 15 15 17.2386 15 20C15 22.7614 17.2386 25 20 25Z" stroke="#1e8dcd" stroke-width="1.5"/>
-              <path d="M15 10C15 10 18 13 15 16" stroke="#1e8dcd" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
+            <img src="assets/icons/icon-partnership.svg" alt="파트너십" width="30" height="30">
           </span>
           <span class="inquiry-card-label">파트너십 &amp; 비즈니스</span>
         </button>
         <button class="inquiry-card" data-type="demo">
           <span class="inquiry-card-icon">
-            <!-- 데모 신청 아이콘 -->
-            <svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="3" y="7" width="24" height="17" rx="2.5" stroke="#1e8dcd" stroke-width="1.5"/>
-              <path d="M3 11L15 17.5L27 11" stroke="#1e8dcd" stroke-width="1.5" stroke-linecap="round"/>
-              <path d="M20 5L25 5" stroke="#1e8dcd" stroke-width="1.5" stroke-linecap="round"/>
-              <path d="M22.5 2.5V7.5" stroke="#1e8dcd" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
+            <img src="assets/icons/icon-demo.svg" alt="데모 신청" width="30" height="30">
           </span>
           <span class="inquiry-card-label">데모 신청</span>
         </button>
         <button class="inquiry-card" data-type="investment">
           <span class="inquiry-card-icon">
-            <!-- 투자 & 전략 협력 아이콘 -->
-            <svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="4" y="18" width="5" height="8" rx="1" stroke="#1e8dcd" stroke-width="1.5"/>
-              <rect x="12.5" y="12" width="5" height="14" rx="1" stroke="#1e8dcd" stroke-width="1.5"/>
-              <rect x="21" y="6" width="5" height="20" rx="1" stroke="#1e8dcd" stroke-width="1.5"/>
-              <path d="M5 14L11 9L18 12L26 5" stroke="#1e8dcd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M22 5H26V9" stroke="#1e8dcd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <img src="assets/icons/icon-investment.svg" alt="투자 & 전략 협력" width="30" height="30">
           </span>
           <span class="inquiry-card-label">투자 &amp; 전략 협력</span>
         </button>
         <button class="inquiry-card" data-type="esg">
           <span class="inquiry-card-icon">
-            <!-- ESG 컨설팅 아이콘 -->
-            <svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M15 26V16" stroke="#1e8dcd" stroke-width="1.5" stroke-linecap="round"/>
-              <path d="M15 16C15 16 10 14 8 9C12 9 15 12 15 16Z" fill="#1e8dcd" opacity="0.15" stroke="#1e8dcd" stroke-width="1.3" stroke-linejoin="round"/>
-              <path d="M15 16C15 16 20 14 22 9C18 9 15 12 15 16Z" fill="#1e8dcd" opacity="0.15" stroke="#1e8dcd" stroke-width="1.3" stroke-linejoin="round"/>
-              <path d="M9 25H21" stroke="#1e8dcd" stroke-width="1.5" stroke-linecap="round"/>
-              <circle cx="15" cy="7" r="3" stroke="#1e8dcd" stroke-width="1.5"/>
-            </svg>
+            <img src="assets/icons/icon-esg.svg" alt="ESG 컨설팅" width="30" height="30">
           </span>
           <span class="inquiry-card-label">ESG 컨설팅 신청</span>
         </button>
         <button class="inquiry-card" data-type="recruit">
           <span class="inquiry-card-icon">
-            <!-- 채용 아이콘 -->
-            <svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="11" cy="10" r="4" stroke="#1e8dcd" stroke-width="1.5"/>
-              <path d="M3 25C3 20.5817 6.58172 17 11 17" stroke="#1e8dcd" stroke-width="1.5" stroke-linecap="round"/>
-              <circle cx="21" cy="17" r="2.5" stroke="#1e8dcd" stroke-width="1.3"/>
-              <path d="M21 20.5V25" stroke="#1e8dcd" stroke-width="1.5" stroke-linecap="round"/>
-              <path d="M18.5 25H23.5" stroke="#1e8dcd" stroke-width="1.5" stroke-linecap="round"/>
-              <path d="M19 21L17 25" stroke="#1e8dcd" stroke-width="1.3" stroke-linecap="round"/>
-              <path d="M23 21L25 25" stroke="#1e8dcd" stroke-width="1.3" stroke-linecap="round"/>
-            </svg>
+            <img src="assets/icons/icon-recruit.svg" alt="채용" width="30" height="30">
           </span>
           <span class="inquiry-card-label">채용</span>
         </button>
         <button class="inquiry-card" data-type="other">
           <span class="inquiry-card-icon">
-            <!-- 기타 아이콘 -->
-            <svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 5H26C26.5523 5 27 5.44772 27 6V20C27 20.5523 26.5523 21 26 21H17L11 26V21H4C3.44772 21 3 20.5523 3 20V6C3 5.44772 3.44772 5 4 5Z" stroke="#1e8dcd" stroke-width="1.5" stroke-linejoin="round"/>
-              <circle cx="10" cy="13" r="1.2" fill="#1e8dcd"/>
-              <circle cx="15" cy="13" r="1.2" fill="#1e8dcd"/>
-              <circle cx="20" cy="13" r="1.2" fill="#1e8dcd"/>
-            </svg>
+            <img src="assets/icons/icon-other.svg" alt="기타" width="30" height="30">
           </span>
           <span class="inquiry-card-label">기타</span>
         </button>
@@ -1110,28 +1152,28 @@
 
       <!-- 회원 섹션 -->
       <div class="member-section">
-        <h2 class="member-title">회원이신가요?<br>사용 중인 서비스에 따라 개별 상담을 받아보세요.</h2>
+        <h2 class="member-title">회원이신가요?<br>사용 중인 서비스에 따라 담당자의 개별 상담을 받아보세요.</h2>
         <div class="platform-cards">
           <a class="platform-card" href="#" target="_blank" rel="noopener noreferrer">
             <span class="platform-card-arrow">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M12 2H6M12 2V8" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M12 2H6M12 2V8" stroke="#1e8dcd" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </span>
             <p class="platform-card-name">ecoASSET</p>
             <p class="platform-card-desc">에코에셋 플랫폼에 대한 문의를 남겨주시면<br>담당자가 맞춤 상담을 제공해드립니다.</p>
           </a>
           <a class="platform-card" href="#" target="_blank" rel="noopener noreferrer">
             <span class="platform-card-arrow">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M12 2H6M12 2V8" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M12 2H6M12 2V8" stroke="#1e8dcd" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </span>
             <p class="platform-card-name">E-ASSET</p>
             <p class="platform-card-desc">에너지에셋 플랫폼에 대한 문의를 남겨주시면<br>담당자가 맞춤 상담을 제공해드립니다.</p>
           </a>
           <a class="platform-card" href="#" target="_blank" rel="noopener noreferrer">
             <span class="platform-card-arrow">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M12 2H6M12 2V8" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12L12 2M12 2H6M12 2V8" stroke="#1e8dcd" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </span>
-            <p class="platform-card-name">ecoNODE</p>
-            <p class="platform-card-desc">신·재생에너지 발전기 또는 에코노드에 대한 문의를 남겨주시면 담당자가 맞춤 상담을 제공해드립니다.</p>
+            <p class="platform-card-name">Solution / ecoNODE</p>
+            <p class="platform-card-desc">솔루션에 대한 문의를 남겨주시면<br>담당자가 맞춤 상담을 제공해드립니다.</p>
           </a>
         </div>
       </div>
@@ -1145,9 +1187,11 @@
             월~금요일 09:00~12:00, 13:00~17:30<br>
             토, 일요일 및 공휴일 휴무
           </p>
-          <div class="hours-tel">
-            <span class="hours-tel-label">Tel.</span>
-            <span class="hours-tel-num">02-892-9180</span>
+          <div style="display:flex; align-items:center; gap:0;">
+            <div class="hours-vline"></div>
+            <div class="hours-tel">
+              <span class="hours-tel-text">Tel.&#10;02-892-9180</span>
+            </div>
           </div>
         </div>
       </div>
@@ -1162,27 +1206,43 @@
     <div class="contact-inner">
 
       <!-- 브레드크럼 -->
-      <nav class="breadcrumb" aria-label="breadcrumb">
-        <a class="breadcrumb-item" href="index.html">
-          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1 5.5L6.5 1L12 5.5V12H8.5V8.5H4.5V12H1V5.5Z" stroke="#1e8dcd" stroke-width="1.2" stroke-linejoin="round"/></svg>
+      <div class="breadcrumb">
+        <a href="index.html" class="breadcrumb-home" aria-label="홈">
+          <svg width="11" height="12" viewBox="0 0 11 12" fill="none">
+            <path d="M1 5L5.5 1L10 5V11H7V8H4V11H1V5Z" stroke="#1e8dcd" stroke-width="1.1" stroke-linejoin="round"/>
+          </svg>
         </a>
-        <span class="breadcrumb-sep"><svg width="5" height="9" viewBox="0 0 5 9" fill="none"><path d="M1 1L4 4.5L1 8" stroke="#1e8dcd" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <a class="breadcrumb-item" href="notice.html">Contact Us</a>
-        <span class="breadcrumb-sep"><svg width="5" height="9" viewBox="0 0 5 9" fill="none"><path d="M1 1L4 4.5L1 8" stroke="#1e8dcd" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <span class="breadcrumb-item current">문의하기</span>
-      </nav>
+        <span class="breadcrumb-sep">
+          <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
+            <path d="M1 1L4 5L1 9" stroke="#1e8dcd" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span>Contact Us</span>
+        <span class="breadcrumb-sep">
+          <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
+            <path d="M1 1L4 5L1 9" stroke="#1e8dcd" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <a href="contact.html">문의하기</a>
+        <span class="breadcrumb-sep">
+          <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
+            <path d="M1 1L4 5L1 9" stroke="#1e8dcd" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span id="breadcrumb-type">파트너십 &amp; 비즈니스</span>
+      </div>
 
       <!-- Back to list + FAQ -->
       <div class="form-nav-row">
         <button class="back-btn" id="back-btn">
           <span class="back-circle">
-            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M7 1L3 5L7 9" stroke="#000" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M7 1L3 5L7 9" stroke="#fff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </span>
-          Back to list
+          <span style="position:relative; top:1px; left:3px;">Back to list</span>
         </button>
-        <a class="faq-btn" href="#" style="margin-bottom:0;">
+        <a class="faq-btn-outline" href="#">
           <span class="faq-btn-text">자주 묻는 질문</span>
-          <svg width="7" height="11" viewBox="0 0 7 11" fill="none"><path d="M1 1L5.5 5.5L1 10" stroke="#000" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg width="7" height="11" viewBox="0 0 7 11" fill="none"><path class="faq-arrow" d="M1 1L5.5 5.5L1 10" stroke="rgba(30,140,204,1)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
       <div class="form-nav-divider"></div>
@@ -1364,6 +1424,25 @@
     </div>
   </div>
 
+  <!-- ─── SNS 배너 ─── -->
+  <section class="sns-section">
+    <h2 class="sns-title">에코벨 소식을 만나보세요!</h2>
+    <div class="sns-icons">
+      <a class="sns-icon" href="https://www.facebook.com/ecobell.co.kr" target="_blank" aria-label="Facebook">
+        <img src="assets/icons/sns-facebook.svg" alt="Facebook" width="65" height="65">
+      </a>
+      <a class="sns-icon" href="#" aria-label="LinkedIn">
+        <img src="assets/icons/sns-linkedin.svg" alt="LinkedIn" width="65" height="65">
+      </a>
+      <a class="sns-icon" href="https://www.instagram.com/ecobell.co.kr/" target="_blank" aria-label="Instagram">
+        <img src="assets/icons/sns-instagram.svg" alt="Instagram" width="65" height="65">
+      </a>
+      <a class="sns-icon" href="https://www.youtube.com/@yt_ecobell" target="_blank" aria-label="YouTube">
+        <img src="assets/icons/sns-youtube.svg" alt="YouTube" width="65" height="65">
+      </a>
+    </div>
+  </section>
+
   <!-- ─── FOOTER ─── -->
   <footer>
     <!-- 1440px: absolute layout -->
@@ -1510,41 +1589,71 @@
     const demoForm = document.getElementById('demo-form');
     const submitSuccess = document.getElementById('submit-success');
 
+    const snsSection = document.querySelector('.sns-section');
+
     function showForm(type) {
       viewMain.style.display = 'none';
       viewForm.style.display = 'block';
+      viewForm.style.marginBottom = '453px';
+      if (snsSection) snsSection.style.display = 'none';
       submitSuccess.classList.remove('visible');
       submitSuccess.style.display = 'none';
 
+      const breadcrumbType = document.getElementById('breadcrumb-type');
       if (type === 'demo') {
         formTitle.textContent = '데모 신청';
+        if (breadcrumbType) breadcrumbType.textContent = '데모 신청';
         inquiryForm.style.display = 'none';
         demoForm.style.display = 'block';
       } else {
         const cfg = FORM_TYPES[type];
         if (!cfg) return;
         formTitle.textContent = cfg.title;
+        if (breadcrumbType) breadcrumbType.textContent = cfg.title;
         f2Label.innerHTML = cfg.field2 + ' <span class="req">*</span>';
         fileLabelEl.innerHTML = cfg.fileLabel + (cfg.fileReq ? ' <span class="req">*</span>' : '');
         inquiryForm.style.display = 'block';
         demoForm.style.display = 'none';
       }
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0 });
     }
 
     function showMain() {
       viewForm.style.display = 'none';
+      viewForm.style.marginBottom = '';
       viewMain.style.display = 'block';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (snsSection) snsSection.style.display = '';
+      window.scrollTo({ top: 0 });
     }
 
-    // 카드 클릭
+    // ─── 해시 기반 라우팅 ───
+    function handleHash() {
+      const hash = window.location.hash.slice(1);
+      if (hash.startsWith('form/')) {
+        showForm(hash.slice(5));
+      } else {
+        showMain();
+      }
+    }
+
+    // 카드 클릭 → 해시 이동
     document.querySelectorAll('.inquiry-card').forEach(card => {
-      card.addEventListener('click', () => showForm(card.dataset.type));
+      card.addEventListener('click', () => {
+        window.location.hash = 'form/' + card.dataset.type;
+      });
     });
 
-    // Back to list
-    document.getElementById('back-btn').addEventListener('click', showMain);
+    // Back to list → 해시 제거
+    document.getElementById('back-btn').addEventListener('click', () => {
+      history.pushState('', document.title, window.location.pathname + window.location.search);
+      showMain();
+    });
+
+    // 해시 변경 감지 (브라우저 뒤로가기 등)
+    window.addEventListener('hashchange', handleHash);
+
+    // 페이지 로드 시 해시 확인
+    handleHash();
 
     // ─── 헤더 스크롤 (그림자 + 숨김) ───
     let _lastScrollY = window.scrollY;

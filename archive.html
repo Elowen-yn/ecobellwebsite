@@ -467,87 +467,92 @@
     /* ─── PAGE CONTENT ─── */
     main { padding-top: 69px; }
 
-    .page-header {
+    /* ─── 아카이브 히어로 ─── */
+    .archive-hero {
       position: relative;
-      width: 100%; max-width: 1440px;
+      width: 100%;
+      height: 352px;
+      overflow: hidden;
+    }
+    .archive-hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('assets/archive-hero-bg.png') center center / cover no-repeat;
+    }
+    .archive-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.48);
+    }
+    .archive-hero-inner {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 1440px;
+      height: 100%;
       margin: 0 auto;
-      padding: 39px 75px 44px;
-    }
-
-    /* 브레드크럼 */
-    .breadcrumb {
-      display: flex; align-items: center; gap: 6px;
-      position: absolute; top: 18px; right: 48px;
-      margin-bottom: 0;
-    }
-    @media (min-width: 1441px) {
-      .breadcrumb { right: calc((100% - 1440px) / 2 + 48px); }
-    }
-    .breadcrumb-home { width: 11px; height: 12px; display: flex; align-items: center; }
-    .breadcrumb-sep { width: 5px; height: 10px; display: flex; align-items: center; }
-    .breadcrumb a,
-    .breadcrumb span {
-      font-family: 'Chillax', sans-serif;
-      font-weight: 400; font-size: 13px;
-      color: #1e8dcd;
-      text-decoration: none; letter-spacing: 0.13px;
-    }
-    .breadcrumb a[href]:not(.breadcrumb-home) { cursor: pointer; }
-    .breadcrumb a[href]:not(.breadcrumb-home):hover { opacity: 0.7; }
-    @media (min-width: 1441px) {
-      .page-header { max-width: none; }
-    }
-
-    /* 페이지 제목 + 탭 행 */
-    .page-title-tab-row {
       display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      margin-top: 0;
+      align-items: center;
+      justify-content: center;
     }
-
-    .page-title {
+    .archive-hero-title {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-weight: 800;
-      font-size: 45px;
-      color: #000;
-      line-height: 1.289;
-      letter-spacing: 0.45px;
+      font-size: 55px;
+      color: #fff;
+      letter-spacing: 0.55px;
+      text-align: center;
     }
+    .archive-hero-breadcrumb {
+      position: absolute;
+      top: 18px; right: 48px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .archive-hero-breadcrumb a,
+    .archive-hero-breadcrumb span {
+      font-family: 'Chillax', sans-serif;
+      font-weight: 400; font-size: 13px;
+      color: rgba(255,255,255,0.85);
+      text-decoration: none; letter-spacing: 0.13px;
+    }
+    .archive-hero-breadcrumb a:hover { opacity: 0.7; }
+    .archive-hero-breadcrumb .bc-sep { display: flex; align-items: center; }
 
-    /* ─── 아카이브 탭 ─── */
-    .archive-tabs {
+    /* ─── 탭 네비게이션 ─── */
+    .archive-tab-nav {
+      width: 100%;
+      background: #fff;
+      border-bottom: 0.5px solid rgba(0,0,0,0.12);
       display: flex;
-      margin-top: 40px;
-      margin-right: -30px;
+      align-items: center;
+      justify-content: center;
+      height: 65px;
     }
-
     .archive-tab {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-weight: 400;
-      font-size: 14px;
+      font-size: 23px;
       color: #000;
-      letter-spacing: 0.14px;
-      width: 181px;
-      height: 53px;
-      padding: 0;
-      cursor: pointer;
+      letter-spacing: 0.23px;
       background: transparent;
-      border-top: 0.3px solid rgba(0,0,0,0.4);
-      border-right: 0.3px solid rgba(0,0,0,0.4);
-      border-bottom: 0.3px solid rgba(0,0,0,0.4);
-      border-left: none;
+      border: none;
+      cursor: pointer;
+      padding: 0 32px;
+      transition: color 0.2s;
       white-space: nowrap;
-      transition: color 0.2s, background 0.2s;
     }
-    .archive-tab:first-child { border-left: 0.3px solid rgba(0,0,0,0.4); }
     .archive-tab.active {
-      background: #fff;
       color: #1e8dcd;
-      font-weight: 700;
-      border: 1px solid #1e8dcd;
+      font-weight: 800;
     }
-    .archive-tab:not(.active):hover { background: rgba(0,0,0,0.03); }
+    .archive-tab:not(.active):hover { color: rgba(0,0,0,0.55); }
+    .archive-tab-sep {
+      color: rgba(0,0,0,0.25);
+      font-size: 22px;
+      user-select: none;
+      line-height: 1;
+    }
 
     /* ─── 섹션 제목 ─── */
     .archive-content { min-height: 400px; }
@@ -573,8 +578,8 @@
     /* 주요 브로셔 패널 */
     .archive-featured-panel {
       width: 100%;
-      background: #E9F4FA;
-      padding: 59px 0 177px;
+      background: #EEF1F2;
+      padding: 59px 0 80px;
     }
     .archive-featured-inner {
       width: 1440px;
@@ -587,16 +592,39 @@
       font-size: 25px;
       color: #000;
       letter-spacing: 0.25px;
-      margin-bottom: 21px;
+      margin-bottom: 28px;
     }
     .archive-featured-center {
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 52px;
+    }
+    .archive-featured-text {
+      flex: 1;
+      padding-top: 8px;
+    }
+    .archive-featured-text-title {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 800;
+      font-size: 24px;
+      color: #000;
+      letter-spacing: 0.24px;
+      margin-bottom: 14px;
+    }
+    .archive-featured-text-desc {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 400;
+      font-size: 18px;
+      color: #000;
+      letter-spacing: 0.18px;
+      line-height: 1.65;
+      margin-bottom: 30px;
     }
     .archive-featured-img {
-      width: 427px;
-      height: 240px;
+      width: 438px;
+      height: 246px;
+      flex-shrink: 0;
       background: #c8dde3;
       border-radius: 4px;
       object-fit: cover;
@@ -620,16 +648,17 @@
     .archive-featured-img:hover .archive-featured-overlay { opacity: 1; }
     .archive-featured-btns {
       display: flex;
-      gap: 25px;
+      flex-direction: column;
+      gap: 12px;
     }
     .archive-dl-btn {
       display: inline-flex;
       align-items: center;
       gap: 6px;
       width: 248px;
-      height: 48px;
+      height: 50px;
       padding: 0 28px 0 23px;
-      border: 0.05px solid rgba(30,141,205,0.5);
+      border: 0.5px solid rgba(30,141,205,0.7);
       margin-top: 5px;
       border-radius: 5px;
       background: #fff;
@@ -657,21 +686,22 @@
 
     /* 목록 행 */
     .archive-list {
-      width: 1440px;
+      width: 1100px;
       margin: 0 auto;
-      padding: 100px 75px 0;
+      padding: 60px 0 0;
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 0;
     }
     .archive-list-row {
       display: flex;
       align-items: center;
       background: #fff;
-      min-height: 114px;
-      padding: 0 63px 0 31px;
+      height: 74px;
+      padding: 0 30px 0 24px;
       gap: 0;
-      border-radius: 5px;
+      border: 0.5px solid rgba(0,0,0,0.5);
+      margin-top: -0.5px;
     }
     .archive-list-year {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
@@ -679,42 +709,42 @@
       font-size: 23px;
       color: #1e8dcd;
       letter-spacing: 0.23px;
-      width: 130px;
+      width: 110px;
       flex-shrink: 0;
     }
     .archive-list-title {
       flex: 1;
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-weight: 700;
-      font-size: 19px;
+      font-size: 21px;
       color: #000;
-      letter-spacing: 0.19px;
+      letter-spacing: 0.21px;
     }
     .archive-list-downloads {
       display: flex;
       align-items: center;
-      gap: 46px;
+      gap: 30px;
     }
     .archive-list-dl {
       display: inline-flex;
       align-items: center;
-      gap: 13px;
+      gap: 10px;
       font-family: 'Chillax', sans-serif;
       font-weight: 500;
-      font-size: 18px;
+      font-size: 16px;
       color: #1e8ccc;
       text-decoration: none;
       cursor: pointer;
-      letter-spacing: 0.18px;
+      letter-spacing: 0.16px;
       padding: 0;
       transition: opacity 0.2s;
     }
     .archive-list-dl:hover { opacity: 0.7; }
     .archive-list-dl-circle {
-      width: 38px;
-      height: 38px;
+      width: 25px;
+      height: 25px;
       border-radius: 50%;
-      background: #E9F4FA;
+      background: rgba(233,244,250,1);
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -842,78 +872,196 @@
     }
     .archive-ir-attach:hover { opacity: 1; }
 
-    /* ─── CTA BANNER ─── */
-    .archive-cta-banner {
-      width: 100%;
-      height: 359px;
-      background: #F6FFFD url('assets/press-cta-deco.png') right center / auto 100% no-repeat;
-      position: relative;
-      overflow: hidden;
-    }
-    .archive-cta-banner.white-bg {
-      background-color: #FFFFFF;
-    }
-    .archive-cta-inner {
-      position: absolute;
-      left: 112px;
-      top: 62px;
-      width: 620px;
-    }
-    .archive-cta-title {
-      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 700;
-      font-size: 28px;
-      color: #000;
-      line-height: 45px;
-      letter-spacing: 0.84px;
-      margin-bottom: 15px;
-    }
-    .archive-cta-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      width: 119px;
-      height: 40px;
-      background: #000;
-      color: #fff;
-      text-decoration: none;
-      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 800;
-      font-size: 16px;
-      letter-spacing: 0.48px;
-      border-radius: 10px;
-      margin-bottom: 28px;
-      transition: background 0.2s;
-    }
-    .archive-cta-btn:hover { background: #1e8dcd; }
-    .archive-cta-contacts {
-      display: flex;
-      align-items: center;
-    }
-    .archive-cta-phone, .archive-cta-email {
-      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      line-height: 25px;
+    /* ─── IR 탭 ─── */
+    .archive-ir-years {
+      width: 1100px;
+      margin: 0 auto;
+      padding: 60px 0 80px;
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 50px;
     }
-    .archive-cta-phone .cta-label, .archive-cta-email .cta-label {
+    .archive-ir-year-header {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-weight: 800;
-      font-size: 15px;
-      color: #A9A9A9;
+      font-size: 30px;
+      color: #000;
+      letter-spacing: 0.3px;
+      margin-bottom: 0;
+      padding: 20px 0 0;
     }
-    .archive-cta-phone .cta-value, .archive-cta-email .cta-value {
+    .archive-ir-group .archive-list {
+      width: 100%;
+    }
+
+    /* ─── CI 탭 ─── */
+    .archive-ci-intro {
+      width: 900px;
+      margin: 50px auto 0;
+    }
+    .archive-ci-intro-text {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700;
+      font-size: 19.5px;
+      color: rgba(0,0,0,0.8);
+      line-height: 1.7;
+      letter-spacing: 0.2px;
+    }
+    .archive-ci-section {
+      width: 100%;
+      padding: 50px 0;
+    }
+    .archive-ci-section-gray {
+      background: #f6f6f6;
+    }
+    .archive-ci-section-inner {
+      width: 900px;
+      margin: 0 auto;
+    }
+    .archive-ci-section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-bottom: 30px;
+    }
+    .archive-ci-label-en {
+      font-family: 'Chillax', sans-serif;
+      font-weight: 600;
+      font-size: 25px;
+      color: #000;
+    }
+    .archive-ci-label-kr {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-weight: 800;
-      font-size: 17px;
-      color: #5E5E5E;
+      font-size: 20px;
+      color: #000;
     }
-    .archive-cta-vdivider {
-      width: 0.5px;
-      height: 46px;
-      background: rgba(0,0,0,0.15);
-      margin: 0 35px 0 44px;
+    .archive-ci-sub-labels {
+      display: flex;
+      gap: 30px;
+      margin-left: 20px;
     }
+    .archive-ci-sub-labels span {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 500;
+      font-size: 18px;
+      color: #000;
+    }
+    .archive-ci-sub-label {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: #000;
+      margin-bottom: 16px;
+    }
+    .archive-ci-dl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #f4f4f4;
+      border: none;
+      padding: 8px 16px;
+      cursor: pointer;
+      text-decoration: none;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      color: #000;
+      margin-bottom: 24px;
+      transition: background 0.2s;
+    }
+    .archive-ci-dl-btn:hover { background: #e8e8e8; }
+    .archive-ci-logos {
+      width: 100%;
+    }
+    .archive-ci-logos-img {
+      width: 100%;
+      display: block;
+    }
+    .archive-ci-rules-img {
+      width: 100%;
+      max-width: 700px;
+      display: block;
+      margin-bottom: 16px;
+    }
+    .archive-ci-rules-desc {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 400;
+      font-size: 12px;
+      color: #000;
+      line-height: 1.7;
+      max-width: 315px;
+    }
+    .archive-ci-colors {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .archive-ci-color-row {
+      display: flex;
+      gap: 8px;
+    }
+    .archive-ci-color-chip {
+      flex: 1;
+      height: 63px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 15px;
+    }
+    .archive-ci-color-name {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 500;
+      font-size: 12px;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .archive-ci-color-code {
+      font-family: 'Chillax', sans-serif;
+      font-weight: 400;
+      font-size: 10px;
+      color: #fff;
+      letter-spacing: 0;
+    }
+    .archive-ci-gradient-bar {
+      height: 47px;
+      margin-bottom: 0;
+      width: 100%;
+    }
+
+    /* ─── CTA BANNER ─── */
+    .archive-cta-banner {
+      position: relative;
+      width: 100%;
+      height: 296px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cta-contact-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 218px; height: 42px;
+      border: 0.8px solid #fff;
+      background: transparent;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 800; font-size: 16px; color: #fff;
+      letter-spacing: 0.48px; text-decoration: none;
+      position: relative; overflow: hidden;
+    }
+    .cta-contact-btn::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 150px; height: 150px;
+      background: rgba(255,255,255,0.18);
+      border-radius: 50%;
+      transition: transform 0.5s ease;
+      z-index: 0;
+    }
+    .cta-contact-btn:hover::before { transform: translate(-50%, -50%) scale(5); }
+    .cta-contact-btn span { position: relative; z-index: 1; }
 
     /* ─── FOOTER ─── */
     footer {
@@ -1124,38 +1272,42 @@
 
   <main>
 
-    <!-- 페이지 헤더 -->
-    <div class="page-header">
-      <!-- 브레드크럼 -->
-            <div class="breadcrumb">
-        <a href="index.html" class="breadcrumb-home" aria-label="홈">
-          <svg width="11" height="12" viewBox="0 0 11 12" fill="none">
-            <path d="M1 5L5.5 1L10 5V11H7V8H4V11H1V5Z" stroke="#1e8dcd" stroke-width="1.1" stroke-linejoin="round"/>
-          </svg>
-        </a>
-        <span class="breadcrumb-sep">
-          <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
-            <path d="M1 1L4 5L1 9" stroke="#1e8dcd" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </span>
-        <span>Company</span>
-        <span class="breadcrumb-sep">
-          <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
-            <path d="M1 1L4 5L1 9" stroke="#1e8dcd" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </span>
-        <a href="" onclick="location.reload();return false;">아카이브</a>
-      </div>
-
-      <!-- 제목 + 탭 -->
-      <div class="page-title-tab-row">
-        <h1 class="page-title">아카이브</h1>
-        <div class="archive-tabs" id="archive-tabs">
-          <button class="archive-tab active" data-tab="intro">기업 홍보자료</button>
-          <button class="archive-tab" data-tab="catalog">지명원/카탈로그</button>
-          <button class="archive-tab" data-tab="ir">IR</button>
+    <!-- 아카이브 히어로 -->
+    <div class="archive-hero">
+      <div class="archive-hero-bg"></div>
+      <div class="archive-hero-inner">
+        <div class="archive-hero-breadcrumb">
+          <a href="index.html" aria-label="홈">
+            <svg width="11" height="12" viewBox="0 0 11 12" fill="none">
+              <path d="M1 5L5.5 1L10 5V11H7V8H4V11H1V5Z" stroke="rgba(255,255,255,0.85)" stroke-width="1.1" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <span class="bc-sep">
+            <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
+              <path d="M1 1L4 5L1 9" stroke="rgba(255,255,255,0.85)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span>Company</span>
+          <span class="bc-sep">
+            <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
+              <path d="M1 1L4 5L1 9" stroke="rgba(255,255,255,0.85)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span id="hero-breadcrumb-tab">기업 홍보자료</span>
         </div>
+        <h1 class="archive-hero-title">아카이브</h1>
       </div>
+    </div>
+
+    <!-- 탭 네비게이션 -->
+    <div class="archive-tab-nav" id="archive-tabs">
+      <button class="archive-tab active" data-tab="intro">기업소개서</button>
+      <span class="archive-tab-sep">|</span>
+      <button class="archive-tab" data-tab="catalog">카탈로그/지명원</button>
+      <span class="archive-tab-sep">|</span>
+      <button class="archive-tab" data-tab="ir">IR</button>
+      <span class="archive-tab-sep">|</span>
+      <button class="archive-tab" data-tab="ci">CI</button>
     </div>
 
     <!-- ─── 탭 콘텐츠 ─── -->
@@ -1181,6 +1333,9 @@
                   </a>
                 </div>
               </div>
+              <div class="archive-featured-text">
+                <p class="archive-featured-text-title">2026 에코벨 기업소개서</p>
+                <p class="archive-featured-text-desc">에코벨의 재생에너지 솔루션, VPP, 탄소자산화 플랫폼을<br>한 권에 담은 최신 기업소개 자료입니다.</p>
               <div class="archive-featured-btns">
                 <a class="archive-dl-btn" href="#">
                   국문
@@ -1201,8 +1356,9 @@
                   </svg>
                 </a>
               </div>
-            </div>
-          </div>
+              </div><!-- /.archive-featured-text -->
+            </div><!-- /.archive-featured-center -->
+          </div><!-- /.archive-featured-inner -->
 
           <!-- 연도별 목록 -->
           <div class="archive-list">
@@ -1213,7 +1369,7 @@
                 <a class="archive-list-dl" href="#">
                   <span class="dl-lang">KOR</span>
                   <span class="archive-list-dl-circle">
-                    <svg width="20" height="20" viewBox="0 0 40 40" fill="none">
+                    <svg width="13" height="13" viewBox="0 0 40 40" fill="none">
                       <path d="M37.5 25.9375C36.75 25.9375 36.0625 26.5625 36.0625 27.375V32.9375C36.0625 33.5 35.625 33.9375 35.0625 33.9375H4.9375C4.375 33.9375 3.9375 33.5 3.9375 32.9375V27.375C3.9375 26.625 3.3125 25.9375 2.5 25.9375C1.6875 25.9375 1.0625 26.5625 1.0625 27.375V32.9375C1.0625 35.0625 2.75 36.75 4.875 36.75H35.0625C37.1875 36.75 38.875 35.0625 38.875 32.9375V27.375C38.9375 26.5625 38.25 25.9375 37.5 25.9375Z" fill="#1D7CB2"/>
                       <path d="M19.0003 27.4375C19.2503 27.6875 19.6253 27.8125 20.0003 27.8125C20.3753 27.8125 20.6878 27.6875 21.0003 27.4375L29.9378 18.75C30.5003 18.1875 30.5003 17.3125 30.0003 16.75C29.4378 16.1875 28.5628 16.1875 28.0003 16.6875L21.4378 23.125V4.6875C21.4378 3.9375 20.8128 3.25 20.0003 3.25C19.2503 3.25 18.5628 3.875 18.5628 4.6875V23.125L12.0003 16.75C11.4378 16.1875 10.5628 16.25 10.0003 16.75C9.43784 17.3125 9.50034 18.1875 10.0003 18.75L19.0003 27.4375Z" fill="#1D7CB2"/>
                     </svg>
@@ -1222,7 +1378,7 @@
                 <a class="archive-list-dl" href="#">
                   <span class="dl-lang">ENG</span>
                   <span class="archive-list-dl-circle">
-                    <svg width="20" height="20" viewBox="0 0 40 40" fill="none">
+                    <svg width="13" height="13" viewBox="0 0 40 40" fill="none">
                       <path d="M37.5 25.9375C36.75 25.9375 36.0625 26.5625 36.0625 27.375V32.9375C36.0625 33.5 35.625 33.9375 35.0625 33.9375H4.9375C4.375 33.9375 3.9375 33.5 3.9375 32.9375V27.375C3.9375 26.625 3.3125 25.9375 2.5 25.9375C1.6875 25.9375 1.0625 26.5625 1.0625 27.375V32.9375C1.0625 35.0625 2.75 36.75 4.875 36.75H35.0625C37.1875 36.75 38.875 35.0625 38.875 32.9375V27.375C38.9375 26.5625 38.25 25.9375 37.5 25.9375Z" fill="#1D7CB2"/>
                       <path d="M19.0003 27.4375C19.2503 27.6875 19.6253 27.8125 20.0003 27.8125C20.3753 27.8125 20.6878 27.6875 21.0003 27.4375L29.9378 18.75C30.5003 18.1875 30.5003 17.3125 30.0003 16.75C29.4378 16.1875 28.5628 16.1875 28.0003 16.6875L21.4378 23.125V4.6875C21.4378 3.9375 20.8128 3.25 20.0003 3.25C19.2503 3.25 18.5628 3.875 18.5628 4.6875V23.125L12.0003 16.75C11.4378 16.1875 10.5628 16.25 10.0003 16.75C9.43784 17.3125 9.50034 18.1875 10.0003 18.75L19.0003 27.4375Z" fill="#1D7CB2"/>
                     </svg>
@@ -1237,7 +1393,7 @@
                 <a class="archive-list-dl" href="#">
                   <span class="dl-lang">KOR</span>
                   <span class="archive-list-dl-circle">
-                    <svg width="20" height="20" viewBox="0 0 40 40" fill="none">
+                    <svg width="13" height="13" viewBox="0 0 40 40" fill="none">
                       <path d="M37.5 25.9375C36.75 25.9375 36.0625 26.5625 36.0625 27.375V32.9375C36.0625 33.5 35.625 33.9375 35.0625 33.9375H4.9375C4.375 33.9375 3.9375 33.5 3.9375 32.9375V27.375C3.9375 26.625 3.3125 25.9375 2.5 25.9375C1.6875 25.9375 1.0625 26.5625 1.0625 27.375V32.9375C1.0625 35.0625 2.75 36.75 4.875 36.75H35.0625C37.1875 36.75 38.875 35.0625 38.875 32.9375V27.375C38.9375 26.5625 38.25 25.9375 37.5 25.9375Z" fill="#1D7CB2"/>
                       <path d="M19.0003 27.4375C19.2503 27.6875 19.6253 27.8125 20.0003 27.8125C20.3753 27.8125 20.6878 27.6875 21.0003 27.4375L29.9378 18.75C30.5003 18.1875 30.5003 17.3125 30.0003 16.75C29.4378 16.1875 28.5628 16.1875 28.0003 16.6875L21.4378 23.125V4.6875C21.4378 3.9375 20.8128 3.25 20.0003 3.25C19.2503 3.25 18.5628 3.875 18.5628 4.6875V23.125L12.0003 16.75C11.4378 16.1875 10.5628 16.25 10.0003 16.75C9.43784 17.3125 9.50034 18.1875 10.0003 18.75L19.0003 27.4375Z" fill="#1D7CB2"/>
                     </svg>
@@ -1246,7 +1402,7 @@
                 <a class="archive-list-dl" href="#">
                   <span class="dl-lang">ENG</span>
                   <span class="archive-list-dl-circle">
-                    <svg width="20" height="20" viewBox="0 0 40 40" fill="none">
+                    <svg width="13" height="13" viewBox="0 0 40 40" fill="none">
                       <path d="M37.5 25.9375C36.75 25.9375 36.0625 26.5625 36.0625 27.375V32.9375C36.0625 33.5 35.625 33.9375 35.0625 33.9375H4.9375C4.375 33.9375 3.9375 33.5 3.9375 32.9375V27.375C3.9375 26.625 3.3125 25.9375 2.5 25.9375C1.6875 25.9375 1.0625 26.5625 1.0625 27.375V32.9375C1.0625 35.0625 2.75 36.75 4.875 36.75H35.0625C37.1875 36.75 38.875 35.0625 38.875 32.9375V27.375C38.9375 26.5625 38.25 25.9375 37.5 25.9375Z" fill="#1D7CB2"/>
                       <path d="M19.0003 27.4375C19.2503 27.6875 19.6253 27.8125 20.0003 27.8125C20.3753 27.8125 20.6878 27.6875 21.0003 27.4375L29.9378 18.75C30.5003 18.1875 30.5003 17.3125 30.0003 16.75C29.4378 16.1875 28.5628 16.1875 28.0003 16.6875L21.4378 23.125V4.6875C21.4378 3.9375 20.8128 3.25 20.0003 3.25C19.2503 3.25 18.5628 3.875 18.5628 4.6875V23.125L12.0003 16.75C11.4378 16.1875 10.5628 16.25 10.0003 16.75C9.43784 17.3125 9.50034 18.1875 10.0003 18.75L19.0003 27.4375Z" fill="#1D7CB2"/>
                     </svg>
@@ -1259,167 +1415,261 @@
         </div><!-- /.archive-featured-panel -->
       </div><!-- /.archive-section-wrap#tab-intro -->
 
-      <!-- 탭 2: 지명원/카탈로그 -->
+      <!-- 탭 2: 카탈로그/지명원 -->
       <div class="archive-section-wrap" id="tab-catalog">
-        <div class="archive-section-title">지명원/카탈로그</div>
 
-        <div class="archive-catalog-grid">
+        <!-- 주요 카탈로그 패널 -->
+        <div class="archive-featured-panel">
+          <div class="archive-featured-inner">
+            <p class="archive-featured-year">2026</p>
+            <div class="archive-featured-center">
+              <div class="archive-featured-img" style="width:200px;height:283px;background:#d8e8ef;">
+                <img src="assets/archive-catalog-cover.png" alt="태양광 솔루션 지명원 2026" style="width:100%;height:100%;object-fit:cover;display:block;">
+                <div class="archive-featured-overlay">
+                  <a class="archive-catalog-dl-circle" href="#">
+                    <svg width="22" height="22" viewBox="0 0 40 40" fill="none">
+                      <path d="M37.5 25.9375C36.75 25.9375 36.0625 26.5625 36.0625 27.375V32.9375C36.0625 33.5 35.625 33.9375 35.0625 33.9375H4.9375C4.375 33.9375 3.9375 33.5 3.9375 32.9375V27.375C3.9375 26.625 3.3125 25.9375 2.5 25.9375C1.6875 25.9375 1.0625 26.5625 1.0625 27.375V32.9375C1.0625 35.0625 2.75 36.75 4.875 36.75H35.0625C37.1875 36.75 38.875 35.0625 38.875 32.9375V27.375C38.9375 26.5625 38.25 25.9375 37.5 25.9375Z" fill="#fff"/>
+                      <path d="M19.0003 27.4375C19.2503 27.6875 19.6253 27.8125 20.0003 27.8125C20.3753 27.8125 20.6878 27.6875 21.0003 27.4375L29.9378 18.75C30.5003 18.1875 30.5003 17.3125 30.0003 16.75C29.4378 16.1875 28.5628 16.1875 28.0003 16.6875L21.4378 23.125V4.6875C21.4378 3.9375 20.8128 3.25 20.0003 3.25C19.2503 3.25 18.5628 3.875 18.5628 4.6875V23.125L12.0003 16.75C11.4378 16.1875 10.5628 16.25 10.0003 16.75C9.43784 17.3125 9.50034 18.1875 10.0003 18.75L19.0003 27.4375Z" fill="#fff"/>
+                    </svg>
+                    <span>다운받기</span>
+                  </a>
+                </div>
+              </div>
+              <div class="archive-featured-text">
+                <p class="archive-featured-text-title">태양광 솔루션 지명원 2026</p>
+                <p class="archive-featured-text-desc">에코벨은 귀사의 태양광 발전 사업 파트너로서 최적의 태양광 솔루션을 제공합니다.<br>발전시설 구축부터 ecoNODE(RTU) 기반 Energy-ASSET 모니터링 플랫폼까지,<br>확장 가능한 통합 에너지 경험을 만나보세요.</p>
+                <div class="archive-featured-btns" style="flex-direction:row;gap:14px;">
+                  <a class="archive-dl-btn" href="#">
+                    국문&nbsp;<span class="archive-dl-sep"></span>&nbsp;<span class="dl-lang">KOR</span>
+                    <svg width="20" height="20" viewBox="0 0 40 40" fill="none"><path d="M37.5 25.9375C36.75 25.9375 36.0625 26.5625 36.0625 27.375V32.9375C36.0625 33.5 35.625 33.9375 35.0625 33.9375H4.9375C4.375 33.9375 3.9375 33.5 3.9375 32.9375V27.375C3.9375 26.625 3.3125 25.9375 2.5 25.9375C1.6875 25.9375 1.0625 26.5625 1.0625 27.375V32.9375C1.0625 35.0625 2.75 36.75 4.875 36.75H35.0625C37.1875 36.75 38.875 35.0625 38.875 32.9375V27.375C38.9375 26.5625 38.25 25.9375 37.5 25.9375Z" fill="#1E8DCD"/><path d="M19.0003 27.4375C19.2503 27.6875 19.6253 27.8125 20.0003 27.8125C20.3753 27.8125 20.6878 27.6875 21.0003 27.4375L29.9378 18.75C30.5003 18.1875 30.5003 17.3125 30.0003 16.75C29.4378 16.1875 28.5628 16.1875 28.0003 16.6875L21.4378 23.125V4.6875C21.4378 3.9375 20.8128 3.25 20.0003 3.25C19.2503 3.25 18.5628 3.875 18.5628 4.6875V23.125L12.0003 16.75C11.4378 16.1875 10.5628 16.25 10.0003 16.75C9.43784 17.3125 9.50034 18.1875 10.0003 18.75L19.0003 27.4375Z" fill="#1E8DCD"/></svg>
+                  </a>
+                  <a class="archive-dl-btn" href="#">
+                    영문&nbsp;<span class="archive-dl-sep"></span>&nbsp;<span class="dl-lang">ENG</span>
+                    <svg width="20" height="20" viewBox="0 0 40 40" fill="none"><path d="M37.5 25.9375C36.75 25.9375 36.0625 26.5625 36.0625 27.375V32.9375C36.0625 33.5 35.625 33.9375 35.0625 33.9375H4.9375C4.375 33.9375 3.9375 33.5 3.9375 32.9375V27.375C3.9375 26.625 3.3125 25.9375 2.5 25.9375C1.6875 25.9375 1.0625 26.5625 1.0625 27.375V32.9375C1.0625 35.0625 2.75 36.75 4.875 36.75H35.0625C37.1875 36.75 38.875 35.0625 38.875 32.9375V27.375C38.9375 26.5625 38.25 25.9375 37.5 25.9375Z" fill="#1E8DCD"/><path d="M19.0003 27.4375C19.2503 27.6875 19.6253 27.8125 20.0003 27.8125C20.3753 27.8125 20.6878 27.6875 21.0003 27.4375L29.9378 18.75C30.5003 18.1875 30.5003 17.3125 30.0003 16.75C29.4378 16.1875 28.5628 16.1875 28.0003 16.6875L21.4378 23.125V4.6875C21.4378 3.9375 20.8128 3.25 20.0003 3.25C19.2503 3.25 18.5628 3.875 18.5628 4.6875V23.125L12.0003 16.75C11.4378 16.1875 10.5628 16.25 10.0003 16.75C9.43784 17.3125 9.50034 18.1875 10.0003 18.75L19.0003 27.4375Z" fill="#1E8DCD"/></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
 
-          <div class="archive-catalog-card">
-            <div class="archive-catalog-thumb">
-              <!-- 실제 이미지 있을 경우: <img src="assets/catalog-solar.png" alt="태양광 발전사업 지명원"> -->
-              <div class="archive-catalog-overlay">
-                <a class="archive-catalog-dl-circle" href="#">
-                  <svg width="22" height="22" viewBox="0 0 40 40" fill="none">
-                    <path d="M37.5 25.9375C36.75 25.9375 36.0625 26.5625 36.0625 27.375V32.9375C36.0625 33.5 35.625 33.9375 35.0625 33.9375H4.9375C4.375 33.9375 3.9375 33.5 3.9375 32.9375V27.375C3.9375 26.625 3.3125 25.9375 2.5 25.9375C1.6875 25.9375 1.0625 26.5625 1.0625 27.375V32.9375C1.0625 35.0625 2.75 36.75 4.875 36.75H35.0625C37.1875 36.75 38.875 35.0625 38.875 32.9375V27.375C38.9375 26.5625 38.25 25.9375 37.5 25.9375Z" fill="#fff"/>
-                    <path d="M19.0003 27.4375C19.2503 27.6875 19.6253 27.8125 20.0003 27.8125C20.3753 27.8125 20.6878 27.6875 21.0003 27.4375L29.9378 18.75C30.5003 18.1875 30.5003 17.3125 30.0003 16.75C29.4378 16.1875 28.5628 16.1875 28.0003 16.6875L21.4378 23.125V4.6875C21.4378 3.9375 20.8128 3.25 20.0003 3.25C19.2503 3.25 18.5628 3.875 18.5628 4.6875V23.125L12.0003 16.75C11.4378 16.1875 10.5628 16.25 10.0003 16.75C9.43784 17.3125 9.50034 18.1875 10.0003 18.75L19.0003 27.4375Z" fill="#fff"/>
-                  </svg>
-                  <span>다운받기</span>
+          <!-- 카탈로그 목록 -->
+          <div class="archive-list">
+            <div class="archive-list-row">
+              <span class="archive-list-title">에코에셋(탄소자산화 플랫폼) 카탈로그</span>
+              <div class="archive-list-downloads">
+                <a class="archive-list-dl" href="#">
+                  <span class="dl-lang">KOR</span>
+                  <span class="archive-list-dl-circle">
+                    <svg width="13" height="13" viewBox="0 0 40 40" fill="none"><path d="M37.5 25.9375C36.75 25.9375 36.0625 26.5625 36.0625 27.375V32.9375C36.0625 33.5 35.625 33.9375 35.0625 33.9375H4.9375C4.375 33.9375 3.9375 33.5 3.9375 32.9375V27.375C3.9375 26.625 3.3125 25.9375 2.5 25.9375C1.6875 25.9375 1.0625 26.5625 1.0625 27.375V32.9375C1.0625 35.0625 2.75 36.75 4.875 36.75H35.0625C37.1875 36.75 38.875 35.0625 38.875 32.9375V27.375C38.9375 26.5625 38.25 25.9375 37.5 25.9375Z" fill="#1D7CB2"/><path d="M19.0003 27.4375C19.2503 27.6875 19.6253 27.8125 20.0003 27.8125C20.3753 27.8125 20.6878 27.6875 21.0003 27.4375L29.9378 18.75C30.5003 18.1875 30.5003 17.3125 30.0003 16.75C29.4378 16.1875 28.5628 16.1875 28.0003 16.6875L21.4378 23.125V4.6875C21.4378 3.9375 20.8128 3.25 20.0003 3.25C19.2503 3.25 18.5628 3.875 18.5628 4.6875V23.125L12.0003 16.75C11.4378 16.1875 10.5628 16.25 10.0003 16.75C9.43784 17.3125 9.50034 18.1875 10.0003 18.75L19.0003 27.4375Z" fill="#1D7CB2"/></svg>
+                  </span>
+                </a>
+                <a class="archive-list-dl" href="#">
+                  <span class="dl-lang">ENG</span>
+                  <span class="archive-list-dl-circle">
+                    <svg width="13" height="13" viewBox="0 0 40 40" fill="none"><path d="M37.5 25.9375C36.75 25.9375 36.0625 26.5625 36.0625 27.375V32.9375C36.0625 33.5 35.625 33.9375 35.0625 33.9375H4.9375C4.375 33.9375 3.9375 33.5 3.9375 32.9375V27.375C3.9375 26.625 3.3125 25.9375 2.5 25.9375C1.6875 25.9375 1.0625 26.5625 1.0625 27.375V32.9375C1.0625 35.0625 2.75 36.75 4.875 36.75H35.0625C37.1875 36.75 38.875 35.0625 38.875 32.9375V27.375C38.9375 26.5625 38.25 25.9375 37.5 25.9375Z" fill="#1D7CB2"/><path d="M19.0003 27.4375C19.2503 27.6875 19.6253 27.8125 20.0003 27.8125C20.3753 27.8125 20.6878 27.6875 21.0003 27.4375L29.9378 18.75C30.5003 18.1875 30.5003 17.3125 30.0003 16.75C29.4378 16.1875 28.5628 16.1875 28.0003 16.6875L21.4378 23.125V4.6875C21.4378 3.9375 20.8128 3.25 20.0003 3.25C19.2503 3.25 18.5628 3.875 18.5628 4.6875V23.125L12.0003 16.75C11.4378 16.1875 10.5628 16.25 10.0003 16.75C9.43784 17.3125 9.50034 18.1875 10.0003 18.75L19.0003 27.4375Z" fill="#1D7CB2"/></svg>
+                  </span>
                 </a>
               </div>
             </div>
-            <p class="archive-catalog-title">태양광 발전사업 지명원</p>
-          </div>
-
-          <div class="archive-catalog-card">
-            <div class="archive-catalog-thumb">
-              <div class="archive-catalog-overlay">
-                <a class="archive-catalog-dl-circle" href="#">
-                  <svg width="22" height="22" viewBox="0 0 40 40" fill="none">
-                    <path d="M37.5 25.9375C36.75 25.9375 36.0625 26.5625 36.0625 27.375V32.9375C36.0625 33.5 35.625 33.9375 35.0625 33.9375H4.9375C4.375 33.9375 3.9375 33.5 3.9375 32.9375V27.375C3.9375 26.625 3.3125 25.9375 2.5 25.9375C1.6875 25.9375 1.0625 26.5625 1.0625 27.375V32.9375C1.0625 35.0625 2.75 36.75 4.875 36.75H35.0625C37.1875 36.75 38.875 35.0625 38.875 32.9375V27.375C38.9375 26.5625 38.25 25.9375 37.5 25.9375Z" fill="#fff"/>
-                    <path d="M19.0003 27.4375C19.2503 27.6875 19.6253 27.8125 20.0003 27.8125C20.3753 27.8125 20.6878 27.6875 21.0003 27.4375L29.9378 18.75C30.5003 18.1875 30.5003 17.3125 30.0003 16.75C29.4378 16.1875 28.5628 16.1875 28.0003 16.6875L21.4378 23.125V4.6875C21.4378 3.9375 20.8128 3.25 20.0003 3.25C19.2503 3.25 18.5628 3.875 18.5628 4.6875V23.125L12.0003 16.75C11.4378 16.1875 10.5628 16.25 10.0003 16.75C9.43784 17.3125 9.50034 18.1875 10.0003 18.75L19.0003 27.4375Z" fill="#fff"/>
-                  </svg>
-                  <span>다운받기</span>
+            <div class="archive-list-row">
+              <span class="archive-list-title">에코노드 RTU 지명원</span>
+              <div class="archive-list-downloads">
+                <a class="archive-list-dl" href="#">
+                  <span class="dl-lang">KOR</span>
+                  <span class="archive-list-dl-circle">
+                    <svg width="13" height="13" viewBox="0 0 40 40" fill="none"><path d="M37.5 25.9375C36.75 25.9375 36.0625 26.5625 36.0625 27.375V32.9375C36.0625 33.5 35.625 33.9375 35.0625 33.9375H4.9375C4.375 33.9375 3.9375 33.5 3.9375 32.9375V27.375C3.9375 26.625 3.3125 25.9375 2.5 25.9375C1.6875 25.9375 1.0625 26.5625 1.0625 27.375V32.9375C1.0625 35.0625 2.75 36.75 4.875 36.75H35.0625C37.1875 36.75 38.875 35.0625 38.875 32.9375V27.375C38.9375 26.5625 38.25 25.9375 37.5 25.9375Z" fill="#1D7CB2"/><path d="M19.0003 27.4375C19.2503 27.6875 19.6253 27.8125 20.0003 27.8125C20.3753 27.8125 20.6878 27.6875 21.0003 27.4375L29.9378 18.75C30.5003 18.1875 30.5003 17.3125 30.0003 16.75C29.4378 16.1875 28.5628 16.1875 28.0003 16.6875L21.4378 23.125V4.6875C21.4378 3.9375 20.8128 3.25 20.0003 3.25C19.2503 3.25 18.5628 3.875 18.5628 4.6875V23.125L12.0003 16.75C11.4378 16.1875 10.5628 16.25 10.0003 16.75C9.43784 17.3125 9.50034 18.1875 10.0003 18.75L19.0003 27.4375Z" fill="#1D7CB2"/></svg>
+                  </span>
                 </a>
               </div>
             </div>
-            <p class="archive-catalog-title">에코노드 RTU 지명원</p>
           </div>
 
-          <div class="archive-catalog-card">
-            <div class="archive-catalog-thumb">
-              <div class="archive-catalog-overlay">
-                <a class="archive-catalog-dl-circle" href="#">
-                  <svg width="22" height="22" viewBox="0 0 40 40" fill="none">
-                    <path d="M37.5 25.9375C36.75 25.9375 36.0625 26.5625 36.0625 27.375V32.9375C36.0625 33.5 35.625 33.9375 35.0625 33.9375H4.9375C4.375 33.9375 3.9375 33.5 3.9375 32.9375V27.375C3.9375 26.625 3.3125 25.9375 2.5 25.9375C1.6875 25.9375 1.0625 26.5625 1.0625 27.375V32.9375C1.0625 35.0625 2.75 36.75 4.875 36.75H35.0625C37.1875 36.75 38.875 35.0625 38.875 32.9375V27.375C38.9375 26.5625 38.25 25.9375 37.5 25.9375Z" fill="#fff"/>
-                    <path d="M19.0003 27.4375C19.2503 27.6875 19.6253 27.8125 20.0003 27.8125C20.3753 27.8125 20.6878 27.6875 21.0003 27.4375L29.9378 18.75C30.5003 18.1875 30.5003 17.3125 30.0003 16.75C29.4378 16.1875 28.5628 16.1875 28.0003 16.6875L21.4378 23.125V4.6875C21.4378 3.9375 20.8128 3.25 20.0003 3.25C19.2503 3.25 18.5628 3.875 18.5628 4.6875V23.125L12.0003 16.75C11.4378 16.1875 10.5628 16.25 10.0003 16.75C9.43784 17.3125 9.50034 18.1875 10.0003 18.75L19.0003 27.4375Z" fill="#fff"/>
-                  </svg>
-                  <span>다운받기</span>
-                </a>
-              </div>
-            </div>
-            <p class="archive-catalog-title">에코에셋 탄소자산화 플랫폼</p>
-          </div>
-
-          <div class="archive-catalog-card">
-            <div class="archive-catalog-thumb">
-              <div class="archive-catalog-overlay">
-                <a class="archive-catalog-dl-circle" href="#">
-                  <svg width="22" height="22" viewBox="0 0 40 40" fill="none">
-                    <path d="M37.5 25.9375C36.75 25.9375 36.0625 26.5625 36.0625 27.375V32.9375C36.0625 33.5 35.625 33.9375 35.0625 33.9375H4.9375C4.375 33.9375 3.9375 33.5 3.9375 32.9375V27.375C3.9375 26.625 3.3125 25.9375 2.5 25.9375C1.6875 25.9375 1.0625 26.5625 1.0625 27.375V32.9375C1.0625 35.0625 2.75 36.75 4.875 36.75H35.0625C37.1875 36.75 38.875 35.0625 38.875 32.9375V27.375C38.9375 26.5625 38.25 25.9375 37.5 25.9375Z" fill="#fff"/>
-                    <path d="M19.0003 27.4375C19.2503 27.6875 19.6253 27.8125 20.0003 27.8125C20.3753 27.8125 20.6878 27.6875 21.0003 27.4375L29.9378 18.75C30.5003 18.1875 30.5003 17.3125 30.0003 16.75C29.4378 16.1875 28.5628 16.1875 28.0003 16.6875L21.4378 23.125V4.6875C21.4378 3.9375 20.8128 3.25 20.0003 3.25C19.2503 3.25 18.5628 3.875 18.5628 4.6875V23.125L12.0003 16.75C11.4378 16.1875 10.5628 16.25 10.0003 16.75C9.43784 17.3125 9.50034 18.1875 10.0003 18.75L19.0003 27.4375Z" fill="#fff"/>
-                  </svg>
-                  <span>다운받기</span>
-                </a>
-              </div>
-            </div>
-            <p class="archive-catalog-title">에너지에셋<br>신재생에너지 통합관리</p>
-          </div>
-
-        </div>
-      </div>
+        </div><!-- /.archive-featured-panel -->
+      </div><!-- /.archive-section-wrap#tab-catalog -->
 
       <!-- 탭 3: IR -->
       <div class="archive-section-wrap" id="tab-ir">
-        <div class="archive-section-title">사업보고서</div>
+        <div class="archive-ir-years">
 
-        <div class="archive-ir-wrap">
-          <table class="archive-ir-table">
-            <thead>
-              <tr>
-                <th>no</th>
-                <th>공지제목</th>
-                <th>작성일</th>
-                <th>첨부파일</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>4</td>
-                <td>2025년 제3 기 감사보고서</td>
-                <td>2024.11.13</td>
-                <td>
-                  <button class="archive-ir-attach" aria-label="첨부파일 다운로드">
-                    <svg width="16" height="18" viewBox="0 0 16 18" fill="none">
-                      <path d="M14.5 8L7.5 15C6.1 16.4 3.9 16.4 2.5 15C1.1 13.6 1.1 11.4 2.5 10L9.5 3C10.4 2.1 11.9 2.1 12.8 3C13.7 3.9 13.7 5.4 12.8 6.3L6.2 12.9C5.8 13.3 5.2 13.3 4.8 12.9C4.4 12.5 4.4 11.9 4.8 11.5L10.5 5.8" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>2025년 제3 기 사업보고서</td>
-                <td>2024.11.13</td>
-                <td>
-                  <button class="archive-ir-attach" aria-label="첨부파일 다운로드">
-                    <svg width="16" height="18" viewBox="0 0 16 18" fill="none">
-                      <path d="M14.5 8L7.5 15C6.1 16.4 3.9 16.4 2.5 15C1.1 13.6 1.1 11.4 2.5 10L9.5 3C10.4 2.1 11.9 2.1 12.8 3C13.7 3.9 13.7 5.4 12.8 6.3L6.2 12.9C5.8 13.3 5.2 13.3 4.8 12.9C4.4 12.5 4.4 11.9 4.8 11.5L10.5 5.8" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>2024년 제2 기 감사보고서</td>
-                <td>2024.11.13</td>
-                <td>
-                  <button class="archive-ir-attach" aria-label="첨부파일 다운로드">
-                    <svg width="16" height="18" viewBox="0 0 16 18" fill="none">
-                      <path d="M14.5 8L7.5 15C6.1 16.4 3.9 16.4 2.5 15C1.1 13.6 1.1 11.4 2.5 10L9.5 3C10.4 2.1 11.9 2.1 12.8 3C13.7 3.9 13.7 5.4 12.8 6.3L6.2 12.9C5.8 13.3 5.2 13.3 4.8 12.9C4.4 12.5 4.4 11.9 4.8 11.5L10.5 5.8" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>2024년 제2 기 사업보고서</td>
-                <td>2024.11.13</td>
-                <td>
-                  <button class="archive-ir-attach" aria-label="첨부파일 다운로드">
-                    <svg width="16" height="18" viewBox="0 0 16 18" fill="none">
-                      <path d="M14.5 8L7.5 15C6.1 16.4 3.9 16.4 2.5 15C1.1 13.6 1.1 11.4 2.5 10L9.5 3C10.4 2.1 11.9 2.1 12.8 3C13.7 3.9 13.7 5.4 12.8 6.3L6.2 12.9C5.8 13.3 5.2 13.3 4.8 12.9C4.4 12.5 4.4 11.9 4.8 11.5L10.5 5.8" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <!-- 2025 -->
+          <div class="archive-ir-group">
+            <div class="archive-ir-year-header">2025</div>
+            <div class="archive-list" style="padding-top:0;">
+              <div class="archive-list-row">
+                <span class="archive-list-title">연간 감사보고서</span>
+                <div class="archive-list-downloads">
+                  <a class="archive-list-dl" href="#">
+                    <span class="dl-lang">KOR</span>
+                    <span class="archive-list-dl-circle">
+                      <svg width="13" height="13" viewBox="0 0 40 40" fill="none"><path d="M37.5 25.9375C36.75 25.9375 36.0625 26.5625 36.0625 27.375V32.9375C36.0625 33.5 35.625 33.9375 35.0625 33.9375H4.9375C4.375 33.9375 3.9375 33.5 3.9375 32.9375V27.375C3.9375 26.625 3.3125 25.9375 2.5 25.9375C1.6875 25.9375 1.0625 26.5625 1.0625 27.375V32.9375C1.0625 35.0625 2.75 36.75 4.875 36.75H35.0625C37.1875 36.75 38.875 35.0625 38.875 32.9375V27.375C38.9375 26.5625 38.25 25.9375 37.5 25.9375Z" fill="#1D7CB2"/><path d="M19.0003 27.4375C19.2503 27.6875 19.6253 27.8125 20.0003 27.8125C20.3753 27.8125 20.6878 27.6875 21.0003 27.4375L29.9378 18.75C30.5003 18.1875 30.5003 17.3125 30.0003 16.75C29.4378 16.1875 28.5628 16.1875 28.0003 16.6875L21.4378 23.125V4.6875C21.4378 3.9375 20.8128 3.25 20.0003 3.25C19.2503 3.25 18.5628 3.875 18.5628 4.6875V23.125L12.0003 16.75C11.4378 16.1875 10.5628 16.25 10.0003 16.75C9.43784 17.3125 9.50034 18.1875 10.0003 18.75L19.0003 27.4375Z" fill="#1D7CB2"/></svg>
+                    </span>
+                  </a>
+                </div>
+              </div>
+              <div class="archive-list-row">
+                <span class="archive-list-title">반기 감사보고서</span>
+                <div class="archive-list-downloads">
+                  <a class="archive-list-dl" href="#">
+                    <span class="dl-lang">KOR</span>
+                    <span class="archive-list-dl-circle">
+                      <svg width="13" height="13" viewBox="0 0 40 40" fill="none"><path d="M37.5 25.9375C36.75 25.9375 36.0625 26.5625 36.0625 27.375V32.9375C36.0625 33.5 35.625 33.9375 35.0625 33.9375H4.9375C4.375 33.9375 3.9375 33.5 3.9375 32.9375V27.375C3.9375 26.625 3.3125 25.9375 2.5 25.9375C1.6875 25.9375 1.0625 26.5625 1.0625 27.375V32.9375C1.0625 35.0625 2.75 36.75 4.875 36.75H35.0625C37.1875 36.75 38.875 35.0625 38.875 32.9375V27.375C38.9375 26.5625 38.25 25.9375 37.5 25.9375Z" fill="#1D7CB2"/><path d="M19.0003 27.4375C19.2503 27.6875 19.6253 27.8125 20.0003 27.8125C20.3753 27.8125 20.6878 27.6875 21.0003 27.4375L29.9378 18.75C30.5003 18.1875 30.5003 17.3125 30.0003 16.75C29.4378 16.1875 28.5628 16.1875 28.0003 16.6875L21.4378 23.125V4.6875C21.4378 3.9375 20.8128 3.25 20.0003 3.25C19.2503 3.25 18.5628 3.875 18.5628 4.6875V23.125L12.0003 16.75C11.4378 16.1875 10.5628 16.25 10.0003 16.75C9.43784 17.3125 9.50034 18.1875 10.0003 18.75L19.0003 27.4375Z" fill="#1D7CB2"/></svg>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2024 -->
+          <div class="archive-ir-group">
+            <div class="archive-ir-year-header">2024</div>
+            <div class="archive-list" style="padding-top:0;">
+              <div class="archive-list-row">
+                <span class="archive-list-title">연간 감사보고서</span>
+                <div class="archive-list-downloads">
+                  <a class="archive-list-dl" href="#">
+                    <span class="dl-lang">KOR</span>
+                    <span class="archive-list-dl-circle">
+                      <svg width="13" height="13" viewBox="0 0 40 40" fill="none"><path d="M37.5 25.9375C36.75 25.9375 36.0625 26.5625 36.0625 27.375V32.9375C36.0625 33.5 35.625 33.9375 35.0625 33.9375H4.9375C4.375 33.9375 3.9375 33.5 3.9375 32.9375V27.375C3.9375 26.625 3.3125 25.9375 2.5 25.9375C1.6875 25.9375 1.0625 26.5625 1.0625 27.375V32.9375C1.0625 35.0625 2.75 36.75 4.875 36.75H35.0625C37.1875 36.75 38.875 35.0625 38.875 32.9375V27.375C38.9375 26.5625 38.25 25.9375 37.5 25.9375Z" fill="#1D7CB2"/><path d="M19.0003 27.4375C19.2503 27.6875 19.6253 27.8125 20.0003 27.8125C20.3753 27.8125 20.6878 27.6875 21.0003 27.4375L29.9378 18.75C30.5003 18.1875 30.5003 17.3125 30.0003 16.75C29.4378 16.1875 28.5628 16.1875 28.0003 16.6875L21.4378 23.125V4.6875C21.4378 3.9375 20.8128 3.25 20.0003 3.25C19.2503 3.25 18.5628 3.875 18.5628 4.6875V23.125L12.0003 16.75C11.4378 16.1875 10.5628 16.25 10.0003 16.75C9.43784 17.3125 9.50034 18.1875 10.0003 18.75L19.0003 27.4375Z" fill="#1D7CB2"/></svg>
+                    </span>
+                  </a>
+                </div>
+              </div>
+              <div class="archive-list-row">
+                <span class="archive-list-title">반기 감사보고서</span>
+                <div class="archive-list-downloads">
+                  <a class="archive-list-dl" href="#">
+                    <span class="dl-lang">KOR</span>
+                    <span class="archive-list-dl-circle">
+                      <svg width="13" height="13" viewBox="0 0 40 40" fill="none"><path d="M37.5 25.9375C36.75 25.9375 36.0625 26.5625 36.0625 27.375V32.9375C36.0625 33.5 35.625 33.9375 35.0625 33.9375H4.9375C4.375 33.9375 3.9375 33.5 3.9375 32.9375V27.375C3.9375 26.625 3.3125 25.9375 2.5 25.9375C1.6875 25.9375 1.0625 26.5625 1.0625 27.375V32.9375C1.0625 35.0625 2.75 36.75 4.875 36.75H35.0625C37.1875 36.75 38.875 35.0625 38.875 32.9375V27.375C38.9375 26.5625 38.25 25.9375 37.5 25.9375Z" fill="#1D7CB2"/><path d="M19.0003 27.4375C19.2503 27.6875 19.6253 27.8125 20.0003 27.8125C20.3753 27.8125 20.6878 27.6875 21.0003 27.4375L29.9378 18.75C30.5003 18.1875 30.5003 17.3125 30.0003 16.75C29.4378 16.1875 28.5628 16.1875 28.0003 16.6875L21.4378 23.125V4.6875C21.4378 3.9375 20.8128 3.25 20.0003 3.25C19.2503 3.25 18.5628 3.875 18.5628 4.6875V23.125L12.0003 16.75C11.4378 16.1875 10.5628 16.25 10.0003 16.75C9.43784 17.3125 9.50034 18.1875 10.0003 18.75L19.0003 27.4375Z" fill="#1D7CB2"/></svg>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /.archive-ir-years -->
+      </div><!-- /.archive-section-wrap#tab-ir -->
+
+      <!-- 탭 4: CI -->
+      <div class="archive-section-wrap" id="tab-ci">
+
+        <!-- CI 소개 텍스트 -->
+        <div class="archive-ci-intro">
+          <p class="archive-ci-intro-text">에코벨 CI는 기업과 소비자, 기술과 친환경 가치를 하나로 잇는 플랫폼으로서, 정보 콘텐츠와 거래가 유기적으로 흐르는 '연결'의 구조를 직관적인 그래픽 모티브로 표현합니다. 이는 B2B·B2C를 아우르는 친환경 서비스와 지속가능한 가치의 연결을 상징합니다.</p>
         </div>
-      </div>
+
+        <!-- Signature / Logotype -->
+        <div class="archive-ci-section">
+          <div class="archive-ci-section-inner">
+            <div class="archive-ci-section-header">
+              <span class="archive-ci-label-en">Signiture</span>
+              <div class="archive-ci-sub-labels">
+                <span>Logotype</span>
+                <span>Symbol mark</span>
+              </div>
+            </div>
+
+            <!-- CI 다운로드 버튼 -->
+            <a class="archive-ci-dl-btn" href="#">
+              <span>CI 다운로드</span>
+              <svg width="14" height="14" viewBox="0 0 40 40" fill="none">
+                <path d="M37.5 25.9375C36.75 25.9375 36.0625 26.5625 36.0625 27.375V32.9375C36.0625 33.5 35.625 33.9375 35.0625 33.9375H4.9375C4.375 33.9375 3.9375 33.5 3.9375 32.9375V27.375C3.9375 26.625 3.3125 25.9375 2.5 25.9375C1.6875 25.9375 1.0625 26.5625 1.0625 27.375V32.9375C1.0625 35.0625 2.75 36.75 4.875 36.75H35.0625C37.1875 36.75 38.875 35.0625 38.875 32.9375V27.375C38.9375 26.5625 38.25 25.9375 37.5 25.9375Z" fill="#000"/>
+                <path d="M19.0003 27.4375C19.2503 27.6875 19.6253 27.8125 20.0003 27.8125C20.3753 27.8125 20.6878 27.6875 21.0003 27.4375L29.9378 18.75C30.5003 18.1875 30.5003 17.3125 30.0003 16.75C29.4378 16.1875 28.5628 16.1875 28.0003 16.6875L21.4378 23.125V4.6875C21.4378 3.9375 20.8128 3.25 20.0003 3.25C19.2503 3.25 18.5628 3.875 18.5628 4.6875V23.125L12.0003 16.75C11.4378 16.1875 10.5628 16.25 10.0003 16.75C9.43784 17.3125 9.50034 18.1875 10.0003 18.75L19.0003 27.4375Z" fill="#000"/>
+              </svg>
+            </a>
+
+            <!-- 로고 변형 이미지 -->
+            <div class="archive-ci-logos">
+              <img src="assets/archive-ci-signature.png" alt="CI 시그니처 로고 변형" class="archive-ci-logos-img">
+            </div>
+          </div>
+        </div>
+
+        <!-- CI 규정 -->
+        <div class="archive-ci-section archive-ci-section-gray">
+          <div class="archive-ci-section-inner">
+            <div class="archive-ci-section-header">
+              <span class="archive-ci-label-en">CI</span><span class="archive-ci-label-kr">규정</span>
+            </div>
+            <div class="archive-ci-rules-grid">
+              <div>
+                <p class="archive-ci-sub-label">최소 사이즈</p>
+                <img src="assets/archive-ci-rules.png" alt="CI 규정" class="archive-ci-rules-img">
+                <p class="archive-ci-rules-desc">여백 규정은 CI로고의 가독성과 주목성을 최적의 상태로 유지하기 위한 기준입니다. 각종 매체에 적용할 경우, 중심선과 여백 규정을 준수하여 다른 요소나 복잡한 패턴이 침범하지 않도록 합니다.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Color System -->
+        <div class="archive-ci-section">
+          <div class="archive-ci-section-inner">
+            <div class="archive-ci-section-header">
+              <span class="archive-ci-label-en">Color System</span><span class="archive-ci-label-kr">(색상 체계)</span>
+            </div>
+            <div class="archive-ci-colors">
+              <div>
+                <p class="archive-ci-sub-label" style="font-weight:500;">Main Color</p>
+                <div class="archive-ci-color-row">
+                  <div class="archive-ci-color-chip" style="background:#1E8DCD;">
+                    <span class="archive-ci-color-name">Ecobell Blue</span>
+                    <span class="archive-ci-color-code">#1E8DCD&nbsp;&nbsp;&nbsp;C85 M31 Y0 K20&nbsp;&nbsp;&nbsp;R30 G141 B205</span>
+                  </div>
+                  <div class="archive-ci-color-chip" style="background:#52B0AC;">
+                    <span class="archive-ci-color-name">Ecobell Mint</span>
+                    <span class="archive-ci-color-code">#52B0AC&nbsp;&nbsp;&nbsp;C53 M0 Y2 K31&nbsp;&nbsp;&nbsp;R82 G176 B172</span>
+                  </div>
+                  <div class="archive-ci-color-chip" style="background:#2DB47C;">
+                    <span class="archive-ci-color-name">Ecobell Green</span>
+                    <span class="archive-ci-color-code">#2DB47C&nbsp;&nbsp;&nbsp;C75 M0 Y31 K29&nbsp;&nbsp;&nbsp;R45 G180 B124</span>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <p class="archive-ci-sub-label" style="font-weight:500;">Sub Color</p>
+                <div class="archive-ci-color-row">
+                  <div class="archive-ci-color-chip" style="background:#234B63;">
+                    <span class="archive-ci-color-name">Ecobell Dark Blue</span>
+                    <span class="archive-ci-color-code">#234B63&nbsp;&nbsp;&nbsp;C65 M25 Y0 K61&nbsp;&nbsp;&nbsp;R35 G74 B99</span>
+                  </div>
+                  <div class="archive-ci-color-chip" style="background:#91A4AF;">
+                    <span class="archive-ci-color-name">Ecobell Gray</span>
+                    <span class="archive-ci-color-code">#91A4AF&nbsp;&nbsp;&nbsp;C17 M6 Y0 K31&nbsp;&nbsp;&nbsp;R145 G164 B175</span>
+                  </div>
+                  <div class="archive-ci-color-chip" style="background:#E9F4FA;color:#234b63;">
+                    <span class="archive-ci-color-name" style="color:#234b63;">Ecobell Silver</span>
+                    <span class="archive-ci-color-code" style="color:#234b63;">#E9F4FA&nbsp;&nbsp;&nbsp;C7 M2 Y0 K2&nbsp;&nbsp;&nbsp;R233 G244 B250</span>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <p class="archive-ci-sub-label" style="font-weight:500;">Gradation Effect</p>
+                <div class="archive-ci-gradient-bar" style="background:linear-gradient(to right, #2DB47C, #52B0AC, #1E8DCD, #234B63);"></div>
+                <div class="archive-ci-color-row" style="gap:0;">
+                  <div style="flex:1;height:29px;background:#2DB47C;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;color:#fff;font-weight:500;">Ecobell Green</span></div>
+                  <div style="flex:1;height:29px;background:#52B0AC;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;color:#fff;font-weight:500;">Ecobell Mint</span></div>
+                  <div style="flex:1;height:29px;background:#1E8DCD;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;color:#fff;font-weight:500;">Ecobell Blue</span></div>
+                  <div style="flex:1;height:29px;background:#234B63;display:flex;align-items:center;justify-content:center;"><span style="font-size:11px;color:#fff;font-weight:500;">Ecobell Dark Blue</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /.archive-section-wrap#tab-ci -->
 
     </div><!-- /.archive-content -->
 
     <!-- CTA 배너 -->
-    <div class="archive-cta-banner white-bg">
-      <div class="archive-cta-inner">
-        <p class="archive-cta-title">더 궁금한 점이 있으신가요?<br>문의하기를 통해 빠르게 답변 받아 보세요.</p>
-        <a class="archive-cta-btn" href="notice.html">
-          문의하기
-          <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
-            <path d="M1 1L4 5L1 9" stroke="#fff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-        <div class="archive-cta-contacts">
-          <div class="archive-cta-phone">
-            <span class="cta-label">전화 상담</span>
-            <span class="cta-value">02-892-9180</span>
-          </div>
-          <div class="archive-cta-vdivider"></div>
-          <div class="archive-cta-email">
-            <span class="cta-label">이메일 상담</span>
-            <span class="cta-value">ecobell@ecobell.co.kr</span>
-          </div>
-        </div>
+    <div class="archive-cta-banner">
+      <div style="position:absolute;inset:0;background:url('assets/cta-bg.png') center/cover no-repeat;"></div>
+      <div style="position:absolute;inset:0;background:rgba(0,49,77,0.85);"></div>
+      <div style="position:relative;text-align:center;">
+        <p style="font-family:'Nanum Square','NanumSquare',sans-serif;font-weight:900;font-size:30px;color:#fff;letter-spacing:0.84px;line-height:40px;margin:0 0 8px;">무엇이든 물어보세요</p>
+        <p style="font-family:'Nanum Square','NanumSquare',sans-serif;font-weight:500;font-size:16px;color:#fff;letter-spacing:0.84px;line-height:40px;margin:0 0 18px;">특정 비즈니스 솔루션 문의부터 일반 문의까지 에코벨이 도와드립니다.</p>
+        <a href="contact.html" class="cta-contact-btn"><span>문의하기</span></a>
       </div>
     </div>
 
@@ -1613,7 +1863,7 @@
     // ─── 탭 전환 ───
     const tabs = document.querySelectorAll('.archive-tab');
     const sections = document.querySelectorAll('.archive-section-wrap');
-    const ctaBanner = document.querySelector('.archive-cta-banner');
+    const heroBcTab = document.getElementById('hero-breadcrumb-tab');
 
     tabs.forEach(tab => {
       tab.addEventListener('click', () => {
@@ -1622,25 +1872,15 @@
         sections.forEach(s => s.classList.remove('active'));
         tab.classList.add('active');
         document.getElementById('tab-' + target).classList.add('active');
-        ctaBanner.classList.toggle('white-bg', target === 'intro');
+        if (heroBcTab) heroBcTab.textContent = tab.textContent.trim();
       });
     });
 
-    // URL hash로 탭 초기화 (#ir, #catalog)
+    // URL hash로 탭 초기화
     const hash = location.hash.replace('#', '');
-    if (hash === 'ir' || hash === 'catalog' || hash === 'intro') {
+    if (hash === 'ir' || hash === 'catalog' || hash === 'intro' || hash === 'ci') {
       const matchTab = document.querySelector(`.archive-tab[data-tab="${hash}"]`);
       if (matchTab) matchTab.click();
-    }
-
-    // 페이지 제목 클릭 → LNB 아카이브 링크
-    const pageTitle = document.querySelector('.page-title');
-    if (pageTitle) {
-      const lnbLink = document.querySelector('.lnb-col a[href="archive.html"]');
-      if (lnbLink) {
-        pageTitle.style.cursor = 'pointer';
-        pageTitle.addEventListener('click', () => { window.location.href = lnbLink.getAttribute('href'); });
-      }
     }
   </script>
 </body>
