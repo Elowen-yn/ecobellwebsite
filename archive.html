@@ -533,7 +533,7 @@
     .archive-tab {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-weight: 400;
-      font-size: 23px;
+      font-size: 21.85px;
       color: #000;
       letter-spacing: 0.23px;
       background: transparent;
@@ -935,7 +935,7 @@
     .archive-ci-intro-text {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-weight: 400;
-      font-size: 19.5px;
+      font-size: 17.5px;
       color: rgba(0,0,0,0.8);
       line-height: 1.7;
       letter-spacing: 0.2px;
@@ -1141,7 +1141,7 @@
       background: rgba(0,0,0,0.35);
       color: #fff;
       font-family: 'Chillax', sans-serif;
-      font-size: 11px;
+      font-size: 15px;
       font-weight: 500;
       letter-spacing: 0.3px;
       opacity: 0;
@@ -1716,7 +1716,7 @@
 
         <!-- CI 소개 텍스트 -->
         <div class="archive-ci-intro">
-          <p class="archive-ci-intro-text" style="text-align:center;">에코벨 CI는 기업과 소비자, 기술과 친환경 가치를 하나로 잇는 플랫폼으로서,<br>정보 콘텐츠와 거래가 유기적으로 흐르는 '연결'의 구조를 직관적인 그래픽 모티브로 표현합니다.<br>이는 B2B·B2C를 아우르는 친환경 서비스와 지속가능한 가치의 연결을 상징합니다.</p>
+          <p class="archive-ci-intro-text" style="text-align:center;">에코벨 CI는 기업과 소비자, 기술과 친환경 가치를 하나로 잇는 솔루션 서비스로서,<br>정보 콘텐츠와 거래가 유기적으로 흐르는 '연결'의 구조를 직관적인 그래픽 모티브로 표현합니다.<br>이는 B2B·B2C를 아우르는 친환경 서비스와 지속가능한 가치의 연결을 상징합니다.</p>
         </div>
 
         <!-- Signature / Logotype -->
@@ -1895,13 +1895,13 @@
       <a class="ft-bottom-link" href="#" style="left:250px;">이메일무단수집거부</a>
       <a class="ft-bottom-link" href="#" style="left:383px;">자주 묻는 질문(FAQ)</a>
 
-      <a class="ft-social" href="#" aria-label="YouTube" style="left:1283px;">
+      <a class="ft-social" href="https://www.youtube.com/@yt_ecobell" target="_blank" rel="noopener noreferrer" aria-label="YouTube" style="left:1283px;">
         <svg width="22" height="23" viewBox="0 0 22 23" fill="none"><rect x="1.5" y="5" width="19" height="13" rx="3" stroke="#fff" stroke-width="1.3"/><polygon points="8.5,8.5 15.5,11.5 8.5,14.5" fill="#fff"/></svg>
       </a>
-      <a class="ft-social" href="#" aria-label="Instagram" style="left:1328px;">
+      <a class="ft-social" href="https://www.instagram.com/ecobell.co.kr/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="left:1328px;">
         <svg width="22" height="23" viewBox="0 0 22 23" fill="none"><rect x="2" y="2.5" width="18" height="18" rx="5" stroke="#fff" stroke-width="1.3"/><circle cx="11" cy="11.5" r="4" stroke="#fff" stroke-width="1.3"/><circle cx="16" cy="6.5" r="1.1" fill="#fff"/></svg>
       </a>
-      <a class="ft-social" href="#" aria-label="Facebook" style="left:1372px;">
+      <a class="ft-social" href="https://www.facebook.com/ecobell.co.kr" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="left:1372px;">
         <svg width="22" height="23" viewBox="0 0 22 23" fill="none"><path d="M12.5 11.5H14.8L15.5 8.5H12.5V6.8C12.5 5.9 12.9 5.2 14.2 5.2H15.8V2.6C15.8 2.6 14.3 2.3 12.9 2.3C10.1 2.3 8.5 3.9 8.5 6.5V8.5H5.8V11.5H8.5V20.5H12.5V11.5Z" fill="#fff"/></svg>
       </a>
       <p class="ft-copyright">서울시 금천구 시흥대로 193, 701호(08635)
@@ -2068,9 +2068,10 @@
       activateTab(tab, false);
     });
 
-    // 초기 탭: 해시에서 읽기
+    // 초기 탭: URL 파라미터 또는 해시에서 읽기
+    const urlTab = new URLSearchParams(location.search).get('tab');
     const hashMatch = location.hash.match(/\/(\w+)/);
-    const initTab = hashMatch ? hashMatch[1] : 'profile';
+    const initTab = urlTab || (hashMatch ? hashMatch[1] : 'profile');
     activateTab(initTab, false);
 
     // ─── CI 색상 칩 클릭 시 HEX 복사 ───

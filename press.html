@@ -471,7 +471,7 @@
     .press-hero {
       position: relative;
       width: 100%;
-      height: 318px;
+      height: 283px;
       background: url('assets/press-hero-bg.png') center center / cover no-repeat;
       overflow: hidden;
     }
@@ -486,7 +486,8 @@
       width: 100%; max-width: 1440px;
       height: 100%;
       margin: 0 auto;
-      display: flex; align-items: center; justify-content: center;
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+      padding-top: 110px;
       z-index: 1;
     }
     .press-hero-breadcrumb {
@@ -505,8 +506,8 @@
     .press-hero-sep { width: 5px; height: 10px; display: flex; align-items: center; }
     .press-hero-title {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 800; font-size: 55px; color: #fff;
-      letter-spacing: 0.55px; text-align: center;
+      font-weight: 800; font-size: 50px; color: #fff;
+      letter-spacing: 0.5px; text-align: center;
     }
     .press-hero-sns {
       position: absolute;
@@ -515,9 +516,9 @@
     }
     .press-hero-sns-label {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 800; font-size: 20px; color: #fff;
+      font-weight: 700; font-size: 17px; color: #fff;
     }
-    .press-hero-sns-icons { display: flex; gap: 14px; align-items: center; }
+    .press-hero-sns-icons { display: flex; gap: 25px; align-items: center; }
     .press-hero-sns-icons a {
       display: flex; align-items: center; justify-content: center;
       opacity: 0.85; transition: opacity 0.2s; text-decoration: none;
@@ -535,10 +536,20 @@
       position: relative;
     }
     .press-featured-inner {
-      display: flex;
-      background: #f2f2f2;
       height: 380px;
       overflow: hidden;
+      position: relative;
+    }
+    .press-featured-track {
+      display: flex;
+      height: 100%;
+      transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .press-featured-slide {
+      flex-shrink: 0;
+      display: flex;
+      gap: 5px;
+      background: #f2f2f2;
     }
     .press-featured-image {
       width: 540px; height: 380px;
@@ -550,10 +561,13 @@
     }
     .press-featured-image:hover { opacity: 0.9; }
     .press-featured-body {
-      padding: 44px 50px;
+      padding: 19px 70px 69px 50px;
       display: flex; flex-direction: column;
-      gap: 14px; justify-content: center;
+      gap: 0; justify-content: center;
     }
+    .press-featured-title { margin-top: 22px; }
+    .press-featured-desc  { margin-top: 20px; }
+    .press-featured-more  { margin-top: 20px; }
     .press-featured-date {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-size: 16px; font-weight: 700; color: #000;
@@ -564,6 +578,8 @@
       line-height: 1.45; text-decoration: none;
       display: -webkit-box; -webkit-line-clamp: 2;
       -webkit-box-orient: vertical; overflow: hidden;
+      word-break: keep-all; text-align: left;
+      padding-right: 60px;
       transition: color 0.2s;
     }
     .press-featured-title:hover { color: #1e8dcd; }
@@ -571,6 +587,7 @@
       font-size: 14px; color: #000; line-height: 1.7;
       display: -webkit-box; -webkit-line-clamp: 2;
       -webkit-box-orient: vertical; overflow: hidden;
+      word-break: keep-all; text-align: left;
     }
     .press-featured-more {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
@@ -587,12 +604,12 @@
       transition: background 0.2s;
     }
     .press-featured-nav:hover { background: #fff; }
-    .press-featured-nav.prev { left: 0; }
-    .press-featured-nav.next { right: 0; }
+    .press-featured-nav.prev { left: 0; border-radius: 0 10px 10px 0; }
+    .press-featured-nav.next { right: 0; border-radius: 10px 0 0 10px; }
     .press-featured-dots {
-      display: flex; gap: 8px;
+      display: flex; gap: 10px;
       align-items: center; justify-content: center;
-      margin-top: 16px;
+      margin-top: 19px;
     }
     .press-featured-dot {
       width: 11px; height: 11px;
@@ -601,21 +618,24 @@
       transition: opacity 0.25s;
     }
     .press-featured-dot.active { opacity: 1; }
-    .press-featured-dot-next {
-      width: 20px; height: 20px;
-      border-radius: 50%; background: #000;
+    .press-featured-play-btn {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: transparent;
+      border: 1.5px solid #000;
       display: flex; align-items: center; justify-content: center;
-      cursor: pointer; border: none; margin-left: 4px;
-      transition: background 0.2s;
+      cursor: pointer; margin-left: 10px;
+      transition: border-color 0.2s, opacity 0.2s;
+      flex-shrink: 0;
     }
-    .press-featured-dot-next:hover { background: #1e8dcd; }
+    .press-featured-play-btn:hover { opacity: 0.6; }
 
     /* ─── PRESS SEARCH ROW ─── */
     .press-search-row {
       width: 100%; max-width: 1440px;
       margin: 0 auto;
-      padding: 10px 75px 24px;
-      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 75px 50px;
+      display: flex; align-items: center; justify-content: flex-end;
       position: relative;
     }
     .press-count {
@@ -623,17 +643,19 @@
       font-weight: 700; font-size: 18px; color: #000;
       letter-spacing: 0.18px; line-height: 23px;
       display: none;
+      position: absolute; left: 75px;
     }
+    #press-count-num { color: #1e8dcd; }
     .page-search {
       display: flex; align-items: center;
       border: 0.5px solid rgba(0,0,0,0.3);
-      width: 433px; height: 50px;
+      width: 390px; height: 45px;
       padding: 0 18px; border-radius: 5px;
     }
     .page-search input {
       flex: 1;
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 400; font-size: 18px; color: #606060;
+      font-weight: 400; font-size: 16px; color: #606060;
       border: none; outline: none; background: transparent;
     }
     .page-search input::placeholder { color: #606060; opacity: 0.85; }
@@ -651,7 +673,7 @@
       padding: 0 75px 60px;
       display: grid;
       grid-template-columns: repeat(4, 290px);
-      gap: 40px 43px;
+      gap: 50px 40px;
     }
 
     .press-card {
@@ -680,11 +702,13 @@
       color: #000;
       line-height: 1.5;
       letter-spacing: -0.18px;
-      margin-bottom: 7px;
+      margin-bottom: 10px;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
+      word-break: keep-all;
+      text-align: left;
       transition: color 0.2s;
       text-decoration: none;
     }
@@ -696,7 +720,9 @@
       font-size: 13px;
       color: #8c8c8c;
       letter-spacing: -0.26px;
-      margin-bottom: 11px;
+      margin-bottom: 10px;
+      position: relative;
+      top: -3px;
     }
 
     .press-card-tags {
@@ -716,7 +742,7 @@
     }
     .press-card-tag {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 700;
+      font-weight: 600;
       font-size: 12px;
       color: #8c8c8c;
       background: #f6f6f6;
@@ -739,7 +765,7 @@
 
     /* 결과 없음 메시지 */
     .press-no-results-msg {
-      padding: 80px 75px 80px;
+      padding: 80px 75px 300px;
       text-align: center;
       display: flex;
       flex-direction: column;
@@ -752,16 +778,18 @@
     }
     .press-no-results-title {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 700; font-size: 25px; color: #000;
+      font-weight: 700; font-size: 22px; color: #000;
       letter-spacing: 0.25px;
+      position: relative; top: 0;
     }
     .press-no-results-tips {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 400; font-size: 16px;
+      font-weight: 400; font-size: 13px;
       color: rgba(0,0,0,0.7);
       line-height: 2;
       text-align: left;
       list-style: none;
+      position: relative; top: 5px;
     }
     .press-no-results-tips li::before { content: '∙ '; }
 
@@ -796,34 +824,42 @@
     .cta-contact-btn span { position: relative; z-index: 1; }
 
     /* 페이지네이션 */
-    .pagination {
+    .press-pagination {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0;
-      padding: 20px 0 80px;
+      gap: 30px;
+      padding-top: 20px;
+      padding-bottom: 80px;
     }
-    .pagination-btn {
+    .press-pagination .page-arrow-group {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+    .press-pagination .page-arrow {
       width: 23px; height: 22px;
-      background: none; border: none; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      opacity: 0.5; transition: opacity 0.2s;
-      border-radius: 3px;
-    }
-    .pagination-btn:hover { opacity: 1; }
-    .pagination-num {
-      font-family: 'Chillax', sans-serif;
-      font-weight: 400;
-      font-size: 17px;
-      color: #000;
-      width: 38px; height: 22px;
       display: flex; align-items: center; justify-content: center;
       cursor: pointer;
-      transition: color 0.2s;
-      text-decoration: none;
+      border: 0.5px solid rgba(0,0,0,0.3);
+      border-radius: 3px;
+      background: #fff;
+      transition: background 0.2s;
     }
-    .pagination-num:hover { color: #1e8ccc; }
-    .pagination-num.active { color: #0091bb; font-weight: 600; }
+    .press-pagination .page-arrow:hover { background: #f5f5f5; }
+    .press-pagination .page-num {
+      font-family: 'Chillax', sans-serif;
+      font-size: 17px;
+      color: #000;
+      text-align: center;
+      cursor: pointer;
+      font-weight: 500;
+      letter-spacing: 0.17px;
+      line-height: 22.1px;
+      transition: color 0.15s;
+    }
+    .press-pagination .page-num:hover { color: #1e8dcd; }
+    .press-pagination .page-num.active { color: #0091bb; font-weight: 600; }
 
     /* ─── FOOTER ─── */
     footer {
@@ -1061,14 +1097,14 @@
         <div class="press-hero-sns">
           <span class="press-hero-sns-label">에코벨 SNS 바로가기</span>
           <div class="press-hero-sns-icons">
-            <a href="#" aria-label="LinkedIn">
-              <img src="assets/icons/press-sns-1.svg" alt="LinkedIn" width="28" height="28">
+            <a href="https://www.youtube.com/@yt_ecobell" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+              <img src="assets/icons/press-sns-3.svg" alt="YouTube" width="28" height="28">
             </a>
-            <a href="https://www.instagram.com/ecobell.co.kr/" target="_blank" aria-label="Instagram">
+            <a href="https://www.instagram.com/ecobell.co.kr/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <img src="assets/icons/press-sns-2.svg" alt="Instagram" width="28" height="28">
             </a>
-            <a href="https://www.youtube.com/@yt_ecobell" target="_blank" aria-label="YouTube">
-              <img src="assets/icons/press-sns-3.svg" alt="YouTube" width="28" height="28">
+            <a href="https://www.facebook.com/ecobell.co.kr" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <img src="assets/icons/press-sns-1.svg" alt="Facebook" width="28" height="28">
             </a>
           </div>
         </div>
@@ -1079,13 +1115,7 @@
     <section class="press-featured-section">
       <div class="press-featured-wrap">
         <div class="press-featured-inner" id="press-featured-inner">
-          <a class="press-featured-image" href="press-article.html" id="featured-img" style="background:#c0c8cf;"></a>
-          <div class="press-featured-body">
-            <p class="press-featured-date" id="featured-date">2025-02-05</p>
-            <a class="press-featured-title" href="press-article.html" id="featured-title">"재생에너지+VPP+탄소자산화" 통합...'에너지 혁신 드림팀' 출범 "눈길"</a>
-            <p class="press-featured-desc" id="featured-desc">주식회사 에코벨이 온실가스 감축 데이터를 수집·분석하고 이를 디지털화된 배출권으로 전환하는 '에코에셋(ecoASSET)' 플랫폼을 개발했다고 5일 발표했다.</p>
-            <a class="press-featured-more" href="press-article.html" id="featured-more">자세히 보기</a>
-          </div>
+          <div class="press-featured-track" id="press-featured-track"></div>
         </div>
         <button class="press-featured-nav prev" id="featured-prev" aria-label="이전">
           <svg width="7" height="13" viewBox="0 0 7 13" fill="none"><path d="M6 1L1 6.5L6 12" stroke="#000" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1104,8 +1134,8 @@
         <input type="text" placeholder="보도자료 키워드 검색" id="press-search-input">
         <button type="submit" aria-label="검색">
           <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-            <circle cx="9" cy="9" r="6.5" stroke="#606060" stroke-width="1.5"/>
-            <line x1="14" y1="14" x2="20" y2="20" stroke="#606060" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="9" cy="9" r="6.5" stroke="#1e8dcd" stroke-width="1.5"/>
+            <line x1="14" y1="14" x2="20" y2="20" stroke="#1e8dcd" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
         </button>
       </form>
@@ -1308,32 +1338,23 @@
     </div>
 
     <!-- 페이지네이션 -->
-    <div class="pagination">
-      <button class="pagination-btn" aria-label="처음">
-        <svg width="7" height="7" viewBox="0 0 7 7" fill="none">
-          <path d="M6 1L3.5 3.5L6 6M3.5 1L1 3.5L3.5 6" stroke="#000" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-      <button class="pagination-btn" aria-label="이전">
-        <svg width="4" height="7" viewBox="0 0 4 7" fill="none">
-          <path d="M3 1L1 3.5L3 6" stroke="#000" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-      <a class="pagination-num active" href="#">1</a>
-      <a class="pagination-num" href="#">2</a>
-      <a class="pagination-num" href="#">3</a>
-      <a class="pagination-num" href="#">4</a>
-      <a class="pagination-num" href="#">5</a>
-      <button class="pagination-btn" aria-label="다음">
-        <svg width="4" height="7" viewBox="0 0 4 7" fill="none">
-          <path d="M1 1L3 3.5L1 6" stroke="#000" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-      <button class="pagination-btn" aria-label="마지막">
-        <svg width="7" height="7" viewBox="0 0 7 7" fill="none">
-          <path d="M1 1L3.5 3.5L1 6M3.5 1L6 3.5L3.5 6" stroke="#000" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
+    <div class="press-pagination" id="press-pagination">
+      <div class="page-arrow-group">
+        <button class="page-arrow" aria-label="첫 페이지">
+          <svg width="7" height="7" viewBox="0 0 7 7" fill="none"><path d="M4 1L1 3.5L4 6" stroke="rgba(0,0,0,0.6)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 1L4 3.5L7 6" stroke="rgba(0,0,0,0.6)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="page-arrow" aria-label="이전 페이지">
+          <svg width="5" height="7" viewBox="0 0 5 7" fill="none"><path d="M4 1L1 3.5L4 6" stroke="rgba(0,0,0,0.6)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <div class="page-arrow-group">
+        <button class="page-arrow" aria-label="다음 페이지">
+          <svg width="5" height="7" viewBox="0 0 5 7" fill="none"><path d="M1 1L4 3.5L1 6" stroke="rgba(0,0,0,0.6)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="page-arrow" aria-label="마지막 페이지">
+          <svg width="7" height="7" viewBox="0 0 7 7" fill="none"><path d="M3 1L6 3.5L3 6" stroke="rgba(0,0,0,0.6)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M0 1L3 3.5L0 6" stroke="rgba(0,0,0,0.6)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
     </div>
 
   </main>
@@ -1381,13 +1402,13 @@
       <a class="ft-bottom-link" href="#" style="left:250px;">이메일무단수집거부</a>
       <a class="ft-bottom-link" href="#" style="left:383px;">자주 묻는 질문(FAQ)</a>
 
-      <a class="ft-social" href="#" aria-label="YouTube" style="left:1283px;">
+      <a class="ft-social" href="https://www.youtube.com/@yt_ecobell" target="_blank" rel="noopener noreferrer" aria-label="YouTube" style="left:1283px;">
         <svg width="22" height="23" viewBox="0 0 22 23" fill="none"><rect x="1.5" y="5" width="19" height="13" rx="3" stroke="#fff" stroke-width="1.3"/><polygon points="8.5,8.5 15.5,11.5 8.5,14.5" fill="#fff"/></svg>
       </a>
-      <a class="ft-social" href="#" aria-label="Instagram" style="left:1328px;">
+      <a class="ft-social" href="https://www.instagram.com/ecobell.co.kr/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="left:1328px;">
         <svg width="22" height="23" viewBox="0 0 22 23" fill="none"><rect x="2" y="2.5" width="18" height="18" rx="5" stroke="#fff" stroke-width="1.3"/><circle cx="11" cy="11.5" r="4" stroke="#fff" stroke-width="1.3"/><circle cx="16" cy="6.5" r="1.1" fill="#fff"/></svg>
       </a>
-      <a class="ft-social" href="#" aria-label="Facebook" style="left:1372px;">
+      <a class="ft-social" href="https://www.facebook.com/ecobell.co.kr" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="left:1372px;">
         <svg width="22" height="23" viewBox="0 0 22 23" fill="none"><path d="M12.5 11.5H14.8L15.5 8.5H12.5V6.8C12.5 5.9 12.9 5.2 14.2 5.2H15.8V2.6C15.8 2.6 14.3 2.3 12.9 2.3C10.1 2.3 8.5 3.9 8.5 6.5V8.5H5.8V11.5H8.5V20.5H12.5V11.5Z" fill="#fff"/></svg>
       </a>
       <p class="ft-copyright">서울시 금천구 시흥대로 193, 701호(08635)
@@ -1544,18 +1565,72 @@
         href: 'press-article.html'
       }
     ];
-    let featuredIdx = 0;
+    const N = FEATURED.length;
+    let featuredIdx = 0; // 논리 인덱스 (0~N-1)
+    let trackIdx = 1;    // 트랙 인덱스 (0=끝클론, 1~N=실제, N+1=시작클론)
+    let isTransitioning = false;
 
-    function renderFeatured(idx) {
-      const item = FEATURED[idx];
-      document.getElementById('featured-date').textContent = item.date;
-      document.getElementById('featured-title').textContent = item.title;
-      document.getElementById('featured-title').href = item.href;
-      document.getElementById('featured-desc').textContent = item.desc;
-      document.getElementById('featured-more').href = item.href;
-      document.querySelectorAll('.press-featured-dot').forEach((dot, i) => {
-        dot.classList.toggle('active', i === idx);
+    const ICON_PLAY  = '<svg width="9" height="10" viewBox="0 0 9 10" fill="none"><polygon points="1,1 8,5 1,9" fill="#000"/></svg>';
+    const ICON_PAUSE = '<svg width="9" height="10" viewBox="0 0 9 10" fill="none"><rect x="1" y="1" width="2.5" height="8" rx="0.5" fill="#000"/><rect x="5.5" y="1" width="2.5" height="8" rx="0.5" fill="#000"/></svg>';
+
+    function slideHTML(item) {
+      return `<a class="press-featured-image" href="${item.href}" style="background:${item.bg || '#c0c8cf'};"></a>
+              <div class="press-featured-body">
+                <p class="press-featured-date">${item.date}</p>
+                <a class="press-featured-title" href="${item.href}">${item.title}</a>
+                <p class="press-featured-desc">${item.desc}</p>
+                <a class="press-featured-more" href="${item.href}">자세히 보기</a>
+              </div>`;
+    }
+
+    function buildSlides() {
+      const track = document.getElementById('press-featured-track');
+      const total = N + 2;
+      track.style.width = `${total * 100}%`;
+      track.innerHTML = '';
+      // [마지막클론, 1, 2, 3, 첫번째클론]
+      [FEATURED[N - 1], ...FEATURED, FEATURED[0]].forEach(item => {
+        const slide = document.createElement('div');
+        slide.className = 'press-featured-slide';
+        slide.style.width = `${100 / total}%`;
+        slide.innerHTML = slideHTML(item);
+        track.appendChild(slide);
       });
+      // 클론에 도달하면 트랜지션 없이 실제 슬라이드로 점프
+      track.addEventListener('transitionend', (e) => {
+        if (e.propertyName !== 'transform') return;
+        if (trackIdx === N + 1) {
+          track.style.transition = 'none';
+          trackIdx = 1; featuredIdx = 0;
+          track.style.transform = `translateX(-${trackIdx * (100 / (N + 2))}%)`;
+          track.getBoundingClientRect();
+          track.style.transition = '';
+          updateDots();
+        } else if (trackIdx === 0) {
+          track.style.transition = 'none';
+          trackIdx = N; featuredIdx = N - 1;
+          track.style.transform = `translateX(-${trackIdx * (100 / (N + 2))}%)`;
+          track.getBoundingClientRect();
+          track.style.transition = '';
+          updateDots();
+        }
+        isTransitioning = false;
+      });
+      track.style.transform = `translateX(-${trackIdx * (100 / (N + 2))}%)`;
+    }
+
+    function updateDots() {
+      document.querySelectorAll('.press-featured-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === featuredIdx);
+      });
+    }
+
+    function goTo(ti, li) {
+      if (isTransitioning) return;
+      isTransitioning = true;
+      trackIdx = ti; featuredIdx = li;
+      document.getElementById('press-featured-track').style.transform = `translateX(-${ti * (100 / (N + 2))}%)`;
+      updateDots();
     }
 
     function buildDots() {
@@ -1564,62 +1639,135 @@
       FEATURED.forEach((_, i) => {
         const dot = document.createElement('button');
         dot.className = 'press-featured-dot' + (i === 0 ? ' active' : '');
-        dot.addEventListener('click', () => { featuredIdx = i; renderFeatured(i); });
+        dot.addEventListener('click', () => { goTo(i + 1, i); resetAuto(); });
         dotsEl.appendChild(dot);
       });
-      const nextBtn = document.createElement('button');
-      nextBtn.className = 'press-featured-dot-next';
-      nextBtn.innerHTML = '<svg width="8" height="10" viewBox="0 0 8 10" fill="none"><path d="M1 1L6 5L1 9" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-      nextBtn.addEventListener('click', () => { featuredIdx = (featuredIdx + 1) % FEATURED.length; renderFeatured(featuredIdx); });
-      dotsEl.appendChild(nextBtn);
+      const playBtn = document.createElement('button');
+      playBtn.className = 'press-featured-play-btn';
+      playBtn.setAttribute('aria-label', '일시정지');
+      playBtn.innerHTML = ICON_PAUSE;
+      playBtn.addEventListener('click', () => {
+        if (autoTimer) {
+          clearInterval(autoTimer); autoTimer = null;
+          playBtn.innerHTML = ICON_PLAY;
+          playBtn.setAttribute('aria-label', '재생');
+        } else {
+          startAuto();
+          playBtn.innerHTML = ICON_PAUSE;
+          playBtn.setAttribute('aria-label', '일시정지');
+        }
+      });
+      dotsEl.appendChild(playBtn);
     }
 
+    buildSlides();
     buildDots();
+
+    let autoTimer = null;
+    function startAuto() {
+      autoTimer = setInterval(() => {
+        goTo(trackIdx + 1, trackIdx >= N ? 0 : trackIdx);
+      }, 5000);
+    }
+    function resetAuto() { clearInterval(autoTimer); startAuto(); }
+
     document.getElementById('featured-prev').addEventListener('click', () => {
-      featuredIdx = (featuredIdx - 1 + FEATURED.length) % FEATURED.length;
-      renderFeatured(featuredIdx);
+      goTo(trackIdx - 1, trackIdx <= 1 ? N - 1 : trackIdx - 2);
+      resetAuto();
     });
     document.getElementById('featured-next').addEventListener('click', () => {
-      featuredIdx = (featuredIdx + 1) % FEATURED.length;
-      renderFeatured(featuredIdx);
+      goTo(trackIdx + 1, trackIdx >= N ? 0 : trackIdx);
+      resetAuto();
     });
 
-    /* ─── 카드 필터링 ─── */
+    startAuto();
+
+    /* ─── 카드 필터링 + 페이지네이션 ─── */
+    const ITEMS_PER_PAGE = 8;
+    let pressCurrentPage = 1;
+    let pressFilteredCards = [];
+
     const pressSearchInput = document.getElementById('press-search-input');
     const pressGrid = document.querySelector('.press-grid');
     const pressNoResults = document.getElementById('press-no-results');
     const pressCount = document.getElementById('press-count');
     const pressCountNum = document.getElementById('press-count-num');
     const pressNoResultsQuery = document.getElementById('press-no-results-query');
-    const pagination = document.querySelector('.pagination');
+    const pressPagination = document.getElementById('press-pagination');
+
+    function getAllCards() {
+      return Array.from(pressGrid.querySelectorAll('.press-card'));
+    }
+
+    function renderPressPage(page) {
+      pressCurrentPage = page;
+      getAllCards().forEach(c => c.style.display = 'none');
+      const start = (page - 1) * ITEMS_PER_PAGE;
+      pressFilteredCards.slice(start, start + ITEMS_PER_PAGE).forEach(c => c.style.display = '');
+
+      if (pressFilteredCards.length === 0) {
+        pressGrid.style.display = 'none';
+        pressPagination.style.display = 'none';
+        pressNoResults.style.display = 'block';
+      } else {
+        pressGrid.style.display = '';
+        pressPagination.style.display = '';
+        pressNoResults.style.display = 'none';
+      }
+    }
+
+    function renderPressPagination() {
+      const totalPages = Math.max(1, Math.ceil(pressFilteredCards.length / ITEMS_PER_PAGE));
+      pressPagination.querySelectorAll('.page-num').forEach(el => el.remove());
+
+      let startPage = Math.max(1, pressCurrentPage - 2);
+      let endPage   = Math.min(totalPages, startPage + 4);
+      if (endPage - startPage < 4) startPage = Math.max(1, endPage - 4);
+
+      const lastGroup = pressPagination.querySelector('.page-arrow-group:last-child');
+      for (let i = startPage; i <= endPage; i++) {
+        const span = document.createElement('span');
+        span.className = 'page-num' + (i === pressCurrentPage ? ' active' : '');
+        span.textContent = i;
+        span.addEventListener('click', () => { renderPressPage(i); renderPressPagination(); });
+        pressPagination.insertBefore(span, lastGroup);
+      }
+
+      const arrows = pressPagination.querySelectorAll('.page-arrow');
+      arrows[0].onclick = () => { renderPressPage(1); renderPressPagination(); };
+      arrows[1].onclick = () => { if (pressCurrentPage > 1) { renderPressPage(pressCurrentPage - 1); renderPressPagination(); } };
+      arrows[2].onclick = () => { if (pressCurrentPage < totalPages) { renderPressPage(pressCurrentPage + 1); renderPressPagination(); } };
+      arrows[3].onclick = () => { renderPressPage(totalPages); renderPressPagination(); };
+    }
 
     function filterCards(query) {
       const q = query.trim().replace(/^#/, '').toLowerCase();
-      const cards = pressGrid.querySelectorAll('.press-card');
-      let visible = 0;
-      cards.forEach(card => {
-        const title = card.querySelector('.press-card-title').textContent.toLowerCase();
-        const tags = Array.from(card.querySelectorAll('.press-card-tag'))
-          .map(t => t.textContent.replace(/^#/, '').toLowerCase()).join(' ');
-        const match = !q || title.includes(q) || tags.includes(q);
-        card.style.display = match ? '' : 'none';
-        if (match) visible++;
-      });
+      const allCards = getAllCards();
 
       if (q) {
+        pressFilteredCards = allCards.filter(card => {
+          const title = card.querySelector('.press-card-title').textContent.toLowerCase();
+          const tags = Array.from(card.querySelectorAll('.press-card-tag'))
+            .map(t => t.textContent.replace(/^#/, '').toLowerCase()).join(' ');
+          return title.includes(q) || tags.includes(q);
+        });
         pressCount.style.display = 'block';
-        pressCountNum.textContent = visible;
+        pressCountNum.textContent = pressFilteredCards.length;
         pressNoResultsQuery.textContent = query.trim().replace(/^#/, '');
-        pressNoResults.style.display = visible === 0 ? 'block' : 'none';
-        pressGrid.style.display = visible === 0 ? 'none' : '';
-        pagination.style.display = 'none';
       } else {
+        pressFilteredCards = allCards;
         pressCount.style.display = 'none';
-        pressNoResults.style.display = 'none';
-        pressGrid.style.display = '';
-        pagination.style.display = '';
       }
+
+      pressCurrentPage = 1;
+      renderPressPage(1);
+      renderPressPagination();
     }
+
+    // 초기 로드
+    pressFilteredCards = getAllCards();
+    renderPressPage(1);
+    renderPressPagination();
 
     document.querySelector('.page-search').addEventListener('submit', e => {
       e.preventDefault();

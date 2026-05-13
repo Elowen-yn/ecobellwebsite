@@ -603,7 +603,8 @@
     }
     .result-count {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 700; font-size: 20px; color: #000; letter-spacing: 0.2px;
+      font-weight: 800; font-size: 18px; color: #000; letter-spacing: 0.18px;
+      line-height: 23.4px;
     }
     .result-count-num { color: #1e8dcd; }
     .sort-select {
@@ -638,6 +639,7 @@
       text-decoration: none; display: block; transition: color 0.15s;
     }
     .result-title:hover { color: #1e8dcd; }
+    .result-tag { font-weight: 800; }
     .result-excerpt {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-weight: 400; font-size: 14px; color: #000;
@@ -655,7 +657,7 @@
     .result-more:hover { opacity: 0.7; }
 
     /* ─── EMPTY STATE ─── */
-    .search-empty { display: none; flex-direction: column; align-items: center; padding-top: 47px; }
+    .search-empty { display: none; flex-direction: column; align-items: center; padding-top: 47px; padding-left: 20px; }
     .search-empty.visible { display: flex; }
     .search-empty-icon { margin-bottom: 20px; display: flex; justify-content: center; }
     .search-empty-title {
@@ -697,6 +699,7 @@
       width: 100%; height: 296px;
       overflow: hidden;
       display: flex; align-items: center; justify-content: center;
+      margin-bottom: 442px;
     }
     .search-cta-bg {
       position: absolute; inset: 0;
@@ -1039,13 +1042,13 @@
       <a class="ft-bottom-link" href="#" style="left:173px;">이용약관</a>
       <a class="ft-bottom-link" href="#" style="left:250px;">이메일무단수집거부</a>
       <a class="ft-bottom-link" href="#" style="left:383px;">자주 묻는 질문(FAQ)</a>
-      <a class="ft-social" href="#" aria-label="YouTube" style="left:1283px;">
+      <a class="ft-social" href="https://www.youtube.com/@yt_ecobell" target="_blank" rel="noopener noreferrer" aria-label="YouTube" style="left:1283px;">
         <svg width="22" height="23" viewBox="0 0 22 23" fill="none"><rect x="1.5" y="5" width="19" height="13" rx="3" stroke="#fff" stroke-width="1.3"/><polygon points="8.5,8.5 15.5,11.5 8.5,14.5" fill="#fff"/></svg>
       </a>
-      <a class="ft-social" href="#" aria-label="Instagram" style="left:1328px;">
+      <a class="ft-social" href="https://www.instagram.com/ecobell.co.kr/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="left:1328px;">
         <svg width="22" height="23" viewBox="0 0 22 23" fill="none"><rect x="2" y="2.5" width="18" height="18" rx="5" stroke="#fff" stroke-width="1.3"/><circle cx="11" cy="11.5" r="4" stroke="#fff" stroke-width="1.3"/><circle cx="16" cy="6.5" r="1.1" fill="#fff"/></svg>
       </a>
-      <a class="ft-social" href="#" aria-label="Facebook" style="left:1372px;">
+      <a class="ft-social" href="https://www.facebook.com/ecobell.co.kr" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="left:1372px;">
         <svg width="22" height="23" viewBox="0 0 22 23" fill="none"><path d="M12.5 11.5H14.8L15.5 8.5H12.5V6.8C12.5 5.9 12.9 5.2 14.2 5.2H15.8V2.6C15.8 2.6 14.3 2.3 12.9 2.3C10.1 2.3 8.5 3.9 8.5 6.5V8.5H5.8V11.5H8.5V20.5H12.5V11.5Z" fill="#fff"/></svg>
       </a>
       <p class="ft-copyright">서울시 금천구 시흥대로 193, 701호(08635)
@@ -1180,17 +1183,38 @@
     // ─── Mock data ───
     const MOCK = [
       { cat:'company', sub:'CEO 인사말', href:'ceo.html',
-        title:'CEO 인사말 — 에코벨 대표이사 김소연',
+        title:'CEO 인사말',
         excerpt:'안녕하십니까. 에코벨 대표이사 김소연입니다. 에코벨의 성장을 위해 변함없는 신뢰와 성원을 보내주시는 모든 이해관계자 여러분께 깊은 감사를 드립니다. 에너지 전환이 가속화되는 가운데, 데이터 기반의 에너지 관리 역량은 기업 경쟁력을 좌우하는 핵심 요소로 자리 잡고 있습니다. 이러한 흐름 속에서 에코벨은 에너지와 탄소 데이터를 가치 있는 흐름으로 잇는 연결자로 자리매김하며, 2023년 설립 이후 분산된 데이터를 체계적으로 수집·분석하여 친환경 시장의 새로운 기준을 만들어가고 있습니다. 자체 RTU 솔루션인 ecoNODE를 통해 수집된 정밀한 데이터는 기업의 합리적인 의사결정과 만나 경영의 효율을 높입니다. 이렇게 도출된 결과는 다시 탄소배출권 시장과 연결되어, 환경적 가치와 경제적 가치가 함께 실현되는 구조를 만들어갑니다. 우리가 주목하는 진정한 가치는 화합Orchestrate에 있습니다. 데이터와 기술, 그리고 사람이 조화를 이루는 비즈니스 하모니를 통해, 친환경 에너지 전환을 가속화하고 기업의 지속 가능한 성장과 친환경 미래를 함께 만들어가겠습니다. 에코벨은 에너지 데이터의 조화로운 연결을 통해 기업과 사회가 함께 성장하는 내일의 하모니를 만들어가겠습니다.' },
+      { cat:'company', sub:'보도자료', href:'press.html',
+        title:'보도자료',
+        excerpt:'에코벨 보도자료. 최신 뉴스, 보도자료, 미디어 자료를 확인하세요. 에코벨 SNS 바로가기.' },
       { cat:'company', sub:'보도자료', href:'press-article.html',
-        title:'에코벨, ESG 경영 우수기업 선정 — 지속가능경영 보고서 발간',
+        title:'에코벨, ESG 경영 우수기업 선정',
         excerpt:'주식회사 에코벨이 2024년도 ESG 경영 우수기업으로 선정되었습니다. 에코벨은 탄소중립 목표 달성을 위한 다양한 솔루션을 제공하며 지속 가능한 미래를 선도하고 있습니다.' },
       { cat:'company', sub:'보도자료', href:'press-article.html',
-        title:'에코벨 ecoNODE ver.2 정식 출시 — 실시간 탄소 모니터링 강화',
+        title:'에코벨 ecoNODE ver.2 정식 출시',
         excerpt:'에코벨의 차세대 탄소관리 플랫폼 ecoNODE ver.2가 정식 출시되었습니다. 이번 업데이트에서는 실시간 탄소 배출량 모니터링 기능이 대폭 강화되어 기업의 탄소중립 목표 달성을 지원합니다.' },
+      { cat:'contact', sub:'문의하기', href:'contact.html',
+        title:'문의하기',
+        excerpt:'에코벨 문의하기. 파트너십 비즈니스 문의. 데모 신청. ESG 컨설팅 신청. 회원 서비스 문의. 유선 문의 02-892-9180.' },
+      { cat:'contact', sub:'문의하기', href:'contact.html',
+        title:'비회원 통합 문의',
+        excerpt:'에코벨에 대해 궁금하신가요? 원하는 항목을 클릭해 문의 주시면, 빠른 시간 안에 이메일로 답변드립니다. 파트너십 & 비즈니스 문의. 데모 신청. ESG 컨설팅 신청. 문의 접수 후 담당자가 확인 후 빠르게 연락드립니다. 평균 응답 시간은 영업일 기준 1~2일입니다.' },
+      { cat:'contact', sub:'문의하기', href:'contact.html',
+        title:'유선 문의 서비스',
+        excerpt:'유선 문의 서비스. 에코벨 대표 전화번호 02-892-9180. 팩스 02-892-9181. 문의 서비스 제공 시간. 담당자 연결 상담.' },
+      { cat:'contact', sub:'문의하기', href:'contact.html',
+        title:'회원 서비스 문의',
+        excerpt:'회원이신가요? 사용 중인 서비스에 따라 담당자의 개별 상담을 받아보세요. ecoASSET 에코에셋 플랫폼에 대한 문의를 남겨주시면 담당자가 맞춤 상담을 제공해드립니다. E-ASSET 에너지에셋 플랫폼에 대한 문의를 남겨주시면 담당자가 맞춤 상담을 제공해드립니다. Solution / ecoNODE 솔루션에 대한 문의를 남겨주시면 담당자가 맞춤 상담을 제공해드립니다.' },
+      { cat:'contact', sub:'문의하기', href:'contact.html',
+        title:'데모 신청',
+        excerpt:'에코벨 서비스 데모 신청. ecoASSET 탄소자산화 플랫폼 데모. E-ASSET 신·재생에너지 모니터링 플랫폼 데모. ecoNODE 솔루션 데모.' },
       { cat:'contact', sub:'오시는 길', href:'directions.html',
-        title:'오시는 길 — 에코벨 본사 위치 안내',
+        title:'오시는 길',
         excerpt:'에코벨 본사는 서울특별시 금천구 시흥대로 193, 701호 아람아이씨티타워에 위치해 있습니다. 우편번호 08635. 대표 전화번호는 02-892-9180, 팩스는 02-892-9181입니다. 지도에서 위치를 확인하실 수 있습니다.' },
+      { cat:'contact', sub:'공지사항', href:'notice.html',
+        title:'공지사항',
+        excerpt:'에코벨 공지사항. 서비스 업데이트, 정책 변경, 이벤트 등 에코벨의 최신 공지를 확인하세요.' },
       { cat:'contact', sub:'공지사항', href:'notice-article.html',
         title:'에코벨 개인정보 처리방침 변경 안내',
         excerpt:'에코벨의 개인정보 처리방침이 변경됩니다. 변경된 내용은 2024년 12월 1일부터 적용되며, 이용자의 개인정보 보호를 위해 더욱 강화된 정책을 시행합니다.' },
@@ -1203,23 +1227,123 @@
       { cat:'contact', sub:'공지사항', href:'notice-article.html',
         title:'에너지에셋 서비스 이용약관 개정 안내',
         excerpt:'에너지에셋 서비스 이용약관이 개정됩니다. 개정된 약관은 2024년 11월 1일부터 적용되며, 주요 변경 내용은 공지사항을 통해 확인하실 수 있습니다.' },
+      { cat:'company', sub:'아카이브', href:'archive.html',
+        title:'아카이브',
+        excerpt:'에코벨 아카이브. 기업소개서, 카탈로그/지명원, IR 자료, CI 다운로드.' },
+      { cat:'company', sub:'아카이브', href:'archive.html', tag:'기업소개서',
+        title:'기업소개서',
+        excerpt:'Ecobell 기업소개서 2026. 에코벨은 가나다라 경험과 마바사아자 기술을 바탕으로, 탄소감축 및 신재생에너지 전환 데이터 모니터링을 통해 클라우드 기반 자산화 서비스를 제공합니다. 국문(KOR) 및 영문(ENG) 버전 다운로드 제공. ecobell 기업소개서 2025, ecobell 기업소개서 2024(요약본).' },
+      { cat:'company', sub:'아카이브', href:'archive.html?tab=catalog', tag:'카탈로그/지명원',
+        title:'태양광 솔루션 지명원 2026',
+        excerpt:'태양광 솔루션 지명원 2026. 에코벨은 귀사의 태양광 발전 사업 파트너로서 최적의 태양광 솔루션을 제공합니다. 발전시설 구축부터 ecoNODE(RTU) 기반 Energy-ASSET 모니터링 플랫폼까지, 확장 가능한 통합 에너지 경험을 만나보세요. 에코에셋(탄소자산화 플랫폼) 카탈로그, 에코노드 RTU 지명원. 국문(KOR) 영문(ENG) 다운로드.' },
+      { cat:'company', sub:'아카이브', href:'archive.html?tab=ir', tag:'IR',
+        title:'2025년 IR',
+        excerpt:'에코벨 2025년 IR 자료 다운로드. 투자자 대상 2025 연간 감사보고서, 반기 감사보고서.' },
+      { cat:'company', sub:'아카이브', href:'archive.html?tab=ir', tag:'IR',
+        title:'2024년 IR',
+        excerpt:'에코벨 2024년 IR 자료 다운로드. 2024 연간 감사보고서, 반기 감사보고서.' },
+      { cat:'insight', sub:'친환경계산기', href:'insight.html?page=eco',
+        title:'친환경 기업정보',
+        excerpt:'빅데이터로 분석한 친환경 기술 및 기업 정보 시스템을 통해 지금 바로 검증된 ESG 경영 파트너를 검색하고 연결해 보세요. 친환경 기업정보 검색 플랫폼. 에코벨 Insight 친환경계산기. ESG 경영 파트너 연결. 탄소중립 기술 기업 정보. 친환경 기업 데이터 조회.' },
+      { cat:'insight', sub:'그린카계산기', href:'insight.html?page=green',
+        title:'그린카 계산기',
+        excerpt:'내 차량을 전기·수소차로 전환하면 어떤 변화가 생길까요? 탄소 절감 수치와 실질적인 경제적 이익을 지금 바로 확인해 보세요. 그린카 계산기. 전기차 전환 탄소 절감량 계산. 수소차 경제적 이익 분석. 내연기관차 전기차 비교. 친환경 차량 전환 시뮬레이션. 탄소배출 절감 수치 확인.' },
+      { cat:'company', sub:'아카이브', href:'archive.html?tab=ci', tag:'CI',
+        title:'Signiture',
+        excerpt:'에코벨 CI 시그니처. 로고 로고타입 심볼마크. CI 다운로드. Logotype 로고타입. Symbol mark 심볼마크. Full Color. Black. White. Gradation White.' },
+      { cat:'company', sub:'아카이브', href:'archive.html?tab=ci', tag:'CI',
+        title:'Corporate Identity',
+        excerpt:'에코벨 CI는 기업과 소비자, 기술과 친환경 가치를 하나로 잇는 플랫폼으로서, 정보 콘텐츠와 거래가 유기적으로 흐르는 연결의 구조를 직관적인 그래픽 모티브로 표현합니다. 이는 B2B·B2C를 아우르는 친환경 서비스와 지속가능한 가치의 연결을 상징합니다. Signiture. Logotype. Symbol mark. CI 다운로드. CI 규정. 최소 사이즈. 여백. 여백 규정은 CI로고의 가독성과 주목성을 최적의 상태로 유지하기 위한 기준입니다. 각종 매체에 적용할 경우, 중심선과 여백 규정을 준수하여 다른 요소나 복잡한 패턴이 침범하지 않도록 합니다. Color System 색상 체계. Main Color. Ecobell Blue #1E8DCD C85 M31 Y0 K20 R30 G141 B205. Ecobell Mint #52B0AC C53 M0 Y2 K31 R82 G176 B172. Ecobell Green #2DB47C C75 M0 Y31 K29 R45 G180 B124. Sub Color. Ecobell Dark Blue #234B63 C65 M25 Y0 K61 R35 G74 B99. Ecobell Gray #91A4AF C17 M6 Y0 K31 R145 G164 B175. Ecobell Silver #E9F4FA C7 M2 Y0 K2 R233 G244 B250. Gradation Effect. Full Color. Black. White. Gradation White.' },
     ];
 
     const CAT_LABELS = { company:'Company', solution:'Solution', platform:'Platform', insight:'Insight', contact:'Contact Us', faq:'FAQ' };
 
     function escRe(s) { return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); }
+
+    // nkw에서 nt 안에 포함되는 가장 긴 연속 부분문자열 길이 반환
+    function longestConsec(nkw, nt) {
+      for (let len = nkw.length; len >= 1; len--) {
+        for (let start = 0; start <= nkw.length - len; start++) {
+          if (nt.includes(nkw.slice(start, start + len))) return len;
+        }
+      }
+      return 0;
+    }
+    // 순서 일치 음절 수 (비연속 subsequence)
+    function countSubseq(nkw, nt) {
+      let ni = 0;
+      for (let i = 0; i < nt.length && ni < nkw.length; i++) {
+        if (nt[i] === nkw[ni]) ni++;
+      }
+      return ni;
+    }
+
+    // 점수: 공백 없이 연속 일치 → len*200, 공백 제거 후 연속 일치 → len*100, 비연속 subsequence → 낮은 점수
+    function scoreText(nkw, nt, ntRaw) {
+      if (ntRaw !== undefined) {
+        const cRaw = longestConsec(nkw, ntRaw);
+        if (cRaw > 0) return cRaw * 200;
+      }
+      const c = longestConsec(nkw, nt);
+      if (c > 0) return c * 100;
+      return countSubseq(nkw, nt); // 0~nkw.length-1
+    }
+
     function hl(text, kw) {
       if (!kw) return text;
-      return text.replace(new RegExp(escRe(kw),'gi'), m => `<mark class="highlight">${m}</mark>`);
+      const nkw = normalize(kw);
+      // 1) 원문 exact
+      if (text.includes(kw)) {
+        return text.replace(new RegExp(escRe(kw), 'gi'), m => `<mark class="highlight">${m}</mark>`);
+      }
+      // 2) 가장 긴 연속 부분문자열 하이라이트 (2글자 이상)
+      for (let len = nkw.length; len >= 2; len--) {
+        for (let start = 0; start <= nkw.length - len; start++) {
+          const sub = nkw.slice(start, start + len);
+          if (text.includes(sub)) {
+            return text.replace(new RegExp(escRe(sub), 'gi'), m => `<mark class="highlight">${m}</mark>`);
+          }
+        }
+      }
+      // 3) 순서 일치 subsequence 하이라이트
+      const matchedPos = [];
+      let ni = 0;
+      for (let i = 0; i < text.length && ni < nkw.length; i++) {
+        if (/\s/.test(text[i])) continue;
+        if (text[i] === nkw[ni]) { matchedPos.push(i); ni++; }
+      }
+      if (ni > 0) {
+        const posSet = new Set(matchedPos);
+        let result = '', i = 0;
+        while (i < text.length) {
+          if (posSet.has(i)) {
+            let chunk = '';
+            while (i < text.length && (posSet.has(i) || /\s/.test(text[i]))) chunk += text[i++];
+            result += `<mark class="highlight">${chunk.trimEnd()}</mark>${chunk.slice(chunk.trimEnd().length)}`;
+          } else { result += text[i++]; }
+        }
+        return result;
+      }
+      // 4) 순서 무관: nkw의 각 고유 음절이 text에 있으면 개별 하이라이트
+      const uniqueChars = [...new Set(nkw)].filter(c => text.includes(c));
+      if (uniqueChars.length > 0) {
+        const pattern = uniqueChars.map(escRe).join('|');
+        return text.replace(new RegExp(pattern, 'g'), m => `<mark class="highlight">${m}</mark>`);
+      }
+      return text;
     }
+
     function getExcerpt(text, kw) {
-      // '. ' 기준으로 문장 분리 (마침표 유지)
       const raw = text.split('. ');
       const sents = raw.map((s, i) => i < raw.length - 1 ? s + '.' : s);
-      // 키워드가 포함된 첫 번째 문장 위치
-      const idx = kw ? sents.findIndex(s => s.includes(kw)) : 0;
-      const start = idx === -1 ? 0 : idx;
-      return sents.slice(start, start + 2).join(' ');
+      if (!kw) return sents.slice(0, 2).join(' ');
+      const nkw = normalize(kw);
+      let bestIdx = 0, bestScore = -1;
+      sents.forEach((s, i) => {
+        const sc = scoreText(nkw, normalize(s), rawNormalize(s));
+        if (sc > bestScore) { bestScore = sc; bestIdx = i; }
+      });
+      return sents.slice(bestIdx, bestIdx + 2).join(' ');
     }
 
     const PAGE_SIZE = 5;
@@ -1257,9 +1381,34 @@
       document.getElementById('btn-last').onclick  = () => { curPage = totalPages; renderResults(curQuery, curCat, totalPages); };
     }
 
+    function normalize(s) { return s.replace(/[\s./?!~@\-#$%^&*()_+=\[\]{};:'",<>\\|`]/g, ''); }
+    function rawNormalize(s) { return s.replace(/[./?!~@\-#$%^&*()_+=\[\]{};:'",<>\\|`]/g, ''); }
+    function scoreMatch(kw, text) {
+      const nkw = normalize(kw), nt = normalize(text), ntRaw = rawNormalize(text);
+      if (!nkw) return 0;
+      return scoreText(nkw, nt, ntRaw);
+    }
+    // 실제 연속 일치 음절 수 (점수 아님)
+    function matchLen(kw, text) {
+      const nkw = normalize(kw);
+      const cRaw = longestConsec(nkw, rawNormalize(text));
+      if (cRaw > 0) return cRaw;
+      return longestConsec(nkw, normalize(text));
+    }
     function renderResults(kw, cat, page) {
       page = page || 1;
-      const kwFiltered  = kw ? MOCK.filter(d => d.title.includes(kw) || d.excerpt.includes(kw)) : [];
+      const nkwLen = normalize(kw).length;
+      const minScore = nkwLen >= 2 ? 200 : 1;
+      const scored = kw ? MOCK.map(d => ({
+        ...d,
+        _score: (() => { const t = scoreMatch(kw, d.title), s = scoreMatch(kw, d.sub || ''), e = scoreMatch(kw, d.excerpt); const ts = Math.max(t, s); const tsLen = Math.max(matchLen(kw, d.title), matchLen(kw, d.sub || '')); return ts >= minScore && tsLen >= 2 ? 10000 + ts : e; })()
+      })).filter(d => d._score >= minScore) : [];
+      // 같은 href 중 가장 높은 점수만 유지
+      const bestByHref = new Map();
+      scored.forEach(d => {
+        if (!bestByHref.has(d.href) || d._score > bestByHref.get(d.href)._score) bestByHref.set(d.href, d);
+      });
+      const kwFiltered = [...bestByHref.values()].sort((a, b) => b._score - a._score);
       const catFiltered = cat === 'all' ? kwFiltered : kwFiltered.filter(d => d.cat === cat);
 
       const counts = {};
@@ -1304,7 +1453,7 @@
               <span class="result-bc-sep">${arrowSvg}</span>
               <span class="result-bc-sub">${d.sub}</span>
             </div>
-            <a class="result-title" href="${d.href}">${d.title}</a>
+            <a class="result-title" href="${d.href}">${d.tag ? `<span class="result-tag">[${d.tag}]</span> ` : ''}${d.title}</a>
             <p class="result-excerpt">${hl(getExcerpt(d.excerpt, kw), kw)}</p>
             <a class="result-more" href="${d.href}">자세히보기 ${moreSvg}</a>
           </div>`).join('');
