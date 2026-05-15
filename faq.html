@@ -15,105 +15,336 @@
 
     /* ─── HEADER ─── */
     header {
-      position: fixed; top: 0; left: 0; right: 0; min-width: 1100px;
-      height: 69px; background: #fff; z-index: 999; overflow: visible;
+      position: fixed;
+      top: 0; left: 0; right: 0; min-width: 1100px;
+      height: 69px;
+      background: #fff;
+      z-index: 999;
       transition: box-shadow 0.3s ease, transform 0.35s cubic-bezier(0.4,0,0.2,1);
     }
     header.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.07); }
     header.gnb-hidden { transform: translateY(-100%); }
-    .header-inner { position: relative; width: 100%; max-width: 1440px; height: 100%; margin: 0 auto; display: flex; align-items: center; }
-    .logo { position: absolute; left: 44px; top: 50%; transform: translateY(-50%); width: 110px; height: 26px; transition: opacity 0.2s; }
+
+    .header-inner {
+      position: relative;
+      width: 100%;
+      max-width: 1440px;
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo {
+      position: absolute;
+      left: 44px;
+      top: 50%; transform: translateY(-50%);
+      width: 110px; height: 26px;
+      transition: opacity 0.2s;
+    }
     .logo img { width: 100%; height: 100%; object-fit: contain; }
     .logo:hover { opacity: 0.75; }
-    nav { position: absolute; left: 198px; right: 324px; top: 0; display: flex; align-items: stretch; height: 69px; }
-    .nav-item { position: relative; display: flex; align-items: center; transition: transform 0.38s cubic-bezier(0.4,0,0.2,1); }
+
+    nav {
+      position: absolute;
+      left: 198px;
+      right: 324px;
+      top: 0;
+      display: flex;
+      align-items: stretch;
+      height: 69px;
+    }
+    .nav-item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+    }
     nav.lnb-open .nav-item:nth-child(1) { transform: translateX(0px); }
     nav.lnb-open .nav-item:nth-child(2) { transform: translateX(25px); }
     nav.lnb-open .nav-item:nth-child(3) { transform: translateX(53px); }
     nav.lnb-open .nav-item:nth-child(4) { transform: translateX(87px); }
     nav.lnb-open .nav-item:nth-child(5) { transform: translateX(111px); }
-    .nav-link { font-family: 'Chillax', sans-serif; font-weight: 500; font-size: 15.5px; color: #000; text-decoration: none; letter-spacing: 0.46px; line-height: 1.6; padding: 0 17px; white-space: nowrap; position: relative; display: flex; align-items: center; height: 100%; transition: color 0.2s; }
-    .nav-link::after { content: ''; position: absolute; left: 17px; right: 17px; bottom: 0; height: 2px; background: #000; transform: scaleX(0); transform-origin: left; transition: transform 0.25s ease; }
+    .nav-link {
+      font-family: 'Chillax', sans-serif;
+      font-weight: 500;
+      font-size: 15.5px;
+      color: #000;
+      text-decoration: none;
+      letter-spacing: 0.46px;
+      line-height: 1.6;
+      padding: 0 17px;
+      white-space: nowrap;
+      position: relative;
+      display: flex;
+      align-items: center;
+      height: 100%;
+      transition: color 0.2s;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 17px; right: 17px;
+      bottom: 0;
+      height: 2px;
+      background: #000;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s ease;
+    }
     .nav-item:not(.lnb-active) .nav-link:hover::after { transform: scaleX(1); }
     .nav-item.lnb-active .nav-link { color: #1e8dcd; }
-    .lnb { position: fixed; top: 69px; left: 0; right: 0; min-width: 1100px; height: 202px; background: #fff; border-top: 0.3px solid #d9d9d9; border-bottom: 0.3px solid #d9d9d9; opacity: 0; transform: translateY(-6px); pointer-events: none; transition: opacity 0.25s ease, transform 0.28s cubic-bezier(0.4,0,0.2,1); z-index: 102; }
-    .lnb-inner { position: relative; width: 100%; max-width: 1440px; margin: 0 auto; height: 100%; }
+
+    .lnb {
+      position: fixed;
+      top: 69px;
+      left: 0; right: 0; min-width: 1100px;
+      height: 202px;
+      background: #fff;
+      border-top: 0.3px solid #d9d9d9; border-bottom: 0.3px solid #d9d9d9;
+      opacity: 0;
+      transform: translateY(-6px);
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 102;
+    }
+    .lnb-inner {
+      position: relative;
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      height: 100%;
+    }
     .lnb.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
-    .lnb-col { position: absolute; top: 0; width: 132px; height: 100%; display: flex; flex-direction: column; align-items: center; padding-top: 29px; gap: 0; transition: background 0.2s ease; }
+    .lnb-col {
+      position: absolute;
+      top: 0;
+      width: 132px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 29px;
+      gap: 0;
+      transition: background 0.2s ease;
+    }
     .lnb-col[data-col="company"]  { left: 187px; }
     .lnb-col[data-col="solution"] { left: 319px; }
     .lnb-col[data-col="platform"] { left: 451px; }
     .lnb-col[data-col="insight"]  { left: 584px; }
     .lnb-col[data-col="contact"]  { left: 716px; }
     .lnb-col.active { background: #fafcfd; border-top: 2px solid #1e8dcd; padding-top: 27px; }
-    .lnb-col a { font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 600; font-size: 14px; color: #000; text-decoration: none; letter-spacing: 0.14px; line-height: 21px; text-align: center; display: block; width: 100%; padding: 7px 0; transition: color 0.15s; }
+    .lnb-col a {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      color: #000;
+      text-decoration: none;
+      letter-spacing: 0.14px;
+      line-height: 21px;
+      text-align: center;
+      display: block;
+      width: 100%;
+      padding: 7px 0;
+      transition: color 0.15s;
+    }
     .lnb-col a.en { font-family: 'Chillax', sans-serif; font-weight: 450; }
     .lnb-col a:hover { color: #1e8dcd; }
     .lnb-col a.ext::after { content: ' ↗'; font-size: 11px; }
     .lnb-sep { width: 70px; height: 0.5px; background: #d9d9d9; margin: 14px auto 24px; flex-shrink: 0; }
-    header.search-open { background: #fafcfd; box-shadow: none; }
-    .search-overlay { position: fixed; top: 69px; left: 0; right: 0; min-width: 1100px; height: 202px; background: #fafcfd; border-bottom: 0.2px solid rgba(0,0,0,0.3); opacity: 0; pointer-events: none; transition: opacity 0.25s ease, transform 0.28s cubic-bezier(0.4,0,0.2,1); transform: translateY(-8px); z-index: 100; }
+
+    header.search-open { background: #fafcfd; border-bottom-color: transparent; box-shadow: none; }
+    .search-overlay {
+      position: fixed;
+      top: 69px;
+      left: 0; right: 0; min-width: 1100px;
+      height: 202px;
+      background: #fafcfd;
+      border-bottom: 0.2px solid rgba(0,0,0,0.3);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.28s cubic-bezier(0.4,0,0.2,1);
+      transform: translateY(-8px);
+      z-index: 100;
+    }
     .search-overlay.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
     .search-content { position: relative; width: 100%; max-width: 1440px; margin: 0 auto; height: 100%; }
-    .search-input-row { position: absolute; top: 57px; left: 23.9583%; right: 24.0278%; display: flex; align-items: center; }
-    .search-input { flex: 1; font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 400; font-size: 20px; color: #000; letter-spacing: 0.2px; background: transparent; border: none; outline: none; }
-    .search-input::placeholder { color: rgba(0,0,0,0.35); }
-    .search-submit { background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center; justify-content: center; width: 17px; height: 17px; flex-shrink: 0; opacity: 0.6; transition: opacity 0.2s; }
+    .search-input-row {
+      position: absolute;
+      top: 57px;
+      left: 23.9583%;
+      right: 24.0278%;
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+    .search-input {
+      flex: 1;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 400;
+      font-size: 20px;
+      color: #000;
+      letter-spacing: 0.2px;
+      line-height: 1.5;
+      background: transparent;
+      border: none;
+      outline: none;
+      height: 36px;
+      padding: 0;
+    }
+    .search-input::placeholder { color: rgba(0,0,0,0.3); }
+    .search-submit {
+      background: none; border: none; cursor: pointer;
+      width: 17px; height: 17px; padding: 0;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; opacity: 0.6; transition: opacity 0.2s;
+    }
     .search-submit:hover { opacity: 1; }
-    .search-divider { position: absolute; top: 90px; left: 23.9583%; right: 24.0278%; height: 0.5px; background: rgba(0,0,0,0.2); }
-    .search-tags { position: absolute; top: 108px; left: 23.9583%; display: flex; gap: 8px; }
-    .search-tag { font-family: 'Noto Sans KR', sans-serif; font-weight: 400; font-size: 13px; color: rgba(0,0,0,0.5); background: none; border: 0.5px solid rgba(0,0,0,0.25); border-radius: 20px; padding: 3px 12px; cursor: pointer; transition: color 0.15s, border-color 0.15s; }
-    .search-tag:hover { color: #1e8dcd; border-color: #1e8dcd; }
-    .header-right { position: absolute; right: 44px; display: flex; align-items: center; gap: 18px; }
-    .gnb-sep { pointer-events: none; }
-    .search-icon-wrap { position: relative; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; }
-    .search-tooltip { position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.78); color: #fff; font-size: 11px; padding: 4px 8px; border-radius: 4px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+    .search-divider {
+      position: absolute;
+      top: 102px;
+      left: 23.9583%; right: 24.0278%;
+      width: auto; height: 0.3px;
+      background: rgba(0,0,0,0.2);
+    }
+    .search-tags { position: absolute; top: 117px; left: 23.9583%; display: flex; gap: 9px; }
+    .search-tag {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700; font-size: 11.6px;
+      color: rgba(0,0,0,0.55); letter-spacing: 0.11px;
+      border: 0.3px solid rgba(0,0,0,0.15); border-radius: 100px;
+      padding: 0 10px; height: 22px;
+      background: transparent; cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .search-tag:hover { border-color: rgba(0,0,0,0.4); color: rgba(0,0,0,0.85); }
+
+    .search-icon-wrap {
+      position: relative; width: 22px; height: 22px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .search-tooltip {
+      position: absolute;
+      top: calc(100% + 10px); left: 50%; transform: translateX(-50%);
+      background: rgba(0,0,0,0.78); color: #fff;
+      font-family: 'Noto Sans KR', sans-serif; font-size: 11px; font-weight: 400;
+      letter-spacing: 0.4px; padding: 5px 10px; border-radius: 4px;
+      white-space: nowrap; pointer-events: none; opacity: 0;
+      transition: opacity 0.18s ease; z-index: 1001;
+    }
+    .search-tooltip::before {
+      content: ''; position: absolute;
+      bottom: 100%; left: 50%; transform: translateX(-50%);
+      border: 5px solid transparent; border-bottom-color: rgba(0,0,0,0.78);
+    }
     .search-icon-wrap:hover .search-tooltip { opacity: 1; }
-    .search-tooltip::before { content: ''; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); border: 5px solid transparent; border-bottom-color: rgba(0,0,0,0.78); }
-    .search-btn { background: none; border: none; cursor: pointer; padding: 0; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; }
-    .close-btn { background: none; border: none; cursor: pointer; padding: 0; width: 20px; height: 21px; display: flex; align-items: center; justify-content: center; position: absolute; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
-    header.search-open .search-btn { opacity: 0; pointer-events: none; }
-    header.search-open .close-btn { opacity: 1; pointer-events: auto; }
-    .demo-btn { display: inline-flex; align-items: center; justify-content: center; height: 33px; padding: 0 18px; background: #1e8dcd; border-radius: 6px; text-decoration: none; position: relative; overflow: hidden; }
-    .demo-btn::before { content: ''; position: absolute; left: 0; top: 50%; transform: translate(-50%, -50%) scale(0); width: 100px; height: 100px; background: rgba(255,255,255,0.15); border-radius: 50%; transition: transform 0.4s ease; }
-    .demo-btn:hover::before { transform: translate(-50%, -50%) scale(5); }
-    .demo-text { font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 800; font-size: 13px; color: #fff; letter-spacing: 0.13px; position: relative; z-index: 1; }
+    header.search-open .search-tooltip { opacity: 0 !important; pointer-events: none; }
+
+    .close-btn {
+      display: flex; background: none; border: none; cursor: pointer;
+      width: 20px; height: 20px; padding: 0;
+      align-items: center; justify-content: center;
+      font-size: 18px; color: #000;
+      opacity: 0; pointer-events: none; position: absolute;
+      transform: rotate(-180deg) scale(0.5);
+      transition: opacity 0.25s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .close-btn:hover { opacity: 1; }
+    header.search-open .search-btn { opacity: 0; pointer-events: none; transform: rotate(90deg) scale(0.7); }
+    header.search-open .close-btn { opacity: 0.6; pointer-events: auto; transform: rotate(0deg) scale(1); }
+
+    .header-right {
+      position: absolute; right: 45px;
+      top: 50%; transform: translateY(-50%);
+      display: flex; align-items: center; gap: 25px;
+    }
+    .search-btn {
+      background: none; border: none; cursor: pointer;
+      width: 20px; height: 21px; padding: 0;
+      display: flex; align-items: center; justify-content: center;
+      position: absolute;
+      transition: transform 0.2s ease, opacity 0.2s;
+    }
+    .search-btn:hover { transform: scale(1.15); opacity: 0.7; }
+    .search-btn svg { display: block; }
+    .demo-btn {
+      display: flex; align-items: center; gap: 5px;
+      border: 0.3px solid rgba(0,0,0,0.5); border-radius: 100px;
+      padding: 0 18px; height: 34px; cursor: pointer;
+      text-decoration: none; background: transparent;
+      overflow: hidden; position: relative; transition: border-color 0.25s ease;
+    }
+    .demo-btn::before {
+      content: ''; position: absolute; left: 0; top: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 34px; height: 34px; background: #000;
+      border-radius: 50%; transition: transform 0.45s ease;
+    }
+    .demo-btn:hover::before { transform: translate(-50%, -50%) scale(10); }
+    .demo-btn:hover { border-color: #000; }
+    .demo-btn:hover .demo-text { color: #fff; }
+    .demo-text {
+      font-family: 'Chillax', sans-serif; font-weight: 500; font-size: 13px;
+      color: #000; letter-spacing: 0.16px; line-height: 0.8; white-space: nowrap;
+      transition: color 0.25s ease; position: relative; top: 1.5px;
+    }
+
+    @media (min-width: 1441px) {
+      .header-inner { max-width: none; }
+      .lnb-inner    { max-width: none; }
+    }
+
+    /* ─── BREADCRUMB ─── */
+    .breadcrumb {
+      display: flex; align-items: center; gap: 6px;
+      position: absolute; top: 18px; right: 48px; left: auto;
+      height: auto; margin-bottom: 0; z-index: 10;
+    }
+    @media (min-width: 1441px) {
+      .breadcrumb { right: calc((100% - 1440px) / 2 + 48px); }
+    }
+    .breadcrumb-home { width: 11px; height: 12px; display: flex; align-items: center; }
+    .breadcrumb-sep { width: 5px; height: 10px; display: flex; align-items: center; }
+    .breadcrumb a,
+    .breadcrumb span {
+      font-family: 'Chillax', sans-serif;
+      font-weight: 400; font-size: 13px;
+      color: #1e8dcd;
+      text-decoration: none; letter-spacing: 0.13px;
+    }
+    .breadcrumb a[href]:not(.breadcrumb-home) { cursor: pointer; }
+    .breadcrumb a[href]:not(.breadcrumb-home):hover { opacity: 0.7; }
 
     /* ─── FAQ 히어로 ─── */
     .faq-hero {
+      position: relative;
       margin-top: 69px;
       background: #fff;
-      padding: 60px 0 50px;
+      padding: 110px 0 50px;
       text-align: center;
-      border-bottom: 1px solid #eee;
-    }
-    .faq-breadcrumb {
-      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-size: 13px; font-weight: 700;
-      color: #1E8DCD; letter-spacing: 0.39px;
-      margin-bottom: 20px;
     }
     .faq-title {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 800; font-size: 55px; color: #000;
+      font-weight: 800; font-size: 50px; color: #000;
       letter-spacing: -0.5px; line-height: 1;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
     .faq-subtitle {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 300; font-size: 18px; color: #000;
+      font-weight: 400; font-size: 18px; color: #000;
       letter-spacing: -0.36px; line-height: 30px;
+      margin-top: 10px; opacity: 0.6;
     }
 
     /* ─── 필터 탭 ─── */
     .faq-filter {
       display: flex; align-items: center; justify-content: center;
-      gap: 0; padding: 40px 0 0;
+      gap: 0; padding: 80px 0 0;
     }
     .faq-filter-btn {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-size: 18px; font-weight: 400; color: #000;
-      background: none; border: none; cursor: pointer;
+      text-decoration: none;
       padding: 0 28px; letter-spacing: 0.18px;
       transition: color 0.2s, font-weight 0.1s;
     }
@@ -129,13 +360,12 @@
     /* ─── FAQ 리스트 ─── */
     .faq-content {
       max-width: 1100px;
-      margin: 40px auto 0;
-      padding: 0 0 80px;
+      margin: 30px auto 0;
+      padding: 0 0 100px;
     }
     .faq-item {
-      border-top: 1px solid #e8e8e8;
+      border-bottom: 1px solid #e8e8e8;
     }
-    .faq-item:last-child { border-bottom: 1px solid #e8e8e8; }
     .faq-question {
       display: flex; align-items: center; justify-content: space-between;
       min-height: 74px; padding: 0 10px;
@@ -165,29 +395,43 @@
     }
     .faq-item.open .faq-answer { display: block; }
 
+    /* ─── 페이지네이션 ─── */
+    .faq-pagination {
+      display: flex; align-items: center; justify-content: center;
+      gap: 30px; padding-top: 60px; margin-top: 10px; padding-bottom: 80px;
+    }
+    .page-arrow-group { display: flex; align-items: center; gap: 9px; }
+    .page-arrow {
+      width: 23px; height: 22px; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; border: 0.5px solid rgba(0,0,0,0.3);
+      border-radius: 3px; background: #fff; transition: background 0.2s;
+    }
+    .page-arrow:hover { background: #f5f5f5; }
+    .page-num {
+      font-family: 'Chillax', sans-serif; font-size: 17px; color: #000;
+      cursor: pointer; font-weight: 500; letter-spacing: 0.17px; transition: color 0.15s;
+    }
+    .page-num:hover { color: #1e8dcd; }
+    .page-num.active { color: #0091bb; font-weight: 600; }
+
     /* ─── CTA 섹션 ─── */
-    .faq-cta {
-      background: #00314D;
-      padding: 80px 0;
-      text-align: center;
-    }
-    .faq-cta-title {
-      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 700; font-size: 28px; color: #fff;
-      letter-spacing: 0.84px; line-height: 40px;
-      margin-bottom: 36px;
-    }
-    .faq-cta-btn {
+    .cta-contact-btn {
       display: inline-flex; align-items: center; justify-content: center;
       width: 218px; height: 42px;
-      border: 1.5px solid rgba(255,255,255,0.7);
-      border-radius: 4px;
+      border: 0.8px solid #fff; background: transparent;
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-weight: 800; font-size: 16px; color: #fff;
       letter-spacing: 0.48px; text-decoration: none;
-      transition: background 0.2s, border-color 0.2s;
+      position: relative; overflow: hidden;
     }
-    .faq-cta-btn:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
+    .cta-contact-btn::before {
+      content: ''; position: absolute; left: 0; top: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 150px; height: 150px; background: rgba(255,255,255,0.18);
+      border-radius: 50%; transition: transform 0.5s ease; z-index: 0;
+    }
+    .cta-contact-btn:hover::before { transform: translate(-50%, -50%) scale(5); }
+    .cta-contact-btn span { position: relative; z-index: 1; }
 
     /* ─── FOOTER ─── */
     footer { position: sticky; bottom: 0; z-index: 0; min-width: 1100px; height: 442px; background: #2a2a2a; }
@@ -207,10 +451,10 @@
     .ft-copyright { position: absolute; left: 45px; top: 357px; font-family: 'Noto Sans KR', sans-serif; font-weight: 300; font-size: 12px; color: rgba(255,255,255,0.8); white-space: pre-line; margin: 0; }
 
     /* ─── 푸터 오버레이 효과 ─── */
-    body > *:not(header):not(footer) {
+    main {
       position: relative; z-index: 1; background: #fff;
+      width: 100%; display: block;
     }
-    .faq-cta { background: #00314D; }
   </style>
 </head>
 <body>
@@ -218,42 +462,84 @@
   <!-- ─── HEADER ─── -->
   <header id="header">
     <div class="header-inner">
+
+      <!-- Logo -->
       <a class="logo" href="index.html">
         <img src="assets/logo.png" alt="ecobell">
       </a>
+
+      <!-- GNB -->
       <nav id="main-nav">
-        <div class="nav-item" data-menu="company"><a class="nav-link" href="#">Company</a></div>
-        <div class="nav-item" data-menu="solution"><a class="nav-link" href="#">Solution</a></div>
-        <div class="nav-item" data-menu="platform"><a class="nav-link" href="#">Platform</a></div>
-        <div class="nav-item" data-menu="insight"><a class="nav-link" href="insight.html">Insight</a></div>
-        <div class="nav-item" data-menu="contact"><a class="nav-link" href="notice.html">Contact Us</a></div>
+        <div class="nav-item" data-menu="company">
+          <a class="nav-link" href="#">Company</a>
+        </div>
+        <div class="nav-item" data-menu="solution">
+          <a class="nav-link" href="#">Solution</a>
+        </div>
+        <div class="nav-item" data-menu="platform">
+          <a class="nav-link" href="#">Platform</a>
+        </div>
+        <div class="nav-item" data-menu="insight">
+          <a class="nav-link" href="insight.html">Insight</a>
+        </div>
+        <div class="nav-item" data-menu="contact">
+          <a class="nav-link" href="notice.html">Contact Us</a>
+        </div>
       </nav>
+
+      <!-- LNB Dropdown -->
       <div class="lnb" id="lnb">
         <div class="lnb-inner">
-          <div class="lnb-col" data-col="company">
-            <a href="ceo.html">CEO 인사말</a><a href="#">기업소개</a><a href="press.html">보도자료</a><a href="archive.html">아카이브</a>
-          </div>
-          <div class="lnb-col" data-col="solution">
-            <a href="#">전체 솔루션 맵</a><a href="#" class="en">ecoNODE</a><div class="lnb-sep"></div><a href="#">태양광 솔루션</a>
-          </div>
-          <div class="lnb-col" data-col="platform">
-            <a href="#" class="en">eco Asset</a><a href="#" class="en">Energy Asset</a>
-          </div>
-          <div class="lnb-col" data-col="insight">
-            <a href="https://www.netzeronews.kr/" class="en ext" target="_blank" rel="noopener noreferrer">NetZero News</a>
-            <a href="insight.html?page=eco">친환경 기업정보</a><a href="insight.html?page=green">그린카 계산기</a>
-          </div>
-          <div class="lnb-col" data-col="contact">
-            <a href="notice.html">공지사항</a><a href="directions.html">오시는 길</a><a href="contact.html">문의하기</a>
-          </div>
+        <!-- Company -->
+        <div class="lnb-col" data-col="company">
+          <a href="ceo.html">CEO 인사말</a>
+          <a href="#">기업소개</a>
+          <a href="press.html">보도자료</a>
+          <a href="archive.html">아카이브</a>
         </div>
+        <!-- Solution -->
+        <div class="lnb-col" data-col="solution">
+          <a href="#">전체 솔루션 맵</a>
+          <a href="#" class="en">ecoNODE</a>
+          <div class="lnb-sep"></div>
+          <a href="#">태양광 솔루션</a>
+        </div>
+        <!-- Platform -->
+        <div class="lnb-col" data-col="platform">
+          <a href="#" class="en">eco Asset</a>
+          <a href="#" class="en">Energy Asset</a>
+        </div>
+        <!-- Insight -->
+        <div class="lnb-col" data-col="insight">
+          <a href="https://www.netzeronews.kr/" class="en ext" target="_blank" rel="noopener noreferrer">NetZero News</a>
+          <a href="insight.html?page=eco">친환경 기업정보</a>
+          <a href="insight.html?page=green">그린카 계산기</a>
+        </div>
+        <!-- Contact Us -->
+        <div class="lnb-col" data-col="contact">
+          <a href="notice.html">공지사항</a>
+          <a href="directions.html">오시는 길</a>
+          <a href="contact.html">문의하기</a>
+        </div>
+        </div><!-- /.lnb-inner -->
       </div>
+
+      <!-- Search Overlay -->
       <div class="search-overlay" id="search-overlay">
         <div class="search-content">
           <div class="search-input-row">
-            <input class="search-input" type="text" placeholder="검색어를 입력해주세요." id="search-input" autocomplete="off">
+            <input
+              class="search-input"
+              type="text"
+              placeholder="검색어를 입력해주세요."
+              id="search-input"
+              autocomplete="off"
+            >
             <button class="search-submit" aria-label="검색">
-              <svg width="17" height="17" viewBox="0 0 17 17" fill="none"><circle cx="7" cy="7" r="5" stroke="#000" stroke-width="1.5"/><line x1="11" y1="11" x2="16" y2="16" stroke="#000" stroke-width="1.5" stroke-linecap="round"/></svg>
+              <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="7" cy="7" r="5" stroke="#000" stroke-width="1.5"/>
+                <line x1="11" y1="11" x2="16" y2="16" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
             </button>
           </div>
           <div class="search-divider"></div>
@@ -264,41 +550,76 @@
           </div>
         </div>
       </div>
+
+      <!-- Header Right -->
       <div class="header-right">
         <span class="gnb-sep" style="color:rgba(0,0,0,0.2);font-size:16px;line-height:1;user-select:none;">|</span>
         <div class="search-icon-wrap">
-          <button class="search-btn" aria-label="검색" id="search-open-btn">
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M21.1063 19.1469L15.4344 14.5406C17.7719 11.3438 17.5313 6.7719 14.6094 3.8844C13.0626 2.33752 11 1.47815 8.80005 1.47815C6.60005 1.47815 4.53755 2.33752 2.99067 3.8844C-0.206201 7.08127 -0.206201 12.3063 2.99067 15.5031C4.53755 17.05 6.60005 17.9094 8.80005 17.9094C10.8969 17.9094 12.8563 17.1188 14.4032 15.7094L20.1438 20.35C20.2813 20.4531 20.4532 20.5219 20.6251 20.5219C20.8657 20.5219 21.0719 20.4188 21.2094 20.2469C21.4844 19.9032 21.4501 19.4219 21.1063 19.1469ZM8.80005 16.3625C7.01255 16.3625 5.36255 15.675 4.09067 14.4032C1.47817 11.7907 1.47817 7.56252 4.09067 4.9844C5.36255 3.71252 7.01255 3.02502 8.80005 3.02502C10.5875 3.02502 12.2375 3.71252 13.5094 4.9844C16.1219 7.5969 16.1219 11.825 13.5094 14.4032C12.2719 15.675 10.5875 16.3625 8.80005 16.3625Z" fill="#000"/></svg>
-          </button>
-          <button class="close-btn" aria-label="닫기" id="search-close-btn">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><line x1="1" y1="1" x2="17" y2="17" stroke="#000" stroke-width="1.5" stroke-linecap="round"/><line x1="17" y1="1" x2="1" y2="17" stroke="#000" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </button>
-          <span class="search-tooltip">검색</span>
+        <button class="search-btn" aria-label="검색" id="search-open-btn">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21.1063 19.1469L15.4344 14.5406C17.7719 11.3438 17.5313 6.7719 14.6094 3.8844C13.0626 2.33752 11 1.47815 8.80005 1.47815C6.60005 1.47815 4.53755 2.33752 2.99067 3.8844C-0.206201 7.08127 -0.206201 12.3063 2.99067 15.5031C4.53755 17.05 6.60005 17.9094 8.80005 17.9094C10.8969 17.9094 12.8563 17.1188 14.4032 15.7094L20.1438 20.35C20.2813 20.4531 20.4532 20.5219 20.6251 20.5219C20.8657 20.5219 21.0719 20.4188 21.2094 20.2469C21.4844 19.9032 21.4501 19.4219 21.1063 19.1469ZM8.80005 16.3625C7.01255 16.3625 5.36255 15.675 4.09067 14.4032C1.47817 11.7907 1.47817 7.56252 4.09067 4.9844C5.36255 3.71252 7.01255 3.02502 8.80005 3.02502C10.5875 3.02502 12.2375 3.71252 13.5094 4.9844C16.1219 7.5969 16.1219 11.825 13.5094 14.4032C12.2719 15.675 10.5875 16.3625 8.80005 16.3625Z" fill="#000"/>
+          </svg>
+        </button>
+        <button class="close-btn" aria-label="닫기" id="search-close-btn">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="1" y1="1" x2="17" y2="17" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="17" y1="1" x2="1" y2="17" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <span class="search-tooltip">검색</span>
         </div>
-        <a class="demo-btn" href="contact.html"><span class="demo-text">문의하기</span></a>
+        <a class="demo-btn" href="contact.html">
+          <span class="demo-text">문의하기</span>
+        </a>
       </div>
+
     </div>
   </header>
 
+  <main>
   <!-- ─── 히어로 ─── -->
   <div class="faq-hero">
-    <p class="faq-breadcrumb">자주 묻는 질문(FAQ)</p>
+    <nav class="breadcrumb" aria-label="breadcrumb">
+      <a href="index.html" class="breadcrumb-home" aria-label="홈">
+        <svg width="11" height="12" viewBox="0 0 11 12" fill="none">
+          <path d="M1 5L5.5 1L10 5V11H7V8H4V11H1V5Z" stroke="#1e8dcd" stroke-width="1.1" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <span class="breadcrumb-sep">
+        <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
+          <path d="M1 1L4 5L1 9" stroke="#1e8dcd" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span>Contact Us</span>
+      <span class="breadcrumb-sep">
+        <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
+          <path d="M1 1L4 5L1 9" stroke="#1e8dcd" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <a href="faq.html">자주 묻는 질문</a>
+      <span class="breadcrumb-sep" id="bc-cat-sep" style="display:none;">
+        <svg width="5" height="10" viewBox="0 0 5 10" fill="none">
+          <path d="M1 1L4 5L1 9" stroke="#1e8dcd" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span id="bc-cat-label" style="display:none;"></span>
+    </nav>
     <h1 class="faq-title">FAQ</h1>
     <p class="faq-subtitle">궁금하신 내용은 FAQ를 통해 빠르게 확인하실 수 있습니다.</p>
 
     <!-- 필터 탭 -->
     <div class="faq-filter">
-      <button class="faq-filter-btn active" data-filter="전체">전체</button>
+      <a class="faq-filter-btn" href="#" data-filter="전체">전체</a>
       <span class="faq-filter-sep"></span>
-      <button class="faq-filter-btn" data-filter="ecoASSET">ecoASSET</button>
+      <a class="faq-filter-btn" href="#ecoASSET" data-filter="ecoASSET">ecoASSET</a>
       <span class="faq-filter-sep"></span>
-      <button class="faq-filter-btn" data-filter="E-ASSET">E-ASSET</button>
+      <a class="faq-filter-btn" href="#E-ASSET" data-filter="E-ASSET">E-ASSET</a>
       <span class="faq-filter-sep"></span>
-      <button class="faq-filter-btn" data-filter="ecoNODE">ecoNODE</button>
+      <a class="faq-filter-btn" href="#ecoNODE" data-filter="ecoNODE">ecoNODE</a>
       <span class="faq-filter-sep"></span>
-      <button class="faq-filter-btn" data-filter="신재생에너지">신재생에너지</button>
+      <a class="faq-filter-btn" href="#신재생에너지" data-filter="신재생에너지">신재생에너지</a>
       <span class="faq-filter-sep"></span>
-      <button class="faq-filter-btn" data-filter="기타">기타</button>
+      <a class="faq-filter-btn" href="#기타" data-filter="기타">기타</a>
     </div>
   </div>
 
@@ -367,11 +688,39 @@
 
   </div>
 
-  <!-- ─── CTA 섹션 ─── -->
-  <div class="faq-cta">
-    <p class="faq-cta-title">무엇이든 물어보세요<br>더 궁금하신 내용이 있으시면 1:1 문의를 이용해 주세요.</p>
-    <a class="faq-cta-btn" href="contact.html">1:1 문의 바로가기</a>
+  <!-- 페이지네이션 -->
+  <div class="faq-pagination" id="faq-pagination" style="display:none;">
+    <div class="page-arrow-group">
+      <button class="page-arrow" id="faq-btn-first" aria-label="첫 페이지">
+        <svg width="7" height="7" viewBox="0 0 7 7" fill="none"><path d="M4 1L1 3.5L4 6" stroke="rgba(0,0,0,0.6)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 1L4 3.5L7 6" stroke="rgba(0,0,0,0.6)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="page-arrow" id="faq-btn-prev" aria-label="이전 페이지">
+        <svg width="5" height="7" viewBox="0 0 5 7" fill="none"><path d="M4 1L1 3.5L4 6" stroke="rgba(0,0,0,0.6)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+    <span id="faq-page-numbers" style="display:contents;"></span>
+    <div class="page-arrow-group">
+      <button class="page-arrow" id="faq-btn-next" aria-label="다음 페이지">
+        <svg width="5" height="7" viewBox="0 0 5 7" fill="none"><path d="M1 1L4 3.5L1 6" stroke="rgba(0,0,0,0.6)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="page-arrow" id="faq-btn-last" aria-label="마지막 페이지">
+        <svg width="7" height="7" viewBox="0 0 7 7" fill="none"><path d="M3 1L6 3.5L3 6" stroke="rgba(0,0,0,0.6)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M0 1L3 3.5L0 6" stroke="rgba(0,0,0,0.6)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
   </div>
+
+  <!-- CTA 섹션 -->
+  <section style="position:relative;width:100%;height:296px;overflow:hidden;display:flex;align-items:center;justify-content:center;">
+    <div style="position:absolute;inset:0;background:url('assets/cta-bg.png') center/cover no-repeat;"></div>
+    <div style="position:absolute;inset:0;background:rgba(0,49,77,0.85);"></div>
+    <div style="position:relative;text-align:center;">
+      <p style="font-family:'Nanum Square','NanumSquare',sans-serif;font-weight:900;font-size:30px;color:#fff;letter-spacing:0.84px;line-height:40px;margin:0 0 8px;">무엇이든 물어보세요</p>
+      <p style="font-family:'Nanum Square','NanumSquare',sans-serif;font-weight:500;font-size:16px;color:#fff;letter-spacing:0.84px;line-height:40px;margin:0 0 18px;">특정 비즈니스 솔루션 문의부터 일반 문의까지 에코벨이 도와드립니다.</p>
+      <a href="contact.html" class="cta-contact-btn"><span>문의하기</span></a>
+    </div>
+  </section>
+
+  </main>
 
   <!-- ─── FOOTER ─── -->
   <footer>
@@ -423,76 +772,145 @@
 
   <script>
     // ─── 헤더 스크롤 ───
+    const header = document.getElementById('header');
     let _lastScrollY = window.scrollY;
     window.addEventListener('scroll', () => {
       const cur = window.scrollY;
-      const header = document.getElementById('header');
       header.classList.toggle('scrolled', cur > 10);
-      if (cur > _lastScrollY && cur > 80) header.classList.add('gnb-hidden');
-      else header.classList.remove('gnb-hidden');
+      if (cur > _lastScrollY && cur > 80) {
+        header.classList.add('gnb-hidden');
+      } else {
+        header.classList.remove('gnb-hidden');
+      }
+      if (cur > _lastScrollY && header.classList.contains('search-open')) closeSearch();
       _lastScrollY = cur;
-    });
+    }, { passive: true });
 
-    // ─── LNB ───
-    const nav = document.getElementById('main-nav');
-    const lnb = document.getElementById('lnb');
-    const lnbCols = lnb.querySelectorAll('.lnb-col');
-    const navItems = nav.querySelectorAll('.nav-item');
-    let lnbOpen = false;
+    // ─── GNB / LNB 인터랙션 ───
+    const nav      = document.getElementById('main-nav');
+    const lnb      = document.getElementById('lnb');
+    const navItems = document.querySelectorAll('.nav-item');
+    const lnbCols  = document.querySelectorAll('.lnb-col');
+    let closeTimer;
 
-    function openLnb(menuKey) {
-      lnbOpen = true;
+    function openLnb(menuName) {
+      clearTimeout(closeTimer);
       nav.classList.add('lnb-open');
       lnb.classList.add('open');
-      navItems.forEach(ni => ni.classList.toggle('lnb-active', ni.dataset.menu === menuKey));
-      lnbCols.forEach(col => col.classList.toggle('active', col.dataset.col === menuKey));
+      navItems.forEach(item => item.classList.toggle('lnb-active', item.dataset.menu === menuName));
+      lnbCols.forEach(col => col.classList.toggle('active', col.dataset.col === menuName));
     }
-    function closeLnb() {
-      lnbOpen = false;
-      nav.classList.remove('lnb-open');
-      lnb.classList.remove('open');
-      navItems.forEach(ni => ni.classList.remove('lnb-active'));
-      lnbCols.forEach(col => col.classList.remove('active'));
+
+    function schedulClose() {
+      closeTimer = setTimeout(() => {
+        nav.classList.remove('lnb-open');
+        lnb.classList.remove('open');
+        navItems.forEach(i => i.classList.remove('lnb-active'));
+        lnbCols.forEach(c => c.classList.remove('active'));
+      }, 120);
     }
 
     navItems.forEach(item => {
       item.addEventListener('mouseenter', () => openLnb(item.dataset.menu));
+      item.addEventListener('mouseleave', schedulClose);
     });
-    document.getElementById('header').addEventListener('mouseleave', closeLnb);
-    lnb.addEventListener('mouseleave', closeLnb);
+    lnb.addEventListener('mouseenter', () => clearTimeout(closeTimer));
+    lnb.addEventListener('mouseleave', schedulClose);
+    lnbCols.forEach(col => {
+      col.addEventListener('mouseenter', () => {
+        const menu = col.dataset.col;
+        navItems.forEach(item => item.classList.toggle('lnb-active', item.dataset.menu === menu));
+        lnbCols.forEach(c => c.classList.toggle('active', c.dataset.col === menu));
+      });
+    });
 
-    // ─── 검색 ───
-    const searchOpenBtn = document.getElementById('search-open-btn');
+    // ─── 검색창 토글 ───
+    const searchOverlay  = document.getElementById('search-overlay');
+    const searchInput    = document.getElementById('search-input');
+    const searchOpenBtn  = document.getElementById('search-open-btn');
     const searchCloseBtn = document.getElementById('search-close-btn');
-    const searchOverlay = document.getElementById('search-overlay');
-    const header = document.getElementById('header');
 
     function openSearch() {
       header.classList.add('search-open');
       searchOverlay.classList.add('open');
-      document.getElementById('search-input').focus();
+      nav.classList.remove('lnb-open');
+      lnb.classList.remove('open');
+      navItems.forEach(i => i.classList.remove('lnb-active'));
+      lnbCols.forEach(c => c.classList.remove('active'));
+      setTimeout(() => searchInput.focus(), 50);
     }
     function closeSearch() {
       header.classList.remove('search-open');
       searchOverlay.classList.remove('open');
     }
+
     searchOpenBtn.addEventListener('click', openSearch);
     searchCloseBtn.addEventListener('click', closeSearch);
-    searchOverlay.querySelector('.search-submit').addEventListener('click', () => {
-      const q = document.getElementById('search-input').value.trim();
-      if (q) location.href = 'search.html?q=' + encodeURIComponent(q);
-    });
-    document.getElementById('search-input').addEventListener('keydown', e => {
-      if (e.key === 'Enter') {
-        const q = e.target.value.trim();
-        if (q) location.href = 'search.html?q=' + encodeURIComponent(q);
-      }
-    });
-    searchOverlay.querySelectorAll('.search-tag').forEach(btn => {
-      btn.addEventListener('click', () => {
-        location.href = 'search.html?q=' + encodeURIComponent(btn.dataset.keyword);
+    document.querySelectorAll('.search-tag').forEach(tag => {
+      tag.addEventListener('click', () => {
+        searchInput.value = tag.dataset.keyword;
+        searchInput.focus();
       });
     });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSearch(); });
+    document.querySelector('.search-submit').addEventListener('click', () => {
+      const kw = searchInput.value.trim();
+      if (kw) window.location.href = 'search.html?q=' + encodeURIComponent(kw);
+    });
+    searchInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { const kw = searchInput.value.trim(); if (kw) window.location.href = 'search.html?q=' + encodeURIComponent(kw); }
+    });
+
+    // ─── FAQ 페이지네이션 ───
+    const PAGE_SIZE = 5;
+    let curFilter = '전체', curPage = 1;
+    const allItems = Array.from(document.querySelectorAll('.faq-item'));
+
+    function getFilteredItems() {
+      return curFilter === '전체'
+        ? allItems
+        : allItems.filter(item => item.dataset.category === curFilter);
+    }
+
+    function renderPage() {
+      const filtered = getFilteredItems();
+      const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
+      const start = (curPage - 1) * PAGE_SIZE;
+      const end = start + PAGE_SIZE;
+
+      // 모든 아이템 숨기기
+      allItems.forEach(item => { item.style.display = 'none'; item.classList.remove('open'); });
+      // 현재 페이지 아이템만 표시
+      filtered.slice(start, end).forEach(item => { item.style.display = ''; });
+
+      renderPagination(filtered.length, curPage);
+    }
+
+    function renderPagination(total, page) {
+      const paginEl = document.getElementById('faq-pagination');
+      const numsEl  = document.getElementById('faq-page-numbers');
+      const totalPages = Math.ceil(total / PAGE_SIZE);
+
+      if (totalPages <= 1) { paginEl.style.display = 'none'; return; }
+      paginEl.style.display = '';
+
+      const groupStart = Math.floor((page - 1) / 5) * 5 + 1;
+      const groupEnd   = Math.min(groupStart + 4, totalPages);
+
+      numsEl.innerHTML = '';
+      for (let i = groupStart; i <= groupEnd; i++) {
+        const sp = document.createElement('span');
+        sp.className = 'page-num' + (i === page ? ' active' : '');
+        sp.textContent = i;
+        sp.addEventListener('click', () => { curPage = i; renderPage(); });
+        numsEl.appendChild(sp);
+      }
+
+      document.getElementById('faq-btn-first').onclick = () => { curPage = 1; renderPage(); };
+      document.getElementById('faq-btn-prev').onclick  = () => { if (curPage > 1) { curPage--; renderPage(); } };
+      document.getElementById('faq-btn-next').onclick  = () => { if (curPage < totalPages) { curPage++; renderPage(); } };
+      document.getElementById('faq-btn-last').onclick  = () => { curPage = totalPages; renderPage(); };
+    }
 
     // ─── FAQ 아코디언 ───
     document.querySelectorAll('.faq-question').forEach(q => {
@@ -504,25 +922,38 @@
       });
     });
 
-    // ─── 필터 탭 ───
-    document.querySelectorAll('.faq-filter-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.faq-filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const filter = btn.dataset.filter;
-        document.querySelectorAll('.faq-item').forEach(item => {
-          if (filter === '전체' || item.dataset.category === filter) {
-            item.style.display = '';
-          } else {
-            item.style.display = 'none';
-          }
-        });
-        // 숨겨진 아이템 열린 것 닫기
-        document.querySelectorAll('.faq-item').forEach(item => {
-          if (item.style.display === 'none') item.classList.remove('open');
-        });
+    // ─── 필터 탭 활성화 (hash 기반) ───
+    function getHashFilter() {
+      const hash = decodeURIComponent(location.hash.slice(1));
+      return hash || '전체';
+    }
+
+    function applyFilter() {
+      curFilter = getHashFilter();
+      curPage = 1;
+      document.querySelectorAll('.faq-filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.filter === curFilter);
       });
-    });
+
+      // 브레드크럼 카테고리 업데이트
+      const bcSep   = document.getElementById('bc-cat-sep');
+      const bcLabel = document.getElementById('bc-cat-label');
+      if (curFilter && curFilter !== '전체') {
+        bcSep.style.display   = '';
+        bcLabel.style.display = '';
+        bcLabel.textContent   = curFilter;
+      } else {
+        bcSep.style.display   = 'none';
+        bcLabel.style.display = 'none';
+      }
+
+      renderPage();
+    }
+
+    window.addEventListener('hashchange', applyFilter);
+
+    // 초기 렌더
+    applyFilter();
   </script>
 </body>
 </html>
