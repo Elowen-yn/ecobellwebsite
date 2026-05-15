@@ -1,0 +1,24 @@
+{
+  "name": "ecobellwebsite",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Elowen-yn/ecobellwebsite.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Elowen-yn/ecobellwebsite/issues"
+  },
+  "homepage": "https://github.com/Elowen-yn/ecobellwebsite#readme",
+  "dependencies": {
+    "nodemailer": "^8.0.7"
+  }
+}

@@ -479,7 +479,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: rgba(0,0,0,0.45);
+      background: rgba(0,0,0,0.28);
     }
     .press-hero-inner {
       position: relative;
@@ -511,14 +511,14 @@
     }
     .press-hero-sns {
       position: absolute;
-      bottom: 28px; right: 75px;
+      bottom: 33px; right: 48px;
       display: flex; align-items: center; gap: 20px;
     }
     .press-hero-sns-label {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
       font-weight: 700; font-size: 17px; color: #fff;
     }
-    .press-hero-sns-icons { display: flex; gap: 25px; align-items: center; }
+    .press-hero-sns-icons { display: flex; gap: 20px; align-items: center; }
     .press-hero-sns-icons a {
       display: flex; align-items: center; justify-content: center;
       opacity: 0.85; transition: opacity 0.2s; text-decoration: none;
@@ -528,7 +528,8 @@
     /* ─── FEATURED ARTICLE ─── */
     .press-featured-section {
       width: 100%;
-      padding: 50px 45px 24px;
+      padding: 70px 45px 24px;
+      zoom: 0.95;
     }
     .press-featured-wrap {
       max-width: 1350px;
@@ -536,7 +537,7 @@
       position: relative;
     }
     .press-featured-inner {
-      height: 380px;
+      height: 320px;
       overflow: hidden;
       position: relative;
     }
@@ -552,7 +553,7 @@
       background: #f2f2f2;
     }
     .press-featured-image {
-      width: 540px; height: 380px;
+      width: 540px; height: 320px;
       flex-shrink: 0; display: block;
       text-decoration: none;
       background: #c0c0c0;
@@ -561,20 +562,20 @@
     }
     .press-featured-image:hover { opacity: 0.9; }
     .press-featured-body {
-      padding: 19px 70px 69px 50px;
+      padding: 0 70px 0 50px;
       display: flex; flex-direction: column;
       gap: 0; justify-content: center;
     }
-    .press-featured-title { margin-top: 22px; }
-    .press-featured-desc  { margin-top: 20px; }
-    .press-featured-more  { margin-top: 20px; }
+    .press-featured-title { margin-top: 19px; }
+    .press-featured-desc  { margin-top: 15px; }
+    .press-featured-more  { margin-top: 27px; }
     .press-featured-date {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-size: 16px; font-weight: 700; color: #000;
+      font-size: 14px; font-weight: 600; color: #000;
     }
     .press-featured-title {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-size: 28px; font-weight: 800; color: #000;
+      font-size: 26px; font-weight: 800; color: #000;
       line-height: 1.45; text-decoration: none;
       display: -webkit-box; -webkit-line-clamp: 2;
       -webkit-box-orient: vertical; overflow: hidden;
@@ -584,14 +585,15 @@
     }
     .press-featured-title:hover { color: #1e8dcd; }
     .press-featured-desc {
-      font-size: 14px; color: #000; line-height: 1.7;
+      font-size: 16px; font-weight: 400; color: #000; line-height: 1.7;
       display: -webkit-box; -webkit-line-clamp: 2;
       -webkit-box-orient: vertical; overflow: hidden;
       word-break: keep-all; text-align: left;
+      padding-right: 100px;
     }
     .press-featured-more {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-size: 12px; font-weight: 800; color: #1e8dcd;
+      font-size: 14px; font-weight: 800; color: #1e8dcd;
       text-decoration: none;
     }
     .press-featured-more:hover { text-decoration: underline; }
@@ -619,12 +621,12 @@
     }
     .press-featured-dot.active { opacity: 1; }
     .press-featured-play-btn {
-      width: 22px; height: 22px;
+      width: 21px; height: 21px;
       border-radius: 50%;
       background: transparent;
       border: 1.5px solid #000;
       display: flex; align-items: center; justify-content: center;
-      cursor: pointer; margin-left: 10px;
+      cursor: pointer; margin-left: 15px;
       transition: border-color 0.2s, opacity 0.2s;
       flex-shrink: 0;
     }
@@ -634,46 +636,94 @@
     .press-search-row {
       width: 100%; max-width: 1440px;
       margin: 0 auto;
-      padding: 10px 75px 50px;
+      padding: 30px 75px 50px;
       display: flex; align-items: center; justify-content: flex-end;
       position: relative;
     }
     .press-count {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 700; font-size: 18px; color: #000;
-      letter-spacing: 0.18px; line-height: 23px;
+      font-weight: 800; font-size: 18px; color: #000;
+      letter-spacing: 0.18px; line-height: 23.4px;
       display: none;
       position: absolute; left: 75px;
     }
     #press-count-num { color: #1e8dcd; }
+    .press-total {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 800; font-size: 18px; color: #000;
+      letter-spacing: 0.18px; line-height: 23.4px;
+      position: absolute; left: 75px;
+    }
+    #press-total-num { color: #1e8dcd; }
+    .press-sort-group {
+      display: none;
+      align-items: center;
+      gap: 0;
+      margin-right: 30px;
+    }
+    .press-sort-btn {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      color: rgba(0,0,0,0.4);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0 10px;
+      line-height: 1;
+      transition: color 0.2s;
+      position: relative;
+    }
+    .press-sort-btn + .press-sort-btn::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 50%; transform: translateY(-50%);
+      width: 1px; height: 12px;
+      background: rgba(0,0,0,0.2);
+    }
+    .press-sort-btn.active {
+      color: #000;
+    }
     .page-search {
+      position: relative;
       display: flex; align-items: center;
-      border: 0.5px solid rgba(0,0,0,0.3);
-      width: 390px; height: 45px;
-      padding: 0 18px; border-radius: 5px;
+      border: 0.5px solid rgba(0,0,0,0.25);
+      width: 338px; height: 39px;
+      padding: 0 40px 0 14px; border-radius: 5px;
+      background: #fff;
     }
     .page-search input {
       flex: 1;
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 400; font-size: 16px; color: #606060;
+      font-weight: 400; font-size: 15px; color: #2d2d2d;
       border: none; outline: none; background: transparent;
     }
-    .page-search input::placeholder { color: #606060; opacity: 0.85; }
+    .page-search input::placeholder { color: rgba(45,45,45,0.4); font-weight: 400; letter-spacing: 0.45px; }
     .page-search button {
+      position: absolute;
+      right: 12px; top: 50%; transform: translateY(-50%);
       background: none; border: none; cursor: pointer;
       padding: 0; display: flex; align-items: center;
-      opacity: 0.7; transition: opacity 0.2s;
+      opacity: 0.85; transition: opacity 0.2s;
     }
     .page-search button:hover { opacity: 1; }
 
     /* 카드 그리드 */
     .press-grid {
-      width: 1440px;
+      width: 100%;
+      max-width: 1440px;
       margin: 0 auto;
       padding: 0 75px 60px;
+      margin-top: -10px;
       display: grid;
       grid-template-columns: repeat(4, 290px);
+      justify-content: center;
       gap: 50px 40px;
+    }
+    @media (max-width: 1349px) {
+      .press-grid {
+        grid-template-columns: repeat(3, 290px);
+      }
     }
 
     .press-card {
@@ -760,38 +810,47 @@
     .press-card-tag:hover { background: #e8f4fb; color: #1e8ccc; }
 
 
-    /* 결과 없음 전체 영역 */
-    .press-no-results { display: none; }
-
-    /* 결과 없음 메시지 */
-    .press-no-results-msg {
-      padding: 80px 75px 300px;
-      text-align: center;
-      display: flex;
+    /* 결과 없음 */
+    .press-no-results {
+      display: none;
       flex-direction: column;
       align-items: center;
-      gap: 20px;
+      justify-content: center;
+      padding: 100px 0 80px;
+      gap: 16px;
     }
+    .press-no-results.visible { display: flex; }
     .press-no-results-icon {
-      display: block;
-      flex-shrink: 0;
+      width: 24px; height: 24px;
+      margin-bottom: 8px;
     }
     .press-no-results-title {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 700; font-size: 22px; color: #000;
-      letter-spacing: 0.25px;
-      position: relative; top: 0;
+      font-weight: 700;
+      font-size: 20px;
+      color: #000;
+      letter-spacing: 0.2px;
+      margin-top: -6px;
+    }
+    .press-no-results-title em {
+      font-style: normal;
+      font-weight: 800;
     }
     .press-no-results-tips {
-      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 400; font-size: 13px;
-      color: rgba(0,0,0,0.7);
-      line-height: 2;
-      text-align: left;
-      list-style: none;
-      position: relative; top: 5px;
+      display: flex;
+      flex-direction: column;
+      margin-top: 13px;
+      margin-bottom: 150px;
     }
-    .press-no-results-tips li::before { content: '∙ '; }
+    .press-no-results-tips li {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      color: rgba(0,0,0,0.7);
+      letter-spacing: 0.14px;
+      list-style: none;
+      line-height: 30px;
+    }
 
     /* CTA 배너 */
     .press-cta-banner {
@@ -1098,13 +1157,13 @@
           <span class="press-hero-sns-label">에코벨 SNS 바로가기</span>
           <div class="press-hero-sns-icons">
             <a href="https://www.youtube.com/@yt_ecobell" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-              <img src="assets/icons/press-sns-3.svg" alt="YouTube" width="28" height="28">
+              <img src="assets/icons/press-sns-3.svg" alt="YouTube" width="27" height="27">
             </a>
             <a href="https://www.instagram.com/ecobell.co.kr/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <img src="assets/icons/press-sns-2.svg" alt="Instagram" width="28" height="28">
+              <img src="assets/icons/press-sns-2.svg" alt="Instagram" width="27" height="27">
             </a>
             <a href="https://www.facebook.com/ecobell.co.kr" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-              <img src="assets/icons/press-sns-1.svg" alt="Facebook" width="28" height="28">
+              <img src="assets/icons/press-sns-1.svg" alt="Facebook" width="27" height="27">
             </a>
           </div>
         </div>
@@ -1129,14 +1188,16 @@
 
     <!-- ─── 검색 ─── -->
     <div class="press-search-row">
+      <span class="press-total" id="press-total">총 <strong id="press-total-num">0</strong>건</span>
       <span class="press-count" id="press-count">검색결과 <strong id="press-count-num">0</strong>건</span>
+      <div class="press-sort-group">
+        <button class="press-sort-btn active" id="sort-latest">최신순</button>
+        <button class="press-sort-btn" id="sort-accuracy">정확도순</button>
+      </div>
       <form class="page-search" onsubmit="return false;">
         <input type="text" placeholder="보도자료 키워드 검색" id="press-search-input">
         <button type="submit" aria-label="검색">
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-            <circle cx="9" cy="9" r="6.5" stroke="#1e8dcd" stroke-width="1.5"/>
-            <line x1="14" y1="14" x2="20" y2="20" stroke="#1e8dcd" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
+          <svg width="19" height="19" viewBox="0 0 19 19" fill="none"><path d="M8.64102 16.3728C12.911 16.3728 16.3724 12.9113 16.3724 8.64139C16.3724 4.37144 12.911 0.909973 8.64102 0.909973C4.37107 0.909973 0.909603 4.37144 0.909603 8.64139C0.909603 12.9113 4.37107 16.3728 8.64102 16.3728Z" stroke="#1E8DCD" stroke-width="1.8" stroke-linecap="round"/><path d="M14.6543 14.6543L18.0904 18.0905" stroke="#1E8DCD" stroke-width="1.8" stroke-linecap="round"/></svg>
         </button>
       </form>
     </div>
@@ -1314,26 +1375,19 @@
 
     <!-- 검색 결과 없음 -->
     <div class="press-no-results" id="press-no-results">
-      <div class="press-no-results-msg">
-        <img class="press-no-results-icon" src="assets/press-ghost.svg" alt="" width="24" height="24">
-        <p class="press-no-results-title">'<span id="press-no-results-query"></span>'에 대한 검색 결과가 없습니다</p>
+        <svg class="press-no-results-icon" width="52" height="52" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 0.9375C6.78749 0.9375 2.58749 5.175 2.58749 10.3875V21.225C2.58749 21.5625 2.77499 21.8625 3.07499 22.0125L5.77499 23.175C6.48749 23.475 7.27499 23.6625 8.06249 23.6625C8.88749 23.6625 9.74999 23.475 10.5375 23.1L10.7625 22.9875C11.85 22.4625 13.125 22.4625 14.2125 22.9875C15.825 23.775 17.7375 23.7375 19.35 22.875L21.075 21.975C21.3375 21.825 21.525 21.525 21.525 21.225V10.3875C21.4125 5.175 17.2125 0.9375 12 0.9375ZM19.725 20.7L18.4875 21.375C17.3625 21.975 16.0125 22.0125 14.8875 21.45C13.3125 20.7 11.55 20.7 9.97499 21.45L9.74999 21.5625C8.69999 22.05 7.49999 22.0875 6.44999 21.6375L4.27499 20.6625V10.3875C4.27499 6.1125 7.72499 2.625 12 2.625C16.275 2.625 19.725 6.1125 19.725 10.35V20.7Z" fill="#1e8dcd"/>
+          <path d="M9.11249 8.02539C8.39999 8.02539 7.83749 8.58789 7.83749 9.30039C7.83749 10.0129 8.39999 10.5754 9.11249 10.5754C9.82499 10.5754 10.3875 10.0129 10.3875 9.30039C10.3875 8.58789 9.82499 8.02539 9.11249 8.02539Z" fill="#1e8dcd"/>
+          <path d="M14.8875 8.02539C14.175 8.02539 13.6125 8.58789 13.6125 9.30039C13.6125 10.0129 14.175 10.5754 14.8875 10.5754C15.6 10.5754 16.1625 10.0129 16.1625 9.30039C16.1625 8.58789 15.6 8.02539 14.8875 8.02539Z" fill="#1e8dcd"/>
+          <path d="M12 13.3877C10.95 13.3877 10.0875 13.9502 10.0875 14.6627C10.0875 15.3752 10.95 15.9377 12 15.9377C13.05 15.9377 13.9125 15.3752 13.9125 14.6627C13.9125 13.9502 13.05 13.3877 12 13.3877Z" fill="#1e8dcd"/>
+        </svg>
+        <p class="press-no-results-title"><em id="press-no-results-query">'검색어'</em>에 대한 검색 결과가 없습니다</p>
         <ul class="press-no-results-tips">
-          <li>검색어의 철자가 정확한지 확인해 주세요.</li>
-          <li>한글을 영어로 혹은 영어를 한글로 입력했는지 확인해 주세요.</li>
-          <li>검색어의 단어수를 줄이거나, 보다 일반적인 단어로 다시 검색해 주세요.</li>
-          <li>두 단어 이상의 검색어인 경우, 띄어쓰기를 확인해 주세요.</li>
+          <li>∙ 검색어의 철자가 정확한지 확인해 주세요.</li>
+          <li>∙ 한글을 영어로 혹은 영어를 한글로 입력했는지 확인해 주세요.</li>
+          <li>∙ 검색어의 단어수를 줄이거나, 보다 일반적인 단어로 다시 검색해 주세요.</li>
+          <li>∙ 두 단어 이상의 검색어인 경우, 띄어쓰기를 확인해 주세요.</li>
         </ul>
-      </div>
-
-      <!-- CTA 배너 -->
-      <div class="press-cta-banner">
-        <div style="position:absolute;inset:0;background:url('assets/cta-bg.png') center/cover no-repeat;"></div>
-        <div style="position:absolute;inset:0;background:rgba(0,49,77,0.85);"></div>
-        <div style="position:relative;text-align:center;">
-          <p style="font-family:'Nanum Square','NanumSquare',sans-serif;font-weight:900;font-size:30px;color:#fff;letter-spacing:0.84px;line-height:40px;margin:0 0 8px;">무엇이든 물어보세요</p>
-          <p style="font-family:'Nanum Square','NanumSquare',sans-serif;font-weight:500;font-size:16px;color:#fff;letter-spacing:0.84px;line-height:40px;margin:0 0 18px;">특정 비즈니스 솔루션 문의부터 일반 문의까지 에코벨이 도와드립니다.</p>
-          <a href="contact.html" class="cta-contact-btn"><span>문의하기</span></a>
-        </div>
       </div>
     </div>
 
@@ -1354,6 +1408,17 @@
         <button class="page-arrow" aria-label="마지막 페이지">
           <svg width="7" height="7" viewBox="0 0 7 7" fill="none"><path d="M3 1L6 3.5L3 6" stroke="rgba(0,0,0,0.6)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M0 1L3 3.5L0 6" stroke="rgba(0,0,0,0.6)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
+      </div>
+    </div>
+
+    <!-- CTA 배너 (일반 보도자료 페이지 하단) -->
+    <div class="press-cta-banner">
+      <div style="position:absolute;inset:0;background:url('assets/cta-bg.png') center/cover no-repeat;"></div>
+      <div style="position:absolute;inset:0;background:rgba(0,49,77,0.85);"></div>
+      <div style="position:relative;text-align:center;">
+        <p style="font-family:'Nanum Square','NanumSquare',sans-serif;font-weight:900;font-size:30px;color:#fff;letter-spacing:0.84px;line-height:40px;margin:0 0 8px;">무엇이든 물어보세요</p>
+        <p style="font-family:'Nanum Square','NanumSquare',sans-serif;font-weight:500;font-size:16px;color:#fff;letter-spacing:0.84px;line-height:40px;margin:0 0 18px;">특정 비즈니스 솔루션 문의부터 일반 문의까지 에코벨이 도와드립니다.</p>
+        <a href="contact.html" class="cta-contact-btn"><span>문의하기</span></a>
       </div>
     </div>
 
@@ -1553,13 +1618,13 @@
         href: 'press-article.html'
       },
       {
-        date: '2026.01.13',
+        date: '2026-01-13',
         title: '에코벨, 재생에너지-탄소자산화 실증 추진…현장·데이터·AI 기술 결합',
         desc: '에코벨이 재생에너지와 탄소자산화를 결합한 실증 프로젝트를 추진하며 현장 데이터와 AI 기술을 통합한 혁신적인 접근 방식으로 주목받고 있다.',
         href: 'press-article.html'
       },
       {
-        date: '2025.04.30',
+        date: '2025-04-30',
         title: '에코벨, 초기창업패키지 및 ESG 그린지원금 선정 "탄소자산화 확장"',
         desc: '에코벨이 초기창업패키지 및 ESG 그린지원금에 선정되어 탄소자산화 기술 개발과 사업 확장에 더욱 박차를 가할 예정이다.',
         href: 'press-article.html'
@@ -1683,9 +1748,10 @@
     startAuto();
 
     /* ─── 카드 필터링 + 페이지네이션 ─── */
-    const ITEMS_PER_PAGE = 8;
+    function getItemsPerPage() { return window.innerWidth >= 1350 ? 8 : 9; }
     let pressCurrentPage = 1;
     let pressFilteredCards = [];
+    let pressSortMode = 'latest'; // 'latest' | 'accuracy'
 
     const pressSearchInput = document.getElementById('press-search-input');
     const pressGrid = document.querySelector('.press-grid');
@@ -1702,22 +1768,26 @@
     function renderPressPage(page) {
       pressCurrentPage = page;
       getAllCards().forEach(c => c.style.display = 'none');
-      const start = (page - 1) * ITEMS_PER_PAGE;
-      pressFilteredCards.slice(start, start + ITEMS_PER_PAGE).forEach(c => c.style.display = '');
+      const start = (page - 1) * getItemsPerPage();
+      const pageCards = pressFilteredCards.slice(start, start + getItemsPerPage());
+      pageCards.forEach(c => {
+        pressGrid.appendChild(c); // DOM 순서 재정렬
+        c.style.display = '';
+      });
 
       if (pressFilteredCards.length === 0) {
         pressGrid.style.display = 'none';
         pressPagination.style.display = 'none';
-        pressNoResults.style.display = 'block';
+        pressNoResults.classList.add('visible');
       } else {
         pressGrid.style.display = '';
         pressPagination.style.display = '';
-        pressNoResults.style.display = 'none';
+        pressNoResults.classList.remove('visible');
       }
     }
 
     function renderPressPagination() {
-      const totalPages = Math.max(1, Math.ceil(pressFilteredCards.length / ITEMS_PER_PAGE));
+      const totalPages = Math.max(1, Math.ceil(pressFilteredCards.length / getItemsPerPage()));
       pressPagination.querySelectorAll('.page-num').forEach(el => el.remove());
 
       let startPage = Math.max(1, pressCurrentPage - 2);
@@ -1740,23 +1810,59 @@
       arrows[3].onclick = () => { renderPressPage(totalPages); renderPressPagination(); };
     }
 
+    const SPECIALS = /[./?!~@\-#$%^&*()_+=\[\]{}"'`;:,<>|\\]/g;
+    function normalize(s) { return s.replace(SPECIALS, '').replace(/\s+/g, '').toLowerCase(); }
+    function rawNormalize(s) { return s.replace(SPECIALS, '').toLowerCase(); }
+
+    function scoreMatch(text, query) {
+      const nq = normalize(query);
+      if (!nq) return 0;
+      const nt = normalize(text);
+      const rnt = rawNormalize(text);
+      const rnq = rawNormalize(query);
+      if (rnt.includes(rnq)) return rnq.length * 200;
+      if (nt.includes(nq)) return nq.length * 100;
+      let matched = 0, ti = 0;
+      for (let qi = 0; qi < nq.length && ti < nt.length;) {
+        if (nt[ti] === nq[qi]) { matched++; qi++; }
+        ti++;
+      }
+      return matched;
+    }
+
+    const pressCardScores = new Map();
+
     function filterCards(query) {
-      const q = query.trim().replace(/^#/, '').toLowerCase();
+      const q = query.trim().replace(/^#/, '');
       const allCards = getAllCards();
+      const minScore = normalize(q).length === 1 ? 1 : 200;
 
       if (q) {
-        pressFilteredCards = allCards.filter(card => {
-          const title = card.querySelector('.press-card-title').textContent.toLowerCase();
+        const scored = allCards.map(card => {
+          const title = card.querySelector('.press-card-title')?.textContent || '';
           const tags = Array.from(card.querySelectorAll('.press-card-tag'))
-            .map(t => t.textContent.replace(/^#/, '').toLowerCase()).join(' ');
-          return title.includes(q) || tags.includes(q);
+            .map(t => t.textContent.replace(/^#/, '')).join(' ');
+          const score = Math.max(scoreMatch(title, q), scoreMatch(tags, q));
+          return { card, score };
+        }).filter(({ score }) => score >= minScore);
+
+        scored.sort((a, b) => b.score - a.score);
+        pressFilteredCards = scored.map(({ card, score }) => {
+          pressCardScores.set(card, score);
+          return card;
         });
+
         pressCount.style.display = 'block';
         pressCountNum.textContent = pressFilteredCards.length;
-        pressNoResultsQuery.textContent = query.trim().replace(/^#/, '');
+        pressNoResultsQuery.textContent = "'" + q + "'";
+        document.getElementById('press-total').style.display = 'none';
+        document.querySelector('.press-sort-group').style.display = pressFilteredCards.length > 0 ? 'flex' : 'none';
       } else {
         pressFilteredCards = allCards;
+        pressCardScores.clear();
         pressCount.style.display = 'none';
+        document.getElementById('press-total').style.display = '';
+        document.querySelector('.press-sort-group').style.display = 'none';
       }
 
       pressCurrentPage = 1;
@@ -1764,8 +1870,54 @@
       renderPressPagination();
     }
 
-    // 초기 로드
-    pressFilteredCards = getAllCards();
+    // 반응형 리사이즈
+    let _prevItemsPerPage = getItemsPerPage();
+    window.addEventListener('resize', () => {
+      const next = getItemsPerPage();
+      if (next !== _prevItemsPerPage) {
+        _prevItemsPerPage = next;
+        renderPressPage(1);
+        renderPressPagination();
+      }
+    });
+
+    // 정렬
+    function sortCards(cards) {
+      if (pressSortMode === 'latest') {
+        return cards.slice().sort((a, b) => {
+          const da = new Date(a.querySelector('.press-card-date')?.textContent.trim() || 0);
+          const db = new Date(b.querySelector('.press-card-date')?.textContent.trim() || 0);
+          return db - da;
+        });
+      }
+      return cards.slice().sort((a, b) => (pressCardScores.get(b) || 0) - (pressCardScores.get(a) || 0));
+    }
+
+    document.getElementById('sort-latest').addEventListener('click', () => {
+      pressSortMode = 'latest';
+      document.getElementById('sort-latest').classList.add('active');
+      document.getElementById('sort-accuracy').classList.remove('active');
+      pressFilteredCards = sortCards(pressFilteredCards);
+      renderPressPage(1); renderPressPagination();
+    });
+    document.getElementById('sort-accuracy').addEventListener('click', () => {
+      pressSortMode = 'accuracy';
+      document.getElementById('sort-accuracy').classList.add('active');
+      document.getElementById('sort-latest').classList.remove('active');
+      pressFilteredCards = sortCards(pressFilteredCards);
+      renderPressPage(1); renderPressPagination();
+    });
+
+    // 날짜 형식 YYYY.MM.DD → YYYY-MM-DD 일괄 변환
+    document.querySelectorAll('.press-card-date').forEach(el => {
+      el.textContent = el.textContent.trim().replace(/\./g, '-');
+    });
+
+    // 초기 로드 (최신순)
+    pressSortMode = 'latest';
+    const _allCards = getAllCards();
+    pressFilteredCards = sortCards(_allCards);
+    document.getElementById('press-total-num').textContent = _allCards.length;
     renderPressPage(1);
     renderPressPagination();
 

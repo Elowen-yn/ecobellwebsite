@@ -703,7 +703,7 @@
     }
     .notice-empty-text em {
       font-style: normal;
-      font-weight: 700;
+      font-weight: 800;
     }
     .notice-empty-tips {
       display: flex;
@@ -1558,19 +1558,45 @@
       arrows[3].onclick = () => { renderPage(totalPages); renderPagination(); };
     }
 
+    const SPECIALS = /[./?!~@\-#$%^&*()_+=\[\]{}"'`;:,<>|\\]/g;
+    function normalize(s) { return s.replace(SPECIALS, '').replace(/\s+/g, '').toLowerCase(); }
+    function rawNormalize(s) { return s.replace(SPECIALS, '').toLowerCase(); }
+
+    function scoreMatch(text, query) {
+      const nq = normalize(query);
+      if (!nq) return 0;
+      const nt = normalize(text);
+      const rnt = rawNormalize(text);
+      const rnq = rawNormalize(query);
+      if (rnt.includes(rnq)) return rnq.length * 200;
+      if (nt.includes(nq)) return nq.length * 100;
+      let matched = 0, ti = 0;
+      for (let qi = 0; qi < nq.length && ti < nt.length;) {
+        if (nt[ti] === nq[qi]) { matched++; qi++; }
+        ti++;
+      }
+      return matched;
+    }
+
     function runSearch() {
       const kw = noticeSearchInput.value.trim();
       const rows = getAllRows();
       const countWrap = document.querySelector('.notice-count');
+      const minScore = normalize(kw).length === 1 ? 1 : 200;
 
       if (!kw) {
         filteredRows = rows;
-        countWrap.innerHTML = '<span class="notice-count-num">100</span>건';
+        countWrap.innerHTML = '<span class="notice-count-num">' + rows.length + '</span>건';
       } else {
-        filteredRows = rows.filter(row => {
-          const title = row.querySelector('.td-title');
-          return title && title.textContent.includes(kw);
-        });
+        const scored = rows.map(row => {
+          const title = row.querySelector('.td-title')?.textContent || '';
+          const score = scoreMatch(title, kw);
+          return { row, score };
+        }).filter(({ score }) => score >= minScore);
+
+        scored.sort((a, b) => b.score - a.score);
+        filteredRows = scored.map(({ row }) => row);
+
         if (filteredRows.length === 0) {
           noticeEmptyKw.textContent = `'${kw}'`;
           countWrap.innerHTML = '검색결과 <span class="notice-count-num">0</span>건';

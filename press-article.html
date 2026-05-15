@@ -15,7 +15,7 @@
     body {
       font-family: 'Noto Sans KR', sans-serif;
       min-width: 1100px;
-      background: #fff;
+      background: transparent;
       color: #000;
     }
 
@@ -470,7 +470,14 @@
       position: relative;
       width: 100%; max-width: 1440px;
       margin: 0 auto;
-      padding: 39px 75px 80px;
+      padding: 39px 0 80px;
+    }
+
+    /* 콘텐츠 컬럼 (950px 중앙 정렬) */
+    .article-content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding-top: 115px;
     }
 
     /* 브레드크럼 */
@@ -497,119 +504,116 @@
       .article-wrapper { max-width: none; }
     }
 
-    /* 섹션 타이틀 */
-    .article-section-title {
-      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 800; font-size: 45px; color: #000;
-      line-height: 1.289; letter-spacing: 0.45px;
-      margin-top: 0; margin-bottom: 79px;
-    }
-
-    /* 구분선 */
+    /* 구분선 (파란색, 하단만 사용) */
     .article-divider {
       width: 100%;
-      height: 0.5px;
-      background: rgba(0,0,0,0.2);
+      height: 1px;
+      background: #1e8ccd;
     }
 
-    /* 아티클 헤더 (기사 제목+날짜+공유 → 상단 구분선 위) */
-    .article-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 37px;
-    }
-    .article-header-left {}
+    /* 기사 제목 */
     .article-title {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 800; font-size: 28px; color: #000;
-      line-height: 1.286; letter-spacing: 0.28px;
-      width: 775px;
-      margin-bottom: 19px;
+      font-weight: 750; font-size: 42px; color: #000;
+      line-height: 61.1px; letter-spacing: 0.47px;
+      margin-bottom: 48px;
+      text-align: left;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    /* 날짜 + 공유 행 */
+    .article-meta {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 40px;
+      align-items: center;
     }
     .article-date {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 400; font-size: 19px; color: #000;
+      font-weight: 500; font-size: 16px; color: #000;
       letter-spacing: 0.19px; line-height: 25px;
     }
     .article-share {
       width: 25px; height: 25px;
-      background: #fff;
+      zoom: 0.95;
+      background: transparent;
       border: none; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
       padding: 0;
-      margin-top: 48px;
       opacity: 0.7; transition: opacity 0.2s;
       flex-shrink: 0;
     }
     .article-share:hover { opacity: 1; }
 
-    /* 이미지 (중앙 정렬, 구분선 아래 72px) */
+    /* 이미지 */
     .article-image-wrap {
-      display: flex;
-      justify-content: center;
-      padding-top: 72px;
-      padding-bottom: 44px;
+      padding-top: 40px;
+      padding-bottom: 40px;
     }
     .article-image {
-      width: 527px;
-      height: 407px;
+      width: 100%;
       background: #e7e7e7;
       object-fit: cover;
-      flex-shrink: 0;
+      display: block;
     }
+    .article-image:empty { display: none; }
+    .article-image-wrap:has(.article-image:empty) { display: none; }
 
-    /* 본문 텍스트 (21px inset) */
+    /* 본문 텍스트 */
     .article-text {
       font-family: 'Noto Sans KR', sans-serif;
-      font-weight: 400; font-size: 20px; color: #000;
-      line-height: 1.8; letter-spacing: -0.2px;
-      margin: 0 21px;
+      font-weight: 400; font-size: 16px; color: #000;
+      line-height: 33px; letter-spacing: 0.57px;
+      margin: 0;
+      text-align: justify;
+      word-break: keep-all;
+      overflow-wrap: break-word;
     }
 
-    /* 태그 (본문 아래 26px, 21px inset) */
+    /* 태그 */
     .article-tags {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 26px;
-      padding-left: 21px;
+      margin-top: 103px;
+      zoom: 0.8;
     }
     .article-tag {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 400; font-size: 20px; color: #a9a9a9;
+      font-weight: 700; font-size: 17px; color: #505050;
       background: #f6f6f6;
-      padding: 0 13px;
-      height: 40px;
+      padding: 0 14px;
+      height: 36px;
       display: flex; align-items: center;
-      letter-spacing: 0.2px;
+      letter-spacing: 0;
       border-radius: 20px;
       white-space: nowrap;
     }
 
-    /* 하단 구분선 (태그 아래 72px) */
-    .article-divider-bottom { margin-top: 72px; }
+    /* 하단 구분선 */
+    .article-divider-bottom { margin-top: 40px; }
 
-    /* 목록 버튼 (중앙 정렬, 구분선 아래 44px) */
+    /* 목록 버튼 (좌측 정렬) */
     .article-footer {
-      overflow: visible;
-      margin-top: 44px;
+      margin-top: 28px;
+      margin-bottom: 50px;
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
+      padding-left: 5px;
     }
     .btn-list {
       font-family: 'Nanum Square', 'NanumSquare', sans-serif;
-      font-weight: 700; font-size: 16px; color: #fff;
-      background: #1e8ccc;
+      font-weight: 700; font-size: 16px; color: #1e8ccd;
+      background: transparent;
       border: none; cursor: pointer;
-      width: 93px; height: 41px;
-      display: flex; align-items: center; justify-content: center;
+      padding: 0;
+      display: flex; align-items: center; gap: 8px;
       text-decoration: none;
-      letter-spacing: 0.16px;
-      border-radius: 10px;
-      transition: background 0.2s;
+      letter-spacing: 0.48px;
+      transition: opacity 0.2s;
     }
-    .btn-list:hover { background: #1677a8; }
+    .btn-list:hover { opacity: 0.7; }
 
     /* ─── FOOTER ─── */
     footer {
@@ -639,12 +643,9 @@
         /* ─── 헤더 오버플로 ─── */
     header { overflow: visible; }
 
-    /* ─── 푸터 오버레이 효과 ─── */
-    body > *:not(header):not(footer):not(.floating-ecoasset):not(.iframe-modal-backdrop) {
-      position: relative;
-      z-index: 1;
-      background: #fff;
-    }
+    /* ─── 콘텐츠 푸터 위 레이어 ─── */
+    /* margin-bottom: 배경 없는 영역으로 고정 footer 노출, padding-bottom: 시각 여백 */
+    main { position: relative; z-index: 1; background: #fff; margin-bottom: 442px; }
   </style>
 </head>
 <body>
@@ -790,32 +791,30 @@
         <a href="press.html">보도자료</a>
       </div>
 
-      <!-- 섹션 타이틀 -->
-      <h2 class="article-section-title">보도자료</h2>
+      <!-- 콘텐츠 컬럼 -->
+      <div class="article-content">
 
-      <!-- 아티클 헤더 -->
-      <div class="article-header">
-        <div class="article-header-left">
-          <h1 class="article-title">에코벨, AI·MRV 탄소자산기술로 BIXPO 2025 8대 혁신기업 선정</h1>
-          <p class="article-date">2025.10.30</p>
+        <!-- 기사 제목 -->
+        <h1 class="article-title">에코벨, AI·MRV 탄소자산기술로 BIXPO 2025 8대 혁신기업 선정</h1>
+
+        <!-- 날짜 + 공유 -->
+        <div class="article-meta">
+          <p class="article-date">2025-10-30</p>
+          <button class="article-share" aria-label="공유">
+            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11.5234 16.6406C11.9922 16.6406 12.4219 16.25 12.4219 15.7422V9.88278C12.4219 7.77341 14.1406 6.05466 16.25 6.05466H20.8984L18.6328 8.2031C18.2812 8.55466 18.2812 9.10153 18.5937 9.4531C18.75 9.64841 18.9844 9.72653 19.2188 9.72653C19.4531 9.72653 19.6484 9.64841 19.8047 9.49216L23.3984 6.09372C23.6328 5.85935 23.7891 5.50778 23.7891 5.15622C23.7891 4.80466 23.6328 4.49216 23.3984 4.25778L19.8047 0.937471C19.4531 0.624971 18.9062 0.624971 18.5547 0.976534C18.2422 1.3281 18.2422 1.87497 18.5937 2.22653L20.8594 4.33591H16.1719C13.0859 4.33591 10.5859 6.83591 10.5859 9.92185V15.7812C10.6641 16.25 11.0547 16.6406 11.5234 16.6406Z" fill="#1E8DCD"/>
+              <path d="M23.0469 14.8828C22.5781 14.8828 22.1484 15.2734 22.1484 15.7813V21.4453C22.1484 22.0703 21.6406 22.5781 21.0156 22.5781H3.98437C3.35937 22.5781 2.85156 22.0703 2.85156 21.4453V15.7422C2.85156 15.2734 2.46094 14.8438 1.95312 14.8438C1.44531 14.8438 1.05469 15.2344 1.05469 15.7422V21.4062C1.05469 23.0078 2.34375 24.2969 3.94531 24.2969H21.0156C22.6172 24.2969 23.9062 23.0078 23.9062 21.4062V15.7422C23.9453 15.2734 23.5547 14.8828 23.0469 14.8828Z" fill="#1E8DCD"/>
+            </svg>
+          </button>
         </div>
-        <button class="article-share" aria-label="공유">
-          <svg width="22" height="23" viewBox="0 0 22 23" fill="none">
-            <path d="M13 2L19 8M19 8L13 14M19 8H7C4.8 8 3 9.8 3 12V21" stroke="#1e8ccc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-      </div>
 
-      <!-- 상단 구분선 -->
-      <div class="article-divider"></div>
+        <!-- 이미지 -->
+        <div class="article-image-wrap">
+          <div class="article-image"></div>
+        </div>
 
-      <!-- 이미지 (중앙 정렬) -->
-      <div class="article-image-wrap">
-        <div class="article-image"></div>
-      </div>
-
-      <!-- 본문 텍스트 -->
-      <p class="article-text">에너지·AI 융합기술기업 ㈜에코벨(대표이사 김소연)이 한국전력공사가 주최하는 'BIXPO 2025 Future TIPS League'에서 전국 8개 혁신기업중 하나로 선정됐다. 이번 프로그램은 한전 에너지생태계조성처 주관으로, 산업통상자원부와 광주광역시가 후원하며 국내 주요 TIPS 운영사(엔슬파트너스, 블루포인트, 소풍벤처스)가 참여해 기술력·사업성·정책연계성을 종합 평가하는 방식으로 진행됐다.
+        <!-- 본문 텍스트 -->
+        <p class="article-text">에너지·AI 융합기술기업 ㈜에코벨(대표이사 김소연)이 한국전력공사가 주최하는 'BIXPO 2025 Future TIPS League'에서 전국 8개 혁신기업중 하나로 선정됐다. 이번 프로그램은 한전 에너지생태계조성처 주관으로, 산업통상자원부와 광주광역시가 후원하며 국내 주요 TIPS 운영사(엔슬파트너스, 블루포인트, 소풍벤처스)가 참여해 기술력·사업성·정책연계성을 종합 평가하는 방식으로 진행됐다.
 <br><br>
 에코벨은 AI 기반 스마트 제조기술과 디지털 데이터 관리 역량을 융합한 탄소감축 통합 솔루션 기업이다. 자체 개발한 탄소 감축 측정장치 '에코노드(EcoNode)'와 탄소 자산관리 플랫폼 'ecoAsset시스템'을 통해 에너지 데이터를 실시간 측정·검증(MRV)하고, 국제표준(ISO 14064, GHG Protocol)에 따라 탄소 데이터를 자산화(Assetization) 한다.
 <br><br>
@@ -825,22 +824,29 @@
 <br><br>
 에코벨은 이번 BIXPO 선정을 계기로 한국전력의 AI·탄소연계 실증 프로젝트 및 TIPS 투자트랙 연계 협력을 추진하며, 'ecoAsset 기반 에너지고속도로(Energy Highway)' 실증사업을 전북·시화·새만금산업단지 중심으로 확대할 예정이다.</p>
 
-      <!-- 태그 -->
-      <div class="article-tags">
-        <span class="article-tag">#에코벨</span>
-        <span class="article-tag">#BIXPO</span>
-        <span class="article-tag">#탄소감축</span>
-        <span class="article-tag">#자산화</span>
-        <span class="article-tag">#에코에셋</span>
-      </div>
+        <!-- 태그 -->
+        <div class="article-tags">
+          <span class="article-tag">#에코벨</span>
+          <span class="article-tag">#BIXPO</span>
+          <span class="article-tag">#탄소감축</span>
+          <span class="article-tag">#자산화</span>
+          <span class="article-tag">#에코에셋</span>
+        </div>
 
-      <!-- 하단 구분선 -->
-      <div class="article-divider article-divider-bottom"></div>
+        <!-- 하단 구분선 (파란색) -->
+        <div class="article-divider article-divider-bottom"></div>
 
-      <!-- 목록 버튼 -->
-      <div class="article-footer">
-        <a class="btn-list" href="press.html">목록</a>
-      </div>
+        <!-- 목록 버튼 -->
+        <div class="article-footer">
+          <a class="btn-list" href="press.html">
+            <svg width="8" height="12" viewBox="0 0 8 12" fill="none">
+              <path d="M7 1L1 6L7 11" stroke="#1e8ccd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            보도자료 목록
+          </a>
+        </div>
+
+      </div><!-- /.article-content -->
 
     </div>
   </main>
@@ -1037,6 +1043,54 @@
         sectionTitle.addEventListener('click', () => { window.location.href = lnbLink.getAttribute('href'); });
       }
     }
+    // ─── 공유 아이콘 클립보드 복사 ───
+    (function() {
+      const shareBtn = document.querySelector('.article-share');
+      if (!shareBtn) return;
+
+      // 토스트 생성
+      const toast = document.createElement('div');
+      toast.style.cssText = `
+        position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(10px);
+        background: rgba(0,0,0,0.78); color: #fff;
+        font-family: 'Nanum Square','NanumSquare',sans-serif; font-size: 14px; font-weight: 500;
+        padding: 10px 20px; border-radius: 6px; white-space: nowrap;
+        opacity: 0; transition: opacity 0.25s ease, transform 0.25s ease;
+        pointer-events: none; z-index: 9999;
+      `;
+      toast.textContent = '클립보드에 복사되었습니다.';
+      document.body.appendChild(toast);
+
+      let toastTimer;
+      function showToast() {
+        clearTimeout(toastTimer);
+        toast.style.opacity = '1';
+        toast.style.transform = 'translateX(-50%) translateY(0)';
+        toastTimer = setTimeout(() => {
+          toast.style.opacity = '0';
+          toast.style.transform = 'translateX(-50%) translateY(10px)';
+        }, 2000);
+      }
+
+      shareBtn.addEventListener('click', () => {
+        const title = document.querySelector('.article-title')?.textContent.trim() || '';
+        const date = document.querySelector('.article-date')?.textContent.trim() || '';
+        const url = window.location.href;
+        const text = `[에코벨 보도자료] ${title}, ${date}\n${url}`;
+
+        navigator.clipboard.writeText(text).then(showToast).catch(() => {
+          // fallback
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.cssText = 'position:fixed;opacity:0;';
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+          showToast();
+        });
+      });
+    })();
   </script>
 </body>
 </html>

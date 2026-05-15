@@ -532,7 +532,7 @@
     /* 폼 뷰 자주 묻는 질문 버튼 (아웃라인 스타일) */
     .faq-btn-outline {
       display: inline-flex; align-items: center; gap: 9px;
-      border: 0.5px solid rgba(0,0,0,1); border-radius: 5px;
+      border: 0.5px solid rgba(0,0,0,0.3); border-radius: 5px;
       padding: 10px 18px; background: transparent; cursor: pointer;
       text-decoration: none; transition: border-color 0.4s;
       margin-bottom: 0; position: relative; overflow: hidden; margin-top: 0.5px;
@@ -758,6 +758,12 @@
     }
     .form-input::placeholder, .form-textarea::placeholder { color: rgba(45,45,45,0.35); }
     .form-input:focus, .form-textarea:focus { border-color: #1e8dcd; }
+    .form-input.input-error, .form-textarea.input-error { border-color: #e03030 !important; }
+    .field-error-msg {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-size: 12px; color: #e03030;
+      margin-top: 4px; display: block;
+    }
 
     .form-row-full { margin-bottom: 20px; }
     .form-textarea {
@@ -819,10 +825,47 @@
     }
     .submit-btn:hover { background: #1679b3; }
 
+    /* 제출 전 검토 팝업 */
+    .review-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.45); z-index: 1000;
+      align-items: center; justify-content: center;
+    }
+    .review-overlay.visible { display: flex; }
+    .review-popup {
+      background: #fff; border-radius: 12px;
+      padding: 48px 52px 40px; text-align: center;
+      max-width: 480px; width: 90%; box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    }
+    .review-email-label {
+      font-size: 15px; color: #555; margin-bottom: 8px;
+    }
+    .review-email-value {
+      font-size: 18px; font-weight: 700; color: #1E8DCD; margin-bottom: 28px;
+    }
+    .review-notice {
+      font-size: 12px; color: #999; margin-bottom: 28px; line-height: 1.7;
+    }
+    .review-btn-row {
+      display: flex; gap: 10px; justify-content: center;
+    }
+    .review-submit-btn {
+      background: #1E8DCD; color: #fff; border: none;
+      padding: 13px 40px; font-size: 17px; font-weight: 700;
+      border-radius: 6px; cursor: pointer;
+    }
+    .review-submit-btn:hover { background: #176eab; }
+    .review-back-btn {
+      background: #fff; border: 1px solid #ccc; color: #555;
+      padding: 13px 28px; font-size: 15px; font-weight: 500;
+      border-radius: 6px; cursor: pointer;
+    }
+    .review-back-btn:hover { background: #f5f5f5; }
+
     /* 제출 완료 */
     .submit-success {
       display: none; flex-direction: column;
-      align-items: center; text-align: center; padding: 80px 0 60px;
+      align-items: center; text-align: center; padding: 80px 0 150px;
     }
     .submit-success.visible { display: flex; }
     .success-icon {
@@ -837,6 +880,26 @@
       font-family: 'Noto Sans KR', sans-serif; font-weight: 400;
       font-size: 16px; color: #5d5d5d; line-height: 28px;
     }
+    .success-summary {
+      margin-top: 40px; text-align: left;
+      background: #f7f9fb; border-radius: 8px;
+      padding: 32px 36px; min-width: 480px; max-width: 600px;
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+    .success-summary .s-type {
+      font-size: 13px; color: #1E8DCD; font-weight: 600; margin-bottom: 12px;
+    }
+    .success-summary .s-title {
+      font-size: 18px; font-weight: 700; color: #111; margin-bottom: 20px;
+    }
+    .success-summary .s-row {
+      display: flex; gap: 12px; font-size: 14px; color: #444;
+      margin-bottom: 8px; line-height: 1.6;
+    }
+    .success-summary .s-label {
+      color: #888; white-space: nowrap; min-width: 80px;
+    }
+    .success-summary .s-value { color: #222; word-break: break-all; }
 
     /* ─── FOOTER ─── */
     footer {
@@ -895,7 +958,7 @@
       content: '';
       width: 11px; height: 7px;
       border-left: 2px solid #fff; border-bottom: 2px solid #fff;
-      transform: rotate(-45deg) translateY(-1px);
+      transform: rotate(-45deg) translate(2px, -2px);
       display: block;
     }
     .service-check-item input:not(:checked) + .check-box {
@@ -1251,6 +1314,20 @@
       <!-- 폼 제목 -->
       <h1 class="form-page-title" id="form-title">파트너십 &amp; 비즈니스</h1>
 
+      <!-- 제출 전 검토 팝업 -->
+      <div class="review-overlay" id="submit-review">
+        <div class="review-popup">
+          <p class="review-email-label" style="margin-bottom:30px;">문의 내용이 저장되었습니다.</p>
+          <p class="review-email-label">저장 내용을 제출하실 경우<br>입력하신 메일로 회신드리겠습니다.</p>
+          <p class="review-email-value" id="review-email-display"></p>
+          <p class="review-notice">온라인 문의 제출 시, 개인정보 수집 및 이용에<br>동의한 것으로 간주됩니다.</p>
+          <div class="review-btn-row">
+            <button type="button" class="review-back-btn" id="review-back-btn">계속 작성</button>
+            <button type="button" class="review-submit-btn" id="review-confirm-btn">제출하기</button>
+          </div>
+        </div>
+      </div>
+
       <!-- 제출 성공 -->
       <div class="submit-success" id="submit-success">
         <div class="success-icon">
@@ -1258,41 +1335,48 @@
         </div>
         <p class="success-title">문의가 접수되었습니다</p>
         <p class="success-desc">담당자가 확인 후 빠르게 연락드리겠습니다.<br>평균 응답 시간은 영업일 기준 1~2일입니다.</p>
+        <div class="success-summary" id="success-summary"></div>
       </div>
 
       <!-- ── 일반 폼 (파트너십/투자/ESG/채용/기타) ── -->
-      <form id="inquiry-form" novalidate>
+      <form id="inquiry-form" novalidate autocomplete="off">
 
         <!-- 1행: 이름 / 소속(or희망직무) / 이메일 / 휴대폰 -->
         <div class="form-row-4">
           <div class="form-group">
             <label class="form-label" for="f-name">작성자 이름 <span class="req">*</span></label>
-            <input class="form-input" id="f-name" type="text" required>
+            <input class="form-input" id="f-name" type="text" placeholder="이름을 입력하세요" required>
           </div>
           <div class="form-group">
             <label class="form-label" id="f-field2-label" for="f-field2">소속/회사명 <span class="req">*</span></label>
-            <input class="form-input" id="f-field2" type="text" required>
+            <input class="form-input" id="f-field2" type="text" placeholder="소속 또는 회사명을 입력하세요" required>
           </div>
           <div class="form-group">
             <label class="form-label" for="f-email">이메일 <span class="req">*</span></label>
-            <input class="form-input" id="f-email" type="email" required>
+            <input class="form-input" id="f-email" type="email" placeholder="이메일을 입력하세요" required>
           </div>
           <div class="form-group">
             <label class="form-label" for="f-phone">휴대폰 번호 <span class="req">*</span></label>
-            <input class="form-input" id="f-phone" type="tel" required>
+            <input class="form-input" id="f-phone" type="tel" placeholder="'-'없이 입력해주세요" required>
           </div>
         </div>
 
         <!-- 제목 -->
         <div class="form-row-full form-group">
           <label class="form-label" for="f-subject">제목 <span class="req">*</span></label>
-          <input class="form-input" id="f-subject" type="text" required>
+          <div style="position:relative;">
+            <input class="form-input" id="f-subject" type="text" placeholder="제목을 입력하세요" required style="padding-right:60px;">
+            <span id="f-subject-count" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:12px;color:#999;pointer-events:none;">0/70</span>
+          </div>
         </div>
 
         <!-- 문의 내용 -->
         <div class="form-row-full form-group">
           <label class="form-label" for="f-message">문의 내용 <span class="req">*</span></label>
-          <textarea class="form-textarea" id="f-message" required></textarea>
+          <div style="position:relative;">
+            <textarea class="form-textarea" id="f-message" placeholder="문의 내용을 입력하세요." required style="padding-bottom:24px;"></textarea>
+            <span id="f-message-count" style="position:absolute;right:12px;bottom:20px;font-size:12px;color:#999;pointer-events:none;">0/1000</span>
+          </div>
         </div>
 
         <!-- 첨부파일 -->
@@ -1323,15 +1407,16 @@
           <p class="privacy-agree-text">온라인 문의 제출 시, 개인정보 수집 및 이용에 동의한 것으로 간주됩니다.</p>
         </div>
 
-        <!-- 제출 버튼 -->
-        <div class="submit-row">
-          <button class="submit-btn" type="submit">제출</button>
+        <!-- 저장 버튼 -->
+        <div class="submit-row" style="flex-direction:column;align-items:center;gap:10px;">
+          <button class="submit-btn" type="submit">저장</button>
+          <p style="font-size:12px;color:#999;margin:0;">제출 전까지 5일간 임시 저장됩니다.</p>
         </div>
 
       </form>
 
       <!-- ── 데모 신청 전용 폼 ── -->
-      <form id="demo-form" style="display:none;" novalidate>
+      <form id="demo-form" style="display:none;" novalidate autocomplete="off">
 
         <!-- 1행: 회사명 / 담당자명 / 연락처 / 이메일 -->
         <div class="form-row-4" style="margin-bottom:20px;">
@@ -1361,28 +1446,28 @@
             <div class="form-group" style="margin-bottom:14px;">
               <label class="form-label">회사 주소 <span class="req">*</span></label>
               <div class="zipcode-row">
-                <input class="form-input" id="d-zipcode" type="text" placeholder="우편번호 입력" style="flex:1;">
-                <button type="button" class="zipcode-btn">우편번호 찾기</button>
+                <input class="form-input" id="d-zipcode" type="text" placeholder="우편번호 찾기" style="flex:1;cursor:pointer;" readonly onclick="document.querySelector('.zipcode-btn').click()">
+                <button type="button" class="zipcode-btn" id="zipcode-btn">우편번호 조회</button>
               </div>
-              <input class="form-input" id="d-address1" type="text" placeholder="주소 입력" style="margin-top:8px;">
-              <input class="form-input" id="d-address2" type="text" placeholder="상세 주소" style="margin-top:8px;">
+              <input class="form-input" id="d-address1" type="text" placeholder="주소 찾기" style="margin-top:3px;cursor:pointer;" readonly onclick="document.getElementById('zipcode-btn').click()">
+              <input class="form-input" id="d-address2" type="text" placeholder="상세 주소 입력" style="margin-top:3px;" required>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" style="margin-top:18px;">
               <label class="form-label">관심있는 서비스 <span style="font-size:12px;color:#888;font-weight:400;">(복수 선택 가능)</span></label>
               <div class="service-checks">
                 <label class="service-check-item">
-                  <input type="checkbox" name="service" value="ecoASSET" checked>
+                  <input type="checkbox" name="service" value="ecoASSET">
                   <span class="check-box"></span>
                   <span class="check-label"><strong>ecoASSET</strong>&nbsp;|&nbsp;탄소자산화 플랫폼</span>
                 </label>
                 <label class="service-check-item">
-                  <input type="checkbox" name="service" value="E-ASSET" checked>
+                  <input type="checkbox" name="service" value="E-ASSET">
                   <span class="check-box"></span>
                   <span class="check-label"><strong>E-ASSET</strong>&nbsp;|&nbsp;신·재생에너지 모니터링 플랫폼</span>
                 </label>
                 <label class="service-check-item">
-                  <input type="checkbox" name="service" value="ecoNODE" checked>
+                  <input type="checkbox" name="service" value="ecoNODE">
                   <span class="check-box"></span>
                   <span class="check-label"><strong>ecoNODE</strong>&nbsp;|&nbsp;신·재생에너지 원격 통합관리 장비(RTU)</span>
                 </label>
@@ -1393,12 +1478,15 @@
           <!-- 우측 -->
           <div class="demo-col-right">
             <div class="form-group" style="margin-bottom:16px;">
-              <label class="form-label" for="d-etc">기타문의 <span style="font-size:12px;color:#888;font-weight:400;">(선택)</span></label>
-              <textarea class="form-textarea" id="d-etc" style="height:160px;" placeholder="문의사항을 입력해주세요"></textarea>
+              <label class="form-label" for="d-etc">신청 내용 <span class="req">*</span></label>
+              <div style="position:relative;">
+                <textarea class="form-textarea" id="d-etc" style="height:160px;padding-bottom:24px;" placeholder="신청 내용을 입력해주세요" required></textarea>
+                <span id="d-etc-count" style="position:absolute;right:12px;bottom:20px;font-size:12px;color:#999;pointer-events:none;">0/1000</span>
+              </div>
             </div>
 
             <div class="privacy-section" style="margin-top:0;">
-              <p class="privacy-label-text">개인정보 수집 및 이용 동의 <span class="req">*</span></p>
+              <p class="privacy-label-text">개인정보 수집 및 이용 동의</p>
               <div class="privacy-box">
                 <p class="privacy-box-title">I. 개인정보 수집 및 이용 동의</p>
                 <p class="privacy-box-content">
@@ -1415,9 +1503,10 @@
 
         </div><!-- /.demo-two-col -->
 
-        <!-- 제출 버튼 -->
-        <div class="submit-row" style="margin-top:40px;">
-          <button class="submit-btn" type="submit">제출</button>
+        <!-- 저장 버튼 -->
+        <div class="submit-row" style="margin-top:40px;flex-direction:column;align-items:center;gap:10px;">
+          <button class="submit-btn" type="submit">저장</button>
+          <p style="font-size:12px;color:#999;margin:0;">제출 전까지 5일간 임시 저장됩니다.</p>
         </div>
 
       </form>
@@ -1589,6 +1678,188 @@
     const inquiryForm = document.getElementById('inquiry-form');
     const demoForm = document.getElementById('demo-form');
     const submitSuccess = document.getElementById('submit-success');
+    const submitReview = document.getElementById('submit-review');
+    const reviewEmailDisplay = document.getElementById('review-email-display');
+    let pendingFormEl = null;
+
+    function showReview(emailVal, formEl) {
+      pendingFormEl = formEl;
+      reviewEmailDisplay.textContent = emailVal;
+      submitReview.classList.add('visible');
+    }
+
+    function closeReview() {
+      submitReview.classList.remove('visible');
+      pendingFormEl = null;
+    }
+
+    // ─── localStorage 저장/복원 (5일) ───
+    const TYPE_LABELS = {
+      partnership: '01 파트너십 & 비즈니스',
+      demo:        '02 데모 신청',
+      investment:  '03 투자 & 전략 협력',
+      esg:         '04 ESG 컨설팅',
+      recruit:     '05 채용',
+      other:       '06 기타',
+    };
+    let currentFormType = 'partnership';
+
+    function renderSummary(isDemo) {
+      const summary = document.getElementById('success-summary');
+      if (!summary) return;
+      const typeKey = isDemo ? 'demo' : currentFormType;
+      const typeLabel = TYPE_LABELS[typeKey] || '';
+
+      let rows;
+      if (isDemo) {
+        rows = [
+          { label: '담당자명',  id: 'd-manager' },
+          { label: '소속/회사명', id: 'd-company' },
+          { label: '이메일',   id: 'd-email' },
+          { label: '연락처',   id: 'd-phone' },
+          { label: '문의 내용', id: 'd-etc' },
+        ];
+      } else {
+        rows = [
+          { label: '작성자 이름', id: 'f-name' },
+          { label: '소속/회사명', id: 'f-field2' },
+          { label: '이메일',     id: 'f-email' },
+          { label: '휴대폰 번호', id: 'f-phone' },
+          { label: '문의 내용',  id: 'f-message' },
+        ];
+      }
+
+      const titleVal = isDemo ? '' : (document.getElementById('f-subject')?.value || '');
+      const titleHtml = titleVal ? `<p class="s-title">${titleVal}</p>` : '';
+
+      const rowsHtml = rows.map(({ label, id }) => {
+        const el = document.getElementById(id);
+        const val = el ? (el.value || '—') : '—';
+        return `<div class="s-row"><span class="s-label">${label}</span><span class="s-value">${val}</span></div>`;
+      }).join('');
+
+      summary.innerHTML = `
+        <p class="s-type">${typeLabel}</p>
+        ${titleHtml}
+        ${rowsHtml}
+      `;
+    }
+
+    const STORAGE_KEY = 'ecobell_form_data';
+    const STORAGE_DAYS = 5;
+
+    function getFormFields(formId) {
+      const form = document.getElementById(formId);
+      if (!form) return {};
+      const data = {};
+      form.querySelectorAll('input:not([type=submit]):not([type=checkbox]):not([readonly]), textarea, input[type=checkbox]').forEach(el => {
+        if (!el.id && !el.name) return;
+        const key = el.id || el.name;
+        data[key] = el.type === 'checkbox' ? el.checked : el.value;
+      });
+      return data;
+    }
+
+    function saveFormData() {
+      const payload = {
+        inquiry: getFormFields('inquiry-form'),
+        demo: getFormFields('demo-form'),
+        expiry: Date.now() + STORAGE_DAYS * 86400000
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+    }
+
+    function restoreFormData() {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const payload = JSON.parse(raw);
+      if (Date.now() > payload.expiry) { localStorage.removeItem(STORAGE_KEY); return; }
+      function fill(formId, data) {
+        const form = document.getElementById(formId);
+        if (!form || !data) return;
+        Object.entries(data).forEach(([key, val]) => {
+          const el = document.getElementById(key) || form.querySelector(`[name="${key}"]`);
+          if (!el) return;
+          if (el.type === 'checkbox') el.checked = val;
+          else el.value = val;
+        });
+      }
+      fill('inquiry-form', payload.inquiry);
+      fill('demo-form', payload.demo);
+      // 글자수 카운터 업데이트
+      ['f-subject', 'f-message', 'd-etc'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.dispatchEvent(new Event('input'));
+      });
+    }
+
+    // 저장되지 않은 경우 세션 종료 시 리셋 (sessionStorage 플래그 활용)
+    if (!sessionStorage.getItem('form_saved')) {
+      localStorage.removeItem(STORAGE_KEY);
+    }
+    restoreFormData();
+
+    document.getElementById('review-confirm-btn').addEventListener('click', async () => {
+      const formEl = pendingFormEl;
+      const isDemo = formEl === demoForm;
+
+      // 폼 데이터 수집
+      let payload;
+      if (isDemo) {
+        payload = {
+          type: '데모 신청',
+          name:    document.getElementById('d-manager')?.value || '',
+          company: document.getElementById('d-company')?.value  || '',
+          email:   document.getElementById('d-email')?.value    || '',
+          phone:   document.getElementById('d-phone')?.value    || '',
+          subject: '데모 신청',
+          message: document.getElementById('d-etc')?.value      || '',
+        };
+      } else {
+        const typeLabel = TYPE_LABELS[currentFormType] || currentFormType;
+        payload = {
+          type:    typeLabel,
+          name:    document.getElementById('f-name')?.value    || '',
+          company: document.getElementById('f-field2')?.value  || '',
+          email:   document.getElementById('f-email')?.value   || '',
+          phone:   document.getElementById('f-phone')?.value   || '',
+          subject: document.getElementById('f-subject')?.value || '',
+          message: document.getElementById('f-message')?.value || '',
+        };
+      }
+
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        if (!res.ok) throw new Error('서버 오류');
+      } catch (e) {
+        alert('문의 전송 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+        return;
+      }
+
+      saveFormData();
+      sessionStorage.setItem('form_saved', '1');
+      closeReview();
+      renderSummary(isDemo);
+      if (formEl) formEl.style.display = 'none';
+      submitSuccess.style.display = 'flex';
+      submitSuccess.classList.add('visible');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    document.getElementById('review-back-btn').addEventListener('click', () => {
+      saveFormData();
+      sessionStorage.setItem('form_saved', '1');
+      closeReview();
+    });
+
+    // 배경 클릭 시 닫기
+    submitReview.addEventListener('click', e => {
+      if (e.target === submitReview) closeReview();
+    });
 
     const snsSection = document.querySelector('.sns-section');
 
@@ -1600,12 +1871,24 @@
       submitSuccess.classList.remove('visible');
       submitSuccess.style.display = 'none';
 
+      currentFormType = type;
       const breadcrumbType = document.getElementById('breadcrumb-type');
       if (type === 'demo') {
         formTitle.textContent = '데모 신청';
         if (breadcrumbType) breadcrumbType.textContent = '데모 신청';
         inquiryForm.style.display = 'none';
         demoForm.style.display = 'block';
+        // 데모 폼 표시 후 신청내용 높이 계산
+        (function() {
+          const zipcodeRow = document.querySelector('.zipcode-row');
+          const addr1 = document.getElementById('d-address1');
+          const addr2 = document.getElementById('d-address2');
+          const dEtc = document.getElementById('d-etc');
+          if (zipcodeRow && addr1 && addr2 && dEtc) {
+            const totalH = zipcodeRow.offsetHeight + 3 + addr1.offsetHeight + 3 + addr2.offsetHeight + 15;
+            dEtc.style.height = totalH + 'px';
+          }
+        })();
       } else {
         const cfg = FORM_TYPES[type];
         if (!cfg) return;
@@ -1792,31 +2075,202 @@
       }
     });
 
+    // ─── 폼 유효성 검사 공통 ───
+    const SPECIAL_RE = /[!@#$%^&*()\-_=+\[\]{}|;:'",.<>?/\\`~]/;
+    const EMAIL_RE   = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    function setError(input, msg) {
+      input.classList.add('input-error');
+      let err = input.parentNode.querySelector('.field-error-msg[data-for="' + input.id + '"]');
+      if (!err) {
+        err = document.createElement('span');
+        err.className = 'field-error-msg';
+        err.setAttribute('data-for', input.id);
+        input.insertAdjacentElement('afterend', err);
+      }
+      err.textContent = msg;
+    }
+
+    function clearError(input) {
+      input.classList.remove('input-error');
+      const err = input.parentNode.querySelector('.field-error-msg[data-for="' + input.id + '"]');
+      if (err) err.remove();
+    }
+
+    // 이름/담당자명: 특수기호·숫자 입력 자체 차단
+    function bindNameValidation(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.addEventListener('keydown', (e) => {
+        if (e.key.length === 1 && (SPECIAL_RE.test(e.key) || /[0-9]/.test(e.key))) e.preventDefault();
+      });
+      el.addEventListener('input', () => {
+        // 붙여넣기 등으로 들어온 특수문자·숫자 제거
+        const cleaned = el.value.replace(/[!@#$%^&*()\-_=+\[\]{}|;:'",.<>?/\\`~0-9]/g, '');
+        if (el.value !== cleaned) el.value = cleaned;
+      });
+    }
+
+    // 연락처: 숫자만 최대 11자리 허용, 비숫자 입력 완전 차단
+    function bindPhoneValidation(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.setAttribute('maxlength', '11');
+      el.addEventListener('keydown', (e) => {
+        const allowed = ['Backspace','Delete','ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Tab','Home','End'];
+        if (allowed.includes(e.key)) return;
+        if (e.ctrlKey || e.metaKey) return; // 복사/붙여넣기 허용
+        if (!/^[0-9]$/.test(e.key)) e.preventDefault();
+      });
+      el.addEventListener('input', () => {
+        // 붙여넣기 등으로 들어온 비숫자 제거 후 11자리 제한
+        const filtered = el.value.replace(/[^0-9]/g, '').slice(0, 11);
+        if (el.value !== filtered) el.value = filtered;
+        // 8자 미만이면 빨간 외곽선, 8자면 해제
+        if (el.value.length > 0 && el.value.length < 11) setError(el, '연락처는 11자리를 입력해주세요');
+        else clearError(el);
+      });
+    }
+
+    // 이메일: @ 없거나 .으로 끝나면 즉시 빨간 외곽선, 정상이면 해제
+    function bindEmailValidation(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      function checkEmail() {
+        const v = el.value.trim();
+        if (!v) { clearError(el); return; }
+        const invalid = !v.includes('@') || /[^a-zA-Z0-9]$/.test(v);
+        if (invalid) setError(el, '이메일 주소를 다시 입력해주세요.');
+        else clearError(el);
+      }
+      el.addEventListener('input', checkEmail);
+      el.addEventListener('blur', checkEmail);
+    }
+
+    // 최대 길이 초과 시 빨간 외곽선
+    function bindMaxLength(id, max, msg) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.setAttribute('maxlength', max);
+      el.addEventListener('input', () => {
+        if (el.value.length >= max) setError(el, msg);
+        else clearError(el);
+      });
+    }
+
+    // 글자수 카운터 + 제한 초과 시 빨간 외곽선
+    function bindCharCount(inputId, countId, max) {
+      const el = document.getElementById(inputId);
+      const counter = document.getElementById(countId);
+      if (!el || !counter) return;
+      el.setAttribute('maxlength', max);
+      el.addEventListener('input', () => {
+        const len = el.value.length;
+        counter.textContent = len + '/' + max;
+        if (len >= max) {
+          counter.style.color = '#e03030';
+        } else {
+          counter.style.color = '#999';
+          clearError(el);
+        }
+      });
+      el.addEventListener('keydown', (e) => {
+        if (el.value.length < max) return;
+        const allowed = ['Backspace','Delete','ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Tab','Home','End','Enter'];
+        if (allowed.includes(e.key) || e.ctrlKey || e.metaKey) return;
+        setError(el, `최대 ${max}자까지 입력 가능합니다`);
+      });
+    }
+    bindCharCount('f-subject', 'f-subject-count', 70);
+    bindCharCount('f-message', 'f-message-count', 1000);
+    bindCharCount('d-etc', 'd-etc-count', 1000);
+
+
+    // 실시간 검사 바인딩 (일반 + 데모 공통)
+    bindNameValidation('f-name');
+    bindMaxLength('f-name', 30, '이름은 최대 30자까지 입력 가능합니다');
+    // 이름/담당자명 최소 2글자 검사 (실시간)
+    function bindMinLength2(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.addEventListener('input', () => {
+        if (el.value.length === 1) setError(el, '최소 2자 이상 입력해주세요');
+        else clearError(el);
+      });
+    }
+    bindMinLength2('f-name');
+    bindMinLength2('d-manager');
+    bindMaxLength('f-field2', 30, '소속/회사명은 최대 30자까지 입력 가능합니다');
+    bindPhoneValidation('f-phone');
+    bindEmailValidation('f-email');
+    bindNameValidation('d-manager');
+    bindPhoneValidation('d-phone');
+    bindEmailValidation('d-email');
+
+    // 공통 필수 + 형식 검사
+    function validateForm(fields) {
+      const errors = [];
+      fields.forEach(({ id, label, required, type }) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const val = el.value.trim();
+        if (required && !val) {
+          setError(el, label + '을(를) 입력해주세요.');
+          errors.push(label + '을(를) 입력해주세요.');
+        } else if (val) {
+          let errMsg = null;
+          if (type === 'name') {
+            if (val.length < 2) errMsg = label + '은(는) 최소 2자 이상 입력해주세요.';
+          }
+          if (type === 'phone') {
+            if (val.length < 11) errMsg = '연락처는 11자리 숫자를 입력해주세요.';
+          }
+          if (type === 'email') {
+            if (!val.includes('@') || /[^a-zA-Z0-9]$/.test(val)) errMsg = '올바른 이메일 주소 형식으로 입력해주세요.';
+          }
+          if (errMsg) {
+            setError(el, errMsg);
+            errors.push(errMsg);
+          }
+        }
+      });
+      // 이미 빨간 테두리가 있는 필드도 포함 (값이 있는 필드는 제외)
+      document.querySelectorAll('.input-error').forEach(el => {
+        if (el.value && el.value.trim()) { clearError(el); return; }
+        const msgEl = el.closest('.form-group, div')?.querySelector('.field-error-msg');
+        if (msgEl && !errors.includes(msgEl.textContent)) errors.push(msgEl.textContent);
+      });
+      return [...new Set(errors)];
+    }
+
     // ─── 폼 제출 (일반) ───
     document.getElementById('inquiry-form').addEventListener('submit', e => {
       e.preventDefault();
-      if (!document.getElementById('f-name').value.trim()) { alert('작성자 이름을 입력해 주세요.'); return; }
-      if (!document.getElementById('f-email').value.trim()) { alert('이메일을 입력해 주세요.'); return; }
-      if (!document.getElementById('f-subject').value.trim()) { alert('제목을 입력해 주세요.'); return; }
-      if (!document.getElementById('f-message').value.trim()) { alert('문의 내용을 입력해 주세요.'); return; }
-      inquiryForm.style.display = 'none';
-      submitSuccess.style.display = 'flex';
-      submitSuccess.classList.add('visible');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const errors = validateForm([
+        { id: 'f-name',    label: '작성자 이름', required: true,  type: 'name' },
+        { id: 'f-field2',  label: '소속/회사명', required: true,  type: '' },
+        { id: 'f-phone',   label: '휴대폰 번호', required: true,  type: 'phone' },
+        { id: 'f-email',   label: '이메일',      required: true,  type: 'email' },
+        { id: 'f-subject', label: '제목',        required: true,  type: '' },
+        { id: 'f-message', label: '문의 내용',   required: true,  type: '' },
+      ]);
+      if (errors.length) { alert(errors.join('\n')); return; }
+      showReview(document.getElementById('f-email').value.trim(), inquiryForm);
     });
 
     // ─── 폼 제출 (데모) ───
     document.getElementById('demo-form').addEventListener('submit', e => {
       e.preventDefault();
-      if (!document.getElementById('d-company').value.trim()) { alert('회사명을 입력해 주세요.'); return; }
-      if (!document.getElementById('d-manager').value.trim()) { alert('담당자명을 입력해 주세요.'); return; }
-      if (!document.getElementById('d-phone').value.trim()) { alert('연락처를 입력해 주세요.'); return; }
-      if (!document.getElementById('d-email').value.trim()) { alert('이메일을 입력해 주세요.'); return; }
-      if (!document.getElementById('d-zipcode').value.trim()) { alert('회사 주소를 입력해 주세요.'); return; }
-      demoForm.style.display = 'none';
-      submitSuccess.style.display = 'flex';
-      submitSuccess.classList.add('visible');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const errors = validateForm([
+        { id: 'd-company', label: '회사명',   required: true,  type: '' },
+        { id: 'd-manager', label: '담당자명', required: true,  type: 'name' },
+        { id: 'd-phone',   label: '연락처',   required: true,  type: 'phone' },
+        { id: 'd-email',   label: '이메일',   required: true,  type: 'email' },
+        { id: 'd-zipcode', label: '회사 주소',required: true,  type: '' },
+        { id: 'd-etc',     label: '신청 내용',required: true,  type: '' },
+      ]);
+      if (errors.length) { alert(errors.join('\n')); return; }
+      showReview(document.getElementById('d-email').value.trim(), demoForm);
     });
 
     // ─── 반응형 footer 전환 ───
@@ -1834,6 +2288,27 @@
     }
     checkFooter();
     window.addEventListener('resize', checkFooter);
+    // ─── 우편번호 조회 (카카오 주소 API) ───
+    (function() {
+      function openPostcode() {
+        new daum.Postcode({
+          oncomplete: function(data) {
+            // 우편번호
+            document.getElementById('d-zipcode').value = data.zonecode;
+            clearError(document.getElementById('d-zipcode'));
+            // 도로명 주소 우선, 없으면 지번 주소
+            var addr = data.roadAddress || data.jibunAddress;
+            document.getElementById('d-address1').value = addr;
+            clearError(document.getElementById('d-address1'));
+            // 상세주소 포커스
+            document.getElementById('d-address2').focus();
+          }
+        }).open();
+      }
+
+      document.getElementById('zipcode-btn').addEventListener('click', openPostcode);
+    })();
   </script>
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 </html>
