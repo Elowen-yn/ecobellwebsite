@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ecobell Admin</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Noto Sans KR', -apple-system, sans-serif; background: #f0f2f5; color: #333; min-height: 100vh; }
+
+    /* ── 로그인 ── */
+    .login-overlay { position: fixed; inset: 0; background: #1a1f36; display: flex; align-items: center; justify-content: center; z-index: 9999; }
+    .login-box { background: #fff; border-radius: 12px; padding: 48px 40px; width: 360px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+    .login-logo { font-size: 22px; font-weight: 700; color: #1E8DCD; margin-bottom: 8px; letter-spacing: -0.5px; }
+    .login-sub { font-size: 13px; color: #999; margin-bottom: 32px; }
+    .login-box input { width: 100%; height: 44px; border: 1px solid #e0e0e0; border-radius: 8px; padding: 0 14px; font-size: 14px; margin-bottom: 12px; outline: none; transition: border-color 0.2s; }
+    .login-box input:focus { border-color: #1E8DCD; }
+    .login-btn { width: 100%; height: 44px; background: #1E8DCD; color: #fff; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-top: 4px; }
+    .login-btn:hover { background: #1679b3; }
+    .login-error { color: #e63946; font-size: 13px; margin-top: 10px; min-height: 18px; text-align: center; }
+
+    /* ── 레이아웃 ── */
+    .admin-layout { display: flex; min-height: 100vh; }
+
+    /* ── 사이드바 ── */
+    .sidebar { width: 220px; background: #1a1f36; color: #fff; display: flex; flex-direction: column; flex-shrink: 0; position: fixed; top: 0; left: 0; height: 100vh; z-index: 100; }
+    .sidebar-logo { padding: 24px 20px 20px; font-size: 16px; font-weight: 700; color: #fff; border-bottom: 1px solid rgba(255,255,255,0.08); letter-spacing: -0.3px; }
+    .sidebar-logo span { color: #1E8DCD; }
+    .sidebar-nav { flex: 1; padding: 16px 0; }
+    .nav-btn { display: flex; align-items: center; gap: 10px; width: 100%; padding: 11px 20px; background: none; border: none; color: rgba(255,255,255,0.6); font-size: 14px; cursor: pointer; transition: all 0.15s; text-align: left; border-left: 3px solid transparent; }
+    .nav-btn:hover { color: #fff; background: rgba(255,255,255,0.06); }
+    .nav-btn.active { color: #fff; background: rgba(30,141,205,0.18); border-left-color: #1E8DCD; }
+    .nav-btn .nav-icon { font-size: 16px; width: 20px; text-align: center; }
+    .sidebar-footer { padding: 16px 20px; border-top: 1px solid rgba(255,255,255,0.08); }
+    .logout-btn { width: 100%; padding: 9px; background: rgba(255,255,255,0.07); border: none; border-radius: 6px; color: rgba(255,255,255,0.6); font-size: 13px; cursor: pointer; transition: all 0.15s; }
+    .logout-btn:hover { background: rgba(255,255,255,0.12); color: #fff; }
+
+    /* ── 메인 ── */
+    .main-content { margin-left: 220px; flex: 1; padding: 32px; }
+    .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+    .section-title { font-size: 22px; font-weight: 700; color: #1a1f36; }
+    .section-count { font-size: 14px; color: #999; margin-left: 8px; font-weight: 400; }
+    .add-btn { display: inline-flex; align-items: center; gap: 6px; padding: 0 18px; height: 38px; background: #1E8DCD; color: #fff; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+    .add-btn:hover { background: #1679b3; }
+
+    /* ── 카드/테이블 ── */
+    .card { background: #fff; border-radius: 10px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); overflow: hidden; }
+    .item-list { display: flex; flex-direction: column; }
+    .item-row { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-bottom: 1px solid #f0f0f0; transition: background 0.12s; }
+    .item-row:last-child { border-bottom: none; }
+    .item-row:hover { background: #fafbfc; }
+    .item-row.dragging { opacity: 0.4; }
+    .item-row.drag-over { border-top: 2px solid #1E8DCD; }
+    .drag-handle { cursor: grab; color: #ccc; font-size: 16px; flex-shrink: 0; user-select: none; padding: 0 2px; }
+    .drag-handle:active { cursor: grabbing; }
+    .item-pin { font-size: 16px; cursor: pointer; flex-shrink: 0; opacity: 0.35; transition: opacity 0.15s, transform 0.15s; }
+    .item-pin.pinned { opacity: 1; }
+    .item-pin:hover { opacity: 0.7; transform: scale(1.15); }
+    .item-info { flex: 1; min-width: 0; }
+    .item-title { font-size: 14px; font-weight: 500; color: #222; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .item-meta { font-size: 12px; color: #aaa; margin-top: 2px; }
+    .item-tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; background: #eef6fb; color: #1E8DCD; margin-right: 6px; }
+    .item-tag.unpub { background: #f5f5f5; color: #bbb; }
+    .pub-toggle { display: flex; align-items: center; gap: 6px; cursor: pointer; flex-shrink: 0; }
+    .toggle-switch { width: 36px; height: 20px; background: #ddd; border-radius: 10px; position: relative; transition: background 0.2s; }
+    .toggle-switch.on { background: #1E8DCD; }
+    .toggle-switch::after { content: ''; position: absolute; width: 16px; height: 16px; background: #fff; border-radius: 50%; top: 2px; left: 2px; transition: left 0.2s; }
+    .toggle-switch.on::after { left: 18px; }
+    .action-btn { width: 30px; height: 30px; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.15s; background: transparent; }
+    .action-btn.edit { color: #555; }
+    .action-btn.edit:hover { background: #eef; color: #1E8DCD; }
+    .action-btn.del { color: #ccc; }
+    .action-btn.del:hover { background: #fff0f0; color: #e63946; }
+
+    /* ── 폼 ── */
+    .form-card { background: #fff; border-radius: 10px; box-shadow: 0 1px 6px rgba(0,0,0,0.07); padding: 28px; margin-bottom: 24px; }
+    .form-title { font-size: 16px; font-weight: 700; color: #1a1f36; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid #f0f0f0; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-label { font-size: 13px; font-weight: 600; color: #555; }
+    .form-input, .form-select, .form-textarea { width: 100%; padding: 9px 12px; border: 1px solid #e0e0e0; border-radius: 7px; font-size: 14px; outline: none; transition: border-color 0.2s; font-family: inherit; }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: #1E8DCD; }
+    .form-textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
+    .form-check-row { display: flex; gap: 20px; align-items: center; margin-top: 4px; }
+    .form-check { display: flex; align-items: center; gap: 7px; cursor: pointer; font-size: 14px; color: #555; }
+    .form-check input[type="checkbox"] { width: 16px; height: 16px; accent-color: #1E8DCD; cursor: pointer; }
+    .form-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; padding-top: 16px; border-top: 1px solid #f0f0f0; }
+    .btn-cancel { padding: 0 20px; height: 38px; background: #f5f5f5; border: none; border-radius: 7px; font-size: 14px; cursor: pointer; color: #666; transition: background 0.15s; }
+    .btn-cancel:hover { background: #eee; }
+    .btn-save { padding: 0 24px; height: 38px; background: #1E8DCD; border: none; border-radius: 7px; font-size: 14px; font-weight: 600; color: #fff; cursor: pointer; transition: background 0.15s; }
+    .btn-save:hover { background: #1679b3; }
+    .btn-save:disabled { background: #a0cde8; cursor: not-allowed; }
+
+    /* ── 파일 업로드 ── */
+    .upload-area { border: 2px dashed #e0e0e0; border-radius: 8px; padding: 20px; text-align: center; cursor: pointer; transition: border-color 0.2s; position: relative; }
+    .upload-area:hover { border-color: #1E8DCD; }
+    .upload-area input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+    .upload-hint { font-size: 13px; color: #aaa; margin-top: 4px; }
+    .upload-preview { max-width: 180px; max-height: 120px; border-radius: 6px; margin-top: 10px; object-fit: cover; display: none; }
+    .upload-filename { font-size: 13px; color: #1E8DCD; margin-top: 6px; display: none; }
+    .upload-progress { font-size: 12px; color: #aaa; margin-top: 4px; }
+
+    /* ── 빈 상태 ── */
+    .empty-state { text-align: center; padding: 60px 20px; color: #bbb; }
+    .empty-state p { font-size: 15px; margin-top: 8px; }
+
+    /* ── 토스트 ── */
+    .toast { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(20px); background: #1a1f36; color: #fff; padding: 12px 24px; border-radius: 8px; font-size: 14px; opacity: 0; pointer-events: none; transition: all 0.3s; z-index: 9999; white-space: nowrap; }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .toast.error { background: #e63946; }
+
+    /* ── 로딩 ── */
+    .loading { text-align: center; padding: 40px; color: #aaa; font-size: 14px; }
+
+    /* ── 구분선 ── */
+    .divider { height: 1px; background: #f0f0f0; margin: 20px 0; }
+  </style>
+</head>
+<body>
+
+<!-- 로그인 -->
+<div class="login-overlay" id="login-overlay">
+  <div class="login-box">
+    <div class="login-logo">ecobell</div>
+    <p class="login-sub">관리자 페이지</p>
+    <input id="login-user" type="text" placeholder="아이디" autocomplete="off">
+    <input id="login-pass" type="password" placeholder="비밀번호" autocomplete="off">
+    <button class="login-btn" id="login-btn" onclick="doLogin()">로그인</button>
+    <p class="login-error" id="login-error"></p>
+  </div>
+</div>
+
+<!-- 관리자 패널 -->
+<div class="admin-layout" id="admin-panel" style="display:none;">
+  <aside class="sidebar">
+    <div class="sidebar-logo"><span>eco</span>bell Admin</div>
+    <nav class="sidebar-nav">
+      <button class="nav-btn active" onclick="switchSection('notices')" data-section="notices">
+        <span class="nav-icon">📋</span>공지사항
+      </button>
+      <button class="nav-btn" onclick="switchSection('press')" data-section="press">
+        <span class="nav-icon">📰</span>보도자료
+      </button>
+      <button class="nav-btn" onclick="switchSection('archive')" data-section="archive">
+        <span class="nav-icon">📁</span>아카이브
+      </button>
+      <button class="nav-btn" onclick="switchSection('faq')" data-section="faq">
+        <span class="nav-icon">❓</span>FAQ
+      </button>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="logout-btn" onclick="doLogout()">로그아웃</button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="section-header">
+      <div>
+        <span class="section-title" id="section-title">공지사항</span>
+        <span class="section-count" id="section-count"></span>
+      </div>
+      <button class="add-btn" onclick="showForm()">+ 새 항목 추가</button>
+    </div>
+
+    <!-- 추가/수정 폼 -->
+    <div class="form-card" id="item-form" style="display:none;"></div>
+
+    <!-- 리스트 -->
+    <div class="card">
+      <div class="item-list" id="item-list"><div class="loading">불러오는 중...</div></div>
+    </div>
+  </main>
+</div>
+
+<!-- 토스트 -->
+<div class="toast" id="toast"></div>
+
+<script>
+  /* ── 상태 ── */
+  let authHeader = '';
+  let currentSection = 'notices';
+  let currentItems = [];
+  let editingId = null;
+  let pendingFiles = {}; // { fieldName: { base64, filename, folder } }
+
+  const SECTION_LABELS = { notices: '공지사항', press: '보도자료', archive: '아카이브', faq: 'FAQ' };
+
+  /* ── 초기화 ── */
+  window.addEventListener('DOMContentLoaded', () => {
+    const saved = sessionStorage.getItem('adminAuth');
+    if (saved) {
+      authHeader = saved;
+      showDashboard();
+    }
+    document.getElementById('login-pass').addEventListener('keydown', e => {
+      if (e.key === 'Enter') doLogin();
+    });
+  });
+
+  /* ── 로그인 ── */
+  async function doLogin() {
+    const user = document.getElementById('login-user').value.trim();
+    const pass = document.getElementById('login-pass').value;
+    const errEl = document.getElementById('login-error');
+    const btn = document.getElementById('login-btn');
+    if (!user || !pass) { errEl.textContent = '아이디와 비밀번호를 입력해주세요.'; return; }
+    btn.disabled = true; btn.textContent = '로그인 중...';
+    errEl.textContent = '';
+    try {
+      const res = await fetch('/api/admin-auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user, pass })
+      });
+      const data = await res.json();
+      if (data.ok) {
+        authHeader = btoa(user + ':' + pass);
+        sessionStorage.setItem('adminAuth', authHeader);
+        showDashboard();
+      } else {
+        errEl.textContent = data.message || '로그인 실패';
+      }
+    } catch (e) {
+      errEl.textContent = '서버 연결 오류';
+    }
+    btn.disabled = false; btn.textContent = '로그인';
+  }
+
+  function doLogout() {
+    sessionStorage.removeItem('adminAuth');
+    authHeader = '';
+    document.getElementById('admin-panel').style.display = 'none';
+    document.getElementById('login-overlay').style.display = 'flex';
+    document.getElementById('login-user').value = '';
+    document.getElementById('login-pass').value = '';
+  }
+
+  function showDashboard() {
+    document.getElementById('login-overlay').style.display = 'none';
+    document.getElementById('admin-panel').style.display = 'flex';
+    loadSection(currentSection);
+  }
+
+  /* ── 섹션 전환 ── */
+  function switchSection(type) {
+    currentSection = type;
+    editingId = null;
+    document.getElementById('item-form').style.display = 'none';
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.section === type));
+    document.getElementById('section-title').textContent = SECTION_LABELS[type];
+    loadSection(type);
+  }
+
+  /* ── 데이터 로드 ── */
+  async function loadSection(type) {
+    document.getElementById('item-list').innerHTML = '<div class="loading">불러오는 중...</div>';
+    document.getElementById('section-count').textContent = '';
+    try {
+      const res = await fetch('/api/admin-data?type=' + type, {
+        headers: { Authorization: 'Basic ' + authHeader }
+      });
+      if (res.status === 401) { doLogout(); return; }
+      const data = await res.json();
+      currentItems = data.items || [];
+      document.getElementById('section-count').textContent = '(' + currentItems.length + '건)';
+      renderList();
+    } catch (e) {
+      document.getElementById('item-list').innerHTML = '<div class="loading">불러오기 실패</div>';
+    }
+  }
+
+  /* ── 리스트 렌더 ── */
+  function renderList() {
+    const el = document.getElementById('item-list');
+    if (!currentItems.length) {
+      el.innerHTML = '<div class="empty-state"><div style="font-size:36px;">📭</div><p>등록된 항목이 없습니다.</p></div>';
+      return;
+    }
+    el.innerHTML = currentItems.map((item, idx) => renderRow(item, idx)).join('');
+    initDragDrop();
+  }
+
+  function renderRow(item, idx) {
+    const isPublished = item.published !== false;
+    const isPinned = !!item.pinned;
+    let meta = '';
+    if (currentSection === 'faq') meta = '<span class="item-tag">' + (item.category || '기타') + '</span>';
+    else if (currentSection === 'press') meta = (item.source || '') + (item.date ? ' · ' + item.date : '');
+    else if (currentSection === 'archive') meta = '<span class="item-tag">' + (item.type || '') + '</span>' + (item.date ? ' ' + item.date : '');
+    else meta = item.date || '';
+
+    const title = currentSection === 'faq' ? (item.question || '') : (item.title || '');
+
+    return `<div class="item-row" draggable="true" data-id="${item.id}" data-idx="${idx}">
+      <span class="drag-handle" title="순서 변경">⠿</span>
+      <span class="item-pin ${isPinned ? 'pinned' : ''}" title="${isPinned ? '고정 해제' : '고정'}" onclick="togglePin('${item.id}')">📌</span>
+      <div class="item-info">
+        <div class="item-title">${escHtml(title)}</div>
+        <div class="item-meta">${meta}</div>
+      </div>
+      <div class="pub-toggle" onclick="togglePublish('${item.id}')" title="${isPublished ? '게시 중' : '비게시'}">
+        <div class="toggle-switch ${isPublished ? 'on' : ''}"></div>
+        <span style="font-size:12px;color:#aaa;width:36px;">${isPublished ? '게시' : '숨김'}</span>
+      </div>
+      <button class="action-btn edit" onclick="showForm('${item.id}')" title="수정">✏️</button>
+      <button class="action-btn del" onclick="deleteItem('${item.id}')" title="삭제">🗑️</button>
+    </div>`;
+  }
+
+  /* ── 드래그 앤 드롭 ── */
+  let dragSrcIdx = null;
+  function initDragDrop() {
+    document.querySelectorAll('#item-list .item-row').forEach(row => {
+      row.addEventListener('dragstart', e => { dragSrcIdx = +row.dataset.idx; row.classList.add('dragging'); e.dataTransfer.effectAllowed = 'move'; });
+      row.addEventListener('dragend', () => { row.classList.remove('dragging'); document.querySelectorAll('.item-row').forEach(r => r.classList.remove('drag-over')); });
+      row.addEventListener('dragover', e => { e.preventDefault(); row.classList.add('drag-over'); });
+      row.addEventListener('dragleave', () => row.classList.remove('drag-over'));
+      row.addEventListener('drop', async e => {
+        e.preventDefault(); row.classList.remove('drag-over');
+        const toIdx = +row.dataset.idx;
+        if (dragSrcIdx === null || dragSrcIdx === toIdx) return;
+        const items = [...currentItems];
+        const [moved] = items.splice(dragSrcIdx, 1);
+        items.splice(toIdx, 0, moved);
+        currentItems = items;
+        renderList();
+        await saveReorder();
+      });
+    });
+  }
+
+  async function saveReorder() {
+    try {
+      const res = await fetch('/api/admin-data', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json', Authorization: 'Basic ' + authHeader },
+        body: JSON.stringify({ type: currentSection, items: currentItems })
+      });
+      const d = await res.json();
+      if (d.ok) showToast('순서가 저장됐습니다.');
+      else showToast('순서 저장 실패: ' + d.message, true);
+    } catch { showToast('순서 저장 실패', true); }
+  }
+
+  /* ── 고정/게시 토글 ── */
+  async function togglePin(id) {
+    const item = currentItems.find(i => i.id === id);
+    if (!item) return;
+    item.pinned = !item.pinned;
+    await updateItem(item);
+    renderList();
+  }
+  async function togglePublish(id) {
+    const item = currentItems.find(i => i.id === id);
+    if (!item) return;
+    item.published = item.published === false ? true : false;
+    await updateItem(item);
+    renderList();
+  }
+  async function updateItem(item) {
+    const res = await fetch('/api/admin-data', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', Authorization: 'Basic ' + authHeader },
+      body: JSON.stringify({ type: currentSection, item })
+    });
+    const d = await res.json();
+    if (d.ok) showToast('저장됐습니다.');
+    else showToast('저장 실패: ' + d.message, true);
+  }
+
+  /* ── 삭제 ── */
+  async function deleteItem(id) {
+    if (!confirm('삭제하시겠습니까?')) return;
+    try {
+      const res = await fetch('/api/admin-data', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json', Authorization: 'Basic ' + authHeader },
+        body: JSON.stringify({ type: currentSection, id })
+      });
+      const d = await res.json();
+      if (d.ok) {
+        currentItems = currentItems.filter(i => i.id !== id);
+        document.getElementById('section-count').textContent = '(' + currentItems.length + '건)';
+        renderList();
+        showToast('삭제됐습니다.');
+      } else showToast('삭제 실패: ' + d.message, true);
+    } catch { showToast('삭제 실패', true); }
+  }
+
+  /* ── 폼 ── */
+  function showForm(id) {
+    editingId = id || null;
+    pendingFiles = {};
+    const item = id ? currentItems.find(i => i.id === id) : null;
+    const formEl = document.getElementById('item-form');
+    formEl.style.display = 'block';
+    formEl.innerHTML = buildForm(item);
+    formEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function hideForm() {
+    editingId = null;
+    pendingFiles = {};
+    document.getElementById('item-form').style.display = 'none';
+  }
+
+  function buildForm(item) {
+    const isEdit = !!item;
+    const v = (key, def) => isEdit ? (item[key] !== undefined ? item[key] : def) : def;
+    let fields = '';
+
+    if (currentSection === 'notices') {
+      fields = `
+        <div class="form-group full"><label class="form-label">제목 *</label><input class="form-input" id="f-title" value="${escAttr(v('title',''))}" placeholder="공지사항 제목"></div>
+        <div class="form-group full"><label class="form-label">내용 *</label><textarea class="form-textarea" id="f-content" rows="8" placeholder="공지사항 내용">${escHtml(v('content',''))}</textarea></div>
+        <div class="form-group"><label class="form-label">날짜</label><input class="form-input" type="date" id="f-date" value="${escAttr(v('date',''))}"></div>`;
+    } else if (currentSection === 'press') {
+      fields = `
+        <div class="form-group full"><label class="form-label">제목 *</label><input class="form-input" id="f-title" value="${escAttr(v('title',''))}" placeholder="보도자료 제목"></div>
+        <div class="form-group full"><label class="form-label">부제목</label><input class="form-input" id="f-subtitle" value="${escAttr(v('subtitle',''))}" placeholder="부제목"></div>
+        <div class="form-group"><label class="form-label">언론사</label><input class="form-input" id="f-source" value="${escAttr(v('source',''))}" placeholder="예: 연합뉴스"></div>
+        <div class="form-group"><label class="form-label">날짜</label><input class="form-input" type="date" id="f-date" value="${escAttr(v('date',''))}"></div>
+        <div class="form-group"><label class="form-label">외부 링크</label><input class="form-input" id="f-link" value="${escAttr(v('link',''))}" placeholder="https://..."></div>
+        <div class="form-group">
+          <label class="form-label">이미지</label>
+          <div class="upload-area" onclick="document.getElementById('f-image-input').click()">
+            <input type="file" id="f-image-input" accept="image/*" style="display:none" onchange="handleFile(this,'image','press')">
+            <div>📷 클릭하여 이미지 선택</div>
+            <div class="upload-hint">JPG, PNG, GIF 지원</div>
+            ${v('image','') ? `<img src="${escAttr(v('image',''))}" class="upload-preview" style="display:block;" id="f-image-preview">` : '<img class="upload-preview" id="f-image-preview">'}
+            <div class="upload-filename" id="f-image-name">${v('image','') ? '기존 이미지 있음' : ''}</div>
+          </div>
+        </div>`;
+    } else if (currentSection === 'archive') {
+      fields = `
+        <div class="form-group full"><label class="form-label">제목 *</label><input class="form-input" id="f-title" value="${escAttr(v('title',''))}" placeholder="자료 제목"></div>
+        <div class="form-group"><label class="form-label">유형 *</label>
+          <select class="form-select" id="f-type">
+            ${['intro','catalog','ir','ci'].map(t => `<option value="${t}" ${v('type','') === t ? 'selected' : ''}>${{intro:'기업소개서',catalog:'카탈로그/지명원',ir:'IR',ci:'CI'}[t]}</option>`).join('')}
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label">날짜</label><input class="form-input" type="date" id="f-date" value="${escAttr(v('date',''))}"></div>
+        <div class="form-group">
+          <label class="form-label">파일 (PDF/이미지)</label>
+          <div class="upload-area" onclick="document.getElementById('f-file-input').click()">
+            <input type="file" id="f-file-input" accept=".pdf,image/*" style="display:none" onchange="handleFile(this,'file','archive')">
+            <div>📎 클릭하여 파일 선택</div>
+            <div class="upload-hint">PDF, 이미지 지원</div>
+            <div class="upload-filename" id="f-file-name">${v('file','') ? '기존 파일 있음' : ''}</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">썸네일 이미지</label>
+          <div class="upload-area" onclick="document.getElementById('f-thumb-input').click()">
+            <input type="file" id="f-thumb-input" accept="image/*" style="display:none" onchange="handleFile(this,'thumbnail','archive')">
+            <div>🖼 클릭하여 썸네일 선택</div>
+            <div class="upload-hint">JPG, PNG 지원</div>
+            ${v('thumbnail','') ? `<img src="${escAttr(v('thumbnail',''))}" class="upload-preview" style="display:block;" id="f-thumb-preview">` : '<img class="upload-preview" id="f-thumb-preview">'}
+            <div class="upload-filename" id="f-thumb-name">${v('thumbnail','') ? '기존 썸네일 있음' : ''}</div>
+          </div>
+        </div>`;
+    } else if (currentSection === 'faq') {
+      fields = `
+        <div class="form-group"><label class="form-label">카테고리 *</label>
+          <select class="form-select" id="f-category">
+            ${['ecoASSET','E-ASSET','ecoNODE','신재생에너지','기타'].map(c => `<option value="${c}" ${v('category','') === c ? 'selected' : ''}>${c}</option>`).join('')}
+          </select>
+        </div>
+        <div class="form-group full" style="margin-top:0;"><div></div></div>
+        <div class="form-group full"><label class="form-label">질문 *</label><input class="form-input" id="f-question" value="${escAttr(v('question',''))}" placeholder="자주 묻는 질문"></div>
+        <div class="form-group full"><label class="form-label">답변 *</label><textarea class="form-textarea" id="f-answer" rows="6" placeholder="답변 내용">${escHtml(v('answer',''))}</textarea></div>`;
+    }
+
+    return `
+      <div class="form-title">${isEdit ? '항목 수정' : '새 항목 추가'}</div>
+      <div class="form-grid">${fields}</div>
+      <div class="form-grid" style="margin-top:14px;">
+        <div class="form-group">
+          <label class="form-label">옵션</label>
+          <div class="form-check-row">
+            <label class="form-check"><input type="checkbox" id="f-pinned" ${v('pinned',false) ? 'checked' : ''}> 상단 고정</label>
+            <label class="form-check"><input type="checkbox" id="f-published" ${v('published',true) !== false ? 'checked' : ''}> 게시</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn-cancel" onclick="hideForm()">취소</button>
+        <button class="btn-save" id="save-btn" onclick="saveItem()">저장</button>
+      </div>`;
+  }
+
+  /* ── 파일 처리 ── */
+  function handleFile(input, fieldKey, folder) {
+    const file = input.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      const base64 = e.target.result.split(',')[1];
+      pendingFiles[fieldKey] = { base64, filename: file.name, folder };
+      // 이미지 프리뷰
+      const prevEl = document.getElementById('f-' + fieldKey + '-preview');
+      if (prevEl && file.type.startsWith('image/')) {
+        prevEl.src = e.target.result;
+        prevEl.style.display = 'block';
+      }
+      const nameEl = document.getElementById('f-' + fieldKey + '-name');
+      if (nameEl) { nameEl.textContent = file.name; nameEl.style.display = 'block'; }
+    };
+    reader.readAsDataURL(file);
+  }
+
+  /* ── 저장 ── */
+  async function saveItem() {
+    const btn = document.getElementById('save-btn');
+    btn.disabled = true; btn.textContent = '저장 중...';
+
+    try {
+      // 파일 업로드 먼저
+      const uploadedUrls = {};
+      for (const [key, f] of Object.entries(pendingFiles)) {
+        btn.textContent = '파일 업로드 중...';
+        const res = await fetch('/api/admin-upload', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: 'Basic ' + authHeader },
+          body: JSON.stringify({ filename: f.filename, content: f.base64, folder: f.folder })
+        });
+        const d = await res.json();
+        if (!d.ok) throw new Error('파일 업로드 실패: ' + d.message);
+        uploadedUrls[key] = d.url;
+      }
+
+      btn.textContent = '저장 중...';
+
+      // 폼 데이터 수집
+      const item = collectFormData(uploadedUrls);
+
+      if (editingId) {
+        // 수정
+        const existing = currentItems.find(i => i.id === editingId);
+        const merged = { ...existing, ...item, id: editingId };
+        const res = await fetch('/api/admin-data', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json', Authorization: 'Basic ' + authHeader },
+          body: JSON.stringify({ type: currentSection, item: merged })
+        });
+        const d = await res.json();
+        if (!d.ok) throw new Error(d.message);
+        const idx = currentItems.findIndex(i => i.id === editingId);
+        if (idx !== -1) currentItems[idx] = merged;
+        showToast('수정됐습니다.');
+      } else {
+        // 추가
+        const res = await fetch('/api/admin-data', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: 'Basic ' + authHeader },
+          body: JSON.stringify({ type: currentSection, item })
+        });
+        const d = await res.json();
+        if (!d.ok) throw new Error(d.message);
+        currentItems.unshift(d.item);
+        document.getElementById('section-count').textContent = '(' + currentItems.length + '건)';
+        showToast('추가됐습니다.');
+      }
+
+      hideForm();
+      renderList();
+    } catch (err) {
+      showToast(err.message || '저장 실패', true);
+    }
+    btn.disabled = false; btn.textContent = '저장';
+  }
+
+  function collectFormData(uploadedUrls) {
+    const get = id => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
+    const chk = id => { const el = document.getElementById(id); return el ? el.checked : false; };
+    const base = { pinned: chk('f-pinned'), published: chk('f-published') };
+
+    if (currentSection === 'notices') return { ...base, title: get('f-title'), content: get('f-content'), date: get('f-date') };
+    if (currentSection === 'press') {
+      const existing = editingId ? (currentItems.find(i => i.id === editingId) || {}) : {};
+      return { ...base, title: get('f-title'), subtitle: get('f-subtitle'), source: get('f-source'), date: get('f-date'), link: get('f-link'), image: uploadedUrls.image || existing.image || '' };
+    }
+    if (currentSection === 'archive') {
+      const existing = editingId ? (currentItems.find(i => i.id === editingId) || {}) : {};
+      return { ...base, title: get('f-title'), type: get('f-type'), date: get('f-date'), file: uploadedUrls.file || existing.file || '', thumbnail: uploadedUrls.thumbnail || existing.thumbnail || '' };
+    }
+    if (currentSection === 'faq') return { ...base, category: get('f-category'), question: get('f-question'), answer: get('f-answer') };
+    return base;
+  }
+
+  /* ── 유틸 ── */
+  function escHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+  function escAttr(s) { return String(s).replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+
+  function showToast(msg, isError) {
+    const el = document.getElementById('toast');
+    el.textContent = msg;
+    el.className = 'toast' + (isError ? ' error' : '');
+    el.classList.add('show');
+    setTimeout(() => el.classList.remove('show'), 3000);
+  }
+</script>
+</body>
+</html>
