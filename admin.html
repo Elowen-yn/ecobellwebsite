@@ -9,12 +9,18 @@
     body { font-family: 'Noto Sans KR', -apple-system, sans-serif; background: #f0f2f5; color: #333; min-height: 100vh; }
 
     /* ── 로그인 ── */
-    .login-overlay { position: fixed; inset: 0; background: #1a1f36; display: flex; align-items: center; justify-content: center; z-index: 9999; }
-    .login-box { background: #fff; border-radius: 12px; padding: 48px 40px; width: 360px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
-    .login-logo { font-size: 22px; font-weight: 700; color: #1E8DCD; margin-bottom: 8px; letter-spacing: -0.5px; }
+    .login-overlay { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 9999; background: url('assets/admin-bg.jpg') center/cover no-repeat; overflow: hidden; }
+    .login-deco { position: absolute; inset: 0; top: -115px; left: -16px; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+    .login-overlay::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.3); z-index: 1; pointer-events: none; }
+    .login-box { background: #fff; border-radius: 12px; padding: 48px 40px 25px; width: 360px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); position: relative; z-index: 2; }
+    .login-logo { margin-bottom: 8px; }
+    .login-logo img { height: 36px; width: auto; display: block; }
     .login-sub { font-size: 13px; color: #999; margin-bottom: 32px; }
     .login-box input { width: 100%; height: 44px; border: 1px solid #e0e0e0; border-radius: 8px; padding: 0 14px; font-size: 14px; margin-bottom: 12px; outline: none; transition: border-color 0.2s; }
     .login-box input:focus { border-color: #1E8DCD; }
+    .login-save-id { display: flex; align-items: center; gap: 6px; margin-bottom: 12px; }
+    .login-save-id input[type="checkbox"] { width: 15px; height: 15px; accent-color: #1E8DCD; cursor: pointer; margin: 0; }
+    .login-save-id label { font-size: 13px; color: #666; cursor: pointer; user-select: none; }
     .login-btn { width: 100%; height: 44px; background: #1E8DCD; color: #fff; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-top: 4px; }
     .login-btn:hover { background: #1679b3; }
     .login-error { color: #e63946; font-size: 13px; margin-top: 10px; min-height: 18px; text-align: center; }
@@ -24,8 +30,8 @@
 
     /* ── 사이드바 ── */
     .sidebar { width: 220px; background: #1a1f36; color: #fff; display: flex; flex-direction: column; flex-shrink: 0; position: fixed; top: 0; left: 0; height: 100vh; z-index: 100; }
-    .sidebar-logo { padding: 24px 20px 20px; font-size: 16px; font-weight: 700; color: #fff; border-bottom: 1px solid rgba(255,255,255,0.08); letter-spacing: -0.3px; }
-    .sidebar-logo span { color: #1E8DCD; }
+    .sidebar-logo { padding: 24px 20px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .sidebar-logo img { height: 28px; width: auto; display: block; filter: brightness(0) invert(1); }
     .sidebar-nav { flex: 1; padding: 16px 0; }
     .nav-btn { display: flex; align-items: center; gap: 10px; width: 100%; padding: 11px 20px; background: none; border: none; color: rgba(255,255,255,0.6); font-size: 14px; cursor: pointer; transition: all 0.15s; text-align: left; border-left: 3px solid transparent; }
     .nav-btn:hover { color: #fff; background: rgba(255,255,255,0.06); }
@@ -121,11 +127,16 @@
 
 <!-- 로그인 -->
 <div class="login-overlay" id="login-overlay">
-  <div class="login-box">
-    <div class="login-logo">ecobell</div>
+  <img class="login-deco" src="assets/admin-deco.svg" alt="">
+  <div class="login-box" style="position:relative; z-index:1;">
+    <div class="login-logo"><img src="assets/logo.png" alt="ecobell"></div>
     <p class="login-sub">관리자 페이지</p>
     <input id="login-user" type="text" placeholder="아이디" autocomplete="off">
     <input id="login-pass" type="password" placeholder="비밀번호" autocomplete="off">
+    <div class="login-save-id">
+      <input type="checkbox" id="save-id-chk">
+      <label for="save-id-chk">ID 저장</label>
+    </div>
     <button class="login-btn" id="login-btn" onclick="doLogin()">로그인</button>
     <p class="login-error" id="login-error"></p>
   </div>
@@ -134,7 +145,7 @@
 <!-- 관리자 패널 -->
 <div class="admin-layout" id="admin-panel" style="display:none;">
   <aside class="sidebar">
-    <div class="sidebar-logo"><span>eco</span>bell Admin</div>
+    <div class="sidebar-logo"><img src="assets/logo.png" alt="ecobell"></div>
     <nav class="sidebar-nav">
       <button class="nav-btn active" onclick="switchSection('notices')" data-section="notices">
         <span class="nav-icon">📋</span>공지사항
@@ -183,6 +194,7 @@
   let currentItems = [];
   let editingId = null;
   let pendingFiles = {}; // { fieldName: { base64, filename, folder } }
+  let realPass = '';
 
   const SECTION_LABELS = { notices: '공지사항', press: '보도자료', archive: '아카이브', faq: 'FAQ' };
 
@@ -193,15 +205,52 @@
       authHeader = saved;
       showDashboard();
     }
+    // ID 저장 복원
+    const savedId = localStorage.getItem('adminSavedId');
+    if (savedId) {
+      document.getElementById('login-user').value = savedId;
+      document.getElementById('save-id-chk').checked = true;
+    }
     document.getElementById('login-pass').addEventListener('keydown', e => {
       if (e.key === 'Enter') doLogin();
     });
+
+    // 비밀번호 마지막 글자 보이기
+    (function() {
+      const passEl = document.getElementById('login-pass');
+      passEl.type = 'text';
+      const BULLET = '●';
+      let maskTimer = null;
+      function render(showLast) {
+        const pos = passEl.selectionStart;
+        if (realPass.length === 0) { passEl.value = ''; return; }
+        passEl.value = showLast
+          ? BULLET.repeat(realPass.length - 1) + realPass.slice(-1)
+          : BULLET.repeat(realPass.length);
+        try { passEl.setSelectionRange(pos, pos); } catch(e) {}
+      }
+      passEl.addEventListener('input', function() {
+        const raw = passEl.value;
+        let newReal = '';
+        for (let i = 0; i < raw.length; i++) {
+          newReal += raw[i] === BULLET ? (realPass[i] || '') : raw[i];
+        }
+        realPass = newReal;
+        clearTimeout(maskTimer);
+        render(true);
+        maskTimer = setTimeout(() => render(false), 800);
+      });
+      passEl.addEventListener('blur', function() {
+        clearTimeout(maskTimer);
+        render(false);
+      });
+    })();
   });
 
   /* ── 로그인 ── */
   async function doLogin() {
     const user = document.getElementById('login-user').value.trim();
-    const pass = document.getElementById('login-pass').value;
+    const pass = realPass;
     const errEl = document.getElementById('login-error');
     const btn = document.getElementById('login-btn');
     if (!user || !pass) { errEl.textContent = '아이디와 비밀번호를 입력해주세요.'; return; }
@@ -217,6 +266,11 @@
       if (data.ok) {
         authHeader = btoa(user + ':' + pass);
         sessionStorage.setItem('adminAuth', authHeader);
+        if (document.getElementById('save-id-chk').checked) {
+          localStorage.setItem('adminSavedId', user);
+        } else {
+          localStorage.removeItem('adminSavedId');
+        }
         showDashboard();
       } else {
         errEl.textContent = data.message || '로그인 실패';
@@ -234,6 +288,7 @@
     document.getElementById('login-overlay').style.display = 'flex';
     document.getElementById('login-user').value = '';
     document.getElementById('login-pass').value = '';
+    realPass = '';
   }
 
   function showDashboard() {
