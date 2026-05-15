@@ -121,6 +121,49 @@
 
     /* ── 구분선 ── */
     .divider { height: 1px; background: #f0f0f0; margin: 20px 0; }
+
+    /* ── 리치 텍스트 에디터 ── */
+    .rte-wrap { border: 1px solid #e0e0e0; border-radius: 7px; overflow: hidden; transition: border-color 0.2s; }
+    .rte-wrap:focus-within { border-color: #1E8DCD; }
+    .rte-toolbar { display: flex; flex-wrap: wrap; gap: 4px; padding: 7px 10px; background: #f8f9fa; border-bottom: 1px solid #e0e0e0; align-items: center; }
+    .rte-toolbar button { padding: 3px 9px; border: 1px solid #ddd; border-radius: 4px; background: #fff; cursor: pointer; font-size: 13px; color: #555; transition: background 0.15s; }
+    .rte-toolbar button:hover { background: #eef6fb; border-color: #1E8DCD; color: #1E8DCD; }
+    .rte-toolbar .rte-sep { width: 1px; height: 18px; background: #e0e0e0; margin: 0 2px; }
+    .rte-content { min-height: 140px; padding: 10px 12px; font-size: 14px; line-height: 1.7; outline: none; }
+    .rte-content:empty::before { content: attr(data-placeholder); color: #bbb; pointer-events: none; }
+    .rte-content a { color: #1E8DCD; text-decoration: underline; }
+    /* 글자색 팔레트 */
+    .rte-color-btn { position: relative; display: inline-flex; }
+    .rte-color-btn > button { display: flex; align-items: center; gap: 2px; }
+    .rte-color-indicator { display: inline-block; width: 14px; height: 3px; border-radius: 2px; background: #000; margin-top: 2px; }
+    .rte-color-palette { position: absolute; top: calc(100% + 4px); left: 0; background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 8px; display: none; grid-template-columns: repeat(5, 22px); gap: 5px; z-index: 200; box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+    .rte-color-palette.open { display: grid; }
+    .rte-color-swatch { width: 22px; height: 22px; border-radius: 4px; cursor: pointer; border: 1px solid rgba(0,0,0,0.12); transition: transform 0.1s; }
+    .rte-color-swatch:hover { transform: scale(1.2); }
+
+    /* ── 태그 입력 ── */
+    .tag-wrap { border: 1px solid #e0e0e0; border-radius: 7px; padding: 6px 10px; display: flex; flex-wrap: wrap; gap: 6px; min-height: 44px; cursor: text; transition: border-color 0.2s; align-items: center; }
+    .tag-wrap:focus-within { border-color: #1E8DCD; }
+    .tag-item { display: inline-flex; align-items: center; gap: 4px; background: #eef6fb; color: #1E8DCD; border-radius: 4px; padding: 2px 8px; font-size: 13px; }
+    .tag-item button { background: none; border: none; cursor: pointer; color: #1E8DCD; font-size: 15px; line-height: 1; padding: 0; }
+    .tag-field { border: none; outline: none; font-size: 14px; flex: 1; min-width: 120px; background: transparent; }
+
+    /* ── 다중 이미지 ── */
+    .image-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; align-items: flex-end; }
+    .image-item { position: relative; width: 100px; height: 80px; border-radius: 6px; overflow: hidden; border: 1px solid #e0e0e0; flex-shrink: 0; }
+    .image-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .image-item .img-del { position: absolute; top: 3px; right: 3px; background: rgba(0,0,0,0.55); color: #fff; border: none; border-radius: 3px; width: 18px; height: 18px; cursor: pointer; font-size: 11px; display: flex; align-items: center; justify-content: center; line-height: 1; }
+    .image-item .img-badge { position: absolute; bottom: 3px; left: 3px; background: #1E8DCD; color: #fff; border-radius: 3px; font-size: 10px; padding: 1px 5px; }
+    .image-add-btn { width: 100px; height: 80px; border: 2px dashed #e0e0e0; border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; color: #aaa; font-size: 20px; gap: 2px; transition: border-color 0.2s; background: none; flex-shrink: 0; }
+    .image-add-btn span { font-size: 11px; }
+    .image-add-btn:hover { border-color: #1E8DCD; color: #1E8DCD; }
+
+    /* ── 첨부파일 목록 ── */
+    .attach-list { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+    .attach-item { display: flex; align-items: center; gap: 8px; padding: 7px 12px; background: #f8f9fa; border-radius: 6px; font-size: 13px; }
+    .attach-item .attach-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #444; }
+    .attach-item .attach-del { background: none; border: none; cursor: pointer; color: #ccc; font-size: 16px; line-height: 1; flex-shrink: 0; padding: 0; }
+    .attach-item .attach-del:hover { color: #e63946; }
   </style>
 </head>
 <body>
@@ -194,6 +237,8 @@
   let currentItems = [];
   let editingId = null;
   let pendingFiles = {}; // { fieldName: { base64, filename, folder } }
+  let pendingImages = []; // press 이미지 배열 [{filename, base64, url}]
+  let pendingAttachments = []; // notices 첨부파일 배열 [{name, base64, url}]
   let realPass = '';
 
   const SECTION_LABELS = { notices: '공지사항', press: '보도자료', archive: '아카이브', faq: 'FAQ' };
@@ -341,7 +386,7 @@
     const isPinned = !!item.pinned;
     let meta = '';
     if (currentSection === 'faq') meta = '<span class="item-tag">' + (item.category || '기타') + '</span>';
-    else if (currentSection === 'press') meta = (item.source || '') + (item.date ? ' · ' + item.date : '');
+    else if (currentSection === 'press') meta = (item.date || '') + (item.keywords?.length ? ' · #' + item.keywords.slice(0,3).join(' #') : '');
     else if (currentSection === 'archive') meta = '<span class="item-tag">' + (item.type || '') + '</span>' + (item.date ? ' ' + item.date : '');
     else meta = item.date || '';
 
@@ -402,6 +447,10 @@
   async function togglePin(id) {
     const item = currentItems.find(i => i.id === id);
     if (!item) return;
+    if (!item.pinned && currentSection === 'press') {
+      const pinnedCount = currentItems.filter(i => i.pinned).length;
+      if (pinnedCount >= 3) { showToast('보도자료는 최대 3개까지만 고정할 수 있습니다.', true); return; }
+    }
     item.pinned = !item.pinned;
     await updateItem(item);
     renderList();
@@ -447,18 +496,73 @@
   function showForm(id) {
     editingId = id || null;
     pendingFiles = {};
+    pendingImages = [];
+    pendingAttachments = [];
     const item = id ? currentItems.find(i => i.id === id) : null;
     const formEl = document.getElementById('item-form');
     formEl.style.display = 'block';
     formEl.innerHTML = buildForm(item);
     formEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // RTE 내용 초기화
+    const rteEl = document.getElementById('f-content');
+    if (rteEl && item?.content) rteEl.innerHTML = item.content;
+    // 아카이브 유형 초기화
+    if (currentSection === 'archive') updateArchiveFields();
+    // 키워드 초기화
+    if (currentSection === 'press') {
+      const kws = item?.keywords || [];
+      document.getElementById('f-keywords').value = JSON.stringify(kws);
+      renderKeywords(kws);
+      initKeywordInput();
+      pendingImages = (item?.images || []).map(url => ({ url, filename: '', base64: null }));
+      renderImageList();
+    }
+    // 첨부파일 초기화
+    if (currentSection === 'notices') {
+      pendingAttachments = (item?.attachments || []).map(a => ({ name: a.name, url: a.url, base64: null }));
+      renderAttachList();
+    }
   }
 
   function hideForm() {
     editingId = null;
     pendingFiles = {};
+    pendingImages = [];
+    pendingAttachments = [];
     document.getElementById('item-form').style.display = 'none';
   }
+
+  const RTE_TOOLBAR = `
+    <div class="rte-toolbar">
+      <button type="button" onmousedown="event.preventDefault();rteCmd('bold')"><b>B</b></button>
+      <button type="button" onmousedown="event.preventDefault();rteCmd('italic')"><i>I</i></button>
+      <button type="button" onmousedown="event.preventDefault();rteCmd('underline')"><u>U</u></button>
+      <button type="button" onmousedown="event.preventDefault();rteCmd('insertUnorderedList')">• 목록</button>
+      <button type="button" onmousedown="event.preventDefault();rteCmd('insertOrderedList')">① 목록</button>
+      <button type="button" onmousedown="event.preventDefault();rteCmd('removeFormat')">서식제거</button>
+    </div>`;
+
+  const RTE_COLORS = ['#000000','#444444','#888888','#e63946','#f4722b','#f9c74f','#2d6a4f','#1E8DCD','#234B63','#6a0dad'];
+  const RTE_TOOLBAR_NOTICES = `
+    <div class="rte-toolbar" id="rte-toolbar-notices">
+      <button type="button" onmousedown="event.preventDefault();rteCmd('bold')"><b>B</b></button>
+      <button type="button" onmousedown="event.preventDefault();rteCmd('italic')"><i>I</i></button>
+      <button type="button" onmousedown="event.preventDefault();rteCmd('underline')"><u>U</u></button>
+      <button type="button" onmousedown="event.preventDefault();rteCmd('insertUnorderedList')">• 목록</button>
+      <button type="button" onmousedown="event.preventDefault();rteCmd('insertOrderedList')">① 목록</button>
+      <div class="rte-sep"></div>
+      <div class="rte-color-btn" id="rte-color-btn">
+        <button type="button" onmousedown="event.preventDefault();toggleColorPalette()" title="글자색">
+          A<span class="rte-color-indicator" id="rte-color-indicator"></span>
+        </button>
+        <div class="rte-color-palette" id="rte-color-palette">
+          ${RTE_COLORS.map(c => `<div class="rte-color-swatch" style="background:${c}" title="${c}" onmousedown="event.preventDefault();applyColor('${c}')"></div>`).join('')}
+        </div>
+      </div>
+      <button type="button" onmousedown="event.preventDefault();rteLink()" title="링크 삽입">🔗 링크</button>
+      <div class="rte-sep"></div>
+      <button type="button" onmousedown="event.preventDefault();rteCmd('removeFormat')">서식제거</button>
+    </div>`;
 
   function buildForm(item) {
     const isEdit = !!item;
@@ -468,44 +572,61 @@
     if (currentSection === 'notices') {
       fields = `
         <div class="form-group full"><label class="form-label">제목 *</label><input class="form-input" id="f-title" value="${escAttr(v('title',''))}" placeholder="공지사항 제목"></div>
-        <div class="form-group full"><label class="form-label">내용 *</label><textarea class="form-textarea" id="f-content" rows="8" placeholder="공지사항 내용">${escHtml(v('content',''))}</textarea></div>
-        <div class="form-group"><label class="form-label">날짜</label><input class="form-input" type="date" id="f-date" value="${escAttr(v('date',''))}"></div>`;
+        <div class="form-group full">
+          <label class="form-label">내용 *</label>
+          <div class="rte-wrap">${RTE_TOOLBAR_NOTICES}<div class="rte-content" id="f-content" contenteditable="true" data-placeholder="내용을 입력하세요"></div></div>
+        </div>
+        <div class="form-group"><label class="form-label">날짜</label><input class="form-input" type="date" id="f-date" value="${escAttr(v('date',''))}"></div>
+        <div class="form-group full">
+          <label class="form-label">첨부파일</label>
+          <div class="upload-area" onclick="document.getElementById('f-attach-input').click()">
+            <input type="file" id="f-attach-input" accept=".pdf,.doc,.docx,.xls,.xlsx,.zip,image/*" style="display:none" multiple onchange="handleAttachments(this)">
+            <div>📎 클릭하여 파일 선택 (다중 선택 가능)</div>
+            <div class="upload-hint">PDF, 이미지, ZIP 등 지원</div>
+          </div>
+          <div id="f-attach-list" class="attach-list"></div>
+        </div>`;
+
     } else if (currentSection === 'press') {
       fields = `
         <div class="form-group full"><label class="form-label">제목 *</label><input class="form-input" id="f-title" value="${escAttr(v('title',''))}" placeholder="보도자료 제목"></div>
-        <div class="form-group full"><label class="form-label">부제목</label><input class="form-input" id="f-subtitle" value="${escAttr(v('subtitle',''))}" placeholder="부제목"></div>
-        <div class="form-group"><label class="form-label">언론사</label><input class="form-input" id="f-source" value="${escAttr(v('source',''))}" placeholder="예: 연합뉴스"></div>
-        <div class="form-group"><label class="form-label">날짜</label><input class="form-input" type="date" id="f-date" value="${escAttr(v('date',''))}"></div>
-        <div class="form-group"><label class="form-label">외부 링크</label><input class="form-input" id="f-link" value="${escAttr(v('link',''))}" placeholder="https://..."></div>
-        <div class="form-group">
-          <label class="form-label">이미지</label>
-          <div class="upload-area" onclick="document.getElementById('f-image-input').click()">
-            <input type="file" id="f-image-input" accept="image/*" style="display:none" onchange="handleFile(this,'image','press')">
-            <div>📷 클릭하여 이미지 선택</div>
-            <div class="upload-hint">JPG, PNG, GIF 지원</div>
-            ${v('image','') ? `<img src="${escAttr(v('image',''))}" class="upload-preview" style="display:block;" id="f-image-preview">` : '<img class="upload-preview" id="f-image-preview">'}
-            <div class="upload-filename" id="f-image-name">${v('image','') ? '기존 이미지 있음' : ''}</div>
-          </div>
-        </div>`;
-    } else if (currentSection === 'archive') {
-      fields = `
-        <div class="form-group full"><label class="form-label">제목 *</label><input class="form-input" id="f-title" value="${escAttr(v('title',''))}" placeholder="자료 제목"></div>
-        <div class="form-group"><label class="form-label">유형 *</label>
-          <select class="form-select" id="f-type">
-            ${['intro','catalog','ir','ci'].map(t => `<option value="${t}" ${v('type','') === t ? 'selected' : ''}>${{intro:'기업소개서',catalog:'카탈로그/지명원',ir:'IR',ci:'CI'}[t]}</option>`).join('')}
-          </select>
+        <div class="form-group full">
+          <label class="form-label">내용 *</label>
+          <div class="rte-wrap">${RTE_TOOLBAR}<div class="rte-content" id="f-content" contenteditable="true" data-placeholder="내용을 입력하세요"></div></div>
         </div>
         <div class="form-group"><label class="form-label">날짜</label><input class="form-input" type="date" id="f-date" value="${escAttr(v('date',''))}"></div>
-        <div class="form-group">
-          <label class="form-label">파일 (PDF/이미지)</label>
+        <div class="form-group full">
+          <label class="form-label">키워드 <span style="font-weight:400;color:#aaa;font-size:12px;">Enter 또는 쉼표로 구분</span></label>
+          <div class="tag-wrap" id="f-keywords-wrap" onclick="document.getElementById('f-kw-input').focus()">
+            <input type="text" class="tag-field" id="f-kw-input" placeholder="키워드 입력 후 Enter">
+          </div>
+          <input type="hidden" id="f-keywords" value="[]">
+        </div>
+        <div class="form-group full">
+          <label class="form-label">이미지 <span style="font-weight:400;color:#aaa;font-size:12px;">첫 번째가 썸네일</span></label>
+          <div class="image-list" id="f-image-list"></div>
+        </div>`;
+
+    } else if (currentSection === 'archive') {
+      const archType = v('type','intro');
+      fields = `
+        <div class="form-group full" id="f-title-group"><label class="form-label">제목 *</label><input class="form-input" id="f-title" value="${escAttr(v('title',''))}" placeholder="자료 제목"></div>
+        <div class="form-group"><label class="form-label">유형 *</label>
+          <select class="form-select" id="f-type" onchange="updateArchiveFields()">
+            ${['intro','catalog','ir','ci'].map(t => `<option value="${t}" ${archType===t?'selected':''}>${{intro:'기업소개서',catalog:'카탈로그/지명원',ir:'IR',ci:'CI'}[t]}</option>`).join('')}
+          </select>
+        </div>
+        <div class="form-group" id="f-date-group"><label class="form-label">날짜</label><input class="form-input" type="date" id="f-date" value="${escAttr(v('date',''))}"></div>
+        <div class="form-group" id="f-file-group">
+          <label class="form-label" id="f-file-label">파일</label>
           <div class="upload-area" onclick="document.getElementById('f-file-input').click()">
-            <input type="file" id="f-file-input" accept=".pdf,image/*" style="display:none" onchange="handleFile(this,'file','archive')">
-            <div>📎 클릭하여 파일 선택</div>
-            <div class="upload-hint">PDF, 이미지 지원</div>
+            <input type="file" id="f-file-input" accept=".pdf,image/*,.zip" style="display:none" onchange="handleFile(this,'file','archive')">
+            <div id="f-file-hint-icon">📎 클릭하여 파일 선택</div>
+            <div class="upload-hint" id="f-file-hint">PDF, 이미지 지원</div>
             <div class="upload-filename" id="f-file-name">${v('file','') ? '기존 파일 있음' : ''}</div>
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" id="f-thumb-group">
           <label class="form-label">썸네일 이미지</label>
           <div class="upload-area" onclick="document.getElementById('f-thumb-input').click()">
             <input type="file" id="f-thumb-input" accept="image/*" style="display:none" onchange="handleFile(this,'thumbnail','archive')">
@@ -515,11 +636,12 @@
             <div class="upload-filename" id="f-thumb-name">${v('thumbnail','') ? '기존 썸네일 있음' : ''}</div>
           </div>
         </div>`;
+
     } else if (currentSection === 'faq') {
       fields = `
         <div class="form-group"><label class="form-label">카테고리 *</label>
           <select class="form-select" id="f-category">
-            ${['ecoASSET','E-ASSET','ecoNODE','신재생에너지','기타'].map(c => `<option value="${c}" ${v('category','') === c ? 'selected' : ''}>${c}</option>`).join('')}
+            ${['ecoASSET','E-ASSET','ecoNODE','신재생에너지','기타'].map(c => `<option value="${c}" ${v('category','')===c?'selected':''}>${c}</option>`).join('')}
           </select>
         </div>
         <div class="form-group full" style="margin-top:0;"><div></div></div>
@@ -534,8 +656,8 @@
         <div class="form-group">
           <label class="form-label">옵션</label>
           <div class="form-check-row">
-            <label class="form-check"><input type="checkbox" id="f-pinned" ${v('pinned',false) ? 'checked' : ''}> 상단 고정</label>
-            <label class="form-check"><input type="checkbox" id="f-published" ${v('published',true) !== false ? 'checked' : ''}> 게시</label>
+            <label class="form-check"><input type="checkbox" id="f-pinned" ${v('pinned',false)?'checked':''}> 상단 고정</label>
+            <label class="form-check"><input type="checkbox" id="f-published" ${v('published',true)!==false?'checked':''}> 게시</label>
           </div>
         </div>
       </div>
@@ -543,6 +665,201 @@
         <button class="btn-cancel" onclick="hideForm()">취소</button>
         <button class="btn-save" id="save-btn" onclick="saveItem()">저장</button>
       </div>`;
+  }
+
+  /* ── 아카이브 유형 변경 ── */
+  function updateArchiveFields() {
+    const t = document.getElementById('f-type')?.value;
+    if (!t) return;
+    const isCi = t === 'ci';
+    const isIr = t === 'ir';
+    const titleGroup = document.getElementById('f-title-group');
+    const dateGroup = document.getElementById('f-date-group');
+    const thumbGroup = document.getElementById('f-thumb-group');
+    const fileLabel = document.getElementById('f-file-label');
+    const fileInput = document.getElementById('f-file-input');
+    const fileHintIcon = document.getElementById('f-file-hint-icon');
+    const fileHint = document.getElementById('f-file-hint');
+    if (titleGroup) titleGroup.style.display = isCi ? 'none' : '';
+    if (dateGroup) dateGroup.style.display = isCi ? 'none' : '';
+    if (thumbGroup) thumbGroup.style.display = (isCi || isIr) ? 'none' : '';
+    if (fileLabel) fileLabel.textContent = isCi ? 'ZIP 파일 *' : '파일 (PDF/이미지)';
+    if (fileInput) fileInput.accept = isCi ? '.zip' : '.pdf,image/*,.zip';
+    if (fileHintIcon) fileHintIcon.textContent = isCi ? '🗜 ZIP 파일 선택' : '📎 클릭하여 파일 선택';
+    if (fileHint) fileHint.textContent = isCi ? 'ZIP 파일만 지원' : 'PDF, 이미지 지원';
+  }
+
+  /* ── 리치 텍스트 에디터 ── */
+  function rteCmd(cmd) {
+    const el = document.getElementById('f-content');
+    if (el) el.focus();
+    document.execCommand(cmd, false, null);
+  }
+
+  let _rteSavedRange = null;
+  function rteSaveSelection() {
+    const sel = window.getSelection();
+    if (sel && sel.rangeCount > 0) _rteSavedRange = sel.getRangeAt(0).cloneRange();
+  }
+  function rteRestoreSelection() {
+    if (!_rteSavedRange) return;
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(_rteSavedRange);
+  }
+
+  function rteLink() {
+    const el = document.getElementById('f-content');
+    if (!el) return;
+    const sel = window.getSelection();
+    const hasSelection = sel && sel.toString().trim().length > 0;
+    rteSaveSelection();
+    const url = window.prompt('링크 URL을 입력하세요', 'https://');
+    if (!url) return;
+    el.focus();
+    rteRestoreSelection();
+    if (hasSelection) {
+      document.execCommand('createLink', false, url);
+      // 새 탭으로 열기
+      el.querySelectorAll('a').forEach(a => { if (!a.target) { a.target = '_blank'; a.rel = 'noopener'; } });
+    } else {
+      const a = document.createElement('a');
+      a.href = url; a.target = '_blank'; a.rel = 'noopener'; a.textContent = url;
+      document.execCommand('insertHTML', false, a.outerHTML);
+    }
+  }
+
+  function toggleColorPalette() {
+    rteSaveSelection();
+    const palette = document.getElementById('rte-color-palette');
+    if (!palette) return;
+    const isOpen = palette.classList.contains('open');
+    palette.classList.toggle('open', !isOpen);
+    if (!isOpen) {
+      setTimeout(() => {
+        const close = e => {
+          if (!document.getElementById('rte-color-btn')?.contains(e.target)) {
+            palette.classList.remove('open');
+            document.removeEventListener('mousedown', close);
+          }
+        };
+        document.addEventListener('mousedown', close);
+      }, 0);
+    }
+  }
+
+  function applyColor(color) {
+    const el = document.getElementById('f-content');
+    if (!el) return;
+    el.focus();
+    rteRestoreSelection();
+    document.execCommand('foreColor', false, color);
+    const indicator = document.getElementById('rte-color-indicator');
+    if (indicator) indicator.style.background = color;
+    const palette = document.getElementById('rte-color-palette');
+    if (palette) palette.classList.remove('open');
+  }
+
+  /* ── 키워드 태그 ── */
+  function renderKeywords(kws) {
+    const wrap = document.getElementById('f-keywords-wrap');
+    const input = document.getElementById('f-kw-input');
+    if (!wrap || !input) return;
+    wrap.querySelectorAll('.tag-item').forEach(t => t.remove());
+    kws.forEach((kw, i) => {
+      const tag = document.createElement('span');
+      tag.className = 'tag-item';
+      tag.innerHTML = escHtml(kw) + `<button type="button" onclick="removeKeyword(${i})">×</button>`;
+      wrap.insertBefore(tag, input);
+    });
+    document.getElementById('f-keywords').value = JSON.stringify(kws);
+  }
+  function initKeywordInput() {
+    const input = document.getElementById('f-kw-input');
+    if (!input) return;
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ',') {
+        e.preventDefault();
+        const val = input.value.replace(/,/g,'').trim();
+        if (!val) return;
+        const hidden = document.getElementById('f-keywords');
+        const kws = JSON.parse(hidden.value || '[]');
+        if (!kws.includes(val)) { kws.push(val); renderKeywords(kws); }
+        input.value = '';
+      }
+    });
+  }
+  function removeKeyword(idx) {
+    const hidden = document.getElementById('f-keywords');
+    const kws = JSON.parse(hidden.value || '[]');
+    kws.splice(idx, 1);
+    renderKeywords(kws);
+  }
+
+  /* ── 다중 이미지 (press) ── */
+  function renderImageList() {
+    const list = document.getElementById('f-image-list');
+    if (!list) return;
+    list.innerHTML = pendingImages.map((img, i) => `
+      <div class="image-item">
+        <img src="${img.url || (img.base64 ? 'data:image/*;base64,'+img.base64 : '')}" alt="">
+        ${i === 0 ? '<span class="img-badge">썸네일</span>' : ''}
+        <button class="img-del" type="button" onclick="removeImage(${i})">×</button>
+      </div>`).join('') +
+      `<button class="image-add-btn" type="button" onclick="document.getElementById('f-img-input').click()">
+        <input type="file" id="f-img-input" accept="image/*" multiple style="display:none" onchange="handleImages(this)">
+        +<span>이미지 추가</span>
+      </button>`;
+  }
+  function handleImages(input) {
+    const files = Array.from(input.files);
+    let loaded = 0;
+    files.forEach(file => {
+      const reader = new FileReader();
+      reader.onload = e => {
+        const base64 = e.target.result.split(',')[1];
+        pendingImages.push({ filename: file.name, base64, url: null });
+        loaded++;
+        if (loaded === files.length) renderImageList();
+      };
+      reader.readAsDataURL(file);
+    });
+    input.value = '';
+  }
+  function removeImage(idx) {
+    pendingImages.splice(idx, 1);
+    renderImageList();
+  }
+
+  /* ── 다중 첨부파일 (notices) ── */
+  function renderAttachList() {
+    const list = document.getElementById('f-attach-list');
+    if (!list) return;
+    list.innerHTML = pendingAttachments.map((a, i) => `
+      <div class="attach-item">
+        <span>📄</span>
+        <span class="attach-name">${escHtml(a.name)}</span>
+        <button class="attach-del" type="button" onclick="removeAttachment(${i})">×</button>
+      </div>`).join('');
+  }
+  function handleAttachments(input) {
+    const files = Array.from(input.files);
+    let loaded = 0;
+    files.forEach(file => {
+      const reader = new FileReader();
+      reader.onload = e => {
+        const base64 = e.target.result.split(',')[1];
+        pendingAttachments.push({ name: file.name, base64, url: null });
+        loaded++;
+        if (loaded === files.length) renderAttachList();
+      };
+      reader.readAsDataURL(file);
+    });
+    input.value = '';
+  }
+  function removeAttachment(idx) {
+    pendingAttachments.splice(idx, 1);
+    renderAttachList();
   }
 
   /* ── 파일 처리 ── */
@@ -571,7 +888,7 @@
     btn.disabled = true; btn.textContent = '저장 중...';
 
     try {
-      // 파일 업로드 먼저
+      // 단일 파일 업로드
       const uploadedUrls = {};
       for (const [key, f] of Object.entries(pendingFiles)) {
         btn.textContent = '파일 업로드 중...';
@@ -585,10 +902,40 @@
         uploadedUrls[key] = d.url;
       }
 
+      // 다중 이미지 업로드 (press)
+      const uploadedImages = [];
+      for (const img of pendingImages) {
+        if (img.url && !img.base64) { uploadedImages.push(img.url); continue; }
+        btn.textContent = '이미지 업로드 중...';
+        const res = await fetch('/api/admin-upload', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: 'Basic ' + authHeader },
+          body: JSON.stringify({ filename: img.filename, content: img.base64, folder: 'press' })
+        });
+        const d = await res.json();
+        if (!d.ok) throw new Error('이미지 업로드 실패: ' + d.message);
+        uploadedImages.push(d.url);
+      }
+
+      // 다중 첨부파일 업로드 (notices)
+      const uploadedAttachments = [];
+      for (const att of pendingAttachments) {
+        if (att.url && !att.base64) { uploadedAttachments.push({ name: att.name, url: att.url }); continue; }
+        btn.textContent = '첨부파일 업로드 중...';
+        const res = await fetch('/api/admin-upload', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: 'Basic ' + authHeader },
+          body: JSON.stringify({ filename: att.name, content: att.base64, folder: 'notices' })
+        });
+        const d = await res.json();
+        if (!d.ok) throw new Error('첨부파일 업로드 실패: ' + d.message);
+        uploadedAttachments.push({ name: att.name, url: d.url });
+      }
+
       btn.textContent = '저장 중...';
 
       // 폼 데이터 수집
-      const item = collectFormData(uploadedUrls);
+      const item = collectFormData(uploadedUrls, uploadedImages, uploadedAttachments);
 
       if (editingId) {
         // 수정
@@ -626,19 +973,32 @@
     btn.disabled = false; btn.textContent = '저장';
   }
 
-  function collectFormData(uploadedUrls) {
+  function collectFormData(uploadedUrls, uploadedImages, uploadedAttachments) {
     const get = id => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
     const chk = id => { const el = document.getElementById(id); return el ? el.checked : false; };
+    const rte = id => { const el = document.getElementById(id); return el ? el.innerHTML : ''; };
     const base = { pinned: chk('f-pinned'), published: chk('f-published') };
 
-    if (currentSection === 'notices') return { ...base, title: get('f-title'), content: get('f-content'), date: get('f-date') };
+    if (currentSection === 'notices') {
+      return { ...base, title: get('f-title'), content: rte('f-content'), date: get('f-date'), attachments: uploadedAttachments };
+    }
     if (currentSection === 'press') {
-      const existing = editingId ? (currentItems.find(i => i.id === editingId) || {}) : {};
-      return { ...base, title: get('f-title'), subtitle: get('f-subtitle'), source: get('f-source'), date: get('f-date'), link: get('f-link'), image: uploadedUrls.image || existing.image || '' };
+      const kws = JSON.parse(get('f-keywords') || '[]');
+      return { ...base, title: get('f-title'), content: rte('f-content'), date: get('f-date'), keywords: kws, images: uploadedImages };
     }
     if (currentSection === 'archive') {
       const existing = editingId ? (currentItems.find(i => i.id === editingId) || {}) : {};
-      return { ...base, title: get('f-title'), type: get('f-type'), date: get('f-date'), file: uploadedUrls.file || existing.file || '', thumbnail: uploadedUrls.thumbnail || existing.thumbnail || '' };
+      const archType = get('f-type');
+      const isCi = archType === 'ci';
+      const isIr = archType === 'ir';
+      return {
+        ...base,
+        title: isCi ? 'CI 파일' : get('f-title'),
+        type: archType,
+        date: isCi ? '' : get('f-date'),
+        file: uploadedUrls.file || existing.file || '',
+        thumbnail: (isCi || isIr) ? '' : (uploadedUrls.thumbnail || existing.thumbnail || '')
+      };
     }
     if (currentSection === 'faq') return { ...base, category: get('f-category'), question: get('f-question'), answer: get('f-answer') };
     return base;
