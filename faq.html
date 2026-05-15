@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>자주 묻는 질문(FAQ) — Contact Us — Ecobell</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;600;700&family=Nanum+Square:wght@400;700;800&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=chillax@400,500,600,700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; overscroll-behavior: none; }
+    body { font-family: 'Noto Sans KR', sans-serif; min-width: 1100px; background: #fff; color: #000; }
+
+    /* ─── HEADER ─── */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; min-width: 1100px;
+      height: 69px; background: #fff; z-index: 999; overflow: visible;
+      transition: box-shadow 0.3s ease, transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+    header.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.07); }
+    header.gnb-hidden { transform: translateY(-100%); }
+    .header-inner { position: relative; width: 100%; max-width: 1440px; height: 100%; margin: 0 auto; display: flex; align-items: center; }
+    .logo { position: absolute; left: 44px; top: 50%; transform: translateY(-50%); width: 110px; height: 26px; transition: opacity 0.2s; }
+    .logo img { width: 100%; height: 100%; object-fit: contain; }
+    .logo:hover { opacity: 0.75; }
+    nav { position: absolute; left: 198px; right: 324px; top: 0; display: flex; align-items: stretch; height: 69px; }
+    .nav-item { position: relative; display: flex; align-items: center; transition: transform 0.38s cubic-bezier(0.4,0,0.2,1); }
+    nav.lnb-open .nav-item:nth-child(1) { transform: translateX(0px); }
+    nav.lnb-open .nav-item:nth-child(2) { transform: translateX(25px); }
+    nav.lnb-open .nav-item:nth-child(3) { transform: translateX(53px); }
+    nav.lnb-open .nav-item:nth-child(4) { transform: translateX(87px); }
+    nav.lnb-open .nav-item:nth-child(5) { transform: translateX(111px); }
+    .nav-link { font-family: 'Chillax', sans-serif; font-weight: 500; font-size: 15.5px; color: #000; text-decoration: none; letter-spacing: 0.46px; line-height: 1.6; padding: 0 17px; white-space: nowrap; position: relative; display: flex; align-items: center; height: 100%; transition: color 0.2s; }
+    .nav-link::after { content: ''; position: absolute; left: 17px; right: 17px; bottom: 0; height: 2px; background: #000; transform: scaleX(0); transform-origin: left; transition: transform 0.25s ease; }
+    .nav-item:not(.lnb-active) .nav-link:hover::after { transform: scaleX(1); }
+    .nav-item.lnb-active .nav-link { color: #1e8dcd; }
+    .lnb { position: fixed; top: 69px; left: 0; right: 0; min-width: 1100px; height: 202px; background: #fff; border-top: 0.3px solid #d9d9d9; border-bottom: 0.3px solid #d9d9d9; opacity: 0; transform: translateY(-6px); pointer-events: none; transition: opacity 0.25s ease, transform 0.28s cubic-bezier(0.4,0,0.2,1); z-index: 102; }
+    .lnb-inner { position: relative; width: 100%; max-width: 1440px; margin: 0 auto; height: 100%; }
+    .lnb.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .lnb-col { position: absolute; top: 0; width: 132px; height: 100%; display: flex; flex-direction: column; align-items: center; padding-top: 29px; gap: 0; transition: background 0.2s ease; }
+    .lnb-col[data-col="company"]  { left: 187px; }
+    .lnb-col[data-col="solution"] { left: 319px; }
+    .lnb-col[data-col="platform"] { left: 451px; }
+    .lnb-col[data-col="insight"]  { left: 584px; }
+    .lnb-col[data-col="contact"]  { left: 716px; }
+    .lnb-col.active { background: #fafcfd; border-top: 2px solid #1e8dcd; padding-top: 27px; }
+    .lnb-col a { font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 600; font-size: 14px; color: #000; text-decoration: none; letter-spacing: 0.14px; line-height: 21px; text-align: center; display: block; width: 100%; padding: 7px 0; transition: color 0.15s; }
+    .lnb-col a.en { font-family: 'Chillax', sans-serif; font-weight: 450; }
+    .lnb-col a:hover { color: #1e8dcd; }
+    .lnb-col a.ext::after { content: ' ↗'; font-size: 11px; }
+    .lnb-sep { width: 70px; height: 0.5px; background: #d9d9d9; margin: 14px auto 24px; flex-shrink: 0; }
+    header.search-open { background: #fafcfd; box-shadow: none; }
+    .search-overlay { position: fixed; top: 69px; left: 0; right: 0; min-width: 1100px; height: 202px; background: #fafcfd; border-bottom: 0.2px solid rgba(0,0,0,0.3); opacity: 0; pointer-events: none; transition: opacity 0.25s ease, transform 0.28s cubic-bezier(0.4,0,0.2,1); transform: translateY(-8px); z-index: 100; }
+    .search-overlay.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .search-content { position: relative; width: 100%; max-width: 1440px; margin: 0 auto; height: 100%; }
+    .search-input-row { position: absolute; top: 57px; left: 23.9583%; right: 24.0278%; display: flex; align-items: center; }
+    .search-input { flex: 1; font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 400; font-size: 20px; color: #000; letter-spacing: 0.2px; background: transparent; border: none; outline: none; }
+    .search-input::placeholder { color: rgba(0,0,0,0.35); }
+    .search-submit { background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center; justify-content: center; width: 17px; height: 17px; flex-shrink: 0; opacity: 0.6; transition: opacity 0.2s; }
+    .search-submit:hover { opacity: 1; }
+    .search-divider { position: absolute; top: 90px; left: 23.9583%; right: 24.0278%; height: 0.5px; background: rgba(0,0,0,0.2); }
+    .search-tags { position: absolute; top: 108px; left: 23.9583%; display: flex; gap: 8px; }
+    .search-tag { font-family: 'Noto Sans KR', sans-serif; font-weight: 400; font-size: 13px; color: rgba(0,0,0,0.5); background: none; border: 0.5px solid rgba(0,0,0,0.25); border-radius: 20px; padding: 3px 12px; cursor: pointer; transition: color 0.15s, border-color 0.15s; }
+    .search-tag:hover { color: #1e8dcd; border-color: #1e8dcd; }
+    .header-right { position: absolute; right: 44px; display: flex; align-items: center; gap: 18px; }
+    .gnb-sep { pointer-events: none; }
+    .search-icon-wrap { position: relative; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; }
+    .search-tooltip { position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.78); color: #fff; font-size: 11px; padding: 4px 8px; border-radius: 4px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+    .search-icon-wrap:hover .search-tooltip { opacity: 1; }
+    .search-tooltip::before { content: ''; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); border: 5px solid transparent; border-bottom-color: rgba(0,0,0,0.78); }
+    .search-btn { background: none; border: none; cursor: pointer; padding: 0; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; }
+    .close-btn { background: none; border: none; cursor: pointer; padding: 0; width: 20px; height: 21px; display: flex; align-items: center; justify-content: center; position: absolute; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+    header.search-open .search-btn { opacity: 0; pointer-events: none; }
+    header.search-open .close-btn { opacity: 1; pointer-events: auto; }
+    .demo-btn { display: inline-flex; align-items: center; justify-content: center; height: 33px; padding: 0 18px; background: #1e8dcd; border-radius: 6px; text-decoration: none; position: relative; overflow: hidden; }
+    .demo-btn::before { content: ''; position: absolute; left: 0; top: 50%; transform: translate(-50%, -50%) scale(0); width: 100px; height: 100px; background: rgba(255,255,255,0.15); border-radius: 50%; transition: transform 0.4s ease; }
+    .demo-btn:hover::before { transform: translate(-50%, -50%) scale(5); }
+    .demo-text { font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 800; font-size: 13px; color: #fff; letter-spacing: 0.13px; position: relative; z-index: 1; }
+
+    /* ─── FAQ 히어로 ─── */
+    .faq-hero {
+      margin-top: 69px;
+      background: #fff;
+      padding: 60px 0 50px;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+    }
+    .faq-breadcrumb {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-size: 13px; font-weight: 700;
+      color: #1E8DCD; letter-spacing: 0.39px;
+      margin-bottom: 20px;
+    }
+    .faq-title {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 800; font-size: 55px; color: #000;
+      letter-spacing: -0.5px; line-height: 1;
+      margin-bottom: 20px;
+    }
+    .faq-subtitle {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 300; font-size: 18px; color: #000;
+      letter-spacing: -0.36px; line-height: 30px;
+    }
+
+    /* ─── 필터 탭 ─── */
+    .faq-filter {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0; padding: 40px 0 0;
+    }
+    .faq-filter-btn {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-size: 18px; font-weight: 400; color: #000;
+      background: none; border: none; cursor: pointer;
+      padding: 0 28px; letter-spacing: 0.18px;
+      transition: color 0.2s, font-weight 0.1s;
+    }
+    .faq-filter-btn.active {
+      color: #1E8DCD; font-weight: 800;
+    }
+    .faq-filter-sep {
+      width: 1px; height: 15px;
+      background: rgba(0,0,0,0.2);
+      flex-shrink: 0;
+    }
+
+    /* ─── FAQ 리스트 ─── */
+    .faq-content {
+      max-width: 1100px;
+      margin: 40px auto 0;
+      padding: 0 0 80px;
+    }
+    .faq-item {
+      border-top: 1px solid #e8e8e8;
+    }
+    .faq-item:last-child { border-bottom: 1px solid #e8e8e8; }
+    .faq-question {
+      display: flex; align-items: center; justify-content: space-between;
+      min-height: 74px; padding: 0 10px;
+      cursor: pointer; gap: 20px;
+      transition: background 0.15s;
+    }
+    .faq-question:hover { background: #fafafa; }
+    .faq-question-text {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-size: 17px; font-weight: 400; color: #000;
+      letter-spacing: 0.17px; line-height: 1.5;
+      flex: 1;
+    }
+    .faq-chevron {
+      width: 25px; height: 25px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.3s ease;
+    }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); }
+    .faq-answer {
+      display: none;
+      padding: 20px 10px 28px;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 15px; font-weight: 400; color: #444;
+      line-height: 28px; letter-spacing: -0.15px;
+      border-top: 1px solid #f0f0f0;
+    }
+    .faq-item.open .faq-answer { display: block; }
+
+    /* ─── CTA 섹션 ─── */
+    .faq-cta {
+      background: #00314D;
+      padding: 80px 0;
+      text-align: center;
+    }
+    .faq-cta-title {
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 700; font-size: 28px; color: #fff;
+      letter-spacing: 0.84px; line-height: 40px;
+      margin-bottom: 36px;
+    }
+    .faq-cta-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 218px; height: 42px;
+      border: 1.5px solid rgba(255,255,255,0.7);
+      border-radius: 4px;
+      font-family: 'Nanum Square', 'NanumSquare', sans-serif;
+      font-weight: 800; font-size: 16px; color: #fff;
+      letter-spacing: 0.48px; text-decoration: none;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .faq-cta-btn:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
+
+    /* ─── FOOTER ─── */
+    footer { position: sticky; bottom: 0; z-index: 0; min-width: 1100px; height: 442px; background: #2a2a2a; }
+    .footer-inner { position: relative; width: 100%; max-width: 1440px; margin: 0 auto; height: 100%; }
+    .ft-company-info { position: absolute; right: 45px; top: 211px; font-family: 'Noto Sans KR', sans-serif; font-weight: 450; font-size: 13px; color: rgba(255,255,255,0.5); line-height: 23px; letter-spacing: -0.28px; white-space: pre-line; text-align: right; }
+    .ft-col-title { position: absolute; font-family: 'Chillax', sans-serif; font-weight: 600; font-size: 16px; color: #fff; white-space: nowrap; margin: 0; top: 41px; letter-spacing: 0.54px; line-height: 28.8px; }
+    .ft-link { position: absolute; font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 500; font-size: 14px; color: #fff; white-space: nowrap; text-decoration: none; line-height: 22.5px; letter-spacing: 0.15px; opacity: 1; transition: opacity 0.2s; }
+    .ft-link:hover { opacity: 0.55; }
+    .ft-link.ft-en { font-family: 'Chillax', sans-serif; font-weight: 400; line-height: 16.5px; }
+    .ft-sep { position: absolute; height: 0.5px; background: rgba(255,255,255,0.3); }
+    .ft-divider { position: absolute; left: 45px; right: 45px; height: 0.5px; background: rgba(255,255,255,0.2); }
+    .ft-bottom-link { position: absolute; font-family: 'Noto Sans KR', sans-serif; font-weight: 300; font-size: 13px; color: rgba(255,255,255,0.8); text-decoration: none; white-space: nowrap; top: 323px; line-height: 23px; letter-spacing: -0.28px; transition: opacity 0.2s; }
+    .ft-bottom-link:hover { opacity: 0.55; }
+    .ft-bottom-link.fw-bold { font-weight: 500; color: #fff; }
+    .ft-social { position: absolute; line-height: 0; opacity: 1; transition: opacity 0.2s, transform 0.2s; top: 323px; }
+    .ft-social:hover { opacity: 0.7; transform: scale(1.1); }
+    .ft-copyright { position: absolute; left: 45px; top: 357px; font-family: 'Noto Sans KR', sans-serif; font-weight: 300; font-size: 12px; color: rgba(255,255,255,0.8); white-space: pre-line; margin: 0; }
+
+    /* ─── 푸터 오버레이 효과 ─── */
+    body > *:not(header):not(footer) {
+      position: relative; z-index: 1; background: #fff;
+    }
+    .faq-cta { background: #00314D; }
+  </style>
+</head>
+<body>
+
+  <!-- ─── HEADER ─── -->
+  <header id="header">
+    <div class="header-inner">
+      <a class="logo" href="index.html">
+        <img src="assets/logo.png" alt="ecobell">
+      </a>
+      <nav id="main-nav">
+        <div class="nav-item" data-menu="company"><a class="nav-link" href="#">Company</a></div>
+        <div class="nav-item" data-menu="solution"><a class="nav-link" href="#">Solution</a></div>
+        <div class="nav-item" data-menu="platform"><a class="nav-link" href="#">Platform</a></div>
+        <div class="nav-item" data-menu="insight"><a class="nav-link" href="insight.html">Insight</a></div>
+        <div class="nav-item" data-menu="contact"><a class="nav-link" href="notice.html">Contact Us</a></div>
+      </nav>
+      <div class="lnb" id="lnb">
+        <div class="lnb-inner">
+          <div class="lnb-col" data-col="company">
+            <a href="ceo.html">CEO 인사말</a><a href="#">기업소개</a><a href="press.html">보도자료</a><a href="archive.html">아카이브</a>
+          </div>
+          <div class="lnb-col" data-col="solution">
+            <a href="#">전체 솔루션 맵</a><a href="#" class="en">ecoNODE</a><div class="lnb-sep"></div><a href="#">태양광 솔루션</a>
+          </div>
+          <div class="lnb-col" data-col="platform">
+            <a href="#" class="en">eco Asset</a><a href="#" class="en">Energy Asset</a>
+          </div>
+          <div class="lnb-col" data-col="insight">
+            <a href="https://www.netzeronews.kr/" class="en ext" target="_blank" rel="noopener noreferrer">NetZero News</a>
+            <a href="insight.html?page=eco">친환경 기업정보</a><a href="insight.html?page=green">그린카 계산기</a>
+          </div>
+          <div class="lnb-col" data-col="contact">
+            <a href="notice.html">공지사항</a><a href="directions.html">오시는 길</a><a href="contact.html">문의하기</a>
+          </div>
+        </div>
+      </div>
+      <div class="search-overlay" id="search-overlay">
+        <div class="search-content">
+          <div class="search-input-row">
+            <input class="search-input" type="text" placeholder="검색어를 입력해주세요." id="search-input" autocomplete="off">
+            <button class="search-submit" aria-label="검색">
+              <svg width="17" height="17" viewBox="0 0 17 17" fill="none"><circle cx="7" cy="7" r="5" stroke="#000" stroke-width="1.5"/><line x1="11" y1="11" x2="16" y2="16" stroke="#000" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+          </div>
+          <div class="search-divider"></div>
+          <div class="search-tags">
+            <button class="search-tag" data-keyword="에코벨">#에코벨</button>
+            <button class="search-tag" data-keyword="에코에셋">#에코에셋</button>
+            <button class="search-tag" data-keyword="에너지에셋">#에너지에셋</button>
+          </div>
+        </div>
+      </div>
+      <div class="header-right">
+        <span class="gnb-sep" style="color:rgba(0,0,0,0.2);font-size:16px;line-height:1;user-select:none;">|</span>
+        <div class="search-icon-wrap">
+          <button class="search-btn" aria-label="검색" id="search-open-btn">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M21.1063 19.1469L15.4344 14.5406C17.7719 11.3438 17.5313 6.7719 14.6094 3.8844C13.0626 2.33752 11 1.47815 8.80005 1.47815C6.60005 1.47815 4.53755 2.33752 2.99067 3.8844C-0.206201 7.08127 -0.206201 12.3063 2.99067 15.5031C4.53755 17.05 6.60005 17.9094 8.80005 17.9094C10.8969 17.9094 12.8563 17.1188 14.4032 15.7094L20.1438 20.35C20.2813 20.4531 20.4532 20.5219 20.6251 20.5219C20.8657 20.5219 21.0719 20.4188 21.2094 20.2469C21.4844 19.9032 21.4501 19.4219 21.1063 19.1469ZM8.80005 16.3625C7.01255 16.3625 5.36255 15.675 4.09067 14.4032C1.47817 11.7907 1.47817 7.56252 4.09067 4.9844C5.36255 3.71252 7.01255 3.02502 8.80005 3.02502C10.5875 3.02502 12.2375 3.71252 13.5094 4.9844C16.1219 7.5969 16.1219 11.825 13.5094 14.4032C12.2719 15.675 10.5875 16.3625 8.80005 16.3625Z" fill="#000"/></svg>
+          </button>
+          <button class="close-btn" aria-label="닫기" id="search-close-btn">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><line x1="1" y1="1" x2="17" y2="17" stroke="#000" stroke-width="1.5" stroke-linecap="round"/><line x1="17" y1="1" x2="1" y2="17" stroke="#000" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <span class="search-tooltip">검색</span>
+        </div>
+        <a class="demo-btn" href="contact.html"><span class="demo-text">문의하기</span></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ─── 히어로 ─── -->
+  <div class="faq-hero">
+    <p class="faq-breadcrumb">자주 묻는 질문(FAQ)</p>
+    <h1 class="faq-title">FAQ</h1>
+    <p class="faq-subtitle">궁금하신 내용은 FAQ를 통해 빠르게 확인하실 수 있습니다.</p>
+
+    <!-- 필터 탭 -->
+    <div class="faq-filter">
+      <button class="faq-filter-btn active" data-filter="전체">전체</button>
+      <span class="faq-filter-sep"></span>
+      <button class="faq-filter-btn" data-filter="ecoASSET">ecoASSET</button>
+      <span class="faq-filter-sep"></span>
+      <button class="faq-filter-btn" data-filter="E-ASSET">E-ASSET</button>
+      <span class="faq-filter-sep"></span>
+      <button class="faq-filter-btn" data-filter="ecoNODE">ecoNODE</button>
+      <span class="faq-filter-sep"></span>
+      <button class="faq-filter-btn" data-filter="신재생에너지">신재생에너지</button>
+      <span class="faq-filter-sep"></span>
+      <button class="faq-filter-btn" data-filter="기타">기타</button>
+    </div>
+  </div>
+
+  <!-- ─── FAQ 리스트 ─── -->
+  <div class="faq-content" id="faq-list">
+
+    <div class="faq-item" data-category="ecoNODE">
+      <div class="faq-question">
+        <span class="faq-question-text">ecoNODE란 무엇인가요?</span>
+        <span class="faq-chevron">
+          <svg width="25" height="25" viewBox="0 0 25 25" fill="none"><path d="M6 9.5L12.5 16L19 9.5" stroke="#1E8DCD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+      <div class="faq-answer">
+        ecoNODE는 신재생에너지 설비를 원격으로 통합 관리하는 에코벨의 RTU(Remote Terminal Unit) 장비입니다. 태양광, 풍력 등 다양한 신재생에너지 설비의 데이터를 실시간으로 수집·전송하며, 현장 설비 상태를 중앙에서 효율적으로 모니터링할 수 있도록 지원합니다.
+      </div>
+    </div>
+
+    <div class="faq-item" data-category="E-ASSET">
+      <div class="faq-question">
+        <span class="faq-question-text">E-ASSET(에너지에셋)은 어떤 플랫폼인가요?</span>
+        <span class="faq-chevron">
+          <svg width="25" height="25" viewBox="0 0 25 25" fill="none"><path d="M6 9.5L12.5 16L19 9.5" stroke="#1E8DCD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+      <div class="faq-answer">
+        E-ASSET(에너지에셋)은 신재생에너지 설비의 발전 현황을 실시간으로 모니터링하고 분석하는 통합 플랫폼입니다. 태양광, 풍력 등 다양한 에너지원의 데이터를 한 곳에서 관리하고, 발전량·수익·설비 상태를 직관적인 대시보드로 확인하실 수 있습니다.
+      </div>
+    </div>
+
+    <div class="faq-item" data-category="ecoASSET">
+      <div class="faq-question">
+        <span class="faq-question-text">ecoASSET(에코에셋)은 어떤 플랫폼인가요?</span>
+        <span class="faq-chevron">
+          <svg width="25" height="25" viewBox="0 0 25 25" fill="none"><path d="M6 9.5L12.5 16L19 9.5" stroke="#1E8DCD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+      <div class="faq-answer">
+        ecoASSET(에코에셋)은 기업의 탄소자산을 체계적으로 관리하는 탄소자산화 플랫폼입니다. 온실가스 배출량 산정, 탄소크레딧 거래, 감축 활동 관리 등을 통해 기업이 ESG 목표를 달성할 수 있도록 지원합니다.
+      </div>
+    </div>
+
+    <div class="faq-item" data-category="신재생에너지">
+      <div class="faq-question">
+        <span class="faq-question-text">태양광 솔루션 견적 신청은 어떻게 해야 하나요?</span>
+        <span class="faq-chevron">
+          <svg width="25" height="25" viewBox="0 0 25 25" fill="none"><path d="M6 9.5L12.5 16L19 9.5" stroke="#1E8DCD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+      <div class="faq-answer">
+        상단 메뉴의 '문의하기' 페이지에서 '데모 신청' 또는 '파트너십 & 비즈니스' 항목을 선택하여 문의를 남겨주시면 담당자가 빠르게 연락드립니다. 설치 환경, 규모 등을 함께 기재해주시면 더욱 정확한 견적 안내가 가능합니다.
+      </div>
+    </div>
+
+    <div class="faq-item" data-category="ecoASSET">
+      <div class="faq-question">
+        <span class="faq-question-text">탄소자산화가 무엇인가요?</span>
+        <span class="faq-chevron">
+          <svg width="25" height="25" viewBox="0 0 25 25" fill="none"><path d="M6 9.5L12.5 16L19 9.5" stroke="#1E8DCD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+      <div class="faq-answer">
+        탄소자산화란 기업이 온실가스를 감축함으로써 발생하는 탄소크레딧을 자산으로 관리·활용하는 것을 말합니다. 에코벨의 ecoASSET 플랫폼을 통해 탄소크레딧의 발행·거래·검증 과정을 체계적으로 관리하고, 이를 통해 새로운 수익을 창출할 수 있습니다.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ─── CTA 섹션 ─── -->
+  <div class="faq-cta">
+    <p class="faq-cta-title">무엇이든 물어보세요<br>더 궁금하신 내용이 있으시면 1:1 문의를 이용해 주세요.</p>
+    <a class="faq-cta-btn" href="contact.html">1:1 문의 바로가기</a>
+  </div>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="footer-inner">
+      <p class="ft-company-info">㈜에코벨
+사업자 등록번호 : 598-87-02578  |  대표 : 김소연
+호스팅 서비스 : 주식회사 에코벨 | 통신판매업신고번호 : 2023-서울금천-1822</p>
+      <p class="ft-col-title" style="left:45px;">회사정보</p>
+      <p class="ft-col-title" style="left:202px;">솔루션</p>
+      <p class="ft-col-title" style="left:374px;">플랫폼</p>
+      <p class="ft-col-title" style="left:554px;">인사이트</p>
+      <p class="ft-col-title" style="left:750px;">문의하기</p>
+      <a class="ft-link" href="ceo.html" style="left:45px;top:86px;">CEO 인사말</a>
+      <a class="ft-link" href="#" style="left:45px;top:121px;">회사소개</a>
+      <a class="ft-link" href="press.html" style="left:45px;top:156px;">보도자료</a>
+      <a class="ft-link" href="archive.html" style="left:45px;top:191px;">아카이브</a>
+      <a class="ft-link" href="#" style="left:202px;top:87px;">전체 솔루션 맵</a>
+      <a class="ft-link ft-en" href="#" style="left:202px;top:121px;">ecoNODE</a>
+      <div class="ft-sep" style="left:202px;top:161px;width:80px;"></div>
+      <a class="ft-link" href="#" style="left:202px;top:191px;">태양광 솔루션</a>
+      <a class="ft-link ft-en" href="#" style="left:374px;top:87px;">eco Asset</a>
+      <a class="ft-link ft-en" href="#" style="left:374px;top:121px;">Energy Asset</a>
+      <a class="ft-link ft-en" href="https://www.netzeronews.kr/" target="_blank" rel="noopener noreferrer" style="left:554px;top:86px;">NetZero News
+        <svg width="6" height="6" viewBox="0 0 8 8" fill="none" style="margin-left:2px;vertical-align:middle;"><path d="M1 7L7 1M7 1H3M7 1V5" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="ft-link" href="insight.html?page=eco" style="left:554px;top:121px;">친환경 기업정보</a>
+      <a class="ft-link" href="insight.html?page=green" style="left:554px;top:156px;">그린카 계산기</a>
+      <a class="ft-link ft-en" href="notice.html" style="left:750px;top:87px;">공지사항</a>
+      <a class="ft-link ft-en" href="directions.html" style="left:750px;top:121px;">오시는길</a>
+      <a class="ft-link ft-en" href="contact.html" style="left:750px;top:156px;">문의하기</a>
+      <div class="ft-divider" style="top:305px;"></div>
+      <a class="ft-bottom-link fw-bold" href="#" style="left:45px;">개인정보처리방침</a>
+      <a class="ft-bottom-link" href="#" style="left:173px;">이용약관</a>
+      <a class="ft-bottom-link" href="#" style="left:250px;">이메일무단수집거부</a>
+      <a class="ft-bottom-link" href="faq.html" style="left:383px;">자주 묻는 질문(FAQ)</a>
+      <a class="ft-social" href="https://www.youtube.com/@yt_ecobell" target="_blank" rel="noopener noreferrer" aria-label="YouTube" style="right:135px;">
+        <svg width="22" height="23" viewBox="0 0 22 23" fill="none"><rect x="1.5" y="5" width="19" height="13" rx="3" stroke="#fff" stroke-width="1.3"/><polygon points="8.5,8.5 15.5,11.5 8.5,14.5" fill="#fff"/></svg>
+      </a>
+      <a class="ft-social" href="https://www.instagram.com/ecobell.co.kr/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="right:90px;">
+        <svg width="22" height="23" viewBox="0 0 22 23" fill="none"><rect x="2" y="2.5" width="18" height="18" rx="5" stroke="#fff" stroke-width="1.3"/><circle cx="11" cy="11.5" r="4" stroke="#fff" stroke-width="1.3"/><circle cx="16" cy="6.5" r="1.1" fill="#fff"/></svg>
+      </a>
+      <a class="ft-social" href="https://www.facebook.com/ecobell.co.kr" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="right:46px;">
+        <svg width="22" height="23" viewBox="0 0 22 23" fill="none"><path d="M12.5 11.5H14.8L15.5 8.5H12.5V6.8C12.5 5.9 12.9 5.2 14.2 5.2H15.8V2.6C15.8 2.6 14.3 2.3 12.9 2.3C10.1 2.3 8.5 3.9 8.5 6.5V8.5H5.8V11.5H8.5V20.5H12.5V11.5Z" fill="#fff"/></svg>
+      </a>
+      <p class="ft-copyright">서울시 금천구 시흥대로 193, 701호(08635)
+ⓒ ecobell Co., Ltd. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // ─── 헤더 스크롤 ───
+    let _lastScrollY = window.scrollY;
+    window.addEventListener('scroll', () => {
+      const cur = window.scrollY;
+      const header = document.getElementById('header');
+      header.classList.toggle('scrolled', cur > 10);
+      if (cur > _lastScrollY && cur > 80) header.classList.add('gnb-hidden');
+      else header.classList.remove('gnb-hidden');
+      _lastScrollY = cur;
+    });
+
+    // ─── LNB ───
+    const nav = document.getElementById('main-nav');
+    const lnb = document.getElementById('lnb');
+    const lnbCols = lnb.querySelectorAll('.lnb-col');
+    const navItems = nav.querySelectorAll('.nav-item');
+    let lnbOpen = false;
+
+    function openLnb(menuKey) {
+      lnbOpen = true;
+      nav.classList.add('lnb-open');
+      lnb.classList.add('open');
+      navItems.forEach(ni => ni.classList.toggle('lnb-active', ni.dataset.menu === menuKey));
+      lnbCols.forEach(col => col.classList.toggle('active', col.dataset.col === menuKey));
+    }
+    function closeLnb() {
+      lnbOpen = false;
+      nav.classList.remove('lnb-open');
+      lnb.classList.remove('open');
+      navItems.forEach(ni => ni.classList.remove('lnb-active'));
+      lnbCols.forEach(col => col.classList.remove('active'));
+    }
+
+    navItems.forEach(item => {
+      item.addEventListener('mouseenter', () => openLnb(item.dataset.menu));
+    });
+    document.getElementById('header').addEventListener('mouseleave', closeLnb);
+    lnb.addEventListener('mouseleave', closeLnb);
+
+    // ─── 검색 ───
+    const searchOpenBtn = document.getElementById('search-open-btn');
+    const searchCloseBtn = document.getElementById('search-close-btn');
+    const searchOverlay = document.getElementById('search-overlay');
+    const header = document.getElementById('header');
+
+    function openSearch() {
+      header.classList.add('search-open');
+      searchOverlay.classList.add('open');
+      document.getElementById('search-input').focus();
+    }
+    function closeSearch() {
+      header.classList.remove('search-open');
+      searchOverlay.classList.remove('open');
+    }
+    searchOpenBtn.addEventListener('click', openSearch);
+    searchCloseBtn.addEventListener('click', closeSearch);
+    searchOverlay.querySelector('.search-submit').addEventListener('click', () => {
+      const q = document.getElementById('search-input').value.trim();
+      if (q) location.href = 'search.html?q=' + encodeURIComponent(q);
+    });
+    document.getElementById('search-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        const q = e.target.value.trim();
+        if (q) location.href = 'search.html?q=' + encodeURIComponent(q);
+      }
+    });
+    searchOverlay.querySelectorAll('.search-tag').forEach(btn => {
+      btn.addEventListener('click', () => {
+        location.href = 'search.html?q=' + encodeURIComponent(btn.dataset.keyword);
+      });
+    });
+
+    // ─── FAQ 아코디언 ───
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.addEventListener('click', () => {
+        const item = q.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+
+    // ─── 필터 탭 ───
+    document.querySelectorAll('.faq-filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.faq-filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.faq-item').forEach(item => {
+          if (filter === '전체' || item.dataset.category === filter) {
+            item.style.display = '';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+        // 숨겨진 아이템 열린 것 닫기
+        document.querySelectorAll('.faq-item').forEach(item => {
+          if (item.style.display === 'none') item.classList.remove('open');
+        });
+      });
+    });
+  </script>
+</body>
+</html>

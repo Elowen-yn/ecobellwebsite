@@ -6,9 +6,7 @@ module.exports = async function handler(req, res) {
   const { type, name, company, email, phone, subject, message } = req.body;
 
   const transporter = nodemailer.createTransport({
-    host: 'smtp.mailplug.co.kr',
-    port: 465,
-    secure: true,
+    service: 'gmail',
     auth: {
       user: process.env.MAIL_USER,
       pass: process.env.MAIL_PASS,
