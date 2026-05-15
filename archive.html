@@ -2074,6 +2074,54 @@
     const initTab = urlTab || (hashMatch ? hashMatch[1] : 'profile');
     activateTab(initTab, false);
 
+    // ─── 아카이브 데이터 JSON fetch ───
+    const _DL_SVG = `<span class="archive-list-dl-circle"><svg width="13" height="13" viewBox="0 0 40 40" fill="none"><path d="M37.5 25.9375C36.75 25.9375 36.0625 26.5625 36.0625 27.375V32.9375C36.0625 33.5 35.625 33.9375 35.0625 33.9375H4.9375C4.375 33.9375 3.9375 33.5 3.9375 32.9375V27.375C3.9375 26.625 3.3125 25.9375 2.5 25.9375C1.6875 25.9375 1.0625 26.5625 1.0625 27.375V32.9375C1.0625 35.0625 2.75 36.75 4.875 36.75H35.0625C37.1875 36.75 38.875 35.0625 38.875 32.9375V27.375C38.9375 26.5625 38.25 25.9375 37.5 25.9375Z" fill="#1D7CB2"/><path d="M19.0003 27.4375C19.2503 27.6875 19.6253 27.8125 20.0003 27.8125C20.3753 27.8125 20.6878 27.6875 21.0003 27.4375L29.9378 18.75C30.5003 18.1875 30.5003 17.3125 30.0003 16.75C29.4378 16.1875 28.5628 16.1875 28.0003 16.6875L21.4378 23.125V4.6875C21.4378 3.9375 20.8128 3.25 20.0003 3.25C19.2503 3.25 18.5628 3.875 18.5628 4.6875V23.125L12.0003 16.75C11.4378 16.1875 10.5628 16.25 10.0003 16.75C9.43784 17.3125 9.50034 18.1875 10.0003 18.75L19.0003 27.4375Z" fill="#1D7CB2"/></svg></span>`;
+    function _archiveRow(title, year, file) {
+      const href = file || '#';
+      const dlAttr = file ? 'target="_blank"' : '';
+      return `<div class="archive-list-row">${year ? `<span class="archive-list-year">${year}</span>` : ''}<span class="archive-list-title">${title}</span><div class="archive-list-downloads"><a class="archive-list-dl" href="${href}" ${dlAttr}>${_DL_SVG}</a></div></div>`;
+    }
+    const _introList  = document.querySelector('#tab-profile .archive-list');
+    const _catalogList = document.querySelector('#tab-catalog .archive-list');
+    const _irYears    = document.querySelector('#tab-ir .archive-ir-years');
+    if (_introList)   _introList.innerHTML  = '';
+    if (_catalogList) _catalogList.innerHTML = '';
+    if (_irYears)     _irYears.innerHTML    = '';
+    (async function initArchive() {
+      try {
+        const res = await fetch('https://raw.githubusercontent.com/Elowen-yn/ecobellwebsite/main/data/archive.json');
+        const data = await res.json();
+        const items = (data.items || []).filter(i => i.published !== false);
+        const getYear = d => d ? d.slice(0, 4) : '';
+
+        // 기업소개서
+        if (_introList) {
+          const rows = items.filter(i => i.type === 'intro');
+          _introList.innerHTML = rows.map(i => _archiveRow(i.title, getYear(i.date), i.file)).join('');
+        }
+        // 카탈로그/지명원
+        if (_catalogList) {
+          const rows = items.filter(i => i.type === 'catalog');
+          _catalogList.innerHTML = rows.map(i => _archiveRow(i.title, '', i.file)).join('');
+        }
+        // IR — 연도별 그룹
+        if (_irYears) {
+          const irItems = items.filter(i => i.type === 'ir').sort((a, b) => getYear(b.date).localeCompare(getYear(a.date)));
+          const byYear = {};
+          irItems.forEach(i => { const y = getYear(i.date) || '미정'; (byYear[y] = byYear[y] || []).push(i); });
+          _irYears.innerHTML = Object.entries(byYear).map(([year, yrItems]) =>
+            `<div class="archive-ir-group"><div class="archive-ir-year-header">${year}</div><div class="archive-list" style="padding-top:0;">${yrItems.map(i => _archiveRow(i.title, '', i.file)).join('')}</div></div>`
+          ).join('');
+        }
+        // CI — 다운로드 버튼 링크 업데이트
+        const ciItem = items.find(i => i.type === 'ci');
+        if (ciItem && ciItem.file) {
+          const ciBtn = document.querySelector('#tab-ci .archive-ci-dl-btn');
+          if (ciBtn) { ciBtn.href = ciItem.file; ciBtn.setAttribute('target', '_blank'); ciBtn.setAttribute('download', ''); }
+        }
+      } catch(e) { console.error('archive fetch failed', e); }
+    })();
+
     // ─── CI 색상 칩 클릭 시 HEX 복사 ───
     document.querySelectorAll('#tab-ci .archive-ci-color-chip').forEach(function(chip) {
       chip.style.cursor = 'pointer';

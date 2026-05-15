@@ -1908,18 +1908,34 @@
       renderPressPage(1); renderPressPagination();
     });
 
-    // 날짜 형식 YYYY.MM.DD → YYYY-MM-DD 일괄 변환
-    document.querySelectorAll('.press-card-date').forEach(el => {
-      el.textContent = el.textContent.trim().replace(/\./g, '-');
-    });
-
-    // 초기 로드 (최신순)
-    pressSortMode = 'latest';
-    const _allCards = getAllCards();
-    pressFilteredCards = sortCards(_allCards);
-    document.getElementById('press-total-num').textContent = _allCards.length;
-    renderPressPage(1);
-    renderPressPagination();
+    // 초기 로드 (JSON fetch)
+    pressGrid.innerHTML = '';
+    (async function initPress() {
+      try {
+        const res = await fetch('https://raw.githubusercontent.com/Elowen-yn/ecobellwebsite/main/data/press.json');
+        const data = await res.json();
+        const items = (data.items || []).filter(i => i.published !== false);
+        items.forEach(item => {
+          const thumb = item.images && item.images.length ? item.images[0] : '';
+          const tags = (item.keywords || []).map(k => `<button class="press-card-tag">#${k}</button>`).join('');
+          const el = document.createElement('div');
+          el.className = 'press-card';
+          el.innerHTML = `<a class="press-card-thumb" href="press-article.html?id=${item.id}" style="${thumb ? `background:url('${thumb}') center/cover no-repeat;background-size:cover;` : 'background:#e7e7e7;'}"></a>
+            <div class="press-card-body">
+              <a class="press-card-title" href="press-article.html?id=${item.id}">${item.title}</a>
+              <p class="press-card-date">${item.date || ''}</p>
+              <div class="press-card-tags">${tags}</div>
+            </div>`;
+          pressGrid.appendChild(el);
+        });
+      } catch(e) { console.error('press fetch failed', e); }
+      pressSortMode = 'latest';
+      const _allCards = getAllCards();
+      pressFilteredCards = sortCards(_allCards);
+      document.getElementById('press-total-num').textContent = _allCards.length;
+      renderPressPage(1);
+      renderPressPagination();
+    })();
 
     document.querySelector('.page-search').addEventListener('submit', e => {
       e.preventDefault();

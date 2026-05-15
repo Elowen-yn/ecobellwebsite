@@ -1612,10 +1612,32 @@
     noticeSearchBtn.addEventListener('click', runSearch);
     noticeSearchInput.addEventListener('keydown', e => { if (e.key === 'Enter') runSearch(); });
 
-    // 초기화
-    filteredRows = getAllRows();
-    renderPage(1);
-    renderPagination();
+    // 초기화 (JSON fetch)
+    const _PIN_SVG = `<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M16.7906 6.72187L11.7 5.93438L9.39371 1.09688C9.22495 0.759375 8.77495 0.759375 8.6062 1.09688L6.29995 5.9625L1.23746 6.72187C0.87183 6.77812 0.731205 7.25625 1.01246 7.50938L4.69683 11.3063L3.82495 16.6219C3.7687 16.9875 4.13433 17.2969 4.47183 17.0719L9.0562 14.5687L13.6125 17.0719C13.9218 17.2406 14.3156 16.9594 14.2312 16.6219L13.3593 11.3063L17.0437 7.50938C17.2687 7.25625 17.1562 6.77812 16.7906 6.72187Z" fill="#1E8DCD"/></svg>`;
+    const _ATTACH_SVG = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12 3L17 8L8 17C6.3 18.7 3.5 18.7 1.8 17C0.1 15.3 0.1 12.5 1.8 10.8L10.5 2.1C11.7 0.9 13.6 0.9 14.8 2.1C16 3.3 16 5.2 14.8 6.4L7.1 14.1C6.4 14.8 5.3 14.8 4.6 14.1C3.9 13.4 3.9 12.3 4.6 11.6L12 4.2" stroke="#000" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+    const _noticeTbody = document.querySelector('.notice-table tbody');
+    _noticeTbody.innerHTML = '';
+    (async function initNotices() {
+      try {
+        const res = await fetch('https://raw.githubusercontent.com/Elowen-yn/ecobellwebsite/main/data/notices.json');
+        const data = await res.json();
+        const items = (data.items || []).filter(i => i.published !== false);
+        const pinned = items.filter(i => i.pinned);
+        const normal = items.filter(i => !i.pinned).sort((a, b) => new Date(b.date) - new Date(a.date));
+        const fmtDate = d => d ? d.replace(/-/g, '.') : '';
+        let html = '';
+        pinned.forEach(item => {
+          html += `<tr><td class="td-no pinned">${_PIN_SVG}</td><td><a class="td-title" href="notice-article.html?id=${item.id}">${item.title}</a></td><td class="td-author">${item.author || ''}</td><td class="td-date">${fmtDate(item.date)}</td><td class="td-views">0</td><td class="td-attach">${item.attachments && item.attachments.length ? _ATTACH_SVG : ''}</td></tr>`;
+        });
+        normal.forEach((item, idx) => {
+          html += `<tr><td class="td-no">${normal.length - idx}</td><td><a class="td-title" href="notice-article.html?id=${item.id}">${item.title}</a></td><td class="td-author">${item.author || ''}</td><td class="td-date">${fmtDate(item.date)}</td><td class="td-views">0</td><td class="td-attach">${item.attachments && item.attachments.length ? _ATTACH_SVG : ''}</td></tr>`;
+        });
+        _noticeTbody.innerHTML = html;
+      } catch(e) { console.error('notices fetch failed', e); }
+      filteredRows = getAllRows();
+      renderPage(1);
+      renderPagination();
+    })();
 
     // ─── Contact Us GNB 활성화 (현재 페이지) ───
     const contactItem = document.querySelector('[data-menu="contact"]');
