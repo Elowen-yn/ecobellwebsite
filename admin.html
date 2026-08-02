@@ -425,6 +425,40 @@
     .empty-state { text-align: center; padding: 60px 20px; color: #bbb; }
     .empty-state p { font-size: 15px; margin-top: 8px; }
 
+    /* ── 문의기록 ── */
+    .inq-row { display: flex; align-items: center; gap: 14px; padding: 14px 20px; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background 0.12s; }
+    .inq-row:last-child { border-bottom: none; }
+    .inq-row:hover { background: #f8fafc; }
+    .inq-badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+    .inq-badge.new { background: #e8f4fd; color: #1E8DCD; }
+    .inq-badge.read { background: #f0f0f0; color: #999; }
+    .inq-badge.done { background: #eafaf1; color: #27ae60; }
+    .inq-name { font-size: 14px; font-weight: 600; color: #1a3040; width: 90px; flex-shrink: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .inq-company { font-size: 13px; color: #888; width: 110px; flex-shrink: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .inq-subject { font-size: 14px; color: #333; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .inq-date { font-size: 12px; color: #bbb; flex-shrink: 0; width: 90px; text-align: right; }
+    .inq-actions { display: flex; gap: 6px; flex-shrink: 0; }
+    .inq-act-btn { padding: 4px 10px; border: none; border-radius: 5px; font-size: 12px; cursor: pointer; transition: background 0.15s; }
+    .inq-act-btn.mark-done { background: #eafaf1; color: #27ae60; }
+    .inq-act-btn.mark-done:hover { background: #d4f5e2; }
+    .inq-act-btn.mark-read { background: #f0f0f0; color: #666; }
+    .inq-act-btn.mark-read:hover { background: #e4e4e4; }
+    .inq-act-btn.del { background: #fdecea; color: #e74c3c; }
+    .inq-act-btn.del:hover { background: #fbd5d1; }
+    .inq-detail { background: #f8fafc; border-top: 1px solid #f0f0f0; padding: 18px 24px; font-size: 14px; line-height: 1.8; color: #444; }
+    .inq-detail-grid { display: grid; grid-template-columns: 100px 1fr; gap: 6px 12px; margin-bottom: 14px; }
+    .inq-detail-grid dt { font-weight: 600; color: #888; font-size: 13px; }
+    .inq-detail-grid dd { color: #333; font-size: 13px; }
+    .inq-msg { background: #fff; border: 1px solid #eee; border-radius: 7px; padding: 14px; white-space: pre-wrap; font-size: 14px; color: #444; line-height: 1.7; }
+    .dark .inq-row { border-color: #30303a; }
+    .dark .inq-row:hover { background: #2a2a30; }
+    .dark .inq-name { color: #d8dce6; }
+    .dark .inq-subject { color: #c0c8d4; }
+    .dark .inq-detail { background: #1e1e24; border-color: #30303a; }
+    .dark .inq-msg { background: #252528; border-color: #38384a; color: #c0c8d4; }
+    .dark .inq-detail-grid dd { color: #c0c8d4; }
+    .dark .inq-badge.read { background: #30303a; color: #707580; }
+
     /* ── 토스트 ── */
     .toast { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(20px); background: #1a1f36; color: #fff; padding: 12px 24px; border-radius: 8px; font-size: 14px; opacity: 0; pointer-events: none; transition: all 0.3s; z-index: 9999; white-space: nowrap; }
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
@@ -668,6 +702,9 @@
       <button class="nav-btn" onclick="switchSection('email-policy')" data-section="email-policy">
         <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>이메일무단수집거부
       </button>
+      <button class="nav-btn" onclick="switchSection('inquiries')" data-section="inquiries">
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>문의기록
+      </button>
     </nav>
     <div class="sidebar-footer">
       <div class="dark-mode-toggle">
@@ -724,8 +761,15 @@
     <div id="faq-excel-area" style="display:none;"></div>
 
     <!-- 리스트 -->
-    <div class="card">
+    <div class="card" id="main-list-card">
       <div class="item-list" id="item-list"><div class="loading">불러오는 중...</div></div>
+    </div>
+
+    <!-- 문의기록 패널 -->
+    <div id="inquiry-panel" style="display:none;">
+      <div class="card">
+        <div id="inq-list"></div>
+      </div>
     </div>
   </main>
 </div>
@@ -784,7 +828,7 @@
   let displayItems = [];
   let searchQuery = '';
 
-  const SECTION_LABELS = { notices: '공지사항', press: '보도자료', archive: '아카이브', faq: 'FAQ', privacy: '개인정보처리방침', terms: '이용약관', 'email-policy': '이메일무단수집거부' };
+  const SECTION_LABELS = { notices: '공지사항', press: '보도자료', archive: '아카이브', faq: 'FAQ', privacy: '개인정보처리방침', terms: '이용약관', 'email-policy': '이메일무단수집거부', inquiries: '문의기록' };
   const SVG_EYE = `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`;
   const SVG_EYE_OFF = `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`;
 
@@ -938,6 +982,11 @@ function showDashboard() {
     document.getElementById('item-form').style.display = 'none';
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.section === type));
     document.getElementById('section-title').textContent = SECTION_LABELS[type];
+    const isInq = type === 'inquiries';
+    document.getElementById('main-list-card').style.display = isInq ? 'none' : '';
+    document.getElementById('inquiry-panel').style.display = isInq ? '' : 'none';
+    document.querySelector('.add-btn-wrap').style.display = isInq ? 'none' : '';
+    document.getElementById('bulk-action-bar').style.display = isInq ? 'none' : '';
     loadSection(type);
   }
 
@@ -956,6 +1005,7 @@ function showDashboard() {
   }
 
   async function loadSection(type) {
+    if (type === 'inquiries') { renderInquiries(); return; }
     document.getElementById('section-count').textContent = '';
     // 저장 직후 새로고침 시 캐시된 최신 데이터 즉시 표시
     const fresh = loadFreshCache(type);
@@ -1090,6 +1140,80 @@ function showDashboard() {
   function loadMore() {
     listVisibleCount += 20;
     renderList();
+  }
+
+  /* ── 문의기록 ── */
+  let inqExpandedId = null;
+
+  function renderInquiries() {
+    const inquiries = JSON.parse(localStorage.getItem('ecobell_inquiries') || '[]');
+    document.getElementById('section-count').textContent = '(' + inquiries.length + '건)';
+    const el = document.getElementById('inq-list');
+    if (!inquiries.length) {
+      el.innerHTML = '<div class="empty-state"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><p>문의 내역이 없습니다.</p></div>';
+      return;
+    }
+    const TYPE_LABELS = { partnership: '파트너십 & 비즈니스', demo: '데모 신청', investment: '투자 & 전략 협력', esg: 'ESG 컨설팅 신청', recruit: '채용', other: '기타' };
+    el.innerHTML = inquiries.map(inq => {
+      const dateStr = inq.date ? new Date(inq.date).toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\. /g, '.').replace(/\.$/, '') : '';
+      const statusLabel = inq.status === 'done' ? '완료' : inq.status === 'read' ? '확인' : '신규';
+      const expanded = inqExpandedId === inq.id;
+      return `
+        <div>
+          <div class="inq-row" onclick="toggleInqDetail(${inq.id})">
+            <span class="inq-badge ${inq.status || 'new'}">${statusLabel}</span>
+            <span class="inq-name">${escHtml(inq.name || '')}</span>
+            <span class="inq-company">${escHtml(inq.company || '')}</span>
+            <span class="inq-subject">${escHtml(inq.subject || TYPE_LABELS[inq.type] || inq.type || '')}</span>
+            <span class="inq-date">${dateStr}</span>
+            <span class="inq-actions" onclick="event.stopPropagation()">
+              ${inq.status !== 'done' ? `<button class="inq-act-btn mark-done" onclick="markInquiry(${inq.id},'done')">완료</button>` : ''}
+              ${inq.status === 'new' ? `<button class="inq-act-btn mark-read" onclick="markInquiry(${inq.id},'read')">확인</button>` : ''}
+              <button class="inq-act-btn del" onclick="deleteInquiry(${inq.id})">삭제</button>
+            </span>
+          </div>
+          ${expanded ? `
+          <div class="inq-detail">
+            <dl class="inq-detail-grid">
+              <dt>문의 유형</dt><dd>${TYPE_LABELS[inq.type] || inq.type || '-'}</dd>
+              <dt>이름</dt><dd>${escHtml(inq.name || '-')}</dd>
+              <dt>회사명</dt><dd>${escHtml(inq.company || '-')}</dd>
+              <dt>이메일</dt><dd>${escHtml(inq.email || '-')}</dd>
+              <dt>연락처</dt><dd>${escHtml(inq.phone || '-')}</dd>
+              <dt>제목</dt><dd>${escHtml(inq.subject || '-')}</dd>
+              <dt>접수일시</dt><dd>${inq.date ? new Date(inq.date).toLocaleString('ko-KR') : '-'}</dd>
+            </dl>
+            <div class="inq-msg">${escHtml(inq.message || '')}</div>
+          </div>` : ''}
+        </div>`;
+    }).join('');
+  }
+
+  function toggleInqDetail(id) {
+    inqExpandedId = inqExpandedId === id ? null : id;
+    const inquiries = JSON.parse(localStorage.getItem('ecobell_inquiries') || '[]');
+    const inq = inquiries.find(i => i.id === id);
+    if (inq && inq.status === 'new') {
+      inq.status = 'read';
+      localStorage.setItem('ecobell_inquiries', JSON.stringify(inquiries));
+    }
+    renderInquiries();
+  }
+
+  function markInquiry(id, status) {
+    const inquiries = JSON.parse(localStorage.getItem('ecobell_inquiries') || '[]');
+    const inq = inquiries.find(i => i.id === id);
+    if (inq) { inq.status = status; localStorage.setItem('ecobell_inquiries', JSON.stringify(inquiries)); }
+    renderInquiries();
+  }
+
+  function deleteInquiry(id) {
+    if (!confirm('이 문의를 삭제하시겠습니까?')) return;
+    let inquiries = JSON.parse(localStorage.getItem('ecobell_inquiries') || '[]');
+    inquiries = inquiries.filter(i => i.id !== id);
+    localStorage.setItem('ecobell_inquiries', JSON.stringify(inquiries));
+    if (inqExpandedId === id) inqExpandedId = null;
+    renderInquiries();
   }
 
   function renderRow(item, idx) {

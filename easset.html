@@ -60,42 +60,43 @@
     .lnb-col a.ext::after { content: ' ↗'; font-size: 11px; }
     .lnb-col a.active-page { color: #1e8dcd; }
 
-    /* ─── SEARCH ─── */
-    .search-overlay { position: absolute; top: 0; left: 0; right: 0; height: 69px; background: #fff; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.2s; z-index: 10; }
-    header.search-open .search-overlay { opacity: 1; pointer-events: auto; }
-    .search-content { width: 100%; max-width: 700px; padding: 0 20px; }
-    .search-input-row { display: flex; align-items: center; gap: 12px; }
-    .search-input { flex: 1; border: none; border-bottom: 1.5px solid rgba(0,0,0,0.25); outline: none; font-family: 'Noto Sans KR', sans-serif; font-size: 15px; font-weight: 400; color: #000; padding: 4px 0; background: transparent; }
-    .search-input::placeholder { color: rgba(0,0,0,0.35); }
-    .search-input:focus { border-bottom-color: rgba(0,0,0,0.78); }
-    .search-submit { background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center; flex-shrink: 0; opacity: 0.6; transition: opacity 0.2s; }
+    /* ─── SEARCH OVERLAY ─── */
+    header.search-open { background: #fafcfd; border-bottom-color: transparent; box-shadow: none; }
+    .search-overlay { position: fixed; top: 69px; left: 0; right: 0; min-width: 1100px; height: 202px; background: #fafcfd; border-bottom: 0.2px solid rgba(0,0,0,0.3); opacity: 0; pointer-events: none; transition: opacity 0.25s ease, transform 0.28s cubic-bezier(0.4,0,0.2,1); transform: translateY(-8px); z-index: 100; }
+    .search-overlay.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .search-content { position: relative; width: 100%; max-width: 1440px; margin: 0 auto; height: 100%; }
+    .search-input-row { position: absolute; top: 57px; left: 23.9583%; right: 24.0278%; display: flex; align-items: center; gap: 0; }
+    .search-input { flex: 1; font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 400; font-size: 20px; color: #000; letter-spacing: 0.2px; line-height: 1.5; background: transparent; border: none; outline: none; height: 36px; padding: 0; }
+    .search-input::placeholder { color: rgba(0,0,0,0.3); }
+    .search-submit { background: none; border: none; cursor: pointer; width: 17px; height: 17px; padding: 0; display: flex; align-items: center; justify-content: center; flex-shrink: 0; opacity: 0.6; transition: opacity 0.2s; }
     .search-submit:hover { opacity: 1; }
     .search-submit img { width: 17px; height: 17px; object-fit: contain; }
-    .search-divider { position: absolute; top: 102px; left: 0; right: 0; height: 0.5px; background: rgba(0,0,0,0.08); }
-    .search-tags { display: flex; gap: 8px; margin-top: 12px; }
-    .search-tag { background: none; border: 1px solid rgba(0,0,0,0.2); border-radius: 999px; padding: 4px 12px; font-family: 'Noto Sans KR', sans-serif; font-size: 13px; color: rgba(0,0,0,0.55); cursor: pointer; transition: border-color 0.2s, color 0.2s; }
+    .search-divider { position: absolute; top: 102px; left: 23.9583%; right: 24.0278%; width: auto; height: 0.3px; background: rgba(0,0,0,0.2); }
+    .search-tags { position: absolute; top: 117px; left: 23.9583%; display: flex; gap: 9px; }
+    .search-tag { font-family: 'Nanum Square', 'NanumSquare', sans-serif; font-weight: 700; font-size: 11.6px; color: rgba(0,0,0,0.55); letter-spacing: 0.11px; border: 0.3px solid rgba(0,0,0,0.15); border-radius: 100px; padding: 0 10px; height: 22px; background: transparent; cursor: pointer; transition: border-color 0.2s, color 0.2s; }
     .search-tag:hover { border-color: rgba(0,0,0,0.4); color: rgba(0,0,0,0.85); }
-    .search-icon-wrap { position: relative; width: 22px; height: 22px; }
-    .search-tooltip { position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.78); color: #fff; font-family: 'Noto Sans KR', sans-serif; font-size: 11px; font-weight: 400; letter-spacing: 0.4px; padding: 4px 8px; border-radius: 4px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.15s; }
+    .search-icon-wrap { position: relative; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; }
+    .search-tooltip { position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.78); color: #fff; font-family: 'Noto Sans KR', sans-serif; font-size: 11px; font-weight: 400; letter-spacing: 0.4px; padding: 5px 10px; border-radius: 4px; white-space: nowrap; pointer-events: none; opacity: 0; transition: opacity 0.18s ease; z-index: 1001; }
     .search-tooltip::before { content: ''; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); border: 5px solid transparent; border-bottom-color: rgba(0,0,0,0.78); }
     .search-icon-wrap:hover .search-tooltip { opacity: 1; }
     header.search-open .search-tooltip { opacity: 0 !important; pointer-events: none; }
-    .close-btn { background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center; opacity: 0; pointer-events: none; position: absolute; right: 0; transition: opacity 0.25s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
+    .close-btn { display: flex; background: none; border: none; cursor: pointer; width: 20px; height: 20px; padding: 0; align-items: center; justify-content: center; font-size: 18px; color: #000; opacity: 0; pointer-events: none; position: absolute; transform: rotate(-180deg) scale(0.5); transition: opacity 0.25s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
     .close-btn:hover { opacity: 1; }
+    .close-btn img { width: 18px; height: 18px; object-fit: contain; }
     header.search-open .search-btn { opacity: 0; pointer-events: none; transform: rotate(90deg) scale(0.7); }
     header.search-open .close-btn { opacity: 0.6; pointer-events: auto; transform: rotate(0deg) scale(1); }
 
     /* ─── HEADER RIGHT ─── */
-    .header-right { position: absolute; right: 44px; display: flex; align-items: center; gap: 25px; }
+    .header-right { position: absolute; right: 45px; top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 25px; }
     .gnb-sep { color: rgba(0,0,0,0.2); font-size: 16px; line-height: 1; user-select: none; }
-    .search-btn { background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center; opacity: 0.7; transition: transform 0.2s ease, opacity 0.2s; }
+    .search-btn { background: none; border: none; cursor: pointer; width: 20px; height: 21px; padding: 0; display: flex; align-items: center; justify-content: center; }
     .search-btn:hover { transform: scale(1.15); opacity: 0.7; }
-    .demo-btn { display: inline-flex; align-items: center; justify-content: center; width: 114px; height: 38px; border: 1.5px solid #000; border-radius: 999px; font-family: 'Chillax', sans-serif; font-weight: 500; font-size: 14px; color: #000; text-decoration: none; letter-spacing: 0.32px; position: relative; overflow: hidden; }
-    .demo-btn::before { content: ''; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(0); width: 80px; height: 80px; background: #000; border-radius: 50%; transition: transform 0.45s ease; }
+    .demo-btn { display: flex; align-items: center; gap: 5px; border: 0.3px solid rgba(0,0,0,0.5); border-radius: 100px; padding: 0 18px; height: 34px; cursor: pointer; text-decoration: none; background: transparent; overflow: hidden; position: relative; transition: border-color 0.25s ease; }
+    .demo-btn::before { content: ''; position: absolute; left: 0; top: 50%; transform: translate(-50%, -50%) scale(0); width: 34px; height: 34px; background: #000; border-radius: 50%; transition: transform 0.45s ease; }
     .demo-btn:hover::before { transform: translate(-50%, -50%) scale(10); }
     .demo-btn:hover { border-color: #000; }
     .demo-btn:hover .demo-text { color: #fff; }
-    .demo-text { font-family: 'Chillax', sans-serif; font-weight: 500; font-size: 14px; letter-spacing: 0.32px; line-height: 0.8; white-space: nowrap; transition: color 0.25s ease; position: relative; top: 1.5px; }
+    .demo-text { font-family: 'Chillax', sans-serif; font-weight: 500; font-size: 13px; color: #000; letter-spacing: 0.16px; line-height: 0.8; white-space: nowrap; transition: color 0.25s ease; position: relative; top: 1.5px; }
 
     @media (min-width: 1441px) {
       .header-inner { max-width: none; }
@@ -129,9 +130,11 @@
     .en-fs-seg { width: 28px; height: 3px; border-radius: 2px; background: #e0e0e0; transition: background 0.4s ease; }
     .en-fs-seg.active { background: #1E8DCD; }
     .en-fs-track-wrap { overflow: hidden; }
-    .en-fs-track { display: flex; transition: transform 0.6s cubic-bezier(0.4,0,0.2,1); }
-    .en-feature-solo-row { flex: 0 0 100%; display: flex; gap: 65px; align-items: flex-start; }
+    .en-fs-track { position: relative; min-height: 414px; }
+    .en-feature-solo-row { position: absolute; top: 0; left: 0; width: 100%; display: flex; gap: 65px; align-items: flex-start; opacity: 0; pointer-events: none; }
+    .en-feature-solo-row.fs-active { opacity: 1; pointer-events: auto; }
     .en-feature-solo-img { flex: 0 0 654px; height: 414px; background: #D9D9D9; border-radius: 16px; overflow: hidden; }
+    .en-feature-solo-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .en-feature-solo-body { flex: 0 0 338px; padding-top: 8px; font-family: 'Noto Sans KR', sans-serif; font-size: 17px; color: #000; line-height: 1.85; word-break: keep-all; }
 
     /* ─── CAPABILITIES ─── */
@@ -753,7 +756,7 @@
           <div class="en-fs-track" id="ea-fs-track">
             <!-- Slide 1 -->
             <div class="en-feature-solo-row">
-              <div class="en-feature-solo-img"></div>
+              <div class="en-feature-solo-img"><img src="assets/ecoasset-feature-1.png" alt="실시간 입체 모니터링"></div>
               <div class="en-feature-solo-body ea-fs-body">
                 <div class="ea-fs-bullet">
                   <p class="ea-fs-bullet-title">지역별 벤치마킹</p>
@@ -767,7 +770,7 @@
             </div>
             <!-- Slide 2 -->
             <div class="en-feature-solo-row">
-              <div class="en-feature-solo-img"></div>
+              <div class="en-feature-solo-img"><img src="assets/ecoasset-feature-2.png" alt="정밀 성능 분석"></div>
               <div class="en-feature-solo-body ea-fs-body">
                 <div class="ea-fs-bullet">
                   <p class="ea-fs-bullet-title">발전효율지수 계산</p>
@@ -781,7 +784,7 @@
             </div>
             <!-- Slide 3 -->
             <div class="en-feature-solo-row">
-              <div class="en-feature-solo-img"></div>
+              <div class="en-feature-solo-img"><img src="assets/ecoasset-feature-3.png" alt="이상 징후 알림"></div>
               <div class="en-feature-solo-body ea-fs-body">
                 <div class="ea-fs-bullet">
                   <p class="ea-fs-bullet-title">실시간 장애 감지</p>
@@ -795,7 +798,7 @@
             </div>
             <!-- Slide 4 -->
             <div class="en-feature-solo-row">
-              <div class="en-feature-solo-img"></div>
+              <div class="en-feature-solo-img"><img src="assets/ecoasset-feature-2.png" alt="dMRV 체계 구축"></div>
               <div class="en-feature-solo-body ea-fs-body">
                 <div class="ea-fs-bullet">
                   <p class="ea-fs-bullet-title">디지털MRV</p>
@@ -809,7 +812,7 @@
             </div>
             <!-- Slide 5 -->
             <div class="en-feature-solo-row">
-              <div class="en-feature-solo-img"></div>
+              <div class="en-feature-solo-img"><img src="assets/ecoasset-feature-4.png" alt="자동 리포트 및 자산 연동"></div>
               <div class="en-feature-solo-body ea-fs-body">
                 <div class="ea-fs-bullet">
                   <p class="ea-fs-bullet-title">정기 리포트 발행</p>
@@ -1092,6 +1095,13 @@
       });
     });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSearch(); });
+    document.querySelector('.search-submit').addEventListener('click', () => {
+      const kw = searchInput.value.trim();
+      if (kw) window.location.href = 'search.html?q=' + encodeURIComponent(kw);
+    });
+    searchInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { const kw = searchInput.value.trim(); if (kw) window.location.href = 'search.html?q=' + encodeURIComponent(kw); }
+    });
 
     // Reveal 애니메이션
     const revealEls = document.querySelectorAll('.reveal');
@@ -1147,20 +1157,50 @@
     const eaFsNext     = document.getElementById('ea-fs-next');
     const EA_TOTAL = 5;
     let eaFsIdx = 0;
-    function eaFsSlideTo(idx) {
-      eaFsIdx = Math.max(0, Math.min(idx, EA_TOTAL - 1));
-      eaFsTrack.style.transform = 'translateX(-' + (eaFsIdx * 100) + '%)';
-      if (eaFsCur)     eaFsCur.textContent     = eaFsIdx + 1;
-      if (eaFsSegs)    eaFsSegs.querySelectorAll('.en-fs-seg').forEach((s, i) => s.classList.toggle('active', i <= eaFsIdx));
-      if (eaFsTitleEl) eaFsTitleEl.textContent  = eaFsData[eaFsIdx].title;
-      if (eaFsSubEl)   eaFsSubEl.textContent    = eaFsData[eaFsIdx].subtitle;
-      if (eaFsPrev)    eaFsPrev.disabled        = eaFsIdx === 0;
-      if (eaFsNext)    eaFsNext.disabled        = eaFsIdx === EA_TOTAL - 1;
+    let eaFsBusy = false;
+    const eaFsSlides = eaFsTrack ? Array.from(eaFsTrack.querySelectorAll('.en-feature-solo-row')) : [];
+    function eaFsUpdateUI(idx) {
+      if (eaFsCur)     eaFsCur.textContent     = idx + 1;
+      if (eaFsSegs)    eaFsSegs.querySelectorAll('.en-fs-seg').forEach((s, i) => s.classList.toggle('active', i <= idx));
+      if (eaFsTitleEl) eaFsTitleEl.textContent  = eaFsData[idx].title;
+      if (eaFsSubEl)   eaFsSubEl.textContent    = eaFsData[idx].subtitle;
     }
-    if (eaFsTrack) {
-      eaFsSlideTo(0);
-      if (eaFsPrev) eaFsPrev.addEventListener('click', () => eaFsSlideTo(eaFsIdx - 1));
-      if (eaFsNext) eaFsNext.addEventListener('click', () => eaFsSlideTo(eaFsIdx + 1));
+    function eaFsGoTo(newIdx, dir) {
+      if (eaFsBusy || newIdx === eaFsIdx) return;
+      eaFsBusy = true;
+      const cur  = eaFsSlides[eaFsIdx];
+      const next = eaFsSlides[newIdx];
+      const from = dir === 'fwd' ? '100%' : '-100%';
+      const to   = dir === 'fwd' ? '-100%' : '100%';
+      const T    = 'transform 0.6s cubic-bezier(0.4,0,0.2,1)';
+      next.style.transition    = 'none';
+      next.style.transform     = `translateX(${from})`;
+      next.style.opacity       = '1';
+      next.style.pointerEvents = 'none';
+      next.getBoundingClientRect();
+      next.style.transition = T;
+      next.style.transform  = 'translateX(0)';
+      cur.style.transition  = T;
+      cur.style.transform   = `translateX(${to})`;
+      eaFsIdx = newIdx;
+      eaFsUpdateUI(eaFsIdx);
+      setTimeout(() => {
+        cur.classList.remove('fs-active');
+        cur.style.transition = '';
+        cur.style.transform  = '';
+        next.classList.add('fs-active');
+        next.style.transition    = '';
+        next.style.transform     = '';
+        next.style.opacity       = '';
+        next.style.pointerEvents = '';
+        eaFsBusy = false;
+      }, 650);
+    }
+    if (eaFsTrack && eaFsSlides.length > 0) {
+      eaFsSlides[0].classList.add('fs-active');
+      eaFsUpdateUI(0);
+      if (eaFsPrev) eaFsPrev.addEventListener('click', () => eaFsGoTo((eaFsIdx - 1 + EA_TOTAL) % EA_TOTAL, 'bwd'));
+      if (eaFsNext) eaFsNext.addEventListener('click', () => eaFsGoTo((eaFsIdx + 1) % EA_TOTAL, 'fwd'));
     }
   </script>
 
