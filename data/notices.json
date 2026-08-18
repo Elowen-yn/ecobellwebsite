@@ -2,21 +2,6 @@
   "items": [
     {
       "pinned": true,
-      "title": "테스트",
-      "content": "테스트입니다",
-      "date": "2026-08-18",
-      "author": "기술운영부",
-      "attachments": [
-        {
-          "name": "001-투명배경.png",
-          "url": "https://raw.githubusercontent.com/Elowen-yn/ecobellwebsite/main/assets/uploads/notices/1787034125128_001-____.png"
-        }
-      ],
-      "createdAt": "2026-08-18T06:22:06.689Z",
-      "id": "msy9z90hsc3qg"
-    },
-    {
-      "pinned": true,
       "title": "메뉴얼 변경건",
       "content": "아카이브에서 확인하세요",
       "date": "2026-07-01",
